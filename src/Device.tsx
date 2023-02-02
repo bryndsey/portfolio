@@ -43,7 +43,11 @@ export const Device = () => {
         y: types.number(0.2, { range: [-Math.PI, Math.PI] }),
         z: types.number(0.1, { range: [-Math.PI, Math.PI] }),
       },
-      size: { width: 1, height: 2, thickness: 0.1 },
+      size: {
+        width: types.number(1, { nudgeMultiplier: 0.1 }),
+        height: types.number(2, { nudgeMultiplier: 0.1 }),
+        thickness: types.number(0.1, { nudgeMultiplier: 0.01 }),
+      },
       bezelSize: 32,
     },
     { folder: "device" }
