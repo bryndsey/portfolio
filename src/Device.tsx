@@ -1,7 +1,8 @@
-import { Html, RoundedBox } from "@react-three/drei";
-import { Vector3 } from "@react-three/fiber";
+import { Html, RoundedBox, useScroll } from "@react-three/drei";
+import { useFrame, useThree, Vector3 } from "@react-three/fiber";
+import { useRef } from "react";
 import { useControls, types } from "theatric";
-import { Color, Euler } from "three";
+import { Color, Euler, Group, MathUtils } from "three";
 
 interface DeviceScreenProps {
   width: number;
@@ -12,12 +13,14 @@ interface DeviceScreenProps {
 }
 
 const DeviceScreen = (props: DeviceScreenProps) => {
+  const { gl } = useThree();
   const { width, height, bezelSize, position, resolutionScale } = props;
   const scaleFactor = resolutionScale === undefined ? 1 : resolutionScale;
   return (
     <Html
       transform
       occlude
+      portal={{ current: gl.domElement.parentNode }}
       distanceFactor={1 / scaleFactor}
       position={position}
       style={{
@@ -64,7 +67,7 @@ function DeviceObject(props: DeviceObjectProps) {
   );
 }
 
-const startRotation = { x: -0.2, y: 0.2, z: 0.1 };
+const startRotation = { x: -1.2, y: 0, z: 0.66 };
 
 export const Device = () => {
   const { rotation, size, bezelSize } = useControls(
@@ -84,8 +87,27 @@ export const Device = () => {
     { folder: "device" }
   );
 
+  const groupRef = useRef<Group>(null);
+
+  const scrollData = useScroll();
+  useFrame(() => {
+    const deviceGroup = groupRef.current;
+    if (deviceGroup === null) return;
+    const scrollRange = scrollData.range(0, 2 / 3);
+    const currentRotation = {
+      x: MathUtils.lerp(rotation.x, 0, scrollRange),
+      y: MathUtils.lerp(rotation.y, 0, scrollRange),
+      z: MathUtils.lerp(rotation.z, 0, scrollRange),
+    };
+    deviceGroup.setRotationFromEuler(
+      new Euler(currentRotation.x, currentRotation.y, currentRotation.z)
+    );
+    deviceGroup.position.setX(MathUtils.lerp(-1, 0, scrollRange));
+    deviceGroup.position.setZ(MathUtils.lerp(-3, 1, scrollRange));
+  });
+
   return (
-    <group rotation={new Euler(rotation.x, rotation.y, rotation.z)}>
+    <group ref={groupRef}>
       <DeviceObject {...size} bezelSize={bezelSize}></DeviceObject>
     </group>
   );
