@@ -35,13 +35,44 @@ const DeviceScreen = (props: DeviceScreenProps) => {
   );
 };
 
+interface DeviceObjectProps {
+  width: number;
+  height: number;
+  thickness: number;
+  bezelSize: number;
+}
+
+function DeviceObject(props: DeviceObjectProps) {
+  return (
+    <RoundedBox
+      args={[props.width, props.height, props.thickness]}
+      radius={0.033}
+      smoothness={12}
+    >
+      <meshStandardMaterial
+        color={new Color(0.05, 0.06, 0.052)}
+        roughness={0.5}
+      />
+      <DeviceScreen
+        width={props.width}
+        height={props.height}
+        bezelSize={props.bezelSize}
+        position={[0, 0.01, props.thickness / 2 + 0.001]}
+        resolutionScale={1}
+      />
+    </RoundedBox>
+  );
+}
+
+const startRotation = { x: -0.2, y: 0.2, z: 0.1 };
+
 export const Device = () => {
   const { rotation, size, bezelSize } = useControls(
     {
       rotation: {
-        x: types.number(-0.2, { range: [-Math.PI, Math.PI] }),
-        y: types.number(0.2, { range: [-Math.PI, Math.PI] }),
-        z: types.number(0.1, { range: [-Math.PI, Math.PI] }),
+        x: types.number(startRotation.x, { range: [-Math.PI, Math.PI] }),
+        y: types.number(startRotation.y, { range: [-Math.PI, Math.PI] }),
+        z: types.number(startRotation.z, { range: [-Math.PI, Math.PI] }),
       },
       size: {
         width: types.number(1, { nudgeMultiplier: 0.1 }),
@@ -54,24 +85,9 @@ export const Device = () => {
   );
 
   return (
-    <RoundedBox
-      args={[size.width, size.height, size.thickness]}
-      rotation={new Euler(rotation.x, rotation.y, rotation.z)}
-      radius={0.033}
-      smoothness={12}
-    >
-      <meshStandardMaterial
-        color={new Color(0.05, 0.06, 0.052)}
-        roughness={0.5}
-      />
-      <DeviceScreen
-        width={size.width}
-        height={size.height}
-        bezelSize={bezelSize}
-        position={[0, 0.01, size.thickness / 2 + 0.001]}
-        resolutionScale={1}
-      />
-    </RoundedBox>
+    <group rotation={new Euler(rotation.x, rotation.y, rotation.z)}>
+      <DeviceObject {...size} bezelSize={bezelSize}></DeviceObject>
+    </group>
   );
 };
 
