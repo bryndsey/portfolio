@@ -27,12 +27,10 @@ const DeviceScreen = (props: DeviceScreenProps) => {
         borderRadius: 8 * scaleFactor,
         width: (400 * width - bezelSize) * scaleFactor,
         height: (400 * height - bezelSize) * scaleFactor,
+        overflow: "scroll",
       }}
     >
-      <div style={{ padding: 8 }}>
-        <p>Hello, World!</p>
-        <button>Click me!</button>
-      </div>
+      <ScreenContent />
     </Html>
   );
 };
@@ -63,8 +61,23 @@ export const Device = () => {
         height={size.height}
         bezelSize={bezelSize}
         position={[0, 0.01, size.thickness / 2 + 0.001]}
-        // resolutionScale={1.2}
+        resolutionScale={1}
       />
     </RoundedBox>
   );
 };
+
+function ScreenContent() {
+  return (
+    <div style={{ padding: 8 }}>
+      <h1>Bryan Lindsey</h1>
+      <h2>Developer Extraordinaire</h2>
+      <ul>
+        <li>Android</li>
+        <li>React</li>
+        <li>Music</li>
+        <li>Video Games</li>
+      </ul>
+    </div>
+  );
+}
