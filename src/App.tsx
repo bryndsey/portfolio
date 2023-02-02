@@ -6,7 +6,7 @@ import { Device } from "./Device";
 function App() {
   const { position } = useControls(
     {
-      position: { x: 0, y: 0, z: 5 },
+      position: { x: 0, y: 0, z: 3 },
     },
     { folder: "camera" }
   );
