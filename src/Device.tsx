@@ -1,7 +1,7 @@
 import { Html, RoundedBox } from "@react-three/drei";
 import { Vector3 } from "@react-three/fiber";
 import { useControls, types } from "theatric";
-import { Euler } from "three";
+import { Color, Euler } from "three";
 
 interface DeviceScreenProps {
   width: number;
@@ -58,8 +58,12 @@ export const Device = () => {
       args={[size.width, size.height, size.thickness]}
       rotation={new Euler(rotation.x, rotation.y, rotation.z)}
       radius={0.033}
+      smoothness={12}
     >
-      <meshStandardMaterial color="dimgray" />
+      <meshStandardMaterial
+        color={new Color(0.05, 0.06, 0.052)}
+        roughness={0.5}
+      />
       <DeviceScreen
         width={size.width}
         height={size.height}
