@@ -103,7 +103,7 @@ export const Device = () => {
       new Euler(currentRotation.x, currentRotation.y, currentRotation.z)
     );
     deviceGroup.position.setX(MathUtils.lerp(-1, 0, scrollRange));
-    deviceGroup.position.setZ(MathUtils.lerp(-3, 1, scrollRange));
+    deviceGroup.position.setZ(MathUtils.lerp(-3, 0.5, scrollRange));
   });
 
   return (
