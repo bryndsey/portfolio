@@ -3,6 +3,7 @@ import { useFrame, useThree, Vector3 } from "@react-three/fiber";
 import { useRef } from "react";
 import { useControls, types } from "theatric";
 import { Color, Euler, Group, MathUtils } from "three";
+import { ScreenContent } from "./ScreenContent";
 
 interface DeviceScreenProps {
   width: number;
@@ -112,18 +113,3 @@ export const Device = () => {
     </group>
   );
 };
-
-function ScreenContent() {
-  return (
-    <div style={{ padding: 8 }}>
-      <h1>Bryan Lindsey</h1>
-      <h2>Developer Extraordinaire</h2>
-      <ul>
-        <li>Android</li>
-        <li>React</li>
-        <li>Music</li>
-        <li>Video Games</li>
-      </ul>
-    </div>
-  );
-}
