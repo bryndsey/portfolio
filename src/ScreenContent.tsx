@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 interface DeviceAppIconProps {
   appName: string;
   color: string;
@@ -18,22 +20,27 @@ const DeviceAppIcon = (props: DeviceAppIconProps) => {
   );
 };
 
+const DeviceClock = () => {
+  const [currentTime, setCurrentTime] = useState(new Date());
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    });
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return <p>{currentTime.toLocaleTimeString()}</p>;
+};
+
 export function ScreenContent() {
   return (
     <div style={{ padding: 8 }}>
-      <h1>Bryan Lindsey</h1>
-      <h2>Developer Extraordinaire</h2>
-      <ul>
-        <li>Android</li>
-        <li>React</li>
-        <li>Music</li>
-        <li>Video Games</li>
-      </ul>
+      <DeviceClock />
       <div
         style={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr 1fr 1fr",
-          // gridAutoRows: 48,
           gap: 16,
           padding: 8,
         }}
