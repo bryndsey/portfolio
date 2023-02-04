@@ -25,7 +25,7 @@ const DeviceScreen = (props: DeviceScreenProps) => {
       distanceFactor={1 / scaleFactor}
       position={position}
       style={{
-        background: "white",
+        background: "black",
         margin: 0,
         padding: 0,
         borderRadius: 8 * scaleFactor,

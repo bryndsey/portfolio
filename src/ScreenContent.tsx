@@ -41,14 +41,14 @@ export function ScreenContent() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 1fr 1fr 1fr",
+          gridTemplateColumns: "repeat(4, 1fr)",
           gap: 16,
           padding: 8,
         }}
       >
         <DeviceAppIcon appName="SongSpark" color="royalblue" />
-        <DeviceAppIcon appName="Tilt Archery Trainer" color="forestgreen" />
         <DeviceAppIcon appName="Tap Band" color="brown" />
+        <DeviceAppIcon appName="Tilt Archery Trainer" color="forestgreen" />
         <DeviceAppIcon appName="Connected Light App" color="steelblue" />
         <DeviceAppIcon appName="Banking App" color="white" />
         <DeviceAppIcon appName="Fast Food App" color="red" />
