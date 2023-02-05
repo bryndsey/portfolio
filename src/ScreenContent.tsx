@@ -26,7 +26,7 @@ const DeviceClock = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(new Date());
-    });
+    }, 100);
 
     return () => clearInterval(interval);
   }, []);
