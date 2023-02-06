@@ -17,7 +17,7 @@ const DeviceScreen = (props: DeviceScreenProps) => {
   return (
     <Html
       transform
-      occlude
+      occlude="blending"
       distanceFactor={1 / scaleFactor}
       position={position}
       style={{
