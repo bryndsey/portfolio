@@ -68,22 +68,32 @@ function DeviceObject(props: DeviceObjectProps) {
   );
 }
 
-const startRotation = { x: -1.2, y: 0, z: 0.66 };
+const startPosition = { x: -1, y: -2, z: -3 };
+const startRotation = { x: -0.5 * Math.PI, y: 0, z: 0.66 };
+const deviceSize = { width: 1, height: 2, thickness: 0.1 };
+const deviceBezelSize = 32;
 
 export const Device = () => {
-  const { rotation, size, bezelSize } = useControls(
+  const { position, rotation, size, bezelSize } = useControls(
     {
+      position: {
+        x: types.number(startPosition.x, { nudgeMultiplier: 0.1 }),
+        y: types.number(startPosition.y, { nudgeMultiplier: 0.1 }),
+        z: types.number(startPosition.z, { nudgeMultiplier: 0.1 }),
+      },
       rotation: {
         x: types.number(startRotation.x, { range: [-Math.PI, Math.PI] }),
         y: types.number(startRotation.y, { range: [-Math.PI, Math.PI] }),
         z: types.number(startRotation.z, { range: [-Math.PI, Math.PI] }),
       },
       size: {
-        width: types.number(1, { nudgeMultiplier: 0.1 }),
-        height: types.number(2, { nudgeMultiplier: 0.1 }),
-        thickness: types.number(0.1, { nudgeMultiplier: 0.01 }),
+        width: types.number(deviceSize.width, { nudgeMultiplier: 0.1 }),
+        height: types.number(deviceSize.height, { nudgeMultiplier: 0.1 }),
+        thickness: types.number(deviceSize.thickness, {
+          nudgeMultiplier: 0.01,
+        }),
       },
-      bezelSize: 32,
+      bezelSize: deviceBezelSize,
     },
     { folder: "device" }
   );
@@ -103,8 +113,9 @@ export const Device = () => {
     deviceGroup.setRotationFromEuler(
       new Euler(currentRotation.x, currentRotation.y, currentRotation.z)
     );
-    deviceGroup.position.setX(MathUtils.lerp(-1, 0, scrollRange));
-    deviceGroup.position.setZ(MathUtils.lerp(-3, 0.5, scrollRange));
+    deviceGroup.position.setX(MathUtils.lerp(position.x, 0, scrollRange));
+    deviceGroup.position.setY(MathUtils.lerp(position.y, 0, scrollRange));
+    deviceGroup.position.setZ(MathUtils.lerp(position.z, 0.5, scrollRange));
   });
 
   return (
