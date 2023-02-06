@@ -67,10 +67,9 @@ const DeviceContainer = () => {
       position={[position.x, position.y, position.z]}
       rotation={[rotation.x, rotation.y, rotation.z]}
       onClick={() => {
-        console.log("Clicked group");
+        // console.log("Clicked group");
         setIsSelected(!isSelected);
       }}
-      onPointerMissed={() => console.log("Clicked outside group")}
     >
       <Device {...size} bezelSize={bezelSize} isOn={isSelected} />
     </group>
