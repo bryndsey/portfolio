@@ -1,5 +1,6 @@
 import { CameraControls, PerspectiveCamera, Stats } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import { useState } from "react";
 import { types, useControls } from "theatric";
 import { Device } from "./Device";
 import { Guitar } from "./Guitar";
@@ -34,6 +35,8 @@ const DeviceContainer = () => {
     { folder: "device" }
   );
 
+  const [isSelected, setIsSelected] = useState(false);
+
   // const rotation = startRotation;
   // const size = deviceSize;
   // const bezelSize = deviceBezelSize;
@@ -65,10 +68,11 @@ const DeviceContainer = () => {
       rotation={[rotation.x, rotation.y, rotation.z]}
       onClick={() => {
         console.log("Clicked group");
+        setIsSelected(!isSelected);
       }}
       onPointerMissed={() => console.log("Clicked outside group")}
     >
-      <Device {...size} bezelSize={bezelSize} />
+      <Device {...size} bezelSize={bezelSize} isOn={isSelected} />
     </group>
   );
 };

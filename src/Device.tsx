@@ -40,6 +40,7 @@ interface DeviceObjectProps {
   height: number;
   thickness: number;
   bezelSize: number;
+  isOn: boolean;
 }
 
 export function Device(props: DeviceObjectProps) {
@@ -56,13 +57,15 @@ export function Device(props: DeviceObjectProps) {
         color={new Color(0.05, 0.06, 0.052)}
         roughness={0.5}
       />
-      <DeviceScreen
-        width={props.width}
-        height={props.height}
-        bezelSize={props.bezelSize}
-        position={[0, 0, props.thickness / 2 + 0.001]}
-        resolutionScale={7.5}
-      />
+      {props.isOn && (
+        <DeviceScreen
+          width={props.width}
+          height={props.height}
+          bezelSize={props.bezelSize}
+          position={[0, 0, props.thickness / 2 + 0.001]}
+          resolutionScale={7.5}
+        />
+      )}
     </RoundedBox>
   );
 }
