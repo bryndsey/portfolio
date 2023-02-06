@@ -16,7 +16,7 @@ const DeviceAppIcon = (props: DeviceAppIconProps) => {
           boxShadow: "0px 2px 4px 2px rgba(0, 0, 0, 0.1)",
         }}
       />
-      <p style={{ textAlign: "center" }}>{props.appName}</p>
+      <p style={{ textAlign: "center", fontSize: 12 }}>{props.appName}</p>
     </div>
   );
 };
