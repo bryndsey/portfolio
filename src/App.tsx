@@ -1,4 +1,4 @@
-import { PerspectiveCamera, Stats } from "@react-three/drei";
+import { CameraControls, PerspectiveCamera, Stats } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { types, useControls } from "theatric";
 import { Device } from "./Device";
@@ -91,6 +91,7 @@ function App() {
           makeDefault
           position={[cameraPosition.x, cameraPosition.y, cameraPosition.z]}
         />
+        <CameraControls />
         <ambientLight intensity={0.5} color={backgroundColor} />
         <directionalLight position={[10, 10, 10]} intensity={1} />
         <DeviceContainer />
