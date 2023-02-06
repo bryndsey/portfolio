@@ -28,9 +28,9 @@ const DeviceScreen = (props: DeviceScreenProps) => {
         background: "black",
         margin: 0,
         padding: 0,
-        borderRadius: 8 * scaleFactor,
-        width: (400 * width - bezelSize) * scaleFactor,
-        height: (400 * height - bezelSize) * scaleFactor,
+        borderRadius: 16 * (scaleFactor / 10),
+        width: 400 * width * scaleFactor - bezelSize * (scaleFactor / 10),
+        height: 400 * height * scaleFactor - bezelSize * (scaleFactor / 10),
         overflow: "scroll",
       }}
     >
@@ -50,7 +50,7 @@ function DeviceObject(props: DeviceObjectProps) {
   return (
     <RoundedBox
       args={[props.width, props.height, props.thickness]}
-      radius={0.033}
+      radius={0.01}
       smoothness={12}
     >
       <meshStandardMaterial
@@ -61,17 +61,17 @@ function DeviceObject(props: DeviceObjectProps) {
         width={props.width}
         height={props.height}
         bezelSize={props.bezelSize}
-        position={[0, 0.01, props.thickness / 2 + 0.001]}
-        resolutionScale={1}
+        position={[0, 0, props.thickness / 2 + 0.001]}
+        resolutionScale={7.5}
       />
     </RoundedBox>
   );
 }
 
-const startPosition = { x: -1, y: -2, z: -3 };
+const startPosition = { x: -0.5, y: -0.5, z: 0 };
 const startRotation = { x: -0.5 * Math.PI, y: 0, z: 0.66 };
-const deviceSize = { width: 1, height: 2, thickness: 0.1 };
-const deviceBezelSize = 32;
+const deviceSize = { width: 0.15, height: 0.3, thickness: 0.02 };
+const deviceBezelSize = 64;
 
 export const Device = () => {
   const { position, rotation, size, bezelSize } = useControls(
