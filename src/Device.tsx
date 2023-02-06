@@ -1,8 +1,8 @@
-import { Html, RoundedBox, useScroll } from "@react-three/drei";
-import { useFrame, useThree, Vector3 } from "@react-three/fiber";
+import { Html, RoundedBox } from "@react-three/drei";
+import { Vector3 } from "@react-three/fiber";
 import { useRef } from "react";
-import { useControls, types } from "theatric";
-import { Color, Euler, Group, MathUtils } from "three";
+import { types, useControls } from "theatric";
+import { Color, Group } from "three";
 import { ScreenContent } from "./ScreenContent";
 
 interface DeviceScreenProps {
@@ -14,14 +14,12 @@ interface DeviceScreenProps {
 }
 
 const DeviceScreen = (props: DeviceScreenProps) => {
-  const { gl } = useThree();
   const { width, height, bezelSize, position, resolutionScale } = props;
   const scaleFactor = resolutionScale === undefined ? 1 : resolutionScale;
   return (
     <Html
       transform
       occlude
-      portal={{ current: gl.domElement.parentNode }}
       distanceFactor={1 / scaleFactor}
       position={position}
       style={{
@@ -49,6 +47,9 @@ interface DeviceObjectProps {
 function DeviceObject(props: DeviceObjectProps) {
   return (
     <RoundedBox
+      onClick={() => {
+        console.log("Clicked Device");
+      }}
       args={[props.width, props.height, props.thickness]}
       radius={0.01}
       smoothness={12}
@@ -98,29 +99,41 @@ export const Device = () => {
     { folder: "device" }
   );
 
+  // const rotation = startRotation;
+  // const size = deviceSize;
+  // const bezelSize = deviceBezelSize;
+
   const groupRef = useRef<Group>(null);
 
-  const scrollData = useScroll();
-  useFrame(() => {
-    const deviceGroup = groupRef.current;
-    if (deviceGroup === null) return;
-    const scrollRange = scrollData.range(0, 2 / 3);
-    const currentRotation = {
-      x: MathUtils.lerp(rotation.x, 0, scrollRange),
-      y: MathUtils.lerp(rotation.y, 0, scrollRange),
-      z: MathUtils.lerp(rotation.z, 0, scrollRange),
-    };
-    deviceGroup.setRotationFromEuler(
-      new Euler(currentRotation.x, currentRotation.y, currentRotation.z)
-    );
-    deviceGroup.position.setX(MathUtils.lerp(position.x, 0, scrollRange));
-    deviceGroup.position.setY(MathUtils.lerp(position.y, 0, scrollRange));
-    deviceGroup.position.setZ(MathUtils.lerp(position.z, 0.5, scrollRange));
-  });
+  // const scrollData = useScroll();
+  // useFrame(() => {
+  //   const deviceGroup = groupRef.current;
+  //   if (deviceGroup === null) return;
+  //   const scrollRange = scrollData.range(0, 2 / 3);
+  //   const currentRotation = {
+  //     x: MathUtils.lerp(rotation.x, 0, scrollRange),
+  //     y: MathUtils.lerp(rotation.y, 0, scrollRange),
+  //     z: MathUtils.lerp(rotation.z, 0, scrollRange),
+  //   };
+  //   deviceGroup.setRotationFromEuler(
+  //     new Euler(currentRotation.x, currentRotation.y, currentRotation.z)
+  //   );
+  //   deviceGroup.position.setX(MathUtils.lerp(position.x, 0, scrollRange));
+  //   deviceGroup.position.setY(MathUtils.lerp(position.y, 0, scrollRange));
+  //   deviceGroup.position.setZ(MathUtils.lerp(position.z, 0.5, scrollRange));
+  // });
 
   return (
-    <group ref={groupRef}>
-      <DeviceObject {...size} bezelSize={bezelSize}></DeviceObject>
+    <group
+      ref={groupRef}
+      position={[position.x, position.y, position.z]}
+      rotation={[rotation.x, rotation.y, rotation.z]}
+      onClick={() => {
+        console.log("Clicked group");
+      }}
+      onPointerMissed={() => console.log("Clicked outside group")}
+    >
+      <DeviceObject {...size} bezelSize={bezelSize} />
     </group>
   );
 };

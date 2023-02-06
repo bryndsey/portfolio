@@ -1,4 +1,4 @@
-import { PerspectiveCamera, ScrollControls } from "@react-three/drei";
+import { PerspectiveCamera, Stats } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { useControls } from "theatric";
 import { Device } from "./Device";
@@ -16,15 +16,14 @@ function App() {
   return (
     <div id="App" style={{ height: "100%" }}>
       <Canvas style={{ backgroundColor: backgroundColor }}>
-        <ScrollControls>
-          <PerspectiveCamera
-            makeDefault
-            position={[cameraPosition.x, cameraPosition.y, cameraPosition.z]}
-          />
-          <ambientLight intensity={0.5} color={backgroundColor} />
-          <directionalLight position={[10, 10, 10]} intensity={1} />
-          <Device />
-        </ScrollControls>
+        {/* <Stats /> */}
+        <PerspectiveCamera
+          makeDefault
+          position={[cameraPosition.x, cameraPosition.y, cameraPosition.z]}
+        />
+        <ambientLight intensity={0.5} color={backgroundColor} />
+        <directionalLight position={[10, 10, 10]} intensity={1} />
+        <Device />
       </Canvas>
     </div>
   );
