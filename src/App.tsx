@@ -118,7 +118,7 @@ function App() {
           position={[cameraPosition.x, cameraPosition.y, cameraPosition.z]}
         />
         <CameraControls />
-        <ambientLight intensity={0.5} color={backgroundColor} />
+        <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 10]} intensity={1} />
         <DeviceContainer />
         <GuitarContainer />
