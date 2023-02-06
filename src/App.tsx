@@ -104,7 +104,7 @@ const backgroundColor = "mediumseagreen";
 function App() {
   const { cameraPosition } = useControls(
     {
-      cameraPosition: { x: 0, y: 0, z: 3 },
+      cameraPosition: { x: 0, y: 0.25, z: 2 },
     },
     { folder: "scene" }
   );
