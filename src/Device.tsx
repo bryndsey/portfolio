@@ -35,7 +35,7 @@ const DeviceScreen = (props: DeviceScreenProps) => {
   );
 };
 
-interface DeviceObjectProps {
+interface DeviceProps {
   width: number;
   height: number;
   thickness: number;
@@ -43,7 +43,7 @@ interface DeviceObjectProps {
   isOn: boolean;
 }
 
-export function Device(props: DeviceObjectProps) {
+export function Device(props: DeviceProps) {
   return (
     <RoundedBox
       onClick={() => {
