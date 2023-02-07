@@ -9,12 +9,19 @@ interface DeviceScreenProps {
   bezelSize: number;
   position: Vector3;
   resolutionScale?: number;
-  isOn: boolean;
+  isOn?: boolean;
 }
 
 const DeviceScreen = (props: DeviceScreenProps) => {
   const { gl } = useThree();
-  const { width, height, bezelSize, position, resolutionScale, isOn } = props;
+  const {
+    width,
+    height,
+    bezelSize,
+    position,
+    resolutionScale,
+    isOn = true,
+  } = props;
   const scaleFactor = resolutionScale === undefined ? 1 : resolutionScale;
   return (
     <>
@@ -61,7 +68,7 @@ interface DeviceProps {
   height: number;
   thickness: number;
   bezelSize: number;
-  isOn: boolean;
+  isOn?: boolean;
 }
 
 export function Device(props: DeviceProps) {

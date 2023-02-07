@@ -2,7 +2,7 @@ import { useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef, useState } from "react";
 import { types, useControls } from "theatric";
-import { Group } from "three";
+import { Euler, Group, MathUtils } from "three";
 import { Device } from "./Device";
 import { devicePageIndex, pageCount } from "./App";
 
@@ -11,7 +11,11 @@ const deviceStartRotation = { x: -0.5 * Math.PI, y: 0, z: 0.66 };
 const deviceSize = { width: 0.15, height: 0.3, thickness: 0.02 };
 const deviceBezelSize = 64;
 
-const DeviceContainer = () => {
+export const DevicePage = () => {
+  const groupRef = useRef<Group>(null);
+  const innerGroupRef = useRef<Group>(null);
+  const scrollData = useScroll();
+
   const { position, rotation, size, bezelSize } = useControls(
     {
       position: {
@@ -36,49 +40,7 @@ const DeviceContainer = () => {
     { folder: "device" }
   );
 
-  const [isSelected, setIsSelected] = useState(false);
-
-  // const rotation = startRotation;
-  // const size = deviceSize;
-  // const bezelSize = deviceBezelSize;
-  // const groupRef = useRef<Group>(null);
-  // const scrollData = useScroll();
-  // useFrame(() => {
-  //   const deviceGroup = groupRef.current;
-  //   if (deviceGroup === null) return;
-  //   const scrollRange = scrollData.range(0, 2 / 3);
-  //   const currentRotation = {
-  //     x: MathUtils.lerp(rotation.x, 0, scrollRange),
-  //     y: MathUtils.lerp(rotation.y, 0, scrollRange),
-  //     z: MathUtils.lerp(rotation.z, 0, scrollRange),
-  //   };
-  //   deviceGroup.setRotationFromEuler(
-  //     new Euler(currentRotation.x, currentRotation.y, currentRotation.z)
-  //   );
-  //   deviceGroup.position.setX(MathUtils.lerp(position.x, 0, scrollRange));
-  //   deviceGroup.position.setY(MathUtils.lerp(position.y, 0, scrollRange));
-  //   deviceGroup.position.setZ(MathUtils.lerp(position.z, 0.5, scrollRange));
-  // });
-  return (
-    <group
-      // ref={groupRef}
-      position={[position.x, position.y, position.z]}
-      rotation={[rotation.x, rotation.y, rotation.z]}
-      onClick={() => {
-        // console.log("Clicked group");
-        setIsSelected(!isSelected);
-      }}
-    >
-      <Device {...size} bezelSize={bezelSize} isOn={isSelected} />
-    </group>
-  );
-};
-
-export const DevicePage = () => {
-  const groupRef = useRef<Group>(null);
-  const scrollData = useScroll();
-
-  useFrame((state) => {
+  useFrame((state, delta) => {
     if (groupRef.current === null) return;
 
     const enterAmount =
@@ -91,15 +53,27 @@ export const DevicePage = () => {
       (devicePageIndex + 1) / pageCount
     );
 
-    const yPercent = enterAmount + exitAmount;
+    const progress = enterAmount + exitAmount;
 
-    const viewportHeight = state.viewport.height;
-    groupRef.current.position.setY(yPercent * viewportHeight);
+    groupRef.current.position.setX(-Math.abs(progress) * state.viewport.width);
+
+    const currentRotation = {
+      x: MathUtils.lerp(0, rotation.x, progress),
+      y: MathUtils.lerp(0, rotation.y, progress),
+      z: MathUtils.lerp(0, rotation.z, progress),
+    };
+    if (innerGroupRef.current === null) return;
+
+    innerGroupRef.current.setRotationFromEuler(
+      new Euler(currentRotation.x, currentRotation.y, currentRotation.z)
+    );
   });
 
   return (
     <group ref={groupRef}>
-      <DeviceContainer />
+      <group ref={innerGroupRef}>
+        <Device {...size} bezelSize={bezelSize} />
+      </group>
     </group>
   );
 };
