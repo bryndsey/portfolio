@@ -1,14 +1,16 @@
 import { PerspectiveCamera, ScrollControls, Stats } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { useControls } from "theatric";
+import { ContactPage } from "./ContactPage";
 import { DevicePage } from "./DevicePage";
 import { GuitarPage } from "./GuitarPage";
 import { IntroText } from "./IntroText";
 
-export const pageCount = 5;
+export const pageCount = 4;
 
 export const guitarPageIndex = 1;
 export const devicePageIndex = 2;
+export const contactPageIndex = 3;
 
 const backgroundColor = "mediumseagreen";
 
@@ -37,6 +39,7 @@ function App() {
           <IntroText />
           <GuitarPage />
           <DevicePage />
+          <ContactPage />
         </ScrollControls>
       </Canvas>
     </div>
