@@ -1,10 +1,9 @@
-import { useScroll } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { types, useControls } from "theatric";
 import { Euler, Group, MathUtils } from "three";
 import { Device } from "./Device";
-import { devicePageIndex, pageCount } from "./App";
+import { deviceEndPageIndex, deviceStartPageIndex } from "./App";
+import { useScrollPages } from "./useScrollPages";
 
 // const deviceStartPosition = { x: -0.5, y: 0, z: 0 };
 // const deviceStartRotation = { x: -0.5 * Math.PI, y: 0, z: 0.66 };
@@ -14,7 +13,6 @@ const deviceBezelSize = 64;
 export const DevicePage = () => {
   const groupRef = useRef<Group>(null);
   const innerGroupRef = useRef<Group>(null);
-  const scrollData = useScroll();
 
   const { size, bezelSize } = useControls(
     {
@@ -30,44 +28,38 @@ export const DevicePage = () => {
     { folder: "device" }
   );
 
-  useFrame((state, delta) => {
-    if (groupRef.current === null) return;
+  useScrollPages(
+    deviceStartPageIndex,
+    deviceEndPageIndex,
+    (enterAmount, exitAmount, state, delta) => {
+      if (groupRef.current === null) return;
 
-    const enterAmount =
-      scrollData.range(
-        (devicePageIndex - 1) / pageCount,
-        devicePageIndex / pageCount
-      ) - 1;
-    const exitAmount = scrollData.range(
-      devicePageIndex / pageCount,
-      (devicePageIndex + 1) / pageCount
-    );
+      const progress = enterAmount + exitAmount;
 
-    const progress = enterAmount + exitAmount;
+      const position = MathUtils.lerp(
+        -state.viewport.width / 6,
+        -state.viewport.width,
+        Math.abs(progress)
+      );
+      groupRef.current.position.setX(position);
 
-    const position = MathUtils.lerp(
-      -state.viewport.width / 6,
-      -state.viewport.width,
-      Math.abs(progress)
-    );
-    groupRef.current.position.setX(position);
+      const currentRotation = MathUtils.lerp(
+        0.2,
+        Math.PI * 2,
+        Math.abs(progress)
+      );
 
-    const currentRotation = MathUtils.lerp(
-      0.2,
-      Math.PI * 2,
-      Math.abs(progress)
-    );
+      if (innerGroupRef.current === null) return;
 
-    if (innerGroupRef.current === null) return;
-
-    innerGroupRef.current.setRotationFromEuler(
-      new Euler(0, currentRotation, 0)
-    );
-  });
+      innerGroupRef.current.setRotationFromEuler(
+        new Euler(0, currentRotation, 0)
+      );
+    }
+  );
 
   return (
     <group ref={groupRef}>
-      <group ref={innerGroupRef} scale={3}>
+      <group ref={innerGroupRef} scale={4}>
         <Device {...size} bezelSize={bezelSize} />
       </group>
     </group>
