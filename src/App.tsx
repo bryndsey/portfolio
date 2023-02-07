@@ -4,6 +4,7 @@ import { useState } from "react";
 import { types, useControls } from "theatric";
 import { Device } from "./Device";
 import { Guitar } from "./Guitar";
+import { IntroText } from "./IntroText";
 
 const deviceStartPosition = { x: -0.5, y: -0.5, z: 0 };
 const deviceStartRotation = { x: -0.5 * Math.PI, y: 0, z: 0.66 };
@@ -120,11 +121,12 @@ function App() {
           makeDefault
           position={[cameraPosition.x, cameraPosition.y, cameraPosition.z]}
         />
-        <CameraControls />
+        {/* <CameraControls /> */}
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 10]} intensity={1} />
-        <DeviceContainer />
-        <GuitarContainer />
+        {/* <DeviceContainer />
+        <GuitarContainer /> */}
+        <IntroText />
       </Canvas>
     </div>
   );
