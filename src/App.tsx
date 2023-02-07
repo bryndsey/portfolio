@@ -1,7 +1,14 @@
-import { CameraControls, PerspectiveCamera, Stats } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
-import { useState } from "react";
+import {
+  CameraControls,
+  PerspectiveCamera,
+  ScrollControls,
+  Stats,
+  useScroll,
+} from "@react-three/drei";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { useRef, useState } from "react";
 import { types, useControls } from "theatric";
+import { Group } from "three";
 import { Device } from "./Device";
 import { Guitar } from "./Guitar";
 import { IntroText } from "./IntroText";
@@ -77,6 +84,36 @@ const DeviceContainer = () => {
   );
 };
 
+const pageCount = 5;
+
+const guitarPageIndex = 1;
+
+const GuitarPage = () => {
+  const groupRef = useRef<Group>(null);
+  const scrollData = useScroll();
+
+  useFrame((state) => {
+    if (groupRef.current === null) return;
+
+    const enterAmount = scrollData.range(0, guitarPageIndex / pageCount) - 1;
+    const exitAmount = scrollData.range(
+      guitarPageIndex / pageCount,
+      (guitarPageIndex + 1) / pageCount
+    );
+
+    const yPercent = enterAmount + exitAmount;
+
+    const viewportHeight = state.viewport.height;
+    groupRef.current.position.setY(yPercent * viewportHeight);
+  });
+
+  return (
+    <group ref={groupRef}>
+      <GuitarContainer />
+    </group>
+  );
+};
+
 const GuitarContainer = () => {
   const { position, rotation } = useControls(
     {
@@ -122,11 +159,14 @@ function App() {
           position={[cameraPosition.x, cameraPosition.y, cameraPosition.z]}
         />
         {/* <CameraControls /> */}
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 10]} intensity={1} />
-        {/* <DeviceContainer />
+        <ScrollControls pages={pageCount}>
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[10, 10, 10]} intensity={1} />
+          {/* <DeviceContainer />
         <GuitarContainer /> */}
-        <IntroText />
+          <GuitarPage />
+          <IntroText />
+        </ScrollControls>
       </Canvas>
     </div>
   );
