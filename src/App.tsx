@@ -6,11 +6,12 @@ import { DevicePage } from "./DevicePage";
 import { GuitarPage } from "./GuitarPage";
 import { IntroText } from "./IntroText";
 
-export const pageCount = 4;
+export const pageCount = 5;
 
 export const guitarPageIndex = 1;
-export const devicePageIndex = 2;
-export const contactPageIndex = 3;
+export const guitarEndPageIndex = 2;
+export const devicePageIndex = 3;
+export const contactPageIndex = 4;
 
 const backgroundColor = "mediumseagreen";
 

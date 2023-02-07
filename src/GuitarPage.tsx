@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { types, useControls } from "theatric";
 import { Group } from "three";
 import { Guitar } from "./Guitar";
-import { guitarPageIndex, pageCount } from "./App";
+import { guitarEndPageIndex, guitarPageIndex, pageCount } from "./App";
 import { useScrollPages } from "./useScrollPages";
 
 export const GuitarPage = () => {
@@ -20,7 +20,8 @@ export const GuitarPage = () => {
       const viewportHeight = state.viewport.height;
       groupRef.current.position.setY(yPercent * viewportHeight);
     },
-    guitarPageIndex
+    guitarPageIndex,
+    guitarEndPageIndex
   );
 
   return (
