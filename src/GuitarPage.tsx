@@ -5,29 +5,23 @@ import { types, useControls } from "theatric";
 import { Group } from "three";
 import { Guitar } from "./Guitar";
 import { guitarPageIndex, pageCount } from "./App";
+import { useScrollPages } from "./useScrollPages";
 
 export const GuitarPage = () => {
   const groupRef = useRef<Group>(null);
-  const scrollData = useScroll();
 
-  useFrame((state) => {
-    if (groupRef.current === null) return;
+  useScrollPages(
+    pageCount,
+    (enterAmount, exitAmount, state, delta) => {
+      if (groupRef.current === null) return;
 
-    const enterAmount =
-      scrollData.range(
-        (guitarPageIndex - 1) / pageCount,
-        guitarPageIndex / pageCount
-      ) - 1;
-    const exitAmount = scrollData.range(
-      guitarPageIndex / pageCount,
-      (guitarPageIndex + 1) / pageCount
-    );
+      const yPercent = enterAmount + exitAmount;
 
-    const yPercent = enterAmount + exitAmount;
-
-    const viewportHeight = state.viewport.height;
-    groupRef.current.position.setY(yPercent * viewportHeight);
-  });
+      const viewportHeight = state.viewport.height;
+      groupRef.current.position.setY(yPercent * viewportHeight);
+    },
+    guitarPageIndex
+  );
 
   return (
     <group ref={groupRef}>
