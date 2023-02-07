@@ -11,7 +11,8 @@ export const GuitarPage = () => {
   const groupRef = useRef<Group>(null);
 
   useScrollPages(
-    pageCount,
+    guitarPageIndex,
+    guitarEndPageIndex,
     (enterAmount, exitAmount, state, delta) => {
       if (groupRef.current === null) return;
 
@@ -19,9 +20,7 @@ export const GuitarPage = () => {
 
       const viewportHeight = state.viewport.height;
       groupRef.current.position.setY(yPercent * viewportHeight);
-    },
-    guitarPageIndex,
-    guitarEndPageIndex
+    }
   );
 
   return (
