@@ -33,12 +33,9 @@ function App() {
           makeDefault
           position={[cameraPosition.x, cameraPosition.y, cameraPosition.z]}
         />
-        {/* <CameraControls /> */}
         <ScrollControls pages={pageCount}>
           <ambientLight intensity={0.5} />
           <directionalLight position={[10, 10, 10]} intensity={1} />
-          {/* <DeviceContainer />
-        <GuitarContainer /> */}
           <IntroText />
           <GuitarPage />
           <DevicePage />

@@ -1,10 +1,8 @@
-import { useScroll } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import { types, useControls } from "theatric";
 import { Group } from "three";
+import { guitarEndPageIndex, guitarPageIndex } from "./App";
 import { Guitar } from "./Guitar";
-import { guitarEndPageIndex, guitarPageIndex, pageCount } from "./App";
 import { useScrollPages } from "./useScrollPages";
 
 export const GuitarPage = () => {
