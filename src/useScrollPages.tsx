@@ -15,13 +15,10 @@ export function useScrollPages(
   useFrame((state, delta) => {
     const totalPages = scrollData.pages;
     const enterAmount =
-      scrollData.range(
-        (startPageIndex - 1) / totalPages,
-        startPageIndex / totalPages
-      ) - 1;
+      scrollData.range((startPageIndex - 1) / totalPages, 1 / totalPages) - 1;
     const exitAmount = scrollData.range(
       endPageIndex / totalPages,
-      (endPageIndex + 1) / totalPages
+      1 / totalPages
     );
     progressCallback(enterAmount, exitAmount, state, delta);
   });
