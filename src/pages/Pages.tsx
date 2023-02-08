@@ -1,6 +1,6 @@
 import { ContactPage } from "./ContactPage";
-import { DevicePage } from "./DevicePage";
-import { GuitarPage } from "./GuitarPage";
+import { DevicePage } from "./android/DevicePage";
+import { GuitarPage } from "./react/music/GuitarPage";
 import { IntroText } from "./IntroText";
 
 export interface PageComponentProps {

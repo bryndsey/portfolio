@@ -1,7 +1,7 @@
 import { PerspectiveCamera, ScrollControls, Stats } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { useControls } from "theatric";
-import { pages } from "./Pages";
+import { pages } from "./pages/Pages";
 
 const backgroundColor = "mediumseagreen";
 

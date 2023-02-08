@@ -2,8 +2,8 @@ import { useRef } from "react";
 import { types, useControls } from "theatric";
 import { Group } from "three";
 import { Guitar } from "./Guitar";
-import { PageComponentProps } from "./Pages";
-import { useScrollPages } from "./useScrollPages";
+import { PageComponentProps } from "../../Pages";
+import { useScrollPages } from "../../useScrollPages";
 
 export const GuitarPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);

@@ -2,9 +2,8 @@ import { useRef } from "react";
 import { types, useControls } from "theatric";
 import { Euler, Group, MathUtils } from "three";
 import { Device } from "./Device";
-import { deviceEndPageIndex, deviceStartPageIndex } from "./App";
-import { useScrollPages } from "./useScrollPages";
-import { PageComponentProps } from "./Pages";
+import { PageComponentProps } from "../Pages";
+import { useScrollPages } from "../useScrollPages";
 
 // const deviceStartPosition = { x: -0.5, y: 0, z: 0 };
 // const deviceStartRotation = { x: -0.5 * Math.PI, y: 0, z: 0.66 };
