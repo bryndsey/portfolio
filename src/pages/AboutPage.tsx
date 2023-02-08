@@ -25,7 +25,7 @@ export const AboutPage = (props: PageComponentProps) => {
     <group ref={groupRef}>
       <Text fontSize={0.1} maxWidth={viewportWidth * 0.6} lineHeight={1.5}>
         {
-          "I'm a React and Android developer. I make interactive apps, including tools to make music."
+          "I'm a React and Android developer.\nI make interactive apps, including tools to make music."
         }
       </Text>
     </group>
