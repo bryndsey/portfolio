@@ -30,23 +30,26 @@ export const ContactPage = (props: PageComponentProps) => {
         style={{
           // backgroundColor: "rgba(0, 0, 0, 0.2)",
           width: size.width * 0.5,
-          height: size.height * 0.5,
         }}
         portal={{ current: gl.domElement.parentNode }}
         distanceFactor={1}
       >
         <div
           style={{
-            height: "100%",
             display: "flex",
             flexDirection: "row",
-            justifyContent: "space-evenly",
+            justifyContent: "space-between",
             alignItems: "center",
+            margin: 0,
           }}
         >
-          <a href="http://www.github.com">Github</a>
-          <a href="http://www.linkedin.com">LinkedIn</a>
-          <p>Something else</p>
+          <a href="http://www.github.com" style={{ margin: 0 }}>
+            Github
+          </a>
+          <a href="http://www.linkedin.com" style={{ margin: 0 }}>
+            LinkedIn
+          </a>
+          <p style={{ margin: 0 }}>Something else</p>
         </div>
       </Html>
     </group>

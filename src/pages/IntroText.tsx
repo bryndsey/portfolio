@@ -25,13 +25,11 @@ export const IntroText = (props: PageComponentProps) => {
         style={{
           // backgroundColor: "rgba(0, 0, 1, 0.1)",
           width: size.width * 0.66,
-          height: size.height * 0.66,
           fontFamily: "sans-serif",
         }}
       >
         <div
           style={{
-            height: "100%",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -41,10 +39,11 @@ export const IntroText = (props: PageComponentProps) => {
             style={{
               fontSize: 60,
               fontWeight: "bolder",
+              margin: 0,
             }}
           >
             Hi. My name is <br />
-            <span style={{ fontSize: 100 }}>Bryan Lindsey</span>
+            <span style={{ fontSize: 100 }}>Bryan Lindsey.</span>
           </p>
         </div>
       </Html>
