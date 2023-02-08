@@ -41,7 +41,6 @@ export const IntroPage = (props: PageComponentProps) => {
         style={{
           // backgroundColor: "rgba(0, 0, 1, 0.1)",
           width: size.width * 0.66,
-          fontFamily: "sans-serif",
         }}
         portal={{ current: htmlPortal }}
       >

@@ -16,7 +16,7 @@ function App() {
   // );
 
   return (
-    <div id="App" style={{ height: "100%" }}>
+    <div id="App" style={{ height: "100%", fontFamily: "sans-serif" }}>
       <Canvas style={{ backgroundColor: backgroundColor }}>
         {/* <Stats /> */}
         <PerspectiveCamera
