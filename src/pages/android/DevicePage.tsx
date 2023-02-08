@@ -14,19 +14,19 @@ export const DevicePage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
   const innerGroupRef = useRef<Group>(null);
 
-  const { size, bezelSize } = useControls(
-    {
-      size: {
-        width: types.number(deviceSize.width, { nudgeMultiplier: 0.1 }),
-        height: types.number(deviceSize.height, { nudgeMultiplier: 0.1 }),
-        thickness: types.number(deviceSize.thickness, {
-          nudgeMultiplier: 0.01,
-        }),
-      },
-      bezelSize: deviceBezelSize,
-    },
-    { folder: "device" }
-  );
+  // const { size, bezelSize } = useControls(
+  //   {
+  //     size: {
+  //       width: types.number(deviceSize.width, { nudgeMultiplier: 0.1 }),
+  //       height: types.number(deviceSize.height, { nudgeMultiplier: 0.1 }),
+  //       thickness: types.number(deviceSize.thickness, {
+  //         nudgeMultiplier: 0.01,
+  //       }),
+  //     },
+  //     bezelSize: deviceBezelSize,
+  //   },
+  //   { folder: "device" }
+  // );
 
   useScrollPages(
     props.startPageIndex,
@@ -60,7 +60,7 @@ export const DevicePage = (props: PageComponentProps) => {
   return (
     <group ref={groupRef}>
       <group ref={innerGroupRef} scale={4}>
-        <Device {...size} bezelSize={bezelSize} />
+        <Device {...deviceSize} bezelSize={deviceBezelSize} />
       </group>
     </group>
   );

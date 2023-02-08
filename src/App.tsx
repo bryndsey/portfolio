@@ -5,13 +5,15 @@ import { pages } from "./pages/Pages";
 
 const backgroundColor = "mediumseagreen";
 
+const cameraPosition = { x: 0, y: 0, z: 2 };
+
 function App() {
-  const { cameraPosition } = useControls(
-    {
-      cameraPosition: { x: 0, y: 0.25, z: 2 },
-    },
-    { folder: "scene" }
-  );
+  // const { cameraPosition } = useControls(
+  //   {
+  //     cameraPosition: { x: 0, y: 0.25, z: 2 },
+  //   },
+  //   { folder: "scene" }
+  // );
 
   return (
     <div id="App" style={{ height: "100%" }}>
