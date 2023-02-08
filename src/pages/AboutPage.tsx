@@ -1,12 +1,14 @@
-import { Text } from "@react-three/drei";
+import { Html, Text } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import { Group } from "three";
+import { useHtmlPortal } from "../useHtmlPortal";
 import { PageComponentProps } from "./Pages";
 import { useScrollPages } from "./useScrollPages";
 
 export const AboutPage = (props: PageComponentProps) => {
-  const viewportWidth = useThree((state) => state.viewport.width);
+  const viewportWidth = useThree((state) => state.size.width);
+  const htmlPortal = useHtmlPortal();
   const groupRef = useRef<Group>(null);
   useScrollPages(
     props.startPageIndex,
@@ -23,11 +25,18 @@ export const AboutPage = (props: PageComponentProps) => {
 
   return (
     <group ref={groupRef}>
-      <Text fontSize={0.1} maxWidth={viewportWidth * 0.6} lineHeight={1.5}>
-        {
-          "I'm a React and Android developer.\nI make interactive apps, including tools to make music."
-        }
-      </Text>
+      <Html
+        transform
+        style={{ width: viewportWidth * 0.6 }}
+        portal={{ current: htmlPortal }}
+        distanceFactor={1}
+      >
+        <h2>
+          {
+            "I'm a React and Android developer.\nI make interactive apps, including tools to make music."
+          }
+        </h2>
+      </Html>
     </group>
   );
 };
