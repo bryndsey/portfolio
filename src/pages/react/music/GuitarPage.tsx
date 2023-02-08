@@ -1,3 +1,5 @@
+import { Text } from "@react-three/drei";
+import { useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import { Group } from "three";
 import { PageComponentProps } from "../../Pages";
@@ -6,6 +8,8 @@ import { Guitar } from "./Guitar";
 
 export const GuitarPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
+
+  const viewport = useThree((state) => state.viewport);
 
   useScrollPages(
     props.startPageIndex,
@@ -17,14 +21,19 @@ export const GuitarPage = (props: PageComponentProps) => {
 
       const viewportHeight = state.viewport.height;
       groupRef.current.position.setY(yPercent * viewportHeight);
-      groupRef.current.position.setX(state.viewport.width / 5);
     }
   );
 
   return (
     <group ref={groupRef}>
+      <Text
+        fontSize={0.15}
+        position={[-viewport.width / 5, viewport.height / 5, 0]}
+      >
+        {"SongSpark"}
+      </Text>
       <group
-        // position={[position.x, position.y, position.z]}
+        position={[viewport.width / 5, 0, 0]}
         rotation={[Math.PI / 2, -0.25, 0.6]}
       >
         <Guitar />
