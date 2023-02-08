@@ -1,6 +1,7 @@
 import { Html, RoundedBox } from "@react-three/drei";
-import { useThree, Vector3 } from "@react-three/fiber";
+import { Vector3 } from "@react-three/fiber";
 import { Color } from "three";
+import { useHtmlPortal } from "../../useHtmlPortal";
 import { ScreenContent } from "./ScreenContent";
 
 interface DeviceScreenProps {
@@ -13,7 +14,6 @@ interface DeviceScreenProps {
 }
 
 const DeviceScreen = (props: DeviceScreenProps) => {
-  const { gl } = useThree();
   const {
     width,
     height,
@@ -23,14 +23,16 @@ const DeviceScreen = (props: DeviceScreenProps) => {
     isOn = true,
   } = props;
   const scaleFactor = resolutionScale === undefined ? 1 : resolutionScale;
+
+  const htmlPortal = useHtmlPortal();
+
   return (
     <>
       {isOn && (
         <Html
-          onClickCapture={() => console.log("Click captured")}
           transform
           occlude="blending"
-          portal={{ current: gl.domElement.parentNode }}
+          portal={{ current: htmlPortal }}
           distanceFactor={1 / scaleFactor}
           position={position}
           style={{

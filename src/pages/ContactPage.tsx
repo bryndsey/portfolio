@@ -2,13 +2,15 @@ import { Html } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import { Group } from "three";
+import { useHtmlPortal } from "../useHtmlPortal";
 import { PageComponentProps } from "./Pages";
 import { useScrollPages } from "./useScrollPages";
 
 export const ContactPage = (props: PageComponentProps) => {
   const size = useThree((state) => state.size);
-  const gl = useThree((state) => state.gl);
   const groupRef = useRef<Group>(null);
+
+  const htmlPortal = useHtmlPortal();
 
   useScrollPages(
     props.startPageIndex,
@@ -31,7 +33,7 @@ export const ContactPage = (props: PageComponentProps) => {
           // backgroundColor: "rgba(0, 0, 0, 0.2)",
           width: size.width * 0.5,
         }}
-        portal={{ current: gl.domElement.parentNode }}
+        portal={{ current: htmlPortal }}
         distanceFactor={1}
       >
         <div
