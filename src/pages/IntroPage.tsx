@@ -6,8 +6,7 @@ import { useHtmlPortal } from "../useHtmlPortal";
 import { PageComponentProps } from "./Pages";
 import { useScrollPages } from "./useScrollPages";
 
-// TODO: Actually use the props...
-export const IntroText = (props: PageComponentProps) => {
+export const IntroPage = (props: PageComponentProps) => {
   const size = useThree((state) => state.size);
 
   const htmlPortal = useHtmlPortal();
