@@ -30,7 +30,7 @@ export const IntroText = (props: PageComponentProps) => {
   useFrame((state) => {
     const mouse = state.mouse;
     if (groupRef.current === null) return;
-    groupRef.current.lookAt(mouse.x, mouse.y, 10);
+    groupRef.current.lookAt(mouse.x, mouse.y, 50);
   });
 
   return (
