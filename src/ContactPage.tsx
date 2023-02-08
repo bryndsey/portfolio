@@ -3,16 +3,17 @@ import { useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import { Group } from "three";
 import { contactEnterPageIndex, contactExitPageIndex } from "./App";
+import { PageComponentProps } from "./Pages";
 import { useScrollPages } from "./useScrollPages";
 
-export const ContactPage = () => {
+export const ContactPage = (props: PageComponentProps) => {
   const size = useThree((state) => state.size);
   const gl = useThree((state) => state.gl);
   const groupRef = useRef<Group>(null);
 
   useScrollPages(
-    contactEnterPageIndex,
-    contactExitPageIndex,
+    props.startPageIndex,
+    props.exitPageIndex,
     (enterAmount, exitAmount, state) => {
       if (groupRef.current === null) return;
 

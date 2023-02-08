@@ -4,13 +4,14 @@ import { Euler, Group, MathUtils } from "three";
 import { Device } from "./Device";
 import { deviceEndPageIndex, deviceStartPageIndex } from "./App";
 import { useScrollPages } from "./useScrollPages";
+import { PageComponentProps } from "./Pages";
 
 // const deviceStartPosition = { x: -0.5, y: 0, z: 0 };
 // const deviceStartRotation = { x: -0.5 * Math.PI, y: 0, z: 0.66 };
 const deviceSize = { width: 0.15, height: 0.3, thickness: 0.02 };
 const deviceBezelSize = 64;
 
-export const DevicePage = () => {
+export const DevicePage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
   const innerGroupRef = useRef<Group>(null);
 
@@ -29,8 +30,8 @@ export const DevicePage = () => {
   );
 
   useScrollPages(
-    deviceStartPageIndex,
-    deviceEndPageIndex,
+    props.startPageIndex,
+    props.exitPageIndex,
     (enterAmount, exitAmount, state, delta) => {
       if (groupRef.current === null) return;
 

@@ -2,8 +2,10 @@ import { Html } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import { Group } from "three";
+import { PageComponentProps } from "./Pages";
 
-export const IntroText = () => {
+// TODO: Actually use the props...
+export const IntroText = (props: PageComponentProps) => {
   const size = useThree((state) => state.size);
 
   const groupRef = useRef<Group>(null);
