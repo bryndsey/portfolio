@@ -36,22 +36,24 @@ const DeviceClock = () => {
 
 export function ScreenContent() {
   return (
-    <div style={{ padding: 8, backgroundColor: "lightblue", height: "100%" }}>
-      <DeviceClock />
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: 16,
-          padding: 8,
-        }}
-      >
-        <DeviceAppIcon appName="SongSpark" color="royalblue" />
-        <DeviceAppIcon appName="Tap Band" color="brown" />
-        <DeviceAppIcon appName="Tilt Archery Trainer" color="forestgreen" />
-        <DeviceAppIcon appName="Connected Light App" color="steelblue" />
-        <DeviceAppIcon appName="Banking App" color="white" />
-        <DeviceAppIcon appName="Fast Food App" color="red" />
+    <div style={{ backgroundColor: "lightblue", height: "100%" }}>
+      <div style={{ padding: 8 }}>
+        <DeviceClock />
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: 16,
+            padding: 8,
+          }}
+        >
+          <DeviceAppIcon appName="SongSpark" color="royalblue" />
+          <DeviceAppIcon appName="Tap Band" color="brown" />
+          <DeviceAppIcon appName="Tilt Archery Trainer" color="forestgreen" />
+          <DeviceAppIcon appName="Connected Light App" color="steelblue" />
+          <DeviceAppIcon appName="Banking App" color="white" />
+          <DeviceAppIcon appName="Fast Food App" color="red" />
+        </div>
       </div>
     </div>
   );
