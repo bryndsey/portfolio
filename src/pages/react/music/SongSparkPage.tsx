@@ -6,9 +6,9 @@ import { ProjectDescription, ReactTag } from "../../../ProjectDescription";
 import { useHtmlPortal } from "../../../useHtmlPortal";
 import { PageComponentProps } from "../../Pages";
 import { useScrollPages } from "../../useScrollPages";
-import { Guitar } from "./Guitar";
+import { AcousticGuitar } from "./AcousticGuitar";
 
-export const GuitarPage = (props: PageComponentProps) => {
+export const SongSparkPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
 
   const viewport = useThree((state) => state.viewport);
@@ -53,7 +53,7 @@ export const GuitarPage = (props: PageComponentProps) => {
         position={[viewport.width / 5, 0, 0]}
         rotation={[Math.PI / 2, -0.25, 0.6]}
       >
-        <Guitar />
+        <AcousticGuitar />
       </group>
     </group>
   );

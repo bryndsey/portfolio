@@ -1,6 +1,6 @@
 import { ContactPage } from "./ContactPage";
 import { DevicePage } from "./android/DevicePage";
-import { GuitarPage } from "./react/music/GuitarPage";
+import { SongSparkPage } from "./react/music/SongSparkPage";
 import { IntroPage } from "./IntroPage";
 import { AboutPage } from "./AboutPage";
 
@@ -18,7 +18,7 @@ interface Page {
 const pagesShapes: Page[] = [
   { id: "intro", component: IntroPage, contentLength: 0 },
   { id: "about", component: AboutPage, contentLength: 0 },
-  { id: "guitar", component: GuitarPage, contentLength: 0.5 },
+  { id: "songspark", component: SongSparkPage, contentLength: 0.5 },
   { id: "device", component: DevicePage, contentLength: 0.5 },
   { id: "contact", component: ContactPage, contentLength: 0 },
 ];
