@@ -48,7 +48,7 @@ const DeviceScreen = (props: DeviceScreenProps) => {
           <ScreenContent />
         </Html>
       )}
-      <mesh position={[position[0], position[1], position[2] + 0.001]}>
+      {/* <mesh position={[position[0], position[1], position[2] + 0.001]}>
         <planeGeometry args={[width - 0.02, height - 0.02]} />
         <meshPhysicalMaterial
           // transparent
@@ -60,7 +60,7 @@ const DeviceScreen = (props: DeviceScreenProps) => {
           opacity={0.01}
           color="lightgrey"
         />
-      </mesh>
+      </mesh> */}
     </>
   );
 };
