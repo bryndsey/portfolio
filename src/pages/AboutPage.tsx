@@ -33,7 +33,7 @@ export const AboutPage = (props: PageComponentProps) => {
       >
         <h2>
           {
-            "I like to make thing for the web and Android, including games and apps to make music."
+            "I like to make things for the web and Android, including games and apps to make music."
           }
         </h2>
       </Html>
