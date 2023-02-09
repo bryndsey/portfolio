@@ -35,9 +35,7 @@ export const PedalsPage = (props: PageComponentProps) => {
         style={{
           width: size.width / 2,
           // backgroundColor: "rgba(0, 0, 0, 0.2)",
-          fontSize: size.width / 50,
         }}
-        // fontSize={0.15}
         position={[viewport.width / 4, viewport.height / 5, 0]}
         portal={{ current: htmlPortal }}
         distanceFactor={1}
