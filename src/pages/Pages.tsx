@@ -3,6 +3,7 @@ import { DevicePage } from "./android/DevicePage";
 import { SongSparkPage } from "./react/music/SongSparkPage";
 import { IntroPage } from "./IntroPage";
 import { AboutPage } from "./AboutPage";
+import { PedalsPage } from "./react/music/PedalsPage";
 
 export interface PageComponentProps {
   startPageIndex: number;
@@ -19,6 +20,7 @@ const pagesShapes: Page[] = [
   { id: "intro", component: IntroPage, contentLength: 0 },
   { id: "about", component: AboutPage, contentLength: 0 },
   { id: "songspark", component: SongSparkPage, contentLength: 0.5 },
+  { id: "pedals", component: PedalsPage, contentLength: 0.5 },
   { id: "device", component: DevicePage, contentLength: 0.5 },
   { id: "contact", component: ContactPage, contentLength: 0 },
 ];
