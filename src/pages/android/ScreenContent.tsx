@@ -9,14 +9,12 @@ const DeviceAppIcon = (props: DeviceAppIconProps) => {
   return (
     <div>
       <div
+        className="rounded-lg aspect-square shadow-md hover:shadow-lg active:shadow-sm transition-shadow"
         style={{
           backgroundColor: props.color,
-          borderRadius: 8,
-          aspectRatio: "1 / 1",
-          boxShadow: "0px 2px 4px 2px rgba(0, 0, 0, 0.1)",
         }}
       />
-      <p style={{ textAlign: "center", fontSize: 12 }}>{props.appName}</p>
+      <p className="text-center text-base pt-2">{props.appName}</p>
     </div>
   );
 };
@@ -31,22 +29,19 @@ const DeviceClock = () => {
     return () => clearInterval(interval);
   }, []);
 
-  return <p>{currentTime.toLocaleTimeString()}</p>;
+  return (
+    <p className="text-6xl text-center p-6 tabular-nums">
+      {currentTime.toLocaleTimeString()}
+    </p>
+  );
 };
 
 export function ScreenContent() {
   return (
-    <div style={{ backgroundColor: "lightblue", height: "100%" }}>
-      <div style={{ padding: 8 }}>
+    <div className="h-full bg-blue-300">
+      <div className="p-4">
         <DeviceClock />
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: 16,
-            padding: 8,
-          }}
-        >
+        <div className="grid grid-cols-3 gap-8 p-2">
           <DeviceAppIcon appName="SongSpark" color="royalblue" />
           <DeviceAppIcon appName="Tap Band" color="brown" />
           <DeviceAppIcon appName="Tilt Archery Trainer" color="forestgreen" />
