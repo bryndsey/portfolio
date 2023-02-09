@@ -10,6 +10,7 @@ import { AcousticGuitar } from "./AcousticGuitar";
 
 export const SongSparkPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
+  const descriptionRef = useRef<HTMLDivElement>(null);
 
   const viewport = useThree((state) => state.viewport);
   const size = useThree((state) => state.size);
@@ -26,12 +27,19 @@ export const SongSparkPage = (props: PageComponentProps) => {
 
       const viewportHeight = state.viewport.height;
       groupRef.current.position.setY(yPercent * viewportHeight);
+
+      if (descriptionRef.current === null) return;
+      descriptionRef.current.style.opacity = `${Math.pow(
+        1 - Math.abs(yPercent),
+        4
+      )}`;
     }
   );
 
   return (
     <group ref={groupRef}>
       <Html
+        ref={descriptionRef}
         transform
         style={{
           width: size.width / 2,
