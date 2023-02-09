@@ -44,22 +44,10 @@ export const IntroPage = (props: PageComponentProps) => {
         }}
         portal={{ current: htmlPortal }}
       >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <p
-            style={{
-              fontSize: 60,
-              fontWeight: "bolder",
-              margin: 0,
-            }}
-          >
+        <div className="flex justify-center items-center">
+          <p className="font-bold m-0 text-6xl">
             Hi. My name is <br />
-            <span style={{ fontSize: 100 }}>Bryan Lindsey.</span>
+            <span style={{ fontSize: "2.5em" }}>Bryan Lindsey.</span>
           </p>
         </div>
       </Html>

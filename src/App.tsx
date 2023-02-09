@@ -3,8 +3,6 @@ import { Canvas } from "@react-three/fiber";
 import { useControls } from "theatric";
 import { pages } from "./pages/Pages";
 
-const backgroundColor = "mediumseagreen";
-
 const cameraPosition = { x: 0, y: 0, z: 2 };
 
 function App() {
@@ -16,8 +14,8 @@ function App() {
   // );
 
   return (
-    <div id="App" style={{ height: "100%", fontFamily: "sans-serif" }}>
-      <Canvas style={{ backgroundColor: backgroundColor }}>
+    <div id="App" className="bg-green-500 h-full font-sans">
+      <Canvas>
         {/* <Stats /> */}
         <PerspectiveCamera
           makeDefault
