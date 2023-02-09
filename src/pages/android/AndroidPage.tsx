@@ -7,7 +7,7 @@ import { Device } from "./Device";
 const deviceSize = { width: 0.15, height: 0.3, thickness: 0.02 };
 const deviceBezelSize = 64;
 
-export const DevicePage = (props: PageComponentProps) => {
+export const AndroidPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
   const innerGroupRef = useRef<Group>(null);
 

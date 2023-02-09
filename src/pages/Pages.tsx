@@ -1,5 +1,5 @@
 import { ContactPage } from "./ContactPage";
-import { DevicePage } from "./android/DevicePage";
+import { AndroidPage } from "./android/AndroidPage";
 import { SongSparkPage } from "./react/music/SongSparkPage";
 import { IntroPage } from "./IntroPage";
 import { AboutPage } from "./AboutPage";
@@ -21,7 +21,7 @@ const pagesShapes: Page[] = [
   { id: "about", component: AboutPage, contentLength: 0 },
   { id: "songspark", component: SongSparkPage, contentLength: 0.5 },
   { id: "pedals", component: PedalsPage, contentLength: 0.5 },
-  { id: "device", component: DevicePage, contentLength: 0.5 },
+  { id: "device", component: AndroidPage, contentLength: 0.5 },
   { id: "contact", component: ContactPage, contentLength: 0 },
 ];
 
