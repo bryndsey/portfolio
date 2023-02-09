@@ -20,7 +20,7 @@ export const SongSparkPage = (props: PageComponentProps) => {
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
-    (enterAmount, exitAmount, state, delta) => {
+    (enterAmount, exitAmount, state) => {
       if (groupRef.current === null) return;
 
       const yPercent = enterAmount + exitAmount;
