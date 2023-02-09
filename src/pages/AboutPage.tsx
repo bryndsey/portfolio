@@ -27,15 +27,19 @@ export const AboutPage = (props: PageComponentProps) => {
     <group ref={groupRef}>
       <Html
         transform
-        style={{ width: viewportWidth * 0.6 }}
+        style={{ width: viewportWidth * 0.75 }}
         portal={{ current: htmlPortal }}
         distanceFactor={1}
       >
-        <h2>
-          {
-            "I like to make things for the web and Android, including games and apps to make music."
-          }
-        </h2>
+        <p className="text-4xl whitespace-pre-line">
+          {`I like to make things for the web and Android, including games and apps to make music.
+
+
+
+
+
+          Keep scrolling to see some things I've made.`}
+        </p>
       </Html>
     </group>
   );
