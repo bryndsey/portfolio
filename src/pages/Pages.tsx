@@ -18,8 +18,8 @@ interface Page {
 const pagesShapes: Page[] = [
   { id: "intro", component: IntroPage, contentLength: 0 },
   { id: "about", component: AboutPage, contentLength: 0 },
-  { id: "guitar", component: GuitarPage, contentLength: 1 },
-  { id: "device", component: DevicePage, contentLength: 1 },
+  { id: "guitar", component: GuitarPage, contentLength: 0.5 },
+  { id: "device", component: DevicePage, contentLength: 0.5 },
   { id: "contact", component: ContactPage, contentLength: 0 },
 ];
 
