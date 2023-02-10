@@ -1,7 +1,16 @@
+import { animated, useTransition } from "@react-spring/web";
+import { Html } from "@react-three/drei";
+import { useThree } from "@react-three/fiber";
 import { atom, useAtom } from "jotai";
 import { useRef } from "react";
 import { Euler, Group, MathUtils } from "three";
-import { AndroidTag, Tag, UnityTag } from "../../ProjectDescription";
+import {
+  AndroidTag,
+  ProjectDescription,
+  Tag,
+  UnityTag,
+} from "../../ProjectDescription";
+import { useHtmlPortal } from "../../useHtmlPortal";
 import { PageComponentProps } from "../Pages";
 import { useScrollPages } from "../useScrollPages";
 import { Device } from "./Device";
@@ -64,6 +73,22 @@ export const AndroidPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
   const innerGroupRef = useRef<Group>(null);
 
+  const [selectedApp, selectApp] = useSelectedAndroidApp();
+
+  const transitions = useTransition(selectedApp, {
+    key: selectedApp,
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    config: { duration: 300 },
+    exitBeforeEnter: true,
+  });
+
+  const htmlPortal = useHtmlPortal();
+
+  const size = useThree((state) => state.size);
+  const viewport = useThree((state) => state.viewport);
+
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
@@ -71,6 +96,10 @@ export const AndroidPage = (props: PageComponentProps) => {
       if (groupRef.current === null) return;
 
       const progress = enterAmount + exitAmount;
+
+      if (selectedApp !== null && progress !== 0) {
+        selectApp(null);
+      }
 
       const position = MathUtils.lerp(
         -state.viewport.width / 6,
@@ -94,9 +123,35 @@ export const AndroidPage = (props: PageComponentProps) => {
   );
 
   return (
-    <group ref={groupRef}>
-      <group ref={innerGroupRef} scale={4}>
-        <Device {...deviceSize} bezelSize={deviceBezelSize} />
+    <group>
+      <group ref={groupRef}>
+        <group ref={innerGroupRef} scale={4}>
+          <Device {...deviceSize} bezelSize={deviceBezelSize} />
+        </group>
+      </group>
+      <group>
+        <Html
+          transform
+          style={{
+            width: size.width / 3,
+            // backgroundColor: "rgba(0, 0, 0, 0.2)",
+          }}
+          position={[viewport.width / 4, viewport.height / 5, 0]}
+          portal={{ current: htmlPortal }}
+          distanceFactor={1}
+        >
+          {transitions((style, app) => (
+            <animated.div style={style}>
+              {app && (
+                <ProjectDescription
+                  projectName={app.name}
+                  descriptionText={app.description}
+                  tags={app.projectTags}
+                />
+              )}
+            </animated.div>
+          ))}
+        </Html>
       </group>
     </group>
   );
