@@ -1,18 +1,10 @@
-import { PerspectiveCamera, ScrollControls, Stats } from "@react-three/drei";
+import { PerspectiveCamera, ScrollControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { useControls } from "theatric";
 import { pages } from "./pages/Pages";
 
 const cameraPosition = { x: 0, y: 0, z: 2 };
 
 function App() {
-  // const { cameraPosition } = useControls(
-  //   {
-  //     cameraPosition: { x: 0, y: 0.25, z: 2 },
-  //   },
-  //   { folder: "scene" }
-  // );
-
   return (
     <div id="App" className="bg-green-500 h-full font-sans">
       <Canvas>

@@ -13,8 +13,10 @@
     "cypress:open": "cypress open"
   },
   "dependencies": {
+    "@react-spring/web": "^9.6.1",
     "@react-three/drei": "^9.56.11",
     "@react-three/fiber": "^8.10.1",
+    "jotai": "^2.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "theatric": "^0.6.0",

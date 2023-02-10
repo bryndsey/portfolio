@@ -32,7 +32,7 @@ export const ProjectDescription = (props: ProjectDescriptionProps) => {
   );
 };
 
-type Tag = { name: string; color: string };
+export type Tag = { name: string; color: string };
 export const AndroidTag: Tag = { name: "Android", color: "lightgreen" };
 export const ReactTag: Tag = { name: "React", color: "deepskyblue" };
 export const UnityTag: Tag = { name: "Unity", color: "lightgrey" };

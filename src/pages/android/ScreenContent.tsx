@@ -1,22 +1,19 @@
 import { useEffect, useState } from "react";
+import { useSelectedAndroidApp } from "./useSelectedAndroidApp";
+import { AndroidApp, androidApps } from "./AndroidApp";
 
 interface DeviceAppIconProps {
-  appName: string;
-  color: string;
+  app: AndroidApp;
 }
 
 const DeviceAppIcon = (props: DeviceAppIconProps) => {
+  const [_, selectApp] = useSelectedAndroidApp();
   return (
-    <div>
+    <div onClick={() => selectApp(props.app)}>
       <div
-        style={{
-          backgroundColor: props.color,
-          borderRadius: 8,
-          aspectRatio: "1 / 1",
-          boxShadow: "0px 2px 4px 2px rgba(0, 0, 0, 0.1)",
-        }}
+        className={`${props.app.tempIconColor} rounded-lg aspect-square shadow-md hover:shadow-lg active:shadow-sm transition-shadow`}
       />
-      <p style={{ textAlign: "center", fontSize: 12 }}>{props.appName}</p>
+      <p className="text-center text-base pt-2">{props.app.name}</p>
     </div>
   );
 };
@@ -31,28 +28,22 @@ const DeviceClock = () => {
     return () => clearInterval(interval);
   }, []);
 
-  return <p>{currentTime.toLocaleTimeString()}</p>;
+  return (
+    <p className="text-6xl text-center p-6 tabular-nums">
+      {currentTime.toLocaleTimeString()}
+    </p>
+  );
 };
 
 export function ScreenContent() {
   return (
-    <div style={{ backgroundColor: "lightblue", height: "100%" }}>
-      <div style={{ padding: 8 }}>
+    <div className="h-full bg-blue-300">
+      <div className="p-4">
         <DeviceClock />
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: 16,
-            padding: 8,
-          }}
-        >
-          <DeviceAppIcon appName="SongSpark" color="royalblue" />
-          <DeviceAppIcon appName="Tap Band" color="brown" />
-          <DeviceAppIcon appName="Tilt Archery Trainer" color="forestgreen" />
-          <DeviceAppIcon appName="Connected Light App" color="steelblue" />
-          <DeviceAppIcon appName="Banking App" color="white" />
-          <DeviceAppIcon appName="Fast Food App" color="red" />
+        <div className="grid grid-cols-3 gap-8 p-2">
+          {androidApps.map((app) => {
+            return <DeviceAppIcon key={app.name} app={app} />;
+          })}
         </div>
       </div>
     </div>
