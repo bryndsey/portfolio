@@ -1,3 +1,4 @@
+import { atom, useAtom } from "jotai";
 import { useRef } from "react";
 import { Euler, Group, MathUtils } from "three";
 import { AndroidTag, Tag, UnityTag } from "../../ProjectDescription";
@@ -55,6 +56,9 @@ export const androidApps: AndroidApp[] = [
     projectTags: [AndroidTag],
   },
 ];
+
+const selectedAppAtom = atom<AndroidApp | null>(null);
+export const useSelectedAndroidApp = () => useAtom(selectedAppAtom);
 
 export const AndroidPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);

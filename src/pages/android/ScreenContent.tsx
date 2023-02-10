@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
-import { androidApps } from "./AndroidPage";
+import { AndroidApp, androidApps, useSelectedAndroidApp } from "./AndroidPage";
 
 interface DeviceAppIconProps {
-  appName: string;
-  color: string;
+  app: AndroidApp;
 }
 
 const DeviceAppIcon = (props: DeviceAppIconProps) => {
+  const [_, selectApp] = useSelectedAndroidApp();
   return (
-    <div>
+    <div onClick={() => selectApp(props.app)}>
       <div
-        className={`${props.color} rounded-lg aspect-square shadow-md hover:shadow-lg active:shadow-sm transition-shadow`}
+        className={`${props.app.tempIconColor} rounded-lg aspect-square shadow-md hover:shadow-lg active:shadow-sm transition-shadow`}
       />
-      <p className="text-center text-base pt-2">{props.appName}</p>
+      <p className="text-center text-base pt-2">{props.app.name}</p>
     </div>
   );
 };
@@ -41,13 +41,7 @@ export function ScreenContent() {
         <DeviceClock />
         <div className="grid grid-cols-3 gap-8 p-2">
           {androidApps.map((app) => {
-            return (
-              <DeviceAppIcon
-                key={app.name}
-                appName={app.name}
-                color={app.tempIconColor}
-              />
-            );
+            return <DeviceAppIcon key={app.name} app={app} />;
           })}
         </div>
       </div>
