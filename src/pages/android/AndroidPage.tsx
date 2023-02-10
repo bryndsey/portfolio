@@ -69,6 +69,8 @@ export const androidApps: AndroidApp[] = [
 const selectedAppAtom = atom<AndroidApp | null>(null);
 export const useSelectedAndroidApp = () => useAtom(selectedAppAtom);
 
+const deviceRotation = new Euler();
+
 export const AndroidPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
   const innerGroupRef = useRef<Group>(null);
@@ -123,9 +125,8 @@ export const AndroidPage = (props: PageComponentProps) => {
 
       if (innerGroupRef.current === null) return;
 
-      innerGroupRef.current.setRotationFromEuler(
-        new Euler(0, currentRotation, 0)
-      );
+      deviceRotation.set(0, currentRotation, 0);
+      innerGroupRef.current.setRotationFromEuler(deviceRotation);
     }
   );
 
