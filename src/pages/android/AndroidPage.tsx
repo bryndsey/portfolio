@@ -117,7 +117,7 @@ export const AndroidPage = (props: PageComponentProps) => {
 
       const currentRotation = MathUtils.lerp(
         0.2,
-        Math.PI * 2,
+        Math.PI * 3,
         Math.abs(progress)
       );
 
