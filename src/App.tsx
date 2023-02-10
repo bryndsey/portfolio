@@ -1,4 +1,4 @@
-import { PerspectiveCamera, ScrollControls } from "@react-three/drei";
+import { PerspectiveCamera, ScrollControls, Stats } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { pages } from "./pages/Pages";
 
@@ -8,7 +8,7 @@ function App() {
   return (
     <div id="App" className="bg-green-500 h-full font-sans">
       <Canvas>
-        {/* <Stats /> */}
+        <Stats />
         <PerspectiveCamera
           makeDefault
           position={[cameraPosition.x, cameraPosition.y, cameraPosition.z]}
