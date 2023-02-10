@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { AndroidApp, androidApps, useSelectedAndroidApp } from "./AndroidPage";
+import { useSelectedAndroidApp } from "./useSelectedAndroidApp";
+import { AndroidApp, androidApps } from "./AndroidApp";
 
 interface DeviceAppIconProps {
   app: AndroidApp;
