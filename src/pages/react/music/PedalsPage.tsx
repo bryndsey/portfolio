@@ -75,15 +75,15 @@ export const PedalsPage = (props: PageComponentProps) => {
       <Tube args={[curve, 128, 0.02, 12]}>
         <meshStandardMaterial
           ref={textureRef}
-          opacity={0.51}
+          opacity={0.5}
           color={"dimgrey"}
-          alphaTest={0.01}
+          alphaTest={0.001}
           side={DoubleSide}
         >
           <GradientTexture
             rotation={Math.PI * 0.5}
             center={new Vector2(0.5, 0.5)}
-            stops={[0, 0.45, 0.55, 1]}
+            stops={[0, 0.499, 0.501, 1]}
             colors={["white", "white", "black", "black"]}
             attach="alphaMap"
           />
