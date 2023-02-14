@@ -44,7 +44,7 @@ export const AndroidPage = (props: PageComponentProps) => {
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
-    (enterAmount, contentProgressAmount, exitAmount, state) => {
+    ({ enterAmount, exitAmount, state }) => {
       if (groupRef.current === null) return;
 
       const progress = enterAmount + exitAmount;

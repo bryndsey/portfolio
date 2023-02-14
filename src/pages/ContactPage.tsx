@@ -15,7 +15,7 @@ export const ContactPage = (props: PageComponentProps) => {
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
-    (enterAmount, contentProgressAmount, exitAmount, state) => {
+    ({ enterAmount, exitAmount, state }) => {
       if (groupRef.current === null) return;
 
       const yPercent = enterAmount + exitAmount;

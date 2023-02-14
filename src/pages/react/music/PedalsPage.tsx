@@ -37,12 +37,12 @@ export const PedalsPage = (props: PageComponentProps) => {
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
-    (enterAmount, contentProgressAmount, exitAmount, state) => {
+    ({ enterAmount, contentProgressAmount, exitAmount, state }) => {
       if (groupRef.current === null) return;
 
       const yPercent = enterAmount + exitAmount;
 
-      textureRef.current.alphaMap?.offset.setY(yPercent);
+      textureRef.current.alphaMap?.offset.setY(contentProgressAmount - 0.5);
 
       const viewportHeight = state.viewport.height;
       groupRef.current.position.setY(yPercent * viewportHeight);

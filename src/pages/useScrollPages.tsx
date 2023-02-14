@@ -1,16 +1,18 @@
 import { useScroll } from "@react-three/drei";
 import { RootState, useFrame } from "@react-three/fiber";
 
+type ScrollPageProgress = {
+  enterAmount: number;
+  contentProgressAmount: number;
+  exitAmount: number;
+  state: RootState;
+  frameDelta: number;
+};
+
 export function useScrollPages(
   startPageIndex: number,
   endPageIndex: number,
-  progressCallback: (
-    enterAmount: number,
-    contentProgressAmount: number,
-    exitAmount: number,
-    state: RootState,
-    frameDelta: number
-  ) => void
+  progressCallback: (progress: ScrollPageProgress) => void
 ) {
   const scrollData = useScroll();
   useFrame((state, delta) => {
@@ -28,12 +30,12 @@ export function useScrollPages(
       endPageIndex / totalPages,
       1 / totalPages
     );
-    progressCallback(
-      enterAmount,
-      contentProgressAmount,
-      exitAmount,
-      state,
-      delta
-    );
+    progressCallback({
+      enterAmount: enterAmount,
+      contentProgressAmount: contentProgressAmount,
+      exitAmount: exitAmount,
+      state: state,
+      frameDelta: delta,
+    });
   });
 }
