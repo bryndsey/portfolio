@@ -2,8 +2,10 @@ import {
   Cylinder,
   GradientTexture,
   Html,
+  Mask,
   RoundedBox,
   Tube,
+  useMask,
 } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { useRef } from "react";
@@ -15,6 +17,7 @@ import {
   Group,
   MathUtils,
   Mesh,
+  MeshBasicMaterial,
   MeshStandardMaterial,
   Vector2,
   Vector3,
@@ -43,14 +46,14 @@ export const PedalsPage = (props: PageComponentProps) => {
 
   const curve = new CatmullRomCurve3(
     [
-      new Vector3(viewport.width, 0.5, -1),
-      new Vector3(-0.5, 0.25, -0.5),
-      new Vector3(1, 0, 0),
-      new Vector3(-0.25, -0.25, 1),
+      new Vector3(viewport.width, 1, -1),
+      new Vector3(-0.75, 0.5, -0.25),
+      new Vector3(0.75, -0.1, 0.5),
+      new Vector3(-viewport.width / 7 + 0.1, -0.1, 1),
     ],
     false,
     "catmullrom",
-    0.8
+    0.75
   );
 
   useScrollPages(
