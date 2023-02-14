@@ -17,6 +17,8 @@ import { useScrollPages } from "../../useScrollPages";
 
 const cableColor = new Color(0.03, 0.03, 0.03);
 
+const textureCenter = new Vector2(0.5, 0.5);
+
 export const PedalsPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
   const textureRef = useRef<MeshStandardMaterial>(null!);
@@ -88,7 +90,7 @@ export const PedalsPage = (props: PageComponentProps) => {
         >
           <GradientTexture
             rotation={Math.PI * 0.5}
-            center={new Vector2(0.5, 0.5)}
+            center={textureCenter}
             stops={[0, 0.499, 0.501, 1]}
             colors={["white", "white", "black", "black"]}
             attach="alphaMap"
