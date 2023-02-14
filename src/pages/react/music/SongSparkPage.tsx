@@ -28,11 +28,9 @@ export const SongSparkPage = (props: PageComponentProps) => {
       const viewportHeight = state.viewport.height;
       groupRef.current.position.setY(yPercent * viewportHeight);
 
+      const showDescription = yPercent === 0;
       if (descriptionRef.current === null) return;
-      descriptionRef.current.style.opacity = `${Math.pow(
-        1 - Math.abs(yPercent),
-        4
-      )}`;
+      descriptionRef.current.style.opacity = showDescription ? "1" : "0";
     }
   );
 
@@ -43,6 +41,7 @@ export const SongSparkPage = (props: PageComponentProps) => {
         transform
         style={{
           width: size.width / 2,
+          transition: "opacity 300ms",
           // backgroundColor: "rgba(0, 0, 0, 0.2)",
         }}
         position={[-viewport.width / 6, viewport.height / 5, 0]}
