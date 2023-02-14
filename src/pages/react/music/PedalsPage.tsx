@@ -1,11 +1,20 @@
-import { GradientTexture, Html, RoundedBox, Tube } from "@react-three/drei";
+import {
+  Cylinder,
+  GradientTexture,
+  Html,
+  RoundedBox,
+  Tube,
+} from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import {
   CatmullRomCurve3,
   Color,
   DoubleSide,
+  Euler,
   Group,
+  MathUtils,
+  Mesh,
   MeshStandardMaterial,
   Vector2,
   Vector3,
@@ -17,10 +26,14 @@ import { useScrollPages } from "../../useScrollPages";
 
 const cableColor = new Color(0.03, 0.03, 0.03);
 
+const cableEndRotation = new Euler(Math.PI / 2, 0, 0);
+
 const textureCenter = new Vector2(0.5, 0.5);
 
 export const PedalsPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
+  const cableRef = useRef<Mesh>(null!);
+  const cableEnd = useRef<Group>(null!);
   const textureRef = useRef<MeshStandardMaterial>(null!);
 
   const viewport = useThree((state) => state.viewport);
@@ -48,11 +61,32 @@ export const PedalsPage = (props: PageComponentProps) => {
 
       const yPercent = enterAmount + exitAmount;
 
-      const cableProgress = enterAmount / 2 + contentProgressAmount / 2;
-      textureRef.current.alphaMap?.offset.setY(cableProgress);
-
       const viewportHeight = state.viewport.height;
       groupRef.current.position.setY(yPercent * viewportHeight);
+
+      const cableProgress = MathUtils.mapLinear(
+        enterAmount + contentProgressAmount,
+        -1,
+        1,
+        0,
+        1
+      );
+
+      const cableTextureOffset = cableProgress - 0.5;
+      textureRef.current.alphaMap?.offset.setY(cableTextureOffset);
+
+      const pointPosition = curve.getPointAt(cableProgress);
+      const pointTangent = curve.getTangentAt(cableProgress);
+      cableEnd.current.position.set(
+        pointPosition.x,
+        pointPosition.y,
+        pointPosition.z
+      );
+
+      const rotationTarget = cableRef.current.localToWorld(
+        pointTangent.add(pointPosition)
+      );
+      cableEnd.current.lookAt(rotationTarget);
     }
   );
 
@@ -79,7 +113,7 @@ export const PedalsPage = (props: PageComponentProps) => {
           <meshStandardMaterial color={"firebrick"} />
         </RoundedBox>
       </group>
-      <Tube args={[curve, 256, 0.02, 12]}>
+      <Tube args={[curve, 256, 0.02, 12]} ref={cableRef}>
         <meshStandardMaterial
           ref={textureRef}
           opacity={0.5}
@@ -97,6 +131,18 @@ export const PedalsPage = (props: PageComponentProps) => {
           />
         </meshStandardMaterial>
       </Tube>
+      <group ref={cableEnd}>
+        <Cylinder args={[0.04, 0.04, 0.1]} rotation={cableEndRotation}>
+          <meshStandardMaterial color={"grey"} roughness={0} />
+        </Cylinder>
+        <Cylinder
+          args={[0.02, 0.02, 0.1]}
+          position={[0, 0, 0.1]}
+          rotation={cableEndRotation}
+        >
+          <meshStandardMaterial color={"grey"} roughness={0} />
+        </Cylinder>
+      </group>
     </group>
   );
 };
