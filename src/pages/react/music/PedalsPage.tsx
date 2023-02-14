@@ -22,7 +22,8 @@ const curve = new CatmullRomCurve3(
     new Vector3(-0.5, -0.25, 0.5),
   ],
   false,
-  "centripetal"
+  "catmullrom",
+  0.8
 );
 
 export const PedalsPage = (props: PageComponentProps) => {
@@ -72,7 +73,7 @@ export const PedalsPage = (props: PageComponentProps) => {
           <meshStandardMaterial color={"firebrick"} />
         </RoundedBox>
       </group>
-      <Tube args={[curve, 128, 0.02, 12]}>
+      <Tube args={[curve, 256, 0.02, 12]}>
         <meshStandardMaterial
           ref={textureRef}
           opacity={0.5}
