@@ -13,7 +13,7 @@ export const AboutPage = (props: PageComponentProps) => {
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
-    (enterAmount, exitAmount, state) => {
+    ({ enterAmount, exitAmount, state }) => {
       if (groupRef.current === null) return;
 
       const yPercent = enterAmount + exitAmount;
