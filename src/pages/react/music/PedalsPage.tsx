@@ -3,6 +3,7 @@ import { useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import {
   CatmullRomCurve3,
+  Color,
   DoubleSide,
   Group,
   MeshStandardMaterial,
@@ -13,6 +14,8 @@ import { ProjectDescription, ReactTag } from "../../../ProjectDescription";
 import { useHtmlPortal } from "../../../useHtmlPortal";
 import { PageComponentProps } from "../../Pages";
 import { useScrollPages } from "../../useScrollPages";
+
+const cableColor = new Color(0.03, 0.03, 0.03);
 
 export const PedalsPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
@@ -78,9 +81,10 @@ export const PedalsPage = (props: PageComponentProps) => {
         <meshStandardMaterial
           ref={textureRef}
           opacity={0.5}
-          color={"dimgrey"}
+          color={cableColor}
           alphaTest={0.001}
           side={DoubleSide}
+          roughness={0.6}
         >
           <GradientTexture
             rotation={Math.PI * 0.5}
