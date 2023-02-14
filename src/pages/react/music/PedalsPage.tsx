@@ -39,7 +39,7 @@ export const PedalsPage = (props: PageComponentProps) => {
   const cableEnd = useRef<Group>(null!);
   const textureRef = useRef<MeshStandardMaterial>(null!);
 
-  const descriptionRef = useRef<HTMLDivElement>(null!);
+  const descriptionRef = useRef<HTMLDivElement>(null);
 
   const viewport = useThree((state) => state.viewport);
   const size = useThree((state) => state.size);
@@ -93,6 +93,7 @@ export const PedalsPage = (props: PageComponentProps) => {
       );
       cableEnd.current.lookAt(rotationTarget);
 
+      if (descriptionRef.current === null) return;
       const showContent =
         contentProgressAmount > 0 && contentProgressAmount < 1;
       descriptionRef.current.style.opacity = showContent ? "1" : "0";
