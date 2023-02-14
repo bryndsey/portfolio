@@ -43,7 +43,8 @@ export const PedalsPage = (props: PageComponentProps) => {
 
       const yPercent = enterAmount + exitAmount;
 
-      textureRef.current.alphaMap?.offset.setY(contentProgressAmount - 0.5);
+      const cableProgress = enterAmount / 2 + contentProgressAmount / 2;
+      textureRef.current.alphaMap?.offset.setY(cableProgress);
 
       const viewportHeight = state.viewport.height;
       groupRef.current.position.setY(yPercent * viewportHeight);
