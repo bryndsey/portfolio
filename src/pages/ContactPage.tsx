@@ -5,6 +5,9 @@ import { Group } from "three";
 import { useHtmlPortal } from "../useHtmlPortal";
 import { PageComponentProps } from "./Pages";
 import { useScrollPages } from "./useScrollPages";
+import { FaGithub } from "react-icons/fa";
+import { FaLinkedinIn } from "react-icons/fa";
+import { MdAlternateEmail } from "react-icons/md";
 
 export const ContactPage = (props: PageComponentProps) => {
   const size = useThree((state) => state.size);
@@ -45,13 +48,24 @@ export const ContactPage = (props: PageComponentProps) => {
             margin: 0,
           }}
         >
-          <a href="http://www.github.com" style={{ margin: 0 }}>
-            Github
+          <a
+            href="http://www.github.com/bryndsey"
+            className="bg-black p-3 rounded-xl"
+          >
+            <FaGithub className="w-12 h-12" color="white" />
           </a>
-          <a href="http://www.linkedin.com" style={{ margin: 0 }}>
-            LinkedIn
+          <a
+            href="https://www.linkedin.com/in/bryan-lindsey-1b320998"
+            className="bg-blue-600 p-3 rounded-xl"
+          >
+            <FaLinkedinIn className="w-12 h-12" color="white" />
           </a>
-          <p style={{ margin: 0 }}>Something else</p>
+          <a
+            href="mailto:contact@bryanlindsey.dev"
+            className="bg-yellow-400 p-3 rounded-xl"
+          >
+            <MdAlternateEmail className="w-12 h-12" color="white" />
+          </a>
         </div>
       </Html>
     </group>
