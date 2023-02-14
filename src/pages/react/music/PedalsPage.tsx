@@ -39,6 +39,8 @@ export const PedalsPage = (props: PageComponentProps) => {
   const cableEnd = useRef<Group>(null!);
   const textureRef = useRef<MeshStandardMaterial>(null!);
 
+  const descriptionRef = useRef<HTMLDivElement>(null!);
+
   const viewport = useThree((state) => state.viewport);
   const size = useThree((state) => state.size);
 
@@ -90,15 +92,21 @@ export const PedalsPage = (props: PageComponentProps) => {
         pointTangent.add(pointPosition)
       );
       cableEnd.current.lookAt(rotationTarget);
+
+      const showContent =
+        contentProgressAmount > 0 && contentProgressAmount < 1;
+      descriptionRef.current.style.opacity = showContent ? "1" : "0";
     }
   );
 
   return (
     <group ref={groupRef}>
       <Html
+        ref={descriptionRef}
         transform
         style={{
           width: size.width / 2,
+          transition: "opacity 300ms",
           // backgroundColor: "rgba(0, 0, 0, 0.2)",
         }}
         position={[viewport.width / 4, viewport.height / 5, 0]}
