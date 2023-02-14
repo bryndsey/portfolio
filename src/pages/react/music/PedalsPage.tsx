@@ -1,14 +1,33 @@
-import { Html, RoundedBox } from "@react-three/drei";
+import { GradientTexture, Html, RoundedBox, Tube } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { useRef } from "react";
-import { Group } from "three";
+import {
+  CatmullRomCurve3,
+  DoubleSide,
+  Group,
+  MeshStandardMaterial,
+  Vector2,
+  Vector3,
+} from "three";
 import { ProjectDescription, ReactTag } from "../../../ProjectDescription";
 import { useHtmlPortal } from "../../../useHtmlPortal";
 import { PageComponentProps } from "../../Pages";
 import { useScrollPages } from "../../useScrollPages";
 
+const curve = new CatmullRomCurve3(
+  [
+    new Vector3(1.5, 0.5, -1),
+    new Vector3(-0.5, 0.25, -0.5),
+    new Vector3(1, 0, 0),
+    new Vector3(-0.5, -0.25, 0.5),
+  ],
+  false,
+  "centripetal"
+);
+
 export const PedalsPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
+  const textureRef = useRef<MeshStandardMaterial>(null!);
 
   const viewport = useThree((state) => state.viewport);
   const size = useThree((state) => state.size);
@@ -22,6 +41,8 @@ export const PedalsPage = (props: PageComponentProps) => {
       if (groupRef.current === null) return;
 
       const yPercent = enterAmount + exitAmount;
+
+      textureRef.current.alphaMap?.offset.setY(yPercent);
 
       const viewportHeight = state.viewport.height;
       groupRef.current.position.setY(yPercent * viewportHeight);
@@ -51,6 +72,23 @@ export const PedalsPage = (props: PageComponentProps) => {
           <meshStandardMaterial color={"firebrick"} />
         </RoundedBox>
       </group>
+      <Tube args={[curve, 128, 0.02, 12]}>
+        <meshStandardMaterial
+          ref={textureRef}
+          opacity={0.51}
+          color={"dimgrey"}
+          alphaTest={0.01}
+          side={DoubleSide}
+        >
+          <GradientTexture
+            rotation={Math.PI * 0.5}
+            center={new Vector2(0.5, 0.5)}
+            stops={[0, 0.45, 0.55, 1]}
+            colors={["white", "white", "black", "black"]}
+            attach="alphaMap"
+          />
+        </meshStandardMaterial>
+      </Tube>
     </group>
   );
 };
