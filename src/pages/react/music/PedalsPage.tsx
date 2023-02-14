@@ -14,18 +14,6 @@ import { useHtmlPortal } from "../../../useHtmlPortal";
 import { PageComponentProps } from "../../Pages";
 import { useScrollPages } from "../../useScrollPages";
 
-const curve = new CatmullRomCurve3(
-  [
-    new Vector3(1.5, 0.5, -1),
-    new Vector3(-0.5, 0.25, -0.5),
-    new Vector3(1, 0, 0),
-    new Vector3(-0.5, -0.25, 0.5),
-  ],
-  false,
-  "catmullrom",
-  0.8
-);
-
 export const PedalsPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
   const textureRef = useRef<MeshStandardMaterial>(null!);
@@ -34,6 +22,18 @@ export const PedalsPage = (props: PageComponentProps) => {
   const size = useThree((state) => state.size);
 
   const htmlPortal = useHtmlPortal();
+
+  const curve = new CatmullRomCurve3(
+    [
+      new Vector3(viewport.width, 0.5, -1),
+      new Vector3(-0.5, 0.25, -0.5),
+      new Vector3(1, 0, 0),
+      new Vector3(-0.25, -0.25, 1),
+    ],
+    false,
+    "catmullrom",
+    0.8
+  );
 
   useScrollPages(
     props.startPageIndex,
