@@ -37,7 +37,7 @@ export const PedalsPage = (props: PageComponentProps) => {
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
-    (enterAmount, exitAmount, state) => {
+    (enterAmount, contentProgressAmount, exitAmount, state) => {
       if (groupRef.current === null) return;
 
       const yPercent = enterAmount + exitAmount;
