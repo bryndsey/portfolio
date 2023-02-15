@@ -26,6 +26,7 @@ import { ProjectDescription, ReactTag } from "../../../../ProjectDescription";
 import { useHtmlPortal } from "../../../../useHtmlPortal";
 import { PageComponentProps } from "../../../Pages";
 import { useScrollPages } from "../../../useScrollPages";
+import { PedalModel } from "./PedalModel";
 
 const cableColor = new Color(0.03, 0.03, 0.03);
 
@@ -120,10 +121,12 @@ export const PedalsPage = (props: PageComponentProps) => {
           tags={[ReactTag]}
         />
       </Html>
-      <group position={[-viewport.width / 7, -0.1, 1]} rotation={[2, 0, -0.6]}>
-        <RoundedBox args={[0.2, 0.4, 0.1]} radius={0.01}>
-          <meshStandardMaterial color={"firebrick"} />
-        </RoundedBox>
+      <group
+        position={[-viewport.width / 7, -0.1, 1]}
+        rotation={[1, 0.4, -0.5]}
+        scale={4}
+      >
+        <PedalModel />
       </group>
       <Tube args={[curve, 256, 0.02, 12]} ref={cableRef}>
         <meshStandardMaterial
