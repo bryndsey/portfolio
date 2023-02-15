@@ -1,4 +1,9 @@
-import { PerspectiveCamera, ScrollControls, Stats } from "@react-three/drei";
+import {
+  Environment,
+  PerspectiveCamera,
+  ScrollControls,
+  Stats,
+} from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 import { pages } from "./pages/Pages";
@@ -14,10 +19,11 @@ function App() {
           makeDefault
           position={[cameraPosition.x, cameraPosition.y, cameraPosition.z]}
         />
+        <Environment preset="studio" blur={0.5} />
         <Suspense fallback={null}>
           <ScrollControls pages={pages.totalPages}>
-            <ambientLight intensity={0.5} />
-            <directionalLight position={[10, 10, 10]} intensity={1} />
+            {/* <ambientLight intensity={0.5} /> */}
+            {/* <directionalLight position={[10, 10, 10]} intensity={0.5} /> */}
             {pages.pagesWithStartIndex.map((page) => {
               return (
                 <page.page.component

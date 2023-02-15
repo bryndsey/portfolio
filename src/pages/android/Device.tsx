@@ -81,8 +81,8 @@ export function Device(props: DeviceProps) {
       smoothness={12}
     >
       <meshStandardMaterial
-        color={new Color(0.05, 0.06, 0.052)}
-        roughness={0.5}
+        color={new Color(0.02, 0.02, 0.02)}
+        roughness={0.8}
       />
       <DeviceScreen
         width={props.width}

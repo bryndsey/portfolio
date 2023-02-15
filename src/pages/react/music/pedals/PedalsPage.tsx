@@ -136,7 +136,7 @@ export const PedalsPage = (props: PageComponentProps) => {
           color={cableColor}
           alphaTest={0.001}
           side={DoubleSide}
-          roughness={0.6}
+          roughness={0.8}
         >
           <GradientTexture
             rotation={Math.PI * 0.5}
