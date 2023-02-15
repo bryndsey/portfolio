@@ -3,7 +3,7 @@ import { AndroidPage } from "./android/AndroidPage";
 import { SongSparkPage } from "./react/music/SongSparkPage";
 import { IntroPage } from "./IntroPage";
 import { AboutPage } from "./AboutPage";
-import { PedalsPage } from "./react/music/PedalsPage";
+import { PedalsPage } from "./react/music/pedals/PedalsPage";
 
 export interface PageComponentProps {
   startPageIndex: number;

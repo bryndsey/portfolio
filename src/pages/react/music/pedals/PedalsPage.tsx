@@ -22,10 +22,10 @@ import {
   Vector2,
   Vector3,
 } from "three";
-import { ProjectDescription, ReactTag } from "../../../ProjectDescription";
-import { useHtmlPortal } from "../../../useHtmlPortal";
-import { PageComponentProps } from "../../Pages";
-import { useScrollPages } from "../../useScrollPages";
+import { ProjectDescription, ReactTag } from "../../../../ProjectDescription";
+import { useHtmlPortal } from "../../../../useHtmlPortal";
+import { PageComponentProps } from "../../../Pages";
+import { useScrollPages } from "../../../useScrollPages";
 
 const cableColor = new Color(0.03, 0.03, 0.03);
 
