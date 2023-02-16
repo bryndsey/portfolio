@@ -8,7 +8,7 @@ import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 import { pages } from "./pages/Pages";
 
-const cameraPosition = { x: 0, y: 0, z: 2 };
+const cameraPosition = { x: 0, y: 0, z: 2.5 };
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
         <PerspectiveCamera
           makeDefault
           position={[cameraPosition.x, cameraPosition.y, cameraPosition.z]}
+          fov={46}
         />
         <Environment preset="studio" blur={0.5} />
         <Suspense fallback={null}>
