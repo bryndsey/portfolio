@@ -1,6 +1,8 @@
 interface ProjectDescriptionProps {
   projectName: string;
   descriptionText: string;
+  url?: string;
+  actionText?: string;
   tags?: Tag[];
   className?: string;
 }
@@ -10,6 +12,7 @@ export const ProjectDescription = (props: ProjectDescriptionProps) => {
     // TODO: Re-add ability to combine with props style (or remove props style?)
     <div className={"flex flex-col gap-4"}>
       <h2 className="text-4xl font-bold">{props.projectName}</h2>
+      {props.url && <a href={props.url}>{props.actionText ?? "Try it"}</a>}
       <p className="text-lg">{props.descriptionText}</p>
       {props.tags && (
         <div className="flex flex-row gap-2">

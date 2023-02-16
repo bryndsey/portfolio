@@ -102,6 +102,8 @@ export const AndroidPage = (props: PageComponentProps) => {
                         <ProjectDescription
                           projectName={app.name}
                           descriptionText={app.description}
+                          url={app.url}
+                          actionText={"Play Store"}
                           tags={app.projectTags}
                         />
                       ) : (
