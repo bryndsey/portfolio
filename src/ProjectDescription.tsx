@@ -7,6 +7,30 @@ interface ProjectDescriptionProps {
   className?: string;
 }
 
+interface TagsProps {
+  tags: Tag[];
+}
+
+const Tags = (props: TagsProps) => {
+  return (
+    <div className="flex flex-row gap-2">
+      {props.tags.map((tag) => {
+        return (
+          <div
+            key={tag.name}
+            className="p-2 text-xs rounded"
+            style={{
+              backgroundColor: tag.color,
+            }}
+          >
+            {tag.name}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
 export const ProjectDescription = (props: ProjectDescriptionProps) => {
   return (
     // TODO: Re-add ability to combine with props style (or remove props style?)
@@ -23,23 +47,7 @@ export const ProjectDescription = (props: ProjectDescriptionProps) => {
         )}
       </div>
       <p className="text-lg">{props.descriptionText}</p>
-      {props.tags && (
-        <div className="flex flex-row gap-2">
-          {props.tags.map((tag) => {
-            return (
-              <div
-                key={tag.name}
-                className="p-2 text-xs rounded"
-                style={{
-                  backgroundColor: tag.color,
-                }}
-              >
-                {tag.name}
-              </div>
-            );
-          })}
-        </div>
-      )}
+      {props.tags && <Tags tags={props.tags} />}
     </div>
   );
 };
