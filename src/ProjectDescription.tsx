@@ -50,15 +50,16 @@ const LinkButton = (props: LinkButtonProps) => {
 export const ProjectDescription = (props: ProjectDescriptionProps) => {
   return (
     // TODO: Re-add ability to combine with props style (or remove props style?)
-    <div className={"flex flex-col gap-4"}>
-      <div className="flex flex-row flex-wrap items-center gap-4">
+    <div className={"flex flex-col gap-2 sm:gap-4"}>
+      <div className="flex flex-row flex-wrap items-center gap-2 sm:gap-4">
         <h2 className="text-4xl font-bold">{props.projectName}</h2>
-        {props.url && (
-          <LinkButton linkUrl={props.url} actionText={props.actionText} />
-        )}
+        {props.tags && <Tags tags={props.tags} />}
       </div>
       <p className="text-lg">{props.descriptionText}</p>
-      {props.tags && <Tags tags={props.tags} />}
+
+      {props.url && (
+        <LinkButton linkUrl={props.url} actionText={props.actionText} />
+      )}
     </div>
   );
 };
