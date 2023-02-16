@@ -31,6 +31,22 @@ const Tags = (props: TagsProps) => {
   );
 };
 
+interface LinkButtonProps {
+  linkUrl: string;
+  actionText?: string;
+}
+
+const LinkButton = (props: LinkButtonProps) => {
+  return (
+    <a
+      href={props.linkUrl}
+      className="p-2 text-sm bg-yellow-400 rounded hover:bg-yellow-300 active:bg-yellow-500 font-bold uppercase duration-300"
+    >
+      {props.actionText ?? "Try it"}
+    </a>
+  );
+};
+
 export const ProjectDescription = (props: ProjectDescriptionProps) => {
   return (
     // TODO: Re-add ability to combine with props style (or remove props style?)
@@ -38,12 +54,7 @@ export const ProjectDescription = (props: ProjectDescriptionProps) => {
       <div className="flex flex-row flex-wrap items-center gap-4">
         <h2 className="text-4xl font-bold">{props.projectName}</h2>
         {props.url && (
-          <a
-            href={props.url}
-            className="p-2 text-sm bg-yellow-400 rounded hover:bg-yellow-300 active:bg-yellow-500 font-bold uppercase duration-300"
-          >
-            {props.actionText ?? "Try it"}
-          </a>
+          <LinkButton linkUrl={props.url} actionText={props.actionText} />
         )}
       </div>
       <p className="text-lg">{props.descriptionText}</p>
