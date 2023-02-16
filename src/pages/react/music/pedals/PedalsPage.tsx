@@ -1,23 +1,13 @@
-import {
-  Cylinder,
-  GradientTexture,
-  Html,
-  Mask,
-  RoundedBox,
-  Tube,
-  useMask,
-} from "@react-three/drei";
+import { GradientTexture, Html, Tube } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import {
   CatmullRomCurve3,
   Color,
   DoubleSide,
-  Euler,
   Group,
   MathUtils,
   Mesh,
-  MeshBasicMaterial,
   MeshStandardMaterial,
   Vector2,
   Vector3,
@@ -30,8 +20,6 @@ import { CablePlugModel } from "./CablePlugModel";
 import { PedalModel } from "./PedalModel";
 
 const cableColor = new Color(0.03, 0.03, 0.03);
-
-const cableEndRotation = new Euler(Math.PI / 2, 0, 0);
 
 const textureCenter = new Vector2(0.5, 0.5);
 
@@ -149,16 +137,6 @@ export const PedalsPage = (props: PageComponentProps) => {
         </meshStandardMaterial>
       </Tube>
       <group ref={cableEnd} scale={7}>
-        {/* <Cylinder args={[0.04, 0.04, 0.1]} rotation={cableEndRotation}>
-          <meshStandardMaterial color={"grey"} roughness={0} />
-        </Cylinder>
-        <Cylinder
-          args={[0.02, 0.02, 0.1]}
-          position={[0, 0, 0.1]}
-          rotation={cableEndRotation}
-        >
-          <meshStandardMaterial color={"grey"} roughness={0} />
-        </Cylinder> */}
         <CablePlugModel />
       </group>
     </group>
