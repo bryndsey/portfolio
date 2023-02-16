@@ -88,7 +88,7 @@ export const AndroidPage = (props: PageComponentProps) => {
             width: size.width / 3,
             // backgroundColor: "rgba(0, 0, 0, 0.2)",
           }}
-          position={[viewport.width / 4, viewport.height / 5, 0]}
+          position={[viewport.width / 4, viewport.height / 6, 0]}
           portal={{ current: htmlPortal }}
           distanceFactor={1}
         >
