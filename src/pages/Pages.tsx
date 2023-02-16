@@ -1,6 +1,6 @@
 import { ContactPage } from "./ContactPage";
 import { AndroidPage } from "./android/AndroidPage";
-import { SongSparkPage } from "./react/music/SongSparkPage";
+import { SongSparkPage } from "./react/music/songspark/SongSparkPage";
 import { IntroPage } from "./IntroPage";
 import { AboutPage } from "./AboutPage";
 import { PedalsPage } from "./react/music/pedals/PedalsPage";
