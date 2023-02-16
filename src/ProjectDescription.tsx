@@ -11,8 +11,17 @@ export const ProjectDescription = (props: ProjectDescriptionProps) => {
   return (
     // TODO: Re-add ability to combine with props style (or remove props style?)
     <div className={"flex flex-col gap-4"}>
-      <h2 className="text-4xl font-bold">{props.projectName}</h2>
-      {props.url && <a href={props.url}>{props.actionText ?? "Try it"}</a>}
+      <div className="flex flex-row flex-wrap items-center gap-4">
+        <h2 className="text-4xl font-bold">{props.projectName}</h2>
+        {props.url && (
+          <a
+            href={props.url}
+            className="p-2 text-sm bg-yellow-400 rounded hover:bg-yellow-300 active:bg-yellow-500 font-bold uppercase duration-300"
+          >
+            {props.actionText ?? "Try it"}
+          </a>
+        )}
+      </div>
       <p className="text-lg">{props.descriptionText}</p>
       {props.tags && (
         <div className="flex flex-row gap-2">
