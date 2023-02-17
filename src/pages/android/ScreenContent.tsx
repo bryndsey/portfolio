@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { Children, PropsWithChildren, useEffect, useState } from "react";
 import { useSelectedAndroidApp } from "./useSelectedAndroidApp";
 import { AndroidApp, androidApps } from "./AndroidApp";
+import { ProjectDescription } from "../../ProjectDescription";
 
 interface DeviceAppIconProps {
   app: AndroidApp;
 }
 
 const DeviceAppIcon = (props: DeviceAppIconProps) => {
-  const [_, selectApp] = useSelectedAndroidApp();
+  const [, selectApp] = useSelectedAndroidApp();
   return (
     <div onClick={() => selectApp(props.app)}>
       <div
@@ -35,7 +36,17 @@ const DeviceClock = () => {
   );
 };
 
-export function ScreenContent() {
+const NavigationBar = () => {
+  const [, selectApp] = useSelectedAndroidApp();
+  return (
+    <div className="flex flex-row justify-evenly bg-gray-700 opacity-30 p-4">
+      <button onClick={() => selectApp(null)}>Back</button>
+      <button onClick={() => selectApp(null)}>Home</button>
+    </div>
+  );
+};
+
+const HomeScreen = () => {
   return (
     <div className="h-full bg-blue-300">
       <div className="p-4">
@@ -47,5 +58,41 @@ export function ScreenContent() {
         </div>
       </div>
     </div>
+  );
+};
+
+const AppDisplay = () => {
+  const [selectedApp] = useSelectedAndroidApp();
+  if (selectedApp === null) throw new Error("Selected app should not be null");
+  return (
+    <div className="h-full bg-gray-100 p-8">
+      <ProjectDescription
+        projectName={selectedApp.name}
+        descriptionText={selectedApp.description}
+        tags={selectedApp.projectTags}
+        url={selectedApp.url}
+        actionText={"Play Store"}
+      />
+    </div>
+  );
+};
+
+const ScreenScaffold = (props: PropsWithChildren) => {
+  return (
+    <div className="h-full">
+      {props.children}
+      <div className="absolute bottom-0 left-0 right-0">
+        <NavigationBar />
+      </div>
+    </div>
+  );
+};
+
+export function ScreenContent() {
+  const [selectedApp] = useSelectedAndroidApp();
+  return (
+    <ScreenScaffold>
+      {selectedApp ? <AppDisplay /> : <HomeScreen />}
+    </ScreenScaffold>
   );
 }
