@@ -46,8 +46,8 @@ export const PedalsPage = (props: PageComponentProps) => {
         curveStartDepth
       ),
       new Vector3(-0.75, 0.5, -0.25),
-      new Vector3(0.75, -0.1, 0.5),
-      new Vector3(-viewport.width / 7 + 0.3, -0.1, 0.85),
+      new Vector3(0.8, -0.175, 0.25),
+      new Vector3(-viewport.width / 7 + 0.3, -0.175, 0.85),
     ],
     false,
     "catmullrom",
@@ -102,11 +102,11 @@ export const PedalsPage = (props: PageComponentProps) => {
         ref={descriptionRef}
         transform
         style={{
-          width: size.width / 2,
+          width: size.width * 0.5,
           transition: "opacity 300ms",
           // backgroundColor: "rgba(0, 0, 0, 0.2)",
         }}
-        position={[viewport.width / 4, viewport.height / 5, 0]}
+        position={[viewport.width / 5, viewport.height / 6, 0]}
         portal={{ current: htmlPortal }}
         distanceFactor={1}
       >
@@ -118,7 +118,7 @@ export const PedalsPage = (props: PageComponentProps) => {
         />
       </Html>
       <group
-        position={[-viewport.width / 7, -0.1, 1]}
+        position={[-viewport.width / 7, -0.2, 1]}
         rotation={[1, 0.4, -0.5]}
         scale={4}
       >
