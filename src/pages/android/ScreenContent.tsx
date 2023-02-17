@@ -1,7 +1,8 @@
-import { Children, PropsWithChildren, useEffect, useState } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { useSelectedAndroidApp } from "./useSelectedAndroidApp";
 import { AndroidApp, androidApps } from "./AndroidApp";
 import { ProjectDescription } from "../../ProjectDescription";
+import { FaArrowLeft, FaRegCircle, FaChevronLeft } from "react-icons/fa";
 
 interface DeviceAppIconProps {
   app: AndroidApp;
@@ -39,9 +40,13 @@ const DeviceClock = () => {
 const NavigationBar = () => {
   const [, selectApp] = useSelectedAndroidApp();
   return (
-    <div className="flex flex-row justify-evenly bg-gray-700 opacity-30 p-4">
-      <button onClick={() => selectApp(null)}>Back</button>
-      <button onClick={() => selectApp(null)}>Home</button>
+    <div className="flex flex-row justify-evenly bg-gray-700 bg-opacity-30 p-4">
+      <button onClick={() => selectApp(null)}>
+        <FaChevronLeft color="white" size={"1.5rem"} />
+      </button>
+      <button onClick={() => selectApp(null)}>
+        <FaRegCircle color="white" size={"1.5rem"} />
+      </button>
     </div>
   );
 };
@@ -62,10 +67,13 @@ const HomeScreen = () => {
 };
 
 const AppDisplay = () => {
-  const [selectedApp] = useSelectedAndroidApp();
+  const [selectedApp, selectApp] = useSelectedAndroidApp();
   if (selectedApp === null) throw new Error("Selected app should not be null");
   return (
     <div className="h-full bg-gray-100 p-8">
+      <button onClick={() => selectApp(null)} className="p-2 mb-4">
+        <FaArrowLeft size={"2rem"} />
+      </button>
       <ProjectDescription
         projectName={selectedApp.name}
         descriptionText={selectedApp.description}
