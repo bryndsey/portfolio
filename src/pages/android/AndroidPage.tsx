@@ -77,7 +77,7 @@ export const AndroidPage = (props: PageComponentProps) => {
   return (
     <group>
       <group ref={groupRef}>
-        <group ref={innerGroupRef} scale={4}>
+        <group ref={innerGroupRef} scale={5}>
           <Device {...deviceSize} bezelSize={deviceBezelSize} />
         </group>
       </group>
@@ -85,7 +85,7 @@ export const AndroidPage = (props: PageComponentProps) => {
         <Html
           transform
           style={{
-            width: size.width / 3,
+            width: size.width * 0.4,
             // backgroundColor: "rgba(0, 0, 0, 0.2)",
           }}
           position={[viewport.width / 4, viewport.height / 6, 0]}
