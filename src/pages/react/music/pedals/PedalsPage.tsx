@@ -65,7 +65,7 @@ export const PedalsPage = (props: PageComponentProps) => {
       const viewportHeight = state.viewport.height;
       groupRef.current.position.setY(yPercent * viewportHeight);
 
-      const cableProgress = MathUtils.mapLinear(
+      const cableProgressPercent = MathUtils.mapLinear(
         enterAmount + contentProgressAmount,
         -1,
         1,
@@ -73,11 +73,18 @@ export const PedalsPage = (props: PageComponentProps) => {
         1
       );
 
-      const cableTextureOffset = cableProgress - 0.5;
+      const curveLengths = curve.getLengths();
+      const targetLengthIndex = Math.ceil(
+        curveLengths.length * cableProgressPercent
+      );
+      const targetLength = curveLengths[targetLengthIndex];
+
+      const cableTextureOffset = targetLength / curve.getLength() - 0.5;
+
       textureRef.current.alphaMap?.offset.setY(cableTextureOffset);
 
-      const pointPosition = curve.getPointAt(cableProgress);
-      const pointTangent = curve.getTangentAt(cableProgress);
+      const pointPosition = curve.getPoint(cableProgressPercent);
+      const pointTangent = curve.getTangent(cableProgressPercent);
       cableEnd.current.position.set(
         pointPosition.x,
         pointPosition.y,
