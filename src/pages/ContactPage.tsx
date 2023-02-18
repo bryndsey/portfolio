@@ -8,6 +8,7 @@ import { useScrollPages } from "./useScrollPages";
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import { MdAlternateEmail } from "react-icons/md";
+import { RxSquare } from "react-icons/rx";
 
 export const ContactPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
@@ -42,6 +43,12 @@ export const ContactPage = (props: PageComponentProps) => {
             className="bg-black p-3 rounded-xl"
           >
             <FaGithub className="w-12 h-12" color="white" />
+          </a>
+          <a
+            href="https://codesandbox.io/u/bryanlindsey"
+            className="bg-gray-800 p-3 rounded-xl"
+          >
+            <RxSquare className="w-12 h-12" color="white" />
           </a>
           <a
             href="https://www.linkedin.com/in/bryan-lindsey-1b320998"
