@@ -1,27 +1,18 @@
-import {
-  Cylinder,
-  GradientTexture,
-  Html,
-  Mask,
-  RoundedBox,
-  Tube,
-  useMask,
-} from "@react-three/drei";
+import { GradientTexture, Html, Tube } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import {
   CatmullRomCurve3,
   Color,
   DoubleSide,
-  Euler,
   Group,
   MathUtils,
   Mesh,
-  MeshBasicMaterial,
   MeshStandardMaterial,
   Vector2,
   Vector3,
 } from "three";
+import { useCameraFrustumWidthAtDepth } from "../../../../utils";
 import { ProjectDescription, ReactTag } from "../../../../ProjectDescription";
 import { useHtmlPortal } from "../../../../useHtmlPortal";
 import { PageComponentProps } from "../../../Pages";
@@ -30,8 +21,6 @@ import { CablePlugModel } from "./CablePlugModel";
 import { PedalModel } from "./PedalModel";
 
 const cableColor = new Color(0.03, 0.03, 0.03);
-
-const cableEndRotation = new Euler(Math.PI / 2, 0, 0);
 
 const textureCenter = new Vector2(0.5, 0.5);
 
@@ -48,12 +37,17 @@ export const PedalsPage = (props: PageComponentProps) => {
 
   const htmlPortal = useHtmlPortal();
 
+  const curveStartDepth = -0.5;
   const curve = new CatmullRomCurve3(
     [
-      new Vector3(viewport.width, 1, -1),
-      new Vector3(-0.75, 0.5, -0.25),
-      new Vector3(0.75, -0.1, 0.5),
-      new Vector3(-viewport.width / 7 + 0.3, -0.1, 0.85),
+      new Vector3(
+        useCameraFrustumWidthAtDepth(curveStartDepth) / 2 + 1,
+        1.25,
+        curveStartDepth
+      ),
+      new Vector3(-viewport.width * 0.4, 0.5, -0.1),
+      new Vector3(-viewport.width / 7 + 1.25, -0.1, 0.1),
+      new Vector3(-viewport.width / 7 + 0.25, -0.175, 0.75),
     ],
     false,
     "catmullrom",
@@ -71,19 +65,30 @@ export const PedalsPage = (props: PageComponentProps) => {
       const viewportHeight = state.viewport.height;
       groupRef.current.position.setY(yPercent * viewportHeight);
 
-      const cableProgress = MathUtils.mapLinear(
-        enterAmount + contentProgressAmount,
+      const cableAnimationFinishPercent = 0.9;
+      const cableProgressPercent = MathUtils.mapLinear(
+        Math.min(
+          enterAmount + contentProgressAmount,
+          cableAnimationFinishPercent
+        ),
         -1,
-        1,
+        cableAnimationFinishPercent,
         0,
         1
       );
 
-      const cableTextureOffset = cableProgress - 0.5;
+      const curveLengths = curve.getLengths();
+      const targetLengthIndex = Math.ceil(
+        curveLengths.length * cableProgressPercent
+      );
+      const targetLength = curveLengths[targetLengthIndex];
+
+      const cableTextureOffset = targetLength / curve.getLength() - 0.5;
+
       textureRef.current.alphaMap?.offset.setY(cableTextureOffset);
 
-      const pointPosition = curve.getPointAt(cableProgress);
-      const pointTangent = curve.getTangentAt(cableProgress);
+      const pointPosition = curve.getPoint(cableProgressPercent);
+      const pointTangent = curve.getTangent(cableProgressPercent);
       cableEnd.current.position.set(
         pointPosition.x,
         pointPosition.y,
@@ -108,11 +113,11 @@ export const PedalsPage = (props: PageComponentProps) => {
         ref={descriptionRef}
         transform
         style={{
-          width: size.width / 2,
+          width: size.width * 0.5,
           transition: "opacity 300ms",
           // backgroundColor: "rgba(0, 0, 0, 0.2)",
         }}
-        position={[viewport.width / 4, viewport.height / 5, 0]}
+        position={[viewport.width / 5, viewport.height / 5, 0]}
         portal={{ current: htmlPortal }}
         distanceFactor={1}
       >
@@ -124,7 +129,7 @@ export const PedalsPage = (props: PageComponentProps) => {
         />
       </Html>
       <group
-        position={[-viewport.width / 7, -0.1, 1]}
+        position={[-viewport.width / 7, -0.2, 1]}
         rotation={[1, 0.4, -0.5]}
         scale={4}
       >
@@ -149,16 +154,6 @@ export const PedalsPage = (props: PageComponentProps) => {
         </meshStandardMaterial>
       </Tube>
       <group ref={cableEnd} scale={7}>
-        {/* <Cylinder args={[0.04, 0.04, 0.1]} rotation={cableEndRotation}>
-          <meshStandardMaterial color={"grey"} roughness={0} />
-        </Cylinder>
-        <Cylinder
-          args={[0.02, 0.02, 0.1]}
-          position={[0, 0, 0.1]}
-          rotation={cableEndRotation}
-        >
-          <meshStandardMaterial color={"grey"} roughness={0} />
-        </Cylinder> */}
         <CablePlugModel />
       </group>
     </group>

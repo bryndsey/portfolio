@@ -40,14 +40,14 @@ export const IntroPage = (props: PageComponentProps) => {
         distanceFactor={1}
         style={{
           // backgroundColor: "rgba(0, 0, 1, 0.1)",
-          width: size.width * 0.66,
+          width: size.width * 0.75,
         }}
         portal={{ current: htmlPortal }}
       >
         <div className="flex justify-center items-center">
-          <p className="font-bold m-0 text-6xl">
+          <p className="font-bold text-3xl leading-none sm:text-5xl md:text-7xl">
             Hi. My name is <br />
-            <span style={{ fontSize: "2.5em" }}>Bryan Lindsey.</span>
+            <span style={{ fontSize: "3em" }}>Bryan Lindsey.</span>
           </p>
         </div>
       </Html>
