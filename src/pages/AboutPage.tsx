@@ -30,7 +30,7 @@ export const AboutPage = (props: PageComponentProps) => {
               "I like to make things for the web and Android, including games and apps to make music."
             }
           </p>
-          <p className="text-3xl text-center">
+          <p className="text-xl sm:text-3xl text-center">
             {"Keep scrolling to see some things I've made."}
           </p>
         </div>
