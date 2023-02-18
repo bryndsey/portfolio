@@ -10,7 +10,6 @@ import { FaLinkedinIn } from "react-icons/fa";
 import { MdAlternateEmail } from "react-icons/md";
 
 export const ContactPage = (props: PageComponentProps) => {
-  const size = useThree((state) => state.size);
   const groupRef = useRef<Group>(null);
 
   const htmlPortal = useHtmlPortal();
@@ -30,16 +29,7 @@ export const ContactPage = (props: PageComponentProps) => {
 
   return (
     <group ref={groupRef}>
-      <Html
-        transform
-        style={{
-          // backgroundColor: "rgba(0, 0, 0, 0.2)",
-          width: size.width * 0.9,
-          height: size.height * 0.9,
-        }}
-        portal={{ current: htmlPortal }}
-        distanceFactor={1}
-      >
+      <Html fullscreen portal={{ current: htmlPortal }}>
         <div className="h-full flex flex-row portrait:flex-col justify-evenly items-center m-0">
           <a
             href="http://www.github.com/bryndsey"
