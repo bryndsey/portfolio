@@ -18,7 +18,7 @@ const Tags = (props: TagsProps) => {
         return (
           <div
             key={tag.name}
-            className="p-2 text-xs rounded"
+            className="p-2 text-sm rounded"
             style={{
               backgroundColor: tag.color,
             }}
@@ -40,7 +40,7 @@ const LinkButton = (props: LinkButtonProps) => {
   return (
     <a
       href={props.linkUrl}
-      className="p-2 text-sm bg-yellow-400 rounded hover:bg-yellow-300 active:bg-yellow-500 font-bold uppercase duration-300 w-fit"
+      className="px-4 py-2 text-lg bg-yellow-400 rounded hover:bg-yellow-300 active:bg-yellow-500 font-bold uppercase duration-300 w-fit"
     >
       {props.actionText ?? "Try it"}
     </a>
@@ -50,12 +50,12 @@ const LinkButton = (props: LinkButtonProps) => {
 export const ProjectDescription = (props: ProjectDescriptionProps) => {
   return (
     // TODO: Re-add ability to combine with props style (or remove props style?)
-    <div className={"flex flex-col gap-2 sm:gap-4"}>
+    <div className={"flex flex-col gap-4 sm:gap-6"}>
       <div className="flex flex-row flex-wrap items-center gap-2 sm:gap-4">
-        <h2 className="text-4xl font-bold">{props.projectName}</h2>
+        <h2 className="text-6xl font-bold">{props.projectName}</h2>
         {props.tags && <Tags tags={props.tags} />}
       </div>
-      <p className="text-lg">{props.descriptionText}</p>
+      <p className="text-2xl">{props.descriptionText}</p>
 
       {props.url && (
         <LinkButton linkUrl={props.url} actionText={props.actionText} />
