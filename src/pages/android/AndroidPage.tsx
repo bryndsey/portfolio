@@ -98,32 +98,30 @@ const FloatingText = (props: FloatingTextProps) => {
   const viewport = useThree((state) => state.viewport);
 
   return (
-    <group>
-      <Html
-        transform
-        style={{
-          width: size.width * 0.4,
-          // backgroundColor: "rgba(0, 0, 0, 0.2)",
-        }}
-        position={[viewport.width * 0.25, 0, 0]}
-        portal={{ current: htmlPortal }}
-        distanceFactor={1}
-      >
-        {showTextTransitions(
-          (showStyle, show) =>
-            show && (
-              <animated.div style={showStyle}>
-                <p className="text-center text-8xl font-semibold mb-6">
-                  Android Projects
-                </p>
-                <p className="text-center text-2xl">
-                  (Tap the screen to learn more)
-                </p>
-              </animated.div>
-            )
-        )}
-      </Html>
-    </group>
+    <Html
+      transform
+      style={{
+        width: size.width * 0.4,
+        // backgroundColor: "rgba(0, 0, 0, 0.2)",
+      }}
+      position={[viewport.width * 0.25, 0, 0]}
+      portal={{ current: htmlPortal }}
+      distanceFactor={1}
+    >
+      {showTextTransitions(
+        (showStyle, show) =>
+          show && (
+            <animated.div style={showStyle}>
+              <p className="text-center text-8xl font-semibold mb-6">
+                Android Projects
+              </p>
+              <p className="text-center text-2xl">
+                (Tap the screen to learn more)
+              </p>
+            </animated.div>
+          )
+      )}
+    </Html>
   );
 };
 
@@ -134,7 +132,7 @@ const deviceRotation = new Euler();
 
 export const AndroidPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
-  const innerGroupRef = useRef<Group>(null);
+  const deviceGroupRef = useRef<Group>(null);
 
   const [showText, setShowText] = useState(false);
 
@@ -145,7 +143,7 @@ export const AndroidPage = (props: PageComponentProps) => {
     props.startPageIndex,
     props.exitPageIndex,
     ({ enterAmount, exitAmount, state }) => {
-      if (groupRef.current === null) return;
+      if (deviceGroupRef.current === null) return;
 
       const progress = enterAmount + exitAmount;
 
@@ -161,7 +159,7 @@ export const AndroidPage = (props: PageComponentProps) => {
         Math.min(-state.viewport.width, -1.5),
         Math.abs(progress)
       );
-      groupRef.current.position.setX(position);
+      deviceGroupRef.current.position.setX(position);
 
       const targetYRotation = isPortrait ? 0 : 0.2;
 
@@ -171,19 +169,15 @@ export const AndroidPage = (props: PageComponentProps) => {
         Math.abs(progress)
       );
 
-      if (innerGroupRef.current === null) return;
-
       deviceRotation.set(0, currentRotation, 0);
-      innerGroupRef.current.setRotationFromEuler(deviceRotation);
+      deviceGroupRef.current.setRotationFromEuler(deviceRotation);
     }
   );
 
   return (
-    <group>
-      <group ref={groupRef}>
-        <group ref={innerGroupRef} scale={isPortrait ? 6 : 5.5}>
-          <Device {...deviceSize} bezelSize={deviceBezelSize} />
-        </group>
+    <group ref={groupRef}>
+      <group ref={deviceGroupRef} scale={isPortrait ? 6 : 5.5}>
+        <Device {...deviceSize} bezelSize={deviceBezelSize} />
       </group>
       {/* <FloatingDescription showText={showText} /> */}
       {!isPortrait && <FloatingText showText={showText} />}
