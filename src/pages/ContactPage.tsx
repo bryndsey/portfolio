@@ -34,20 +34,13 @@ export const ContactPage = (props: PageComponentProps) => {
         transform
         style={{
           // backgroundColor: "rgba(0, 0, 0, 0.2)",
-          width: size.width * 0.5,
+          width: size.width * 0.9,
+          height: size.height * 0.9,
         }}
         portal={{ current: htmlPortal }}
         distanceFactor={1}
       >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            margin: 0,
-          }}
-        >
+        <div className="h-full flex flex-row portrait:flex-col justify-evenly items-center m-0">
           <a
             href="http://www.github.com/bryndsey"
             className="bg-black p-3 rounded-xl"
