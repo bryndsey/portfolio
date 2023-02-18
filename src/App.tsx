@@ -48,10 +48,13 @@ const CameraRig = () => {
 };
 
 function App() {
+  const { showStats } = useControls({
+    showStats: true,
+  });
   return (
     <div id="App" className="bg-green-500 h-full font-sans">
       <Canvas>
-        <Stats />
+        {showStats && <Stats />}
         <CameraRig />
         <Environment preset="studio" blur={0.5} />
         <Suspense fallback={null}>
