@@ -65,10 +65,14 @@ export const PedalsPage = (props: PageComponentProps) => {
       const viewportHeight = state.viewport.height;
       groupRef.current.position.setY(yPercent * viewportHeight);
 
+      const cableAnimationFinishPercent = 0.9;
       const cableProgressPercent = MathUtils.mapLinear(
-        enterAmount + contentProgressAmount,
+        Math.min(
+          enterAmount + contentProgressAmount,
+          cableAnimationFinishPercent
+        ),
         -1,
-        1,
+        cableAnimationFinishPercent,
         0,
         1
       );
