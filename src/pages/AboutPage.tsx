@@ -8,11 +8,18 @@ import { useScrollPages } from "./useScrollPages";
 export const AboutPage = (props: PageComponentProps) => {
   const htmlPortal = useHtmlPortal();
   const groupRef = useRef<Group>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
-    ({ enterAmount, exitAmount, state }) => {
+    ({ enterAmount, exitAmount, isPageVisible, state }) => {
       if (groupRef.current === null) return;
+
+      groupRef.current.visible = isPageVisible;
+
+      if (contentRef.current === null) return;
+      contentRef.current.hidden = !isPageVisible;
 
       const yPercent = enterAmount + exitAmount;
 
@@ -23,7 +30,7 @@ export const AboutPage = (props: PageComponentProps) => {
 
   return (
     <group ref={groupRef}>
-      <Html fullscreen portal={{ current: htmlPortal }}>
+      <Html ref={contentRef} fullscreen portal={{ current: htmlPortal }}>
         <div className="h-full w-3/4 flex flex-col justify-around m-auto">
           <p className="font-semibold text-4xl sm:text-6xl">
             {

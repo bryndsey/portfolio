@@ -12,12 +12,18 @@ export const IntroPage = (props: PageComponentProps) => {
   const htmlPortal = useHtmlPortal();
 
   const groupRef = useRef<Group>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
-    ({ enterAmount, exitAmount, state }) => {
+    ({ enterAmount, exitAmount, isPageVisible, state }) => {
       if (groupRef.current === null) return;
+
+      groupRef.current.visible = isPageVisible;
+
+      if (contentRef.current === null) return;
+      contentRef.current.hidden = !isPageVisible;
 
       const yPercent = enterAmount + exitAmount;
 
@@ -35,6 +41,7 @@ export const IntroPage = (props: PageComponentProps) => {
   return (
     <group ref={groupRef}>
       <Html
+        ref={contentRef}
         transform
         position={[0, 0, 0]}
         distanceFactor={1}
