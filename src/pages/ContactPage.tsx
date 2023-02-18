@@ -11,14 +11,20 @@ import { MdAlternateEmail } from "react-icons/md";
 
 export const ContactPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const htmlPortal = useHtmlPortal();
 
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
-    ({ enterAmount, exitAmount, state }) => {
+    ({ enterAmount, exitAmount, isPageVisible, state }) => {
       if (groupRef.current === null) return;
+
+      groupRef.current.visible = isPageVisible;
+
+      if (contentRef.current === null) return;
+      contentRef.current.hidden = !isPageVisible;
 
       const yPercent = enterAmount + exitAmount;
 
@@ -29,7 +35,7 @@ export const ContactPage = (props: PageComponentProps) => {
 
   return (
     <group ref={groupRef}>
-      <Html fullscreen portal={{ current: htmlPortal }}>
+      <Html ref={contentRef} fullscreen portal={{ current: htmlPortal }}>
         <div className="h-full flex flex-row portrait:flex-col justify-evenly items-center m-0">
           <a
             href="http://www.github.com/bryndsey"
