@@ -138,6 +138,9 @@ export const AndroidPage = (props: PageComponentProps) => {
 
   const [showText, setShowText] = useState(false);
 
+  const viewport = useThree((state) => state.viewport);
+  const isPortrait = viewport.aspect < 1;
+
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
@@ -151,15 +154,19 @@ export const AndroidPage = (props: PageComponentProps) => {
         setShowText(shouldShowText);
       }
 
+      const targetXPosition = isPortrait ? 0 : -state.viewport.width / 6;
+
       const position = MathUtils.lerp(
-        -state.viewport.width / 6,
+        targetXPosition,
         -state.viewport.width,
         Math.abs(progress)
       );
       groupRef.current.position.setX(position);
 
+      const targetYRotation = isPortrait ? 0 : 0.2;
+
       const currentRotation = MathUtils.lerp(
-        0.2,
+        targetYRotation,
         Math.PI * 3,
         Math.abs(progress)
       );
@@ -174,12 +181,12 @@ export const AndroidPage = (props: PageComponentProps) => {
   return (
     <group>
       <group ref={groupRef}>
-        <group ref={innerGroupRef} scale={5.5}>
+        <group ref={innerGroupRef} scale={isPortrait ? 6 : 5.5}>
           <Device {...deviceSize} bezelSize={deviceBezelSize} />
         </group>
       </group>
       {/* <FloatingDescription showText={showText} /> */}
-      <FloatingText showText={showText} />
+      {!isPortrait && <FloatingText showText={showText} />}
     </group>
   );
 };
