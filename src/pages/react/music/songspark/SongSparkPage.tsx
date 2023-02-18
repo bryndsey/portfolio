@@ -20,8 +20,14 @@ export const SongSparkPage = (props: PageComponentProps) => {
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
-    ({ enterAmount, exitAmount, state }) => {
+    ({ enterAmount, exitAmount, isPageVisible, state }) => {
       if (groupRef.current === null) return;
+      groupRef.current.visible = isPageVisible;
+
+      if (descriptionRef.current === null) return;
+      descriptionRef.current.hidden = !isPageVisible;
+
+      if (!isPageVisible) return;
 
       const yPercent = enterAmount + exitAmount;
 
@@ -29,7 +35,6 @@ export const SongSparkPage = (props: PageComponentProps) => {
       groupRef.current.position.setY(yPercent * viewportHeight);
 
       const showDescription = yPercent === 0;
-      if (descriptionRef.current === null) return;
       descriptionRef.current.style.opacity = showDescription ? "1" : "0";
     }
   );

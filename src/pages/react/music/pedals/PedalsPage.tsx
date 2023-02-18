@@ -57,8 +57,21 @@ export const PedalsPage = (props: PageComponentProps) => {
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
-    ({ enterAmount, contentProgressAmount, exitAmount, state }) => {
+    ({
+      enterAmount,
+      contentProgressAmount,
+      exitAmount,
+      isPageVisible,
+      state,
+    }) => {
       if (groupRef.current === null) return;
+
+      groupRef.current.visible = isPageVisible;
+
+      if (descriptionRef.current === null) return;
+      descriptionRef.current.hidden = !isPageVisible;
+
+      if (!isPageVisible) return;
 
       const yPercent = enterAmount + exitAmount;
 
@@ -100,7 +113,6 @@ export const PedalsPage = (props: PageComponentProps) => {
       );
       cableEnd.current.lookAt(rotationTarget);
 
-      if (descriptionRef.current === null) return;
       const showContent =
         contentProgressAmount > 0 && contentProgressAmount < 1;
       descriptionRef.current.style.opacity = showContent ? "1" : "0";
