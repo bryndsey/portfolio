@@ -37,17 +37,17 @@ export const PedalsPage = (props: PageComponentProps) => {
 
   const htmlPortal = useHtmlPortal();
 
-  const curveStartDepth = -1;
+  const curveStartDepth = -0.5;
   const curve = new CatmullRomCurve3(
     [
       new Vector3(
         useCameraFrustumWidthAtDepth(curveStartDepth) / 2 + 1,
-        1,
+        1.25,
         curveStartDepth
       ),
-      new Vector3(-0.75, 0.5, -0.25),
-      new Vector3(0.8, -0.175, 0.25),
-      new Vector3(-viewport.width / 7 + 0.3, -0.175, 0.85),
+      new Vector3(-viewport.width * 0.4, 0.5, -0.1),
+      new Vector3(-viewport.width / 7 + 1.25, -0.1, 0.1),
+      new Vector3(-viewport.width / 7 + 0.25, -0.175, 0.75),
     ],
     false,
     "catmullrom",
@@ -113,7 +113,7 @@ export const PedalsPage = (props: PageComponentProps) => {
           transition: "opacity 300ms",
           // backgroundColor: "rgba(0, 0, 0, 0.2)",
         }}
-        position={[viewport.width / 5, viewport.height / 6, 0]}
+        position={[viewport.width / 5, viewport.height / 5, 0]}
         portal={{ current: htmlPortal }}
         distanceFactor={1}
       >
