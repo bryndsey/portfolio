@@ -1,23 +1,35 @@
-import { Html } from "@react-three/drei";
+import { Html, Sphere } from "@react-three/drei";
+import { useThree } from "@react-three/fiber";
 import { useRef } from "react";
-import { Group } from "three";
+import { Group, MathUtils } from "three";
 import { ProjectDescription, ReactTag } from "../../../ProjectDescription";
 import { useHtmlPortal } from "../../../useHtmlPortal";
 import { PageComponentProps } from "../../Pages";
 import { useScrollPages } from "../../useScrollPages";
+import { GarbageCanModel } from "./GarbageCanModel";
 
 export const ChoresPage = (props: PageComponentProps) => {
   const htmlPortal = useHtmlPortal();
-  const groupRef = useRef<Group>(null);
+  const pageGroupRef = useRef<Group>(null);
+  const bagRef = useRef<Group>(null);
+
   const contentRef = useRef<HTMLDivElement>(null);
+
+  const viewport = useThree((state) => state.viewport);
 
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
-    ({ enterAmount, exitAmount, isPageVisible, state }) => {
-      if (groupRef.current === null) return;
+    ({
+      enterAmount,
+      exitAmount,
+      contentProgressAmount,
+      isPageVisible,
+      state,
+    }) => {
+      if (pageGroupRef.current === null) return;
 
-      groupRef.current.visible = isPageVisible;
+      pageGroupRef.current.visible = isPageVisible;
 
       if (contentRef.current === null) return;
       contentRef.current.hidden = !isPageVisible;
@@ -25,17 +37,23 @@ export const ChoresPage = (props: PageComponentProps) => {
       const yPercent = enterAmount + exitAmount;
 
       const viewportHeight = state.viewport.height;
-      groupRef.current.position.setY(yPercent * viewportHeight);
+      pageGroupRef.current.position.setY(yPercent * viewportHeight);
+
+      if (bagRef.current === null) return;
+      const bagYPosition = MathUtils.lerp(0.66, 0, contentProgressAmount);
+      bagRef.current.position.setY(bagYPosition);
     }
   );
 
   return (
-    <group ref={groupRef}>
+    <group ref={pageGroupRef}>
       <Html
         ref={contentRef}
         transform
         portal={{ current: htmlPortal }}
         distanceFactor={1}
+        position={[viewport.width / 4, 0, 0]}
+        style={{ width: (viewport.width * viewport.factor) / 2 }}
       >
         <ProjectDescription
           projectName="Chore Chart"
@@ -44,6 +62,16 @@ export const ChoresPage = (props: PageComponentProps) => {
           url="https://chores.bryanlindsey.dev/"
         />
       </Html>
+      <group position={[-viewport.width / 4, 0, -0.25]}>
+        <group scale={0.66} rotation={[0.1, 0, 0]}>
+          <GarbageCanModel />
+        </group>
+        <group ref={bagRef}>
+          <Sphere args={[0.3]}>
+            <meshStandardMaterial color={"black"} roughness={0.2} />
+          </Sphere>
+        </group>
+      </group>
     </group>
   );
 };
