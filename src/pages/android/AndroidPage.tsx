@@ -158,7 +158,7 @@ export const AndroidPage = (props: PageComponentProps) => {
 
       const position = MathUtils.lerp(
         targetXPosition,
-        -state.viewport.width,
+        Math.min(-state.viewport.width, -1.5),
         Math.abs(progress)
       );
       groupRef.current.position.setX(position);
@@ -167,7 +167,7 @@ export const AndroidPage = (props: PageComponentProps) => {
 
       const currentRotation = MathUtils.lerp(
         targetYRotation,
-        Math.PI * 3,
+        Math.PI * Math.min(state.viewport.width, 2.5),
         Math.abs(progress)
       );
 
