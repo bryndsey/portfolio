@@ -9,13 +9,21 @@ interface DeviceAppIconProps {
 }
 
 const DeviceAppIcon = (props: DeviceAppIconProps) => {
+  const { app } = props;
   const [, selectApp] = useSelectedAndroidApp();
   return (
     <div onClick={() => selectApp(props.app)}>
       <div
-        className={`${props.app.tempIconColor} rounded-lg aspect-square shadow-md hover:shadow-lg active:shadow-sm transition-shadow`}
-      />
-      <p className="text-center text-base pt-2">{props.app.name}</p>
+        className={`${app.iconBackgroundColor} rounded-lg aspect-square shadow-md hover:shadow-lg active:shadow-sm transition-shadow overflow-clip`}
+      >
+        {app.icon && (
+          <img
+            style={{ transform: `scale(${app.iconScale ?? 1})` }}
+            src={app.icon}
+          />
+        )}
+      </div>
+      <p className="text-center text-base pt-2">{app.name}</p>
     </div>
   );
 };
