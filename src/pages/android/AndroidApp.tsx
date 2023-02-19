@@ -1,7 +1,7 @@
 import { AndroidTag, Tag, UnityTag } from "../../ProjectDescription";
-import SongSparkIcon from "../../../assets/songspark_icon.png";
-import TapBandIcon from "../../../assets/tap_band_icon.png";
-import TiltArcheryTrainerIcon from "../../../assets/tilt_archery_trainer_icon.webp";
+import SongSparkIcon from "./icons/songspark_icon.png";
+import TapBandIcon from "./icons/tap_band_icon.png";
+import TiltArcheryTrainerIcon from "./icons/tilt_archery_trainer_icon.webp";
 
 export type AndroidApp = {
   name: string;

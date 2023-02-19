@@ -12,6 +12,7 @@ import { Suspense, useRef } from "react";
 import { useControls } from "theatric";
 import { CameraHelper } from "three";
 import { pages } from "./pages/Pages";
+import HDRI from "./assets/studio_small_03_1k.hdr";
 
 const cameraPosition = { x: 0, y: 0, z: 3 };
 
@@ -56,7 +57,7 @@ function App() {
       <Canvas>
         {showStats && <Stats />}
         <CameraRig />
-        <Environment files={"/assets/studio_small_03_1k.hdr"} />
+        <Environment files={HDRI} />
         <Suspense fallback={null}>
           <ScrollControls pages={pages.totalPages}>
             {/* <ambientLight intensity={0.5} /> */}

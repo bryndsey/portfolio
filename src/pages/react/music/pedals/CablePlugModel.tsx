@@ -1,8 +1,9 @@
 import { Suspense } from "react";
 import { useGLTF } from "@react-three/drei";
+import CablePlug from "./cablePlug.gltf";
 
 export function CablePlugModel() {
-  const gltf = useGLTF("/assets/cablePlug.gltf");
+  const gltf = useGLTF(CablePlug);
   return (
     <Suspense fallback={null}>
       <primitive object={gltf.scene} />
