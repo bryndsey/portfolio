@@ -57,7 +57,7 @@ export const ChoresPage = (props: PageComponentProps) => {
       >
         <ProjectDescription
           projectName="Chore Chart"
-          descriptionText="A chart for keeping track of weekly chores in your household"
+          descriptionText="An app to keep track of weekly chores in your household"
           tags={[ReactTag]}
           url="https://chores.bryanlindsey.dev/"
         />
