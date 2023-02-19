@@ -43,21 +43,28 @@ export const androidApps: AndroidApp[] = [
     projectTags: [AndroidTag, UnityTag],
   },
   {
-    name: "Connected Light App",
-    description: "Control smart lights via Bluetooth and Wi-fi",
-    iconBackgroundColor: "bg-teal-600",
+    name: "Professional Work",
+    description:
+      "I've also done Android professionally since 2015. Because of NDAs, I can't say which apps specifically, but I've worked on things like smart lights, food ordering, banking, and more!",
+    iconBackgroundColor: "bg-slate-500",
     projectTags: [AndroidTag],
   },
-  {
-    name: "Banking App",
-    description: "White-label banking application",
-    iconBackgroundColor: "bg-blue-400",
-    projectTags: [AndroidTag],
-  },
-  {
-    name: "Food Ordering App",
-    description: "Food ordering from a popular fast food chain",
-    iconBackgroundColor: "bg-red-600",
-    projectTags: [AndroidTag],
-  },
+  // {
+  //   name: "Connected Light App",
+  //   description: "Control smart lights via Bluetooth and Wi-fi",
+  //   iconBackgroundColor: "bg-teal-600",
+  //   projectTags: [AndroidTag],
+  // },
+  // {
+  //   name: "Banking App",
+  //   description: "White-label banking application",
+  //   iconBackgroundColor: "bg-blue-400",
+  //   projectTags: [AndroidTag],
+  // },
+  // {
+  //   name: "Food Ordering App",
+  //   description: "Food ordering from a popular fast food chain",
+  //   iconBackgroundColor: "bg-red-600",
+  //   projectTags: [AndroidTag],
+  // },
 ];
