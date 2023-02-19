@@ -56,7 +56,7 @@ function App() {
       <Canvas>
         {showStats && <Stats />}
         <CameraRig />
-        <Environment preset="studio" blur={0.5} />
+        <Environment files={"/assets/studio_small_03_1k.hdr"} />
         <Suspense fallback={null}>
           <ScrollControls pages={pages.totalPages}>
             {/* <ambientLight intensity={0.5} /> */}
