@@ -1,5 +1,5 @@
 import { Html } from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import { Group } from "three";
 import { useHtmlPortal } from "../useHtmlPortal";
@@ -7,8 +7,6 @@ import { PageComponentProps } from "./Pages";
 import { useScrollPages } from "./useScrollPages";
 
 export const IntroPage = (props: PageComponentProps) => {
-  const size = useThree((state) => state.size);
-
   const htmlPortal = useHtmlPortal();
 
   const groupRef = useRef<Group>(null);
@@ -24,6 +22,8 @@ export const IntroPage = (props: PageComponentProps) => {
 
       if (contentRef.current === null) return;
       contentRef.current.hidden = !isPageVisible;
+
+      contentRef.current.style.width = `${state.size.width * 0.75}px`;
 
       const yPercent = enterAmount + exitAmount;
 
@@ -43,12 +43,10 @@ export const IntroPage = (props: PageComponentProps) => {
       <Html
         ref={contentRef}
         transform
-        position={[0, 0, 0]}
         distanceFactor={1}
-        style={{
-          // backgroundColor: "rgba(0, 0, 1, 0.1)",
-          width: size.width * 0.75,
-        }}
+        // style={{
+        //   backgroundColor: "rgba(0, 0, 1, 0.1)",
+        // }}
         portal={{ current: htmlPortal }}
       >
         <div className="flex justify-center items-center">
