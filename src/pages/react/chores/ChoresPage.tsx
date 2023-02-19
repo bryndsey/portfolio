@@ -62,12 +62,12 @@ export const ChoresPage = (props: PageComponentProps) => {
           url="https://chores.bryanlindsey.dev/"
         />
       </Html>
-      <group position={[-viewport.width / 4, 0, -0.25]}>
-        <group scale={0.66} rotation={[0.1, 0, 0]}>
+      <group position={[-viewport.width / 4, -0.25, 0]}>
+        <group scale={0.6} rotation={[0.1, 0, 0]}>
           <GarbageCanModel />
         </group>
         <group ref={bagRef}>
-          <Sphere args={[0.3]}>
+          <Sphere args={[0.25]}>
             <meshStandardMaterial color={"black"} roughness={0.2} />
           </Sphere>
         </group>
