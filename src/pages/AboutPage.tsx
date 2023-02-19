@@ -5,6 +5,14 @@ import { useHtmlPortal } from "../useHtmlPortal";
 import { PageComponentProps } from "./Pages";
 import { useScrollPages } from "./useScrollPages";
 
+const listOfThingsIMake = [
+  "React apps",
+  "Music",
+  "Games",
+  "3D models",
+  "Android apps",
+];
+
 export const AboutPage = (props: PageComponentProps) => {
   const htmlPortal = useHtmlPortal();
   const groupRef = useRef<Group>(null);
@@ -33,9 +41,7 @@ export const AboutPage = (props: PageComponentProps) => {
       <Html ref={contentRef} fullscreen portal={{ current: htmlPortal }}>
         <div className="h-full w-3/4 flex flex-col justify-around m-auto">
           <p className="font-semibold text-4xl sm:text-6xl">
-            {
-              "I like to make things for the web and Android, including games and apps to make music."
-            }
+            {`I like to make things. ${listOfThingsIMake.join(". ")}.`}
           </p>
           <p className="text-xl sm:text-3xl text-center">
             {"Keep scrolling to see some things I've made."}
