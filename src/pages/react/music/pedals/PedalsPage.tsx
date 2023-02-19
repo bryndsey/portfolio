@@ -123,7 +123,8 @@ export const PedalsPage = (props: PageComponentProps) => {
     <group ref={groupRef}>
       <Html
         ref={descriptionRef}
-        transform
+        occlude
+        center
         style={{
           width: size.width * 0.5,
           transition: "opacity 300ms",
@@ -131,7 +132,6 @@ export const PedalsPage = (props: PageComponentProps) => {
         }}
         position={[-viewport.width * 0.15, viewport.height / 5, 0]}
         portal={{ current: htmlPortal }}
-        distanceFactor={1}
       >
         <ProjectDescription
           projectName="Pedals"

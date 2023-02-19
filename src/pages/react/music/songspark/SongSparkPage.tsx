@@ -43,7 +43,8 @@ export const SongSparkPage = (props: PageComponentProps) => {
     <group ref={groupRef}>
       <Html
         ref={descriptionRef}
-        transform
+        center
+        occlude
         style={{
           width: size.width / 2,
           transition: "opacity 300ms",
@@ -51,7 +52,7 @@ export const SongSparkPage = (props: PageComponentProps) => {
         }}
         position={[-viewport.width / 6, viewport.height / 5, 0]}
         portal={{ current: htmlPortal }}
-        distanceFactor={1}
+        // distanceFactor={1}
       >
         <ProjectDescription
           projectName="SongSpark"

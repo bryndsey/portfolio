@@ -49,9 +49,9 @@ export const ChoresPage = (props: PageComponentProps) => {
     <group ref={pageGroupRef}>
       <Html
         ref={contentRef}
-        transform
+        center
+        occlude
         portal={{ current: htmlPortal }}
-        distanceFactor={1}
         position={[viewport.width / 4, 0, 0]}
         style={{ width: (viewport.width * viewport.factor) / 2 }}
       >

@@ -100,14 +100,13 @@ const FloatingText = (props: FloatingTextProps) => {
 
   return (
     <Html
-      transform
+      center
       style={{
         width: size.width * 0.4,
         // backgroundColor: "rgba(0, 0, 0, 0.2)",
       }}
       position={[viewport.width * 0.25, 0, 0]}
       portal={{ current: htmlPortal }}
-      distanceFactor={1}
     >
       {showTextTransitions(
         (showStyle, show) =>
