@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { useGLTF } from "@react-three/drei";
-import GarbageCan from "./garbageCan.gltf";
+import GarbageCan from "./garbageCan.gltf?url";
 
 export function GarbageCanModel() {
   const gltf = useGLTF(GarbageCan);

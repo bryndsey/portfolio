@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { useGLTF } from "@react-three/drei";
-import Pedal from "./pedal.gltf";
+import Pedal from "./pedal.gltf?url";
 
 export function PedalModel() {
   const gltf = useGLTF(Pedal);

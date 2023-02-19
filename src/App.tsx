@@ -12,7 +12,7 @@ import { Suspense, useRef } from "react";
 import { useControls } from "theatric";
 import { CameraHelper } from "three";
 import { pages } from "./pages/Pages";
-import HDRI from "./assets/studio_small_03_1k.hdr";
+import HDRI from "./assets/studio_small_03_1k.hdr?url";
 
 const cameraPosition = { x: 0, y: 0, z: 3 };
 

@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { useGLTF } from "@react-three/drei";
-import CablePlug from "./cablePlug.gltf";
+import CablePlug from "./cablePlug.gltf?url";
 
 export function CablePlugModel() {
   const gltf = useGLTF(CablePlug);
