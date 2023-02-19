@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { Euler, Group, MathUtils } from "three";
 import { ProjectDescription } from "../../ProjectDescription";
 import { useHtmlPortal } from "../../useHtmlPortal";
+import { useCameraFrustumWidthAtDepth } from "../../utils";
 import { PageComponentProps } from "../Pages";
 import { useScrollPages } from "../useScrollPages";
 import { Device } from "./Device";
@@ -130,6 +131,8 @@ const deviceBezelSize = 64;
 
 const deviceRotation = new Euler();
 
+const deviceZOffset = 1.25;
+
 export const AndroidPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
   const deviceGroupRef = useRef<Group>(null);
@@ -140,6 +143,8 @@ export const AndroidPage = (props: PageComponentProps) => {
 
   const viewport = useThree((state) => state.viewport);
   const isPortrait = viewport.aspect < 1;
+
+  const frustumWidthAtZOffset = useCameraFrustumWidthAtDepth(deviceZOffset);
 
   useScrollPages(
     props.startPageIndex,
@@ -163,11 +168,11 @@ export const AndroidPage = (props: PageComponentProps) => {
         setShowText(shouldShowText);
       }
 
-      const targetXPosition = isPortrait ? 0 : -state.viewport.width / 6;
+      const targetXPosition = isPortrait ? 0 : -frustumWidthAtZOffset / 6;
 
       const position = MathUtils.lerp(
         targetXPosition,
-        Math.min(-state.viewport.width, -1.5),
+        Math.min(-frustumWidthAtZOffset / 2, -1.5),
         Math.abs(progress)
       );
       deviceGroupRef.current.position.setX(position);
@@ -187,7 +192,11 @@ export const AndroidPage = (props: PageComponentProps) => {
 
   return (
     <group ref={groupRef}>
-      <group ref={deviceGroupRef} scale={isPortrait ? 6 : 5.5}>
+      <group
+        ref={deviceGroupRef}
+        position={[-10, 0, deviceZOffset]}
+        scale={isPortrait ? 3 : 2.5}
+      >
         <Device {...deviceSize} bezelSize={deviceBezelSize} isOn={isDeviceOn} />
       </group>
       {/* <FloatingDescription showText={showText} /> */}
