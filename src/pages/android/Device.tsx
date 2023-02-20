@@ -36,13 +36,9 @@ const DeviceScreen = (props: DeviceScreenProps) => {
           distanceFactor={1 / scaleFactor}
           position={position}
           style={{
-            background: "black",
-            margin: 0,
-            padding: 0,
             borderRadius: 16 * (scaleFactor / 10),
             width: 400 * width * scaleFactor - bezelSize * (scaleFactor / 10),
             height: 400 * height * scaleFactor - bezelSize * (scaleFactor / 10),
-            overflow: "scroll",
           }}
         >
           <ScreenContent />
