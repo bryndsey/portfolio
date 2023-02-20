@@ -29,14 +29,11 @@ export const IntroPage = (props: PageComponentProps) => {
 
       const viewportHeight = state.viewport.height;
       groupRef.current.position.setY(yPercent * viewportHeight);
+
+      const mouse = state.mouse;
+      groupRef.current.lookAt(mouse.x, mouse.y, 50);
     }
   );
-
-  useFrame((state) => {
-    const mouse = state.mouse;
-    if (groupRef.current === null) return;
-    groupRef.current.lookAt(mouse.x, mouse.y, 50);
-  });
 
   return (
     <group ref={groupRef}>
