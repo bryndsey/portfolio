@@ -91,8 +91,9 @@ export const PedalsPage = (props: PageComponentProps) => {
       );
 
       const curveLengths = curve.getLengths();
-      const targetLengthIndex = Math.ceil(
-        curveLengths.length * cableProgressPercent
+      const targetLengthIndex = Math.min(
+        Math.ceil(curveLengths.length * cableProgressPercent),
+        curveLengths.length - 1
       );
       const targetLength = curveLengths[targetLengthIndex];
 
