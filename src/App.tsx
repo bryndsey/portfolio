@@ -21,7 +21,7 @@ const CameraRig = () => {
     debugCamera: false,
   });
   const mainCameraRef = useRef<THREE.PerspectiveCamera>(null!);
-  // useHelper(mainCameraRef, CameraHelper);
+  useHelper(debugCamera ? mainCameraRef : null, CameraHelper);
 
   return (
     <>
