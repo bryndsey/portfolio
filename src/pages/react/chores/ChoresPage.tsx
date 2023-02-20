@@ -42,6 +42,9 @@ export const ChoresPage = (props: PageComponentProps) => {
       if (bagRef.current === null) return;
       const bagYPosition = MathUtils.lerp(0.66, 0, contentProgressAmount);
       bagRef.current.position.setY(bagYPosition);
+
+      const showDescription = yPercent === 0;
+      contentRef.current.style.opacity = showDescription ? "1" : "0";
     }
   );
 
@@ -53,7 +56,10 @@ export const ChoresPage = (props: PageComponentProps) => {
         occlude
         portal={{ current: htmlPortal }}
         position={[viewport.width / 4, 0, 0]}
-        style={{ width: (viewport.width * viewport.factor) / 2 }}
+        style={{
+          width: (viewport.width * viewport.factor) / 2,
+          transition: "opacity 300ms",
+        }}
       >
         <ProjectDescription
           projectName="Chore Chart"
