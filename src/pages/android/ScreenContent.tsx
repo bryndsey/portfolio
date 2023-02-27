@@ -33,14 +33,17 @@ const DeviceClock = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(new Date());
-    }, 100);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
     <p className="text-6xl text-center p-6 tabular-nums">
-      {currentTime.toLocaleTimeString()}
+      {currentTime.toLocaleTimeString([], {
+        hour: "numeric",
+        minute: "2-digit",
+      })}
     </p>
   );
 };
