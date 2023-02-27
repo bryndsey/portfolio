@@ -1,4 +1,4 @@
-import { Html, Sphere } from "@react-three/drei";
+import { Center, Html, Sphere, Text3D } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import { Group, MathUtils } from "three";
@@ -6,6 +6,7 @@ import { ProjectDescription, ReactTag } from "../../../ProjectDescription";
 import { useHtmlPortal } from "../../../useHtmlPortal";
 import { PageComponentProps } from "../../Pages";
 import { useScrollPages } from "../../useScrollPages";
+import Font from "./Comfortaa_Bold.json";
 
 export const TicTacToePage = (props: PageComponentProps) => {
   const htmlPortal = useHtmlPortal();
@@ -62,6 +63,18 @@ export const TicTacToePage = (props: PageComponentProps) => {
           url="https://tictactoeplus.bryanlindsey.dev/"
         />
       </Html>
+      <Center position={[-0.4, -0.4, -0.75]} rotation={[-0.4, -0.7, -0.2]}>
+        <Text3D font={Font}>
+          x
+          <meshStandardMaterial color={"red"} flatShading={false} />
+        </Text3D>
+      </Center>
+      <Center position={[-0.6, 0.3, 0.1]} rotation={[-0.4, 0.7, 0.2]}>
+        <Text3D font={Font}>
+          o
+          <meshStandardMaterial color={"blue"} />
+        </Text3D>
+      </Center>
     </group>
   );
 };
