@@ -1,6 +1,7 @@
 import { AndroidTag, Tag, UnityTag } from "../../ProjectDescription";
 import SongSparkIcon from "./icons/songspark_icon.png";
 import TapBandIcon from "./icons/tap_band_icon.png";
+import AndroidBryanIcon from "./icons/androidify_bryan.png";
 import TiltArcheryTrainerIcon from "./icons/tilt_archery_trainer_icon.webp";
 
 export type AndroidApp = {
@@ -47,6 +48,7 @@ export const androidApps: AndroidApp[] = [
     description:
       "I've also done Android professionally since 2015. Because of NDAs, I can't say which apps specifically, but I've worked on things like smart lights, food ordering, banking, and more!",
     iconBackgroundColor: "bg-slate-500",
+    icon: AndroidBryanIcon,
     projectTags: [AndroidTag],
   },
   // {
