@@ -1,3 +1,6 @@
+import { IconType } from "react-icons";
+import { FaAndroid, FaReact, FaUnity } from "react-icons/fa";
+
 interface ProjectDescriptionProps {
   projectName: string;
   descriptionText: string;
@@ -18,12 +21,18 @@ const Tags = (props: TagsProps) => {
         return (
           <div
             key={tag.name}
-            className="p-2 text-sm rounded"
-            style={{
-              backgroundColor: tag.color,
-            }}
+            className="tooltip tooltip-bottom"
+            data-tip={tag.name}
           >
-            {tag.name}
+            <div
+              className="p-2 rounded-full"
+              style={{
+                backgroundColor: tag.color,
+              }}
+            >
+              <tag.icon className="w-5 h-5" color={tag.iconColor} />
+              {/* {tag.name} */}
+            </div>
           </div>
         );
       })}
@@ -64,7 +73,30 @@ export const ProjectDescription = (props: ProjectDescriptionProps) => {
   );
 };
 
-export type Tag = { name: string; color: string };
-export const AndroidTag: Tag = { name: "Android", color: "lightgreen" };
-export const ReactTag: Tag = { name: "React", color: "deepskyblue" };
-export const UnityTag: Tag = { name: "Unity", color: "lightgrey" };
+export type Tag = {
+  name: string;
+  color: string;
+  icon: IconType;
+  iconColor: string;
+};
+
+export const AndroidTag: Tag = {
+  name: "Android",
+  color: "rgb(61, 220, 132)",
+  icon: FaAndroid,
+  iconColor: "white",
+};
+
+export const ReactTag: Tag = {
+  name: "React",
+  color: "rgb(20, 158, 202)",
+  icon: FaReact,
+  iconColor: "white",
+};
+
+export const UnityTag: Tag = {
+  name: "Unity",
+  color: "dimgray",
+  icon: FaUnity,
+  iconColor: "white",
+};

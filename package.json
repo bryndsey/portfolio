@@ -17,6 +17,7 @@
     "@react-spring/web": "^9.7.1",
     "@react-three/drei": "^9.56.28",
     "@react-three/fiber": "^8.11.5",
+    "daisyui": "^2.51.2",
     "jotai": "^2.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
