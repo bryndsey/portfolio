@@ -1,5 +1,4 @@
 import { Html } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import { Group } from "three";
 import { useHtmlPortal } from "../useHtmlPortal";
@@ -7,7 +6,6 @@ import { PageComponentProps } from "./Pages";
 import { useScrollPages } from "./useScrollPages";
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
-import { MdAlternateEmail } from "react-icons/md";
 import { RxSquare } from "react-icons/rx";
 import { SiItchdotio } from "react-icons/si";
 
@@ -62,12 +60,6 @@ export const ContactPage = (props: PageComponentProps) => {
             className="bg-blue-600 p-3 rounded-xl"
           >
             <FaLinkedinIn className="w-12 h-12" color="white" />
-          </a>
-          <a
-            href="mailto:contact@bryanlindsey.dev"
-            className="bg-yellow-400 p-3 rounded-xl"
-          >
-            <MdAlternateEmail className="w-12 h-12" color="white" />
           </a>
         </div>
       </Html>
