@@ -24,7 +24,7 @@ const pagesShapes: Page[] = [
   { id: "songspark", component: SongSparkPage, contentLength: 0.5 },
   { id: "pedals", component: PedalsPage, contentLength: 0.5 },
   // { id: "chores", component: ChoresPage, contentLength: 0.25 },
-  { id: "tictactoeplus", component: TicTacToePage, contentLength: 0.25 },
+  { id: "tictactoeplus", component: TicTacToePage, contentLength: 0.5 },
   { id: "android", component: AndroidPage, contentLength: 0.5 },
   { id: "contact", component: ContactPage, contentLength: 0 },
 ];
