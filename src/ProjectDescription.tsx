@@ -21,13 +21,18 @@ const Tags = (props: TagsProps) => {
         return (
           <div
             key={tag.name}
-            className="p-2 rounded-full"
-            style={{
-              backgroundColor: tag.color,
-            }}
+            className="tooltip tooltip-bottom"
+            data-tip={tag.name}
           >
-            <tag.icon className="w-5 h-5" color={tag.iconColor} />
-            {/* {tag.name} */}
+            <div
+              className="p-2 rounded-full"
+              style={{
+                backgroundColor: tag.color,
+              }}
+            >
+              <tag.icon className="w-5 h-5" color={tag.iconColor} />
+              {/* {tag.name} */}
+            </div>
           </div>
         );
       })}
