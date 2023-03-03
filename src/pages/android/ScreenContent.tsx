@@ -47,19 +47,6 @@ const useClock = () => {
   return currentTime;
 };
 
-const DeviceClock = () => {
-  const currentTime = useClock();
-
-  return (
-    <p className="text-6xl text-center p-6 tabular-nums">
-      {currentTime.toLocaleTimeString([], {
-        hour: "numeric",
-        minute: "2-digit",
-      })}
-    </p>
-  );
-};
-
 const NavigationBar = () => {
   const [, selectApp] = useSelectedAndroidApp();
   return (
@@ -94,7 +81,12 @@ const HomeScreen = () => {
   return (
     <div className="h-full">
       <div className="p-4">
-        <DeviceClock />
+        {
+          // TODO: Find a different font
+        }
+        <div className="text-6xl text-center p-6 font-bold">
+          {"Bryan's Android Apps"}
+        </div>
         <div className="grid grid-cols-3 gap-8 p-2">
           {androidApps.map((app) => {
             return <DeviceAppIcon key={app.name} app={app} />;
