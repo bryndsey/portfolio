@@ -191,11 +191,7 @@ export const AndroidPage = (props: PageComponentProps) => {
 
   return (
     <group ref={groupRef}>
-      <group
-        ref={deviceGroupRef}
-        position={[-10, 0, deviceZOffset]}
-        scale={isPortrait ? 3 : 2.5}
-      >
+      <group ref={deviceGroupRef} position={[-10, 0, deviceZOffset]}>
         <Device {...deviceSize} bezelSize={deviceBezelSize} isOn={isDeviceOn} />
       </group>
       {/* <FloatingDescription showText={showText} /> */}

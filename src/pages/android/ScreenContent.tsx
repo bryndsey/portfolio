@@ -2,7 +2,13 @@ import { PropsWithChildren, useEffect, useState } from "react";
 import { useSelectedAndroidApp } from "./useSelectedAndroidApp";
 import { AndroidApp, androidApps } from "./AndroidApp";
 import { ProjectDescription } from "../../ProjectDescription";
-import { FaArrowLeft, FaRegCircle, FaChevronLeft } from "react-icons/fa";
+import {
+  FaArrowLeft,
+  FaRegCircle,
+  FaChevronLeft,
+  FaWifi,
+  FaSignal,
+} from "react-icons/fa";
 
 interface DeviceAppIconProps {
   app: AndroidApp;
@@ -28,7 +34,7 @@ const DeviceAppIcon = (props: DeviceAppIconProps) => {
   );
 };
 
-const DeviceClock = () => {
+const useClock = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   useEffect(() => {
     const interval = setInterval(() => {
@@ -37,6 +43,12 @@ const DeviceClock = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  return currentTime;
+};
+
+const DeviceClock = () => {
+  const currentTime = useClock();
 
   return (
     <p className="text-6xl text-center p-6 tabular-nums">
@@ -51,13 +63,29 @@ const DeviceClock = () => {
 const NavigationBar = () => {
   const [, selectApp] = useSelectedAndroidApp();
   return (
-    <div className="flex flex-row justify-evenly bg-gray-700 bg-opacity-30 p-4">
+    <div className="flex flex-row justify-evenly bg-black p-4">
       <button onClick={() => selectApp(null)}>
         <FaChevronLeft color="white" size={"1.5rem"} />
       </button>
       <button onClick={() => selectApp(null)}>
         <FaRegCircle color="white" size={"1.5rem"} />
       </button>
+    </div>
+  );
+};
+
+const TopBar = () => {
+  const currentTime = useClock();
+  return (
+    <div className="flex justify-end items-center gap-4 bg-black p-4">
+      <FaWifi color="white" />
+      <FaSignal color="white" />
+      <p className="text-lg text-end tabular-nums text-white">
+        {currentTime.toLocaleTimeString([], {
+          hour: "numeric",
+          minute: "2-digit",
+        })}
+      </p>
     </div>
   );
 };
@@ -98,9 +126,12 @@ const AppDisplay = () => {
 
 const ScreenScaffold = (props: PropsWithChildren) => {
   return (
-    <div className="h-full">
+    <div className="h-full flex flex-col">
+      <div className="w-full">
+        <TopBar />
+      </div>
       {props.children}
-      <div className="absolute bottom-0 left-0 right-0">
+      <div className="w-full">
         <NavigationBar />
       </div>
     </div>

@@ -2,12 +2,13 @@ import { Html, RoundedBox } from "@react-three/drei";
 import { Vector3 } from "@react-three/fiber";
 import { Color } from "three";
 import { useHtmlPortal } from "../../useHtmlPortal";
+import { PhoneModel } from "./PhoneModel";
 import { ScreenContent } from "./ScreenContent";
 
 interface DeviceScreenProps {
   width: number;
   height: number;
-  bezelSize: number;
+  bezelSize?: number;
   position: Vector3;
   resolutionScale?: number;
   isOn?: boolean;
@@ -17,7 +18,7 @@ const DeviceScreen = (props: DeviceScreenProps) => {
   const {
     width,
     height,
-    bezelSize,
+    bezelSize = 0,
     position,
     resolutionScale,
     isOn = true,
@@ -31,7 +32,7 @@ const DeviceScreen = (props: DeviceScreenProps) => {
       {isOn && (
         <Html
           transform
-          occlude="blending"
+          occlude
           portal={{ current: htmlPortal }}
           distanceFactor={1 / scaleFactor}
           position={position}
@@ -71,23 +72,15 @@ interface DeviceProps {
 
 export function Device(props: DeviceProps) {
   return (
-    <RoundedBox
-      args={[props.width, props.height, props.thickness]}
-      radius={0.01}
-      smoothness={12}
-    >
-      <meshStandardMaterial
-        color={new Color(0.02, 0.02, 0.02)}
-        roughness={0.8}
-      />
+    <>
+      <PhoneModel scale={5} />
       <DeviceScreen
-        width={props.width}
-        height={props.height}
-        bezelSize={props.bezelSize}
-        position={[0, 0, props.thickness / 2 + 0.001]}
-        resolutionScale={7.5}
+        width={0.33}
+        height={0.75}
+        position={[0, 0, 0.02]}
+        resolutionScale={4}
         isOn={props.isOn}
       />
-    </RoundedBox>
+    </>
   );
 }
