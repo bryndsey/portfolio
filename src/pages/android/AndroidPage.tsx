@@ -125,9 +125,6 @@ const FloatingText = (props: FloatingTextProps) => {
   );
 };
 
-const deviceSize = { width: 0.15, height: 0.3, thickness: 0.02 };
-const deviceBezelSize = 64;
-
 const deviceRotation = new Euler();
 
 const deviceZOffset = 1.25;
@@ -192,7 +189,7 @@ export const AndroidPage = (props: PageComponentProps) => {
   return (
     <group ref={groupRef}>
       <group ref={deviceGroupRef} position={[-10, 0, deviceZOffset]}>
-        <Device {...deviceSize} bezelSize={deviceBezelSize} isOn={isDeviceOn} />
+        <Device isOn={isDeviceOn} />
       </group>
       {/* <FloatingDescription showText={showText} /> */}
       {!isPortrait && <FloatingText showText={showText} />}

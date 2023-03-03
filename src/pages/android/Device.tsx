@@ -62,10 +62,6 @@ const DeviceScreen = (props: DeviceScreenProps) => {
 };
 
 interface DeviceProps {
-  width: number;
-  height: number;
-  thickness: number;
-  bezelSize: number;
   isOn?: boolean;
 }
 
