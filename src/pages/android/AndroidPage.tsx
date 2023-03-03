@@ -145,14 +145,22 @@ export const AndroidPage = (props: PageComponentProps) => {
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
-    ({ enterAmount, exitAmount, isPageVisible, state }) => {
+    ({
+      enterAmount,
+      exitAmount,
+      contentProgressAmount,
+      isPageVisible,
+      state,
+    }) => {
       const progress = enterAmount + exitAmount;
       if (groupRef.current === null) return;
 
       groupRef.current.visible = isPageVisible;
 
-      if (isDeviceOn != isPageVisible) {
-        setIsDeviceOn(isPageVisible);
+      const deviceOnState =
+        isPageVisible && contentProgressAmount > 0 && contentProgressAmount < 1;
+      if (deviceOnState != isDeviceOn) {
+        setIsDeviceOn(deviceOnState);
       }
 
       if (!isPageVisible) return;
