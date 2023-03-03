@@ -63,7 +63,7 @@ const DeviceClock = () => {
 const NavigationBar = () => {
   const [, selectApp] = useSelectedAndroidApp();
   return (
-    <div className="flex flex-row justify-evenly bg-black p-4">
+    <div className="flex flex-row justify-evenly bg-gray-700 bg-opacity-30 p-4">
       <button onClick={() => selectApp(null)}>
         <FaChevronLeft color="white" size={"1.5rem"} />
       </button>
@@ -77,7 +77,7 @@ const NavigationBar = () => {
 const TopBar = () => {
   const currentTime = useClock();
   return (
-    <div className="flex justify-end items-center gap-4 bg-black p-4">
+    <div className="flex justify-end items-center gap-4 p-4">
       <FaWifi color="white" />
       <FaSignal color="white" />
       <p className="text-lg text-end tabular-nums text-white">
@@ -92,7 +92,7 @@ const TopBar = () => {
 
 const HomeScreen = () => {
   return (
-    <div className="h-full bg-blue-300">
+    <div className="h-full">
       <div className="p-4">
         <DeviceClock />
         <div className="grid grid-cols-3 gap-8 p-2">
@@ -126,7 +126,7 @@ const AppDisplay = () => {
 
 const ScreenScaffold = (props: PropsWithChildren) => {
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col bg-blue-300 rounded-[36px]">
       <div className="w-full">
         <TopBar />
       </div>

@@ -37,7 +37,6 @@ const DeviceScreen = (props: DeviceScreenProps) => {
           distanceFactor={1 / scaleFactor}
           position={position}
           style={{
-            borderRadius: 16 * (scaleFactor / 10),
             width: 400 * width * scaleFactor - bezelSize * (scaleFactor / 10),
             height: 400 * height * scaleFactor - bezelSize * (scaleFactor / 10),
           }}
@@ -75,10 +74,10 @@ export function Device(props: DeviceProps) {
     <>
       <PhoneModel scale={5} />
       <DeviceScreen
-        width={0.33}
-        height={0.75}
+        width={0.335}
+        height={0.745}
         position={[0, 0, 0.02]}
-        resolutionScale={4}
+        resolutionScale={3.5}
         isOn={props.isOn}
       />
     </>
