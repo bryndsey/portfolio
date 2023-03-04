@@ -125,9 +125,6 @@ const FloatingText = (props: FloatingTextProps) => {
   );
 };
 
-const deviceSize = { width: 0.15, height: 0.3, thickness: 0.02 };
-const deviceBezelSize = 64;
-
 const deviceRotation = new Euler();
 
 const deviceZOffset = 1.25;
@@ -148,14 +145,22 @@ export const AndroidPage = (props: PageComponentProps) => {
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
-    ({ enterAmount, exitAmount, isPageVisible, state }) => {
+    ({
+      enterAmount,
+      exitAmount,
+      contentProgressAmount,
+      isPageVisible,
+      state,
+    }) => {
       const progress = enterAmount + exitAmount;
       if (groupRef.current === null) return;
 
       groupRef.current.visible = isPageVisible;
 
-      if (isDeviceOn != isPageVisible) {
-        setIsDeviceOn(isPageVisible);
+      const deviceOnState =
+        isPageVisible && contentProgressAmount > 0 && contentProgressAmount < 1;
+      if (deviceOnState != isDeviceOn) {
+        setIsDeviceOn(deviceOnState);
       }
 
       if (!isPageVisible) return;
@@ -191,12 +196,8 @@ export const AndroidPage = (props: PageComponentProps) => {
 
   return (
     <group ref={groupRef}>
-      <group
-        ref={deviceGroupRef}
-        position={[-10, 0, deviceZOffset]}
-        scale={isPortrait ? 3 : 2.5}
-      >
-        <Device {...deviceSize} bezelSize={deviceBezelSize} isOn={isDeviceOn} />
+      <group ref={deviceGroupRef} position={[-10, 0, deviceZOffset]}>
+        <Device isOn={isDeviceOn} />
       </group>
       {/* <FloatingDescription showText={showText} /> */}
       {!isPortrait && <FloatingText showText={showText} />}

@@ -2,7 +2,14 @@ import { PropsWithChildren, useEffect, useState } from "react";
 import { useSelectedAndroidApp } from "./useSelectedAndroidApp";
 import { AndroidApp, androidApps } from "./AndroidApp";
 import { ProjectDescription } from "../../ProjectDescription";
-import { FaArrowLeft, FaRegCircle, FaChevronLeft } from "react-icons/fa";
+import {
+  FaArrowLeft,
+  FaRegCircle,
+  FaChevronLeft,
+  FaWifi,
+  FaSignal,
+  FaBatteryThreeQuarters,
+} from "react-icons/fa";
 
 interface DeviceAppIconProps {
   app: AndroidApp;
@@ -28,7 +35,7 @@ const DeviceAppIcon = (props: DeviceAppIconProps) => {
   );
 };
 
-const DeviceClock = () => {
+const useClock = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   useEffect(() => {
     const interval = setInterval(() => {
@@ -38,14 +45,7 @@ const DeviceClock = () => {
     return () => clearInterval(interval);
   }, []);
 
-  return (
-    <p className="text-6xl text-center p-6 tabular-nums">
-      {currentTime.toLocaleTimeString([], {
-        hour: "numeric",
-        minute: "2-digit",
-      })}
-    </p>
-  );
+  return currentTime;
 };
 
 const NavigationBar = () => {
@@ -62,11 +62,33 @@ const NavigationBar = () => {
   );
 };
 
+const TopBar = () => {
+  const currentTime = useClock();
+  return (
+    <div className="flex justify-end items-center gap-3 p-5 w-full">
+      <p className="text-xl text-start tabular-nums text-white flex-grow">
+        {currentTime.toLocaleTimeString([], {
+          hour: "numeric",
+          minute: "2-digit",
+        })}
+      </p>
+      <FaWifi color="white" />
+      <FaSignal color="white" />
+      <FaBatteryThreeQuarters color="white" />
+    </div>
+  );
+};
+
 const HomeScreen = () => {
   return (
-    <div className="h-full bg-blue-300">
+    <div className="h-full">
       <div className="p-4">
-        <DeviceClock />
+        {
+          // TODO: Find a different font
+        }
+        <div className="text-6xl text-center p-6 font-bold">
+          {"Bryan's Android Apps"}
+        </div>
         <div className="grid grid-cols-3 gap-8 p-2">
           {androidApps.map((app) => {
             return <DeviceAppIcon key={app.name} app={app} />;
@@ -98,9 +120,12 @@ const AppDisplay = () => {
 
 const ScreenScaffold = (props: PropsWithChildren) => {
   return (
-    <div className="h-full">
+    <div className="h-full flex flex-col bg-blue-300 rounded-[36px]">
+      <div className="w-full">
+        <TopBar />
+      </div>
       {props.children}
-      <div className="absolute bottom-0 left-0 right-0">
+      <div className="w-full">
         <NavigationBar />
       </div>
     </div>
