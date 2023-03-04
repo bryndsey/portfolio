@@ -53,7 +53,7 @@ function App() {
     showStats: true,
   });
   return (
-    <div id="App" className="bg-green-500 h-full font-sans">
+    <div id="App" className="bg-green-500 h-screen font-sans">
       <Canvas>
         {showStats && <Stats />}
         <CameraRig />
