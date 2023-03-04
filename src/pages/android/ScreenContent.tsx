@@ -3,13 +3,13 @@ import { useSelectedAndroidApp } from "./useSelectedAndroidApp";
 import { AndroidApp, androidApps } from "./AndroidApp";
 import { ProjectDescription } from "../../ProjectDescription";
 import {
-  FaArrowLeft,
-  FaRegCircle,
-  FaChevronLeft,
-  FaWifi,
-  FaSignal,
-  FaBatteryThreeQuarters,
-} from "react-icons/fa";
+  MdSignalWifiStatusbar3Bar,
+  MdSignalCellular3Bar,
+  MdBattery80,
+  MdOutlineCircle,
+  MdArrowBackIos,
+  MdArrowBack,
+} from "react-icons/md";
 
 interface DeviceAppIconProps {
   app: AndroidApp;
@@ -53,10 +53,10 @@ const NavigationBar = () => {
   return (
     <div className="flex flex-row justify-evenly bg-gray-700 bg-opacity-30 p-4">
       <button onClick={() => selectApp(null)}>
-        <FaChevronLeft color="white" size={"1.5rem"} />
+        <MdArrowBackIos color="white" size={"1.5rem"} />
       </button>
       <button onClick={() => selectApp(null)}>
-        <FaRegCircle color="white" size={"1.5rem"} />
+        <MdOutlineCircle color="white" size={"1.5rem"} />
       </button>
     </div>
   );
@@ -72,9 +72,9 @@ const TopBar = () => {
           minute: "2-digit",
         })}
       </p>
-      <FaWifi color="white" />
-      <FaSignal color="white" />
-      <FaBatteryThreeQuarters color="white" />
+      <MdSignalWifiStatusbar3Bar color="white" />
+      <MdSignalCellular3Bar color="white" />
+      <MdBattery80 color="white" />
     </div>
   );
 };
@@ -105,7 +105,7 @@ const AppDisplay = () => {
   return (
     <div className="h-full bg-gray-100 p-8">
       <button onClick={() => selectApp(null)} className="p-2 mb-4">
-        <FaArrowLeft size={"2rem"} />
+        <MdArrowBack size={"2rem"} />
       </button>
       <ProjectDescription
         projectName={selectedApp.name}
