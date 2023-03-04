@@ -21,7 +21,7 @@ const DeviceAppIcon = (props: DeviceAppIconProps) => {
   return (
     <div onClick={() => selectApp(props.app)}>
       <div
-        className={`${app.iconBackgroundColor} rounded-lg aspect-square shadow-md hover:shadow-lg active:shadow-sm transition-shadow overflow-clip`}
+        className={`${app.iconBackgroundColor} rounded-xl aspect-square shadow-md hover:shadow-lg active:shadow-sm transition-shadow overflow-clip`}
       >
         {app.icon && (
           <img

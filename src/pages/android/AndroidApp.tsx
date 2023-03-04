@@ -46,7 +46,7 @@ export const androidApps: AndroidApp[] = [
   {
     name: "Professional Work",
     description:
-      "I've also done Android professionally since 2015. Because of NDAs, I can't say which apps specifically, but I've worked on things like smart lights, food ordering, banking, and more!",
+      "I've built apps for Android professionally since 2015. In that time, I've worked on apps for food ordering, banking, controlling smart lights, and more!",
     iconBackgroundColor: "bg-slate-500",
     icon: AndroidBryanIcon,
     projectTags: [AndroidTag],
