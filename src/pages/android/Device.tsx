@@ -4,6 +4,7 @@ import { Color, MeshBasicMaterial } from "three";
 import { useHtmlPortal } from "../../useHtmlPortal";
 import { PhoneModel } from "./PhoneModel";
 import { ScreenContent } from "./ScreenContent";
+import LockIcon from "./icons/lock_FILL0_wght400_GRAD0_opsz48.svg";
 
 interface DeviceScreenProps {
   width: number;
@@ -65,10 +66,11 @@ const LockScreen = () => {
       </Text>
       <Center position-y={-0.2}>
         <Svg
-          src={
-            "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-circle-filled' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z' stroke-width='0' fill='currentColor' /%3E%3C/svg%3E"
-          }
-          scale={0.003}
+          // src={
+          //   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-circle-filled' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z' stroke-width='0' fill='currentColor' /%3E%3C/svg%3E"
+          // }
+          src={LockIcon}
+          scale={0.00005}
           fillMaterial={iconColor}
         />
       </Center>
