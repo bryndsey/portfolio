@@ -1,5 +1,5 @@
 import { Html, RoundedBox } from "@react-three/drei";
-import { Vector3 } from "@react-three/fiber";
+import { useThree, Vector3 } from "@react-three/fiber";
 import { Color } from "three";
 import { useHtmlPortal } from "../../useHtmlPortal";
 import { PhoneModel } from "./PhoneModel";
@@ -55,11 +55,19 @@ const DeviceScreen = (props: DeviceScreenProps) => {
   );
 };
 
+const resolutionThresholdSize = 640;
+
 interface DeviceProps {
   isOn?: boolean;
 }
 
 export function Device(props: DeviceProps) {
+  const size = useThree((state) => state.size);
+  const useSmallResolution =
+    Math.min(size.height, size.width) < resolutionThresholdSize;
+  const resolutionScale = useSmallResolution ? 3 : 3.5;
+
+  const { isOn } = props;
   return (
     <>
       <PhoneModel scale={5} />
@@ -67,8 +75,8 @@ export function Device(props: DeviceProps) {
         width={0.335}
         height={0.745}
         position={[0, 0, 0.02]}
-        resolutionScale={3.5}
-        isOn={props.isOn}
+        resolutionScale={resolutionScale}
+        isOn={isOn}
       />
     </>
   );
