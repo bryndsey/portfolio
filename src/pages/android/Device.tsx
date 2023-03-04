@@ -1,6 +1,6 @@
-import { Html, RoundedBox } from "@react-three/drei";
+import { Center, Html, RoundedBox, Svg, Text } from "@react-three/drei";
 import { useThree, Vector3 } from "@react-three/fiber";
-import { Color } from "three";
+import { Color, MeshBasicMaterial } from "three";
 import { useHtmlPortal } from "../../useHtmlPortal";
 import { PhoneModel } from "./PhoneModel";
 import { ScreenContent } from "./ScreenContent";
@@ -8,13 +8,12 @@ import { ScreenContent } from "./ScreenContent";
 interface DeviceScreenProps {
   width: number;
   height: number;
-  position: Vector3;
   resolutionScale?: number;
   isOn?: boolean;
 }
 
 const DeviceScreen = (props: DeviceScreenProps) => {
-  const { width, height, position, resolutionScale, isOn = true } = props;
+  const { width, height, resolutionScale, isOn = true } = props;
   const scaleFactor = resolutionScale === undefined ? 1 : resolutionScale;
 
   const htmlPortal = useHtmlPortal();
@@ -27,7 +26,6 @@ const DeviceScreen = (props: DeviceScreenProps) => {
           occlude
           portal={{ current: htmlPortal }}
           distanceFactor={1 / scaleFactor}
-          position={position}
           style={{
             overflow: "hidden",
             borderRadius: 10 * scaleFactor,
@@ -57,6 +55,27 @@ const DeviceScreen = (props: DeviceScreenProps) => {
 
 const resolutionThresholdSize = 640;
 
+const iconColor = new MeshBasicMaterial();
+
+const LockScreen = () => {
+  return (
+    <group>
+      <Text fontSize={0.02} position-y={0.2} color="white">
+        Scroll to unlock
+      </Text>
+      <Center position-y={-0.2}>
+        <Svg
+          src={
+            "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-circle-filled' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z' stroke-width='0' fill='currentColor' /%3E%3C/svg%3E"
+          }
+          scale={0.003}
+          fillMaterial={iconColor}
+        />
+      </Center>
+    </group>
+  );
+};
+
 interface DeviceProps {
   isOn?: boolean;
 }
@@ -71,13 +90,16 @@ export function Device(props: DeviceProps) {
   return (
     <>
       <PhoneModel scale={5} />
-      <DeviceScreen
-        width={0.335}
-        height={0.745}
-        position={[0, 0, 0.02]}
-        resolutionScale={resolutionScale}
-        isOn={isOn}
-      />
+
+      <group position-z={0.02}>
+        {!isOn && <LockScreen />}
+        <DeviceScreen
+          width={0.335}
+          height={0.745}
+          resolutionScale={resolutionScale}
+          isOn={isOn}
+        />
+      </group>
     </>
   );
 }
