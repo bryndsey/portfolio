@@ -8,6 +8,7 @@ import {
   FaChevronLeft,
   FaWifi,
   FaSignal,
+  FaBatteryThreeQuarters,
 } from "react-icons/fa";
 
 interface DeviceAppIconProps {
@@ -64,15 +65,16 @@ const NavigationBar = () => {
 const TopBar = () => {
   const currentTime = useClock();
   return (
-    <div className="flex justify-end items-center gap-4 p-4">
-      <FaWifi color="white" />
-      <FaSignal color="white" />
-      <p className="text-lg text-end tabular-nums text-white">
+    <div className="flex justify-end items-center gap-3 p-5 w-full">
+      <p className="text-xl text-start tabular-nums text-white flex-grow">
         {currentTime.toLocaleTimeString([], {
           hour: "numeric",
           minute: "2-digit",
         })}
       </p>
+      <FaWifi color="white" />
+      <FaSignal color="white" />
+      <FaBatteryThreeQuarters color="white" />
     </div>
   );
 };
