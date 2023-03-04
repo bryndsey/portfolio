@@ -8,21 +8,13 @@ import { ScreenContent } from "./ScreenContent";
 interface DeviceScreenProps {
   width: number;
   height: number;
-  bezelSize?: number;
   position: Vector3;
   resolutionScale?: number;
   isOn?: boolean;
 }
 
 const DeviceScreen = (props: DeviceScreenProps) => {
-  const {
-    width,
-    height,
-    bezelSize = 0,
-    position,
-    resolutionScale,
-    isOn = true,
-  } = props;
+  const { width, height, position, resolutionScale, isOn = true } = props;
   const scaleFactor = resolutionScale === undefined ? 1 : resolutionScale;
 
   const htmlPortal = useHtmlPortal();
@@ -37,8 +29,10 @@ const DeviceScreen = (props: DeviceScreenProps) => {
           distanceFactor={1 / scaleFactor}
           position={position}
           style={{
-            width: 400 * width * scaleFactor - bezelSize * (scaleFactor / 10),
-            height: 400 * height * scaleFactor - bezelSize * (scaleFactor / 10),
+            overflow: "hidden",
+            borderRadius: 10 * scaleFactor,
+            width: 400 * width * scaleFactor,
+            height: 400 * height * scaleFactor,
           }}
         >
           <ScreenContent />

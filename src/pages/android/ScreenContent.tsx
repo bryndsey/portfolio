@@ -120,7 +120,7 @@ const AppDisplay = () => {
 
 const ScreenScaffold = (props: PropsWithChildren) => {
   return (
-    <div className="h-full flex flex-col bg-blue-300 rounded-[36px]">
+    <div className="h-full flex flex-col bg-blue-300">
       <div className="w-full">
         <TopBar />
       </div>
