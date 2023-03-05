@@ -131,7 +131,7 @@ export const PedalsPage = (props: PageComponentProps) => {
           transition: "opacity 300ms",
           // backgroundColor: "rgba(0, 0, 0, 0.2)",
         }}
-        position={[-viewport.width * 0.15, viewport.height / 5, 0]}
+        position={[-viewport.width * 0.15, viewport.height * 0.25, 0]}
         portal={{ current: htmlPortal }}
       >
         <ProjectDescription
