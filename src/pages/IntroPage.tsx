@@ -23,31 +23,18 @@ export const IntroPage = (props: PageComponentProps) => {
       if (contentRef.current === null) return;
       contentRef.current.hidden = !isPageVisible;
 
-      contentRef.current.style.width = `${state.size.width * 0.75}px`;
-
       const yPercent = enterAmount + exitAmount;
 
       const viewportHeight = state.viewport.height;
       groupRef.current.position.setY(yPercent * viewportHeight);
-
-      const mouse = state.mouse;
-      groupRef.current.lookAt(mouse.x, mouse.y, 50);
     }
   );
 
   return (
     <group ref={groupRef}>
-      <Html
-        ref={contentRef}
-        transform
-        distanceFactor={1}
-        // style={{
-        //   backgroundColor: "rgba(0, 0, 1, 0.1)",
-        // }}
-        portal={{ current: htmlPortal }}
-      >
-        <div className="flex justify-center items-center">
-          <p className="font-bold text-3xl leading-none sm:text-5xl md:text-7xl">
+      <Html ref={contentRef} fullscreen portal={{ current: htmlPortal }}>
+        <div className="h-full m-auto w-3/4 flex justify-center items-center">
+          <p className="font-bold text-3xl leading-none sm:text-5xl lg:text-7xl">
             Hi. My name is <br />
             <span style={{ fontSize: "3em" }}>Bryan Lindsey.</span>
           </p>
