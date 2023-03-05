@@ -102,10 +102,10 @@ const FloatingText = (props: FloatingTextProps) => {
     <Html
       center
       style={{
-        width: size.width * 0.4,
+        width: size.width * 0.5,
         // backgroundColor: "rgba(0, 0, 0, 0.2)",
       }}
-      position={[viewport.width * 0.25, 0, 0]}
+      position={[viewport.width * 0.2, 0, 0]}
       portal={{ current: htmlPortal }}
     >
       {showTextTransitions(
@@ -172,7 +172,7 @@ export const AndroidPage = (props: PageComponentProps) => {
         setShowText(shouldShowText);
       }
 
-      const targetXPosition = isPortrait ? 0 : -frustumWidthAtZOffset / 6;
+      const targetXPosition = isPortrait ? 0 : -frustumWidthAtZOffset * 0.25;
 
       const position = MathUtils.lerp(
         targetXPosition,

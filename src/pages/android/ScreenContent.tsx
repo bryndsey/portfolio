@@ -65,8 +65,8 @@ const NavigationBar = () => {
 const TopBar = () => {
   const currentTime = useClock();
   return (
-    <div className="flex justify-end items-center gap-3 p-5 w-full">
-      <p className="text-xl text-start tabular-nums text-white flex-grow">
+    <div className="flex justify-end items-center gap-2 p-5 w-full">
+      <p className="text-md text-start tabular-nums text-white flex-grow">
         {currentTime.toLocaleTimeString([], {
           hour: "numeric",
           minute: "2-digit",
@@ -86,7 +86,7 @@ const HomeScreen = () => {
         {
           // TODO: Find a different font
         }
-        <div className="text-6xl text-center p-6 font-bold">
+        <div className="text-5xl text-center p-6 font-bold">
           {"Bryan's Android Apps"}
         </div>
         <div className="grid grid-cols-3 gap-8 p-2">

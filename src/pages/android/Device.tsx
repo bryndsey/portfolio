@@ -79,7 +79,7 @@ export function Device(props: DeviceProps) {
   const size = useThree((state) => state.size);
   const useSmallResolution =
     Math.min(size.height, size.width) < resolutionThresholdSize;
-  const resolutionScale = useSmallResolution ? 3 : 3.5;
+  const resolutionScale = useSmallResolution ? 2.75 : 3;
 
   const { isOn } = props;
   return (
