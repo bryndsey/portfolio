@@ -84,13 +84,13 @@ export function Device(props: DeviceProps) {
   const { isOn } = props;
   return (
     <>
-      <PhoneModel scale={5} />
+      <PhoneModel scale={6} />
 
-      <group position-z={0.02}>
+      <group position-z={0.03}>
         {!isOn && <LockScreen />}
         <DeviceScreen
-          width={0.335}
-          height={0.745}
+          width={0.4}
+          height={0.89}
           resolutionScale={resolutionScale}
           isOn={isOn}
         />

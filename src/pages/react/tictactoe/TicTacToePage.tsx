@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { Group, MathUtils } from "three";
 import { ProjectDescription, ReactTag } from "../../../ProjectDescription";
 import { useHtmlPortal } from "../../../useHtmlPortal";
+import { useScreenState } from "../../../useScreenState";
 import { PageComponentProps } from "../../Pages";
 import { useScrollPages } from "../../useScrollPages";
 import Font from "./Comfortaa_Bold.json";
@@ -17,6 +18,13 @@ export const TicTacToePage = (props: PageComponentProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   const viewport = useThree((state) => state.viewport);
+
+  const screenState = useScreenState();
+  const descriptionScaleFactor =
+    screenState.deviceClass === "small" &&
+    screenState.orientation === "landscape"
+      ? 1.5
+      : 2;
 
   useScrollPages(
     props.startPageIndex,
@@ -58,13 +66,13 @@ export const TicTacToePage = (props: PageComponentProps) => {
         <Html
           ref={contentRef}
           center
-          occlude
           portal={{ current: htmlPortal }}
           position={[viewport.width / 4, 0, 0]}
           style={{
             width: (viewport.width * viewport.factor) / 2,
             transition: "opacity 300ms",
           }}
+          distanceFactor={descriptionScaleFactor}
         >
           <ProjectDescription
             projectName="Tic-Tac-Toe Plus"

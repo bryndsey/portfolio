@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { Euler, Group, MathUtils } from "three";
 import { ProjectDescription } from "../../ProjectDescription";
 import { useHtmlPortal } from "../../useHtmlPortal";
+import { useScreenState } from "../../useScreenState";
 import { useCameraFrustumWidthAtDepth } from "../../utils";
 import { PageComponentProps } from "../Pages";
 import { useScrollPages } from "../useScrollPages";
@@ -98,6 +99,13 @@ const FloatingText = (props: FloatingTextProps) => {
   const size = useThree((state) => state.size);
   const viewport = useThree((state) => state.viewport);
 
+  const screenState = useScreenState();
+  const descriptionScaleFactor =
+    screenState.deviceClass === "small" &&
+    screenState.orientation === "landscape"
+      ? 1.5
+      : 2;
+
   return (
     <Html
       center
@@ -107,6 +115,7 @@ const FloatingText = (props: FloatingTextProps) => {
       }}
       position={[viewport.width * 0.2, 0, 0]}
       portal={{ current: htmlPortal }}
+      distanceFactor={descriptionScaleFactor}
     >
       {showTextTransitions(
         (showStyle, show) =>

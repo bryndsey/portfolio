@@ -19,6 +19,7 @@ import { PageComponentProps } from "../../../Pages";
 import { useScrollPages } from "../../../useScrollPages";
 import { CablePlugModel } from "./CablePlugModel";
 import { PedalModel } from "./PedalModel";
+import { useScreenState } from "../../../../useScreenState";
 
 const cableColor = new Color(0.03, 0.03, 0.03);
 
@@ -53,6 +54,13 @@ export const PedalsPage = (props: PageComponentProps) => {
     "catmullrom",
     0.75
   );
+
+  const screenState = useScreenState();
+  const descriptionScaleFactor =
+    screenState.deviceClass === "small" &&
+    screenState.orientation === "landscape"
+      ? 1.5
+      : 2;
 
   useScrollPages(
     props.startPageIndex,
@@ -124,7 +132,6 @@ export const PedalsPage = (props: PageComponentProps) => {
     <group ref={groupRef}>
       <Html
         ref={descriptionRef}
-        occlude
         center
         style={{
           width: size.width * 0.5,
@@ -133,6 +140,7 @@ export const PedalsPage = (props: PageComponentProps) => {
         }}
         position={[-viewport.width * 0.15, viewport.height * 0.25, 0]}
         portal={{ current: htmlPortal }}
+        distanceFactor={descriptionScaleFactor}
       >
         <ProjectDescription
           projectName="Pedals"

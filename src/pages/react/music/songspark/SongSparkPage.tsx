@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { Group } from "three";
 import { ProjectDescription, ReactTag } from "../../../../ProjectDescription";
 import { useHtmlPortal } from "../../../../useHtmlPortal";
+import { useScreenState } from "../../../../useScreenState";
 import { PageComponentProps } from "../../../Pages";
 import { useScrollPages } from "../../../useScrollPages";
 import { AcousticGuitar } from "./AcousticGuitar";
@@ -14,6 +15,12 @@ export const SongSparkPage = (props: PageComponentProps) => {
 
   const viewport = useThree((state) => state.viewport);
   const size = useThree((state) => state.size);
+  const screenState = useScreenState();
+  const descriptionScaleFactor =
+    screenState.deviceClass === "small" &&
+    screenState.orientation === "landscape"
+      ? 1.5
+      : 2;
 
   const htmlPortal = useHtmlPortal();
 
@@ -52,7 +59,7 @@ export const SongSparkPage = (props: PageComponentProps) => {
         }}
         position={[-viewport.width / 6, viewport.height / 5, 0]}
         portal={{ current: htmlPortal }}
-        // distanceFactor={1}
+        distanceFactor={descriptionScaleFactor}
       >
         <ProjectDescription
           projectName="SongSpark"
