@@ -1,5 +1,5 @@
 import { Center, Html, Sphere, Text3D } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
+import { Size, useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import { Group, MathUtils } from "three";
 import { ProjectDescription, ReactTag } from "../../../ProjectDescription";
@@ -8,6 +8,56 @@ import { useScreenState } from "../../../useScreenState";
 import { PageComponentProps } from "../../Pages";
 import { useScrollPages } from "../../useScrollPages";
 import Font from "./Comfortaa_Bold.json";
+
+const XPiece = { color: "red", shape: "x" } as const;
+const OPiece = { color: "blue", shape: "o" } as const;
+type PieceType = typeof XPiece | typeof OPiece;
+
+interface PieceData {
+  type: PieceType;
+  positionFn: (viewport: Size) => number[];
+  rotation: number[];
+  scale: 0.33 | 0.75 | 1;
+}
+
+const pieces: PieceData[] = [
+  {
+    type: XPiece,
+    positionFn: (viewport) => [-0.1, 1.75, -1.5],
+    rotation: [-0.4, 0.07, 0.2],
+    scale: 0.33,
+  },
+  {
+    type: XPiece,
+    positionFn: (viewport) => [-1.25, 0.5, -3],
+    rotation: [-0.4, 0.07, 0.2],
+    scale: 0.33,
+  },
+  {
+    type: OPiece,
+    positionFn: (viewport) => [-0.4, 0.4, -1.75],
+    rotation: [-0.4, -0.7, -0.2],
+    scale: 0.75,
+  },
+  {
+    type: OPiece,
+    positionFn: (viewport) => [-0.6, -0.7, 0.2],
+    rotation: [-0.4, 0.7, 0.2],
+    scale: 1,
+  },
+  {
+    type: XPiece,
+    positionFn: (viewport) => [-0.4, -1.4, -0.25],
+    rotation: [-0.4, -0.7, -0.2],
+    scale: 1,
+  },
+  {
+    type: OPiece,
+    positionFn: (viewport) => [-1.66, -1.75, -3],
+    rotation: [0.4, 0.07, 0.2],
+    scale: 0.33,
+  },
+];
 
 export const TicTacToePage = (props: PageComponentProps) => {
   const htmlPortal = useHtmlPortal();
@@ -83,58 +133,23 @@ export const TicTacToePage = (props: PageComponentProps) => {
         </Html>
       </group>
       <group ref={piecesGroupRef}>
-        <Center
-          position={[-0.1, 1.75, -1.5]}
-          rotation={[-0.4, 0.07, 0.2]}
-          scale={0.33}
-        >
-          <Text3D font={Font}>
-            x
-            <meshStandardMaterial color={"red"} />
-          </Text3D>
-        </Center>
-        <Center
-          position={[-1.25, 0.5, -3]}
-          rotation={[-0.4, 0.07, 0.2]}
-          scale={0.33}
-        >
-          <Text3D font={Font}>
-            x
-            <meshStandardMaterial color={"red"} />
-          </Text3D>
-        </Center>
-        <Center
-          position={[-0.4, 0.4, -1.75]}
-          rotation={[-0.4, -0.7, -0.2]}
-          scale={0.75}
-        >
-          <Text3D font={Font}>
-            o
-            <meshStandardMaterial color={"blue"} flatShading={false} />
-          </Text3D>
-        </Center>
-        <Center position={[-0.6, -0.7, 0.2]} rotation={[-0.4, 0.7, 0.2]}>
-          <Text3D font={Font}>
-            o
-            <meshStandardMaterial color={"blue"} />
-          </Text3D>
-        </Center>
-        <Center position={[-0.4, -1.4, -0.25]} rotation={[-0.4, -0.7, -0.2]}>
-          <Text3D font={Font}>
-            x
-            <meshStandardMaterial color={"red"} flatShading={false} />
-          </Text3D>
-        </Center>
-        <Center
-          position={[-1.66, -1.75, -3]}
-          rotation={[0.4, 0.07, 0.2]}
-          scale={0.33}
-        >
-          <Text3D font={Font}>
-            o
-            <meshStandardMaterial color={"blue"} />
-          </Text3D>
-        </Center>
+        {pieces.map(({ positionFn, rotation, scale, type }, index) => {
+          const [posX, posY, posZ] = positionFn(viewport);
+          const [rotX, rotY, rotZ] = rotation;
+          return (
+            <Center
+              key={index}
+              position={[posX, posY, posZ]}
+              rotation={[rotX, rotY, rotZ]}
+              scale={scale}
+            >
+              <Text3D font={Font}>
+                {type.shape}
+                <meshStandardMaterial color={type.color} />
+              </Text3D>
+            </Center>
+          );
+        })}
       </group>
     </group>
   );
