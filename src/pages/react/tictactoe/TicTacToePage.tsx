@@ -35,31 +35,34 @@ const pieces: PieceData[] = [
   },
   {
     type: XPiece,
-    positionFn: (state) => [-1.25, 0.5, -3],
+    positionFn: (state) => [-state.viewport.width * 0.66, 0.5, -3],
     rotation: [-0.4, 0.07, 0.2],
     scale: 0.33,
   },
   {
     type: OPiece,
-    positionFn: (state) => [-0.4, 0.4, -1.75],
+    positionFn: (state) => [-state.viewport.width * 0.15, 0.4, -1.75],
     rotation: [-0.4, -0.7, -0.2],
     scale: 0.75,
   },
   {
     type: OPiece,
-    positionFn: (state) => [-0.6, -0.7, 0.2],
+    positionFn: (state) => [-state.viewport.width * 0.2 - 0.1, -0.8, 0.2],
     rotation: [-0.4, 0.7, 0.2],
     scale: 1,
   },
   {
     type: XPiece,
-    positionFn: (state) => [-0.4, -1.4, -0.25],
+    positionFn: (state) => [-state.viewport.width * 0.2 + 0.1, -1.4, -0.25],
     rotation: [-0.4, -0.7, -0.2],
     scale: 1,
   },
   {
     type: OPiece,
-    positionFn: (state) => [-1.66, -1.75, -3],
+    positionFn: (state) => {
+      const xPosition = -state.viewport.width / 2;
+      return [xPosition, -1.75, -3];
+    },
     rotation: [0.4, 0.07, 0.2],
     scale: 0.33,
   },
