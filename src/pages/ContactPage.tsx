@@ -8,6 +8,41 @@ import { FaGithub } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import { RxSquare } from "react-icons/rx";
 import { SiItchdotio } from "react-icons/si";
+import { IconType } from "react-icons";
+
+interface LinkData {
+  url: string;
+  icon: IconType;
+  iconColor: string;
+  backgroundColor: string;
+}
+
+const links: LinkData[] = [
+  {
+    url: "http://www.github.com/bryndsey",
+    icon: FaGithub,
+    iconColor: "white",
+    backgroundColor: "bg-black",
+  },
+  {
+    url: "https://codesandbox.io/u/bryanlindsey",
+    icon: RxSquare,
+    iconColor: "white",
+    backgroundColor: "bg-gray-800",
+  },
+  {
+    url: "http://www.https://bryndsey.itch.io/.com/bryndsey",
+    icon: SiItchdotio,
+    iconColor: "white",
+    backgroundColor: "bg-red-500",
+  },
+  {
+    url: "https://www.linkedin.com/in/bryan-lindsey-1b320998",
+    icon: FaLinkedinIn,
+    iconColor: "white",
+    backgroundColor: "bg-blue-600",
+  },
+];
 
 export const ContactPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
@@ -37,30 +72,15 @@ export const ContactPage = (props: PageComponentProps) => {
     <group ref={groupRef}>
       <Html ref={contentRef} fullscreen portal={{ current: htmlPortal }}>
         <div className="h-full flex flex-row portrait:flex-col justify-evenly items-center m-0">
-          <a
-            href="http://www.github.com/bryndsey"
-            className="bg-black p-3 rounded-xl"
-          >
-            <FaGithub className="w-12 h-12" color="white" />
-          </a>
-          <a
-            href="https://codesandbox.io/u/bryanlindsey"
-            className="bg-gray-800 p-3 rounded-xl"
-          >
-            <RxSquare className="w-12 h-12" color="white" />
-          </a>
-          <a
-            href="https://bryndsey.itch.io/"
-            className="bg-red-500 p-3 rounded-xl"
-          >
-            <SiItchdotio className="w-12 h-12" color="white" />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/bryan-lindsey-1b320998"
-            className="bg-blue-600 p-3 rounded-xl"
-          >
-            <FaLinkedinIn className="w-12 h-12" color="white" />
-          </a>
+          {links.map((link) => (
+            <a
+              key={link.url}
+              href={link.url}
+              className={`${link.backgroundColor} p-3 rounded-xl`}
+            >
+              <link.icon className="w-12 h-12" color={link.iconColor} />
+            </a>
+          ))}
         </div>
       </Html>
     </group>
