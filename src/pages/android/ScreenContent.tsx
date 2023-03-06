@@ -19,7 +19,7 @@ const DeviceAppIcon = (props: DeviceAppIconProps) => {
   const { app } = props;
   const [, selectApp] = useSelectedAndroidApp();
   return (
-    <div onClick={() => selectApp(props.app)}>
+    <button onClick={() => selectApp(props.app)}>
       <div
         className={`${app.iconBackgroundColor} rounded-xl aspect-square shadow-md hover:shadow-lg active:shadow-sm transition-shadow overflow-clip`}
       >
@@ -33,7 +33,7 @@ const DeviceAppIcon = (props: DeviceAppIconProps) => {
       <p className="text-center text-sm sm:text-base pt-2 truncate">
         {app.name}
       </p>
-    </div>
+    </button>
   );
 };
 

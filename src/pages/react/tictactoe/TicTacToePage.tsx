@@ -149,16 +149,16 @@ export const TicTacToePage = (props: PageComponentProps) => {
           ref={contentRef}
           center
           portal={{ current: htmlPortal }}
-          position={[viewport.width / 4, 0, 0]}
+          position={[viewport.width * 0.2, 0, 0]}
           style={{
-            width: (viewport.width * viewport.factor) / 2,
+            width: viewport.width * viewport.factor * 0.5,
             transition: "opacity 300ms",
           }}
           distanceFactor={descriptionScaleFactor}
         >
           <ProjectDescription
-            projectName="Tic-Tac-Toe Plus"
-            descriptionText="A strategic twist on the classic game. Use differently-sized X's and O's to steal your opponents square."
+            projectName="Tic-Tac-Toe+"
+            descriptionText="A unique twist on the classic game that adds a layer of strategy"
             tags={[ReactTag]}
             url="https://tictactoeplus.bryanlindsey.dev/"
           />

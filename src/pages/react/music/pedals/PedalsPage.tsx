@@ -144,7 +144,7 @@ export const PedalsPage = (props: PageComponentProps) => {
       >
         <ProjectDescription
           projectName="Pedals"
-          descriptionText="Build your own virtual pedal board to add effects for guitar"
+          descriptionText="Create your own virtual pedal board of effects for guitar"
           url="https://pedals.bryanlindsey.dev"
           tags={[ReactTag]}
         />
