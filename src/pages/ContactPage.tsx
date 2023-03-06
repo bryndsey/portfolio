@@ -15,6 +15,7 @@ interface LinkData {
   icon: IconType;
   iconColor: string;
   backgroundColor: string;
+  displayName: string;
 }
 
 const links: LinkData[] = [
@@ -23,24 +24,28 @@ const links: LinkData[] = [
     icon: FaGithub,
     iconColor: "white",
     backgroundColor: "bg-black",
+    displayName: "GitHub",
   },
   {
     url: "https://codesandbox.io/u/bryanlindsey",
     icon: RxSquare,
     iconColor: "white",
     backgroundColor: "bg-gray-800",
+    displayName: "CodeSandbox",
   },
   {
     url: "http://www.https://bryndsey.itch.io/.com/bryndsey",
     icon: SiItchdotio,
     iconColor: "white",
     backgroundColor: "bg-red-500",
+    displayName: "itch.io",
   },
   {
     url: "https://www.linkedin.com/in/bryan-lindsey-1b320998",
     icon: FaLinkedinIn,
     iconColor: "white",
     backgroundColor: "bg-blue-600",
+    displayName: "LinkedIn",
   },
 ];
 
@@ -71,15 +76,23 @@ export const ContactPage = (props: PageComponentProps) => {
   return (
     <group ref={groupRef}>
       <Html ref={contentRef} fullscreen portal={{ current: htmlPortal }}>
-        <div className="h-full flex flex-row portrait:flex-col justify-evenly items-center m-0">
+        <div className="h-full portrait:w-fit flex landscape:flex-row flex-col justify-evenly items-start m-auto landscape:items-center landscape:m-0 p-6">
           {links.map((link) => (
-            <a
+            <div
               key={link.url}
-              href={link.url}
-              className={`${link.backgroundColor} p-3 rounded-xl`}
+              className="flex landscape:flex-col flex-row gap-10 landscape:gap-6 items-center"
             >
-              <link.icon className="w-12 h-12" color={link.iconColor} />
-            </a>
+              <a
+                href={link.url}
+                className={`${link.backgroundColor} p-3 rounded-xl`}
+              >
+                <link.icon
+                  className="w-8 h-8 sm:w-12 sm:h-12"
+                  color={link.iconColor}
+                />
+              </a>
+              <p>{link.displayName}</p>
+            </div>
           ))}
         </div>
       </Html>
