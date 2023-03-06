@@ -30,7 +30,9 @@ const DeviceAppIcon = (props: DeviceAppIconProps) => {
           />
         )}
       </div>
-      <p className="text-center text-base pt-2">{app.name}</p>
+      <p className="text-center text-sm sm:text-base pt-2 truncate">
+        {app.name}
+      </p>
     </div>
   );
 };
@@ -86,10 +88,10 @@ const HomeScreen = () => {
         {
           // TODO: Find a different font
         }
-        <div className="text-5xl text-center p-6 font-bold">
+        <div className="text-4xl sm:text-5xl text-center p-6 font-bold">
           {"Bryan's Android Apps"}
         </div>
-        <div className="grid grid-cols-3 gap-8 p-2">
+        <div className="grid grid-cols-3 gap-x-5 gap-y-8 sm:gap-8 p-1 sm:p-2">
           {androidApps.map((app) => {
             return <DeviceAppIcon key={app.name} app={app} />;
           })}

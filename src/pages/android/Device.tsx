@@ -1,60 +1,40 @@
-import { Center, Html, RoundedBox, Svg, Text } from "@react-three/drei";
-import { useThree, Vector3 } from "@react-three/fiber";
-import { Color, MeshBasicMaterial } from "three";
+import { Center, Html, Svg, Text } from "@react-three/drei";
+import { MeshBasicMaterial } from "three";
 import { useHtmlPortal } from "../../useHtmlPortal";
+import { useScreenState } from "../../useScreenState";
+import LockIcon from "./icons/lock_FILL0_wght400_GRAD0_opsz48.svg";
 import { PhoneModel } from "./PhoneModel";
 import { ScreenContent } from "./ScreenContent";
-import LockIcon from "./icons/lock_FILL0_wght400_GRAD0_opsz48.svg";
 
 interface DeviceScreenProps {
   width: number;
   height: number;
   resolutionScale?: number;
-  isOn?: boolean;
 }
 
 const DeviceScreen = (props: DeviceScreenProps) => {
-  const { width, height, resolutionScale, isOn = true } = props;
+  const { width, height, resolutionScale } = props;
   const scaleFactor = resolutionScale === undefined ? 1 : resolutionScale;
 
   const htmlPortal = useHtmlPortal();
 
   return (
-    <>
-      {isOn && (
-        <Html
-          transform
-          occlude
-          portal={{ current: htmlPortal }}
-          distanceFactor={1 / scaleFactor}
-          style={{
-            overflow: "hidden",
-            borderRadius: 10 * scaleFactor,
-            width: 400 * width * scaleFactor,
-            height: 400 * height * scaleFactor,
-          }}
-        >
-          <ScreenContent />
-        </Html>
-      )}
-      {/* <mesh position={[position[0], position[1], position[2] + 0.001]}>
-        <planeGeometry args={[width - 0.02, height - 0.02]} />
-        <meshPhysicalMaterial
-          // transparent
-          thickness={0.005}
-          // metalness={1}
-          roughness={0}
-          transmission={1}
-          reflectivity={0.75}
-          opacity={0.01}
-          color="lightgrey"
-        />
-      </mesh> */}
-    </>
+    <Html
+      transform
+      occlude
+      portal={{ current: htmlPortal }}
+      distanceFactor={1 / scaleFactor}
+      style={{
+        overflow: "hidden",
+        borderRadius: 10 * scaleFactor,
+        width: 400 * width * scaleFactor,
+        height: 400 * height * scaleFactor,
+      }}
+    >
+      <ScreenContent />
+    </Html>
   );
 };
-
-const resolutionThresholdSize = 640;
 
 const iconColor = new MeshBasicMaterial();
 
@@ -76,10 +56,9 @@ interface DeviceProps {
 }
 
 export function Device(props: DeviceProps) {
-  const size = useThree((state) => state.size);
-  const useSmallResolution =
-    Math.min(size.height, size.width) < resolutionThresholdSize;
-  const resolutionScale = useSmallResolution ? 2.75 : 3;
+  const screenState = useScreenState();
+  const useSmallResolution = screenState.deviceClass === "small";
+  const resolutionScale = useSmallResolution ? 2 : 2.5;
 
   const { isOn } = props;
   return (
@@ -87,13 +66,28 @@ export function Device(props: DeviceProps) {
       <PhoneModel scale={6} />
 
       <group position-z={0.03}>
-        {!isOn && <LockScreen />}
-        <DeviceScreen
-          width={0.4}
-          height={0.89}
-          resolutionScale={resolutionScale}
-          isOn={isOn}
+        {isOn ? (
+          <DeviceScreen
+            width={0.4}
+            height={0.89}
+            resolutionScale={resolutionScale}
+          />
+        ) : (
+          <LockScreen />
+        )}
+        {/* <mesh position={[position[0], position[1], position[2] + 0.001]}>
+        <planeGeometry args={[width - 0.02, height - 0.02]} />
+        <meshPhysicalMaterial
+          // transparent
+          thickness={0.005}
+          // metalness={1}
+          roughness={0}
+          transmission={1}
+          reflectivity={0.75}
+          opacity={0.01}
+          color="lightgrey"
         />
+      </mesh> */}
       </group>
     </>
   );
