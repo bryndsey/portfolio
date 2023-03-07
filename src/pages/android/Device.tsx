@@ -57,7 +57,10 @@ interface DeviceProps {
 
 export function Device(props: DeviceProps) {
   const screenState = useScreenState();
-  const useSmallResolution = screenState.deviceClass === "small";
+
+  const useSmallResolution =
+    screenState.deviceClass === "small" &&
+    screenState.orientation === "portrait";
   const resolutionScale = useSmallResolution ? 2 : 2.5;
 
   const { isOn } = props;

@@ -34,7 +34,7 @@ export const IntroPage = (props: PageComponentProps) => {
     <group ref={groupRef}>
       <Html ref={contentRef} fullscreen portal={{ current: htmlPortal }}>
         <div className="h-full m-auto w-3/4 flex justify-center items-center">
-          <p className="font-bold text-3xl leading-none sm:text-5xl lg:text-7xl">
+          <p className="font-bold text-3xl leading-none md:text-5xl lg:text-7xl">
             Hi. My name is <br />
             <span style={{ fontSize: "3em" }}>Bryan Lindsey.</span>
           </p>
