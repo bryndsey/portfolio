@@ -144,6 +144,18 @@ export const TicTacToePage = (props: PageComponentProps) => {
     }
   );
 
+  const descriptionWidth =
+    screenState.orientation === "portrait" &&
+    screenState.deviceClass === "small"
+      ? viewport.width * viewport.factor * 0.8
+      : viewport.width * viewport.factor * 0.5;
+
+  const [descriptionX, descriptionY] =
+    screenState.orientation === "portrait" &&
+    screenState.deviceClass === "small"
+      ? [0, viewport.height * -0.2]
+      : [viewport.width * 0.2, 0];
+
   return (
     <group ref={pageGroupRef}>
       <group ref={descriptionGroupRef}>
@@ -151,11 +163,12 @@ export const TicTacToePage = (props: PageComponentProps) => {
           ref={contentRef}
           center
           portal={{ current: htmlPortal }}
-          position={[viewport.width * 0.2, 0, 0]}
+          position={[descriptionX, descriptionY, 0]}
           style={{
-            width: viewport.width * viewport.factor * 0.5,
+            width: descriptionWidth,
             transition: "opacity 300ms",
           }}
+          className="portrait:rounded-2xl portrait:p-4 portrait:bg-white"
           distanceFactor={descriptionScaleFactor}
         >
           <ProjectDescription
