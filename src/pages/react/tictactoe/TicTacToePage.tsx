@@ -148,7 +148,7 @@ export const TicTacToePage = (props: PageComponentProps) => {
     screenState.orientation === "portrait" &&
     screenState.deviceClass === "small"
       ? viewport.width * viewport.factor * 0.8
-      : viewport.width * viewport.factor * 0.5;
+      : viewport.width * viewport.factor * 0.45;
 
   const [descriptionX, descriptionY] =
     screenState.orientation === "portrait" &&
@@ -168,7 +168,7 @@ export const TicTacToePage = (props: PageComponentProps) => {
             width: descriptionWidth,
             transition: "opacity 300ms",
           }}
-          className="portrait:rounded-2xl portrait:p-4 portrait:bg-white"
+          className="portrait:rounded-2xl portrait:p-4 portrait:bg-white portrait:bg-opacity-90 portrait:backdrop-blur"
           distanceFactor={descriptionScaleFactor}
         >
           <ProjectDescription

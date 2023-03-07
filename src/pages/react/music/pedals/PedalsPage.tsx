@@ -62,6 +62,18 @@ export const PedalsPage = (props: PageComponentProps) => {
       ? 1.5
       : 2;
 
+  const descriptionWidth =
+    screenState.orientation === "portrait" &&
+    screenState.deviceClass === "small"
+      ? size.width * 0.8
+      : size.width * 0.5;
+
+  const [descriptionX, descriptionY] =
+    screenState.orientation === "portrait" &&
+    screenState.deviceClass === "small"
+      ? [0, viewport.height * 0.25]
+      : [-viewport.width * 0.15, viewport.height * 0.2];
+
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
@@ -134,11 +146,12 @@ export const PedalsPage = (props: PageComponentProps) => {
         ref={descriptionRef}
         center
         style={{
-          width: size.width * 0.5,
+          width: descriptionWidth,
           transition: "opacity 300ms",
           // backgroundColor: "rgba(0, 0, 0, 0.2)",
         }}
-        position={[-viewport.width * 0.15, viewport.height * 0.25, 0]}
+        className="portrait:rounded-2xl portrait:p-4 portrait:bg-white portrait:bg-opacity-90 portrait:backdrop-blur"
+        position={[descriptionX, descriptionY, 0]}
         portal={{ current: htmlPortal }}
         distanceFactor={descriptionScaleFactor}
       >

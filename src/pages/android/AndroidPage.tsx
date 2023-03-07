@@ -113,7 +113,7 @@ const FloatingText = (props: FloatingTextProps) => {
         width: size.width * 0.5,
         // backgroundColor: "rgba(0, 0, 0, 0.2)",
       }}
-      position={[viewport.width * 0.2, 0, 0]}
+      position={[viewport.width * 0.225, 0, 0]}
       portal={{ current: htmlPortal }}
       distanceFactor={descriptionScaleFactor}
     >
@@ -181,7 +181,7 @@ export const AndroidPage = (props: PageComponentProps) => {
         setShowText(shouldShowText);
       }
 
-      const targetXPosition = isPortrait ? 0 : -frustumWidthAtZOffset * 0.25;
+      const targetXPosition = isPortrait ? 0 : -frustumWidthAtZOffset * 0.2;
 
       const position = MathUtils.lerp(
         targetXPosition,

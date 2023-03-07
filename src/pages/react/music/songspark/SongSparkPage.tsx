@@ -46,18 +46,35 @@ export const SongSparkPage = (props: PageComponentProps) => {
     }
   );
 
+  const descriptionWidth =
+    screenState.orientation === "portrait" &&
+    screenState.deviceClass === "small"
+      ? viewport.width * viewport.factor * 0.8
+      : viewport.width * viewport.factor * 0.5;
+
+  const descriptionX =
+    screenState.orientation === "portrait" &&
+    screenState.deviceClass === "small"
+      ? -viewport.width * 0.425
+      : -viewport.width * 0.375;
+
+  const descriptionY =
+    screenState.orientation === "portrait"
+      ? viewport.height * 0.4
+      : viewport.height * 0.25;
+
   return (
     <group ref={groupRef}>
       <Html
         ref={descriptionRef}
-        center
         occlude
         style={{
-          width: size.width / 2,
+          minWidth: size.width / 2,
           transition: "opacity 300ms",
           // backgroundColor: "rgba(0, 0, 0, 0.2)",
         }}
-        position={[-viewport.width / 6, viewport.height / 5, 0]}
+        className="portrait:rounded-2xl portrait:p-4 portrait:bg-white portrait:bg-opacity-90 portrait:backdrop-blur"
+        position={[descriptionX, descriptionY, 0]}
         portal={{ current: htmlPortal }}
         distanceFactor={descriptionScaleFactor}
       >
