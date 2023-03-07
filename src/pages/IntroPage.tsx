@@ -1,5 +1,4 @@
 import { Html } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import { Group } from "three";
 import { useHtmlPortal } from "../useHtmlPortal";
