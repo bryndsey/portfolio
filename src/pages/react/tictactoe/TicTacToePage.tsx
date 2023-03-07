@@ -1,13 +1,7 @@
-import { Center, Html, Sphere, Text3D } from "@react-three/drei";
-import {
-  getRootState,
-  RootState,
-  Size,
-  useFrame,
-  useThree,
-} from "@react-three/fiber";
+import { Center, Html, Text3D } from "@react-three/drei";
+import { RootState, useFrame, useThree } from "@react-three/fiber";
 import { useRef } from "react";
-import { Group, MathUtils } from "three";
+import { Group } from "three";
 import { ProjectDescription, ReactTag } from "../../../ProjectDescription";
 import { useHtmlPortal } from "../../../useHtmlPortal";
 import { useScreenState } from "../../../useScreenState";
@@ -81,9 +75,17 @@ const DisplayPiece = ({ piece }: DisplayPieceProps) => {
     const [posX, posY, posZ] = positionFn(state);
     ref.current.position.set(posX, posY, posZ);
   });
+
   return (
     <Center ref={ref} rotation={[rotX, rotY, rotZ]} scale={scale}>
-      <Text3D font={Font}>
+      <Text3D
+        font={Font}
+        bevelEnabled
+        bevelSize={0.01}
+        bevelThickness={0.025}
+        bevelSegments={6}
+        curveSegments={32}
+      >
         {type.shape}
         <meshStandardMaterial color={type.color} />
       </Text3D>
