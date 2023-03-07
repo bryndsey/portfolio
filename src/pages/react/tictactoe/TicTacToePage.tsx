@@ -87,7 +87,7 @@ const DisplayPiece = ({ piece }: DisplayPieceProps) => {
         curveSegments={32}
       >
         {type.shape}
-        <meshStandardMaterial color={type.color} />
+        <meshStandardMaterial color={type.color} roughness={0.5} />
       </Text3D>
     </Center>
   );
