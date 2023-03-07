@@ -23,7 +23,7 @@ export const useScreenState = (): ScreenState => {
       : "large";
 
   const orientation: ScreenOrientation =
-    size.width < size.height ? "portrait" : "landscape";
+    size.width <= size.height ? "portrait" : "landscape";
 
   return { deviceClass: deviceClass, orientation: orientation };
 };
