@@ -3,7 +3,6 @@ import {
   OrbitControls,
   PerspectiveCamera,
   ScrollControls,
-  Sphere,
   Stats,
   useHelper,
 } from "@react-three/drei";
@@ -11,8 +10,8 @@ import { Canvas } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import { useControls } from "theatric";
 import { CameraHelper } from "three";
+import HDRI from "./assets/empty_warehouse_01_1k.hdr?url";
 import { pages } from "./pages/Pages";
-import HDRI from "./assets/studio_small_03_1k.hdr?url";
 
 const cameraPosition = { x: 0, y: 0, z: 3 };
 
