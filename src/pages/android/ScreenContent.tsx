@@ -55,10 +55,10 @@ const NavigationBar = () => {
   return (
     <div className="flex flex-row justify-evenly bg-gray-700 bg-opacity-30 p-4">
       <button onClick={() => selectApp(null)}>
-        <MdArrowBackIos color="white" size={"1.5rem"} />
+        <MdArrowBackIos color="white" className="w-6 h-6" />
       </button>
       <button onClick={() => selectApp(null)}>
-        <MdOutlineCircle color="white" size={"1.5rem"} />
+        <MdOutlineCircle color="white" className="w-6 h-6" />
       </button>
     </div>
   );
