@@ -10,3 +10,5 @@ export function AcousticGuitar() {
     </Suspense>
   );
 }
+
+useGLTF.preload(Guitar);

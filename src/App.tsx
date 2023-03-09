@@ -2,6 +2,7 @@ import {
   Environment,
   OrbitControls,
   PerspectiveCamera,
+  Preload,
   ScrollControls,
   Stats,
   useHelper,
@@ -56,22 +57,23 @@ function App() {
       <Canvas>
         {showStats && <Stats />}
         <CameraRig />
-        <Environment files={HDRI} />
         <Suspense fallback={null}>
-          <ScrollControls pages={pages.totalPages}>
-            {/* <ambientLight intensity={0.5} /> */}
-            {/* <directionalLight position={[10, 10, 10]} intensity={0.5} /> */}
-            {pages.pagesWithStartIndex.map((page) => {
-              return (
-                <page.page.component
-                  key={page.page.id}
-                  startPageIndex={page.startIndex}
-                  exitPageIndex={page.startIndex + page.page.contentLength}
-                />
-              );
-            })}
-          </ScrollControls>
+          <Environment files={HDRI} />
+          <Preload all />
         </Suspense>
+        <ScrollControls pages={pages.totalPages}>
+          {/* <ambientLight intensity={0.5} /> */}
+          {/* <directionalLight position={[10, 10, 10]} intensity={0.5} /> */}
+          {pages.pagesWithStartIndex.map((page) => {
+            return (
+              <page.page.component
+                key={page.page.id}
+                startPageIndex={page.startIndex}
+                exitPageIndex={page.startIndex + page.page.contentLength}
+              />
+            );
+          })}
+        </ScrollControls>
       </Canvas>
     </div>
   );
