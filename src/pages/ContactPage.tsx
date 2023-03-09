@@ -9,6 +9,7 @@ import { FaLinkedinIn } from "react-icons/fa";
 import { RxSquare } from "react-icons/rx";
 import { SiItchdotio } from "react-icons/si";
 import { BsGooglePlay } from "react-icons/bs";
+import { IoCubeSharp } from "react-icons/io5";
 import { IconType } from "react-icons";
 
 interface LinkData {
@@ -47,6 +48,13 @@ const links: LinkData[] = [
     iconColor: "white",
     backgroundColor: "bg-red-500",
     displayName: "itch.io",
+  },
+  {
+    url: "https://sketchfab.com/bryndsey",
+    icon: IoCubeSharp,
+    iconColor: "white",
+    backgroundColor: "bg-sky-500",
+    displayName: "Sketchfab",
   },
   {
     url: "https://www.linkedin.com/in/bryan-lindsey-1b320998",
