@@ -43,7 +43,8 @@ export function useScrollPages(
 
     const isVisible = scrollData.visible(
       enterVisiblePageIndex / totalPages,
-      totalVisibleLength / totalPages
+      totalVisibleLength / totalPages,
+      -0.001
     );
 
     progressCallback({
