@@ -79,7 +79,7 @@ const DisplayPiece = ({ piece }: DisplayPieceProps) => {
   return (
     <Center ref={ref} rotation={[rotX, rotY, rotZ]} scale={scale}>
       <Text3D
-        font={Font}
+        font={Font as any}
         bevelEnabled
         bevelSize={0.01}
         bevelThickness={0.025}
