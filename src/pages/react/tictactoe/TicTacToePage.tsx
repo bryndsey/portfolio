@@ -179,13 +179,13 @@ export const TicTacToePage = (props: PageComponentProps) => {
           />
         </Html>
       </group>
-      <Suspense fallback={null}>
-        <group ref={piecesGroupRef}>
+      <group ref={piecesGroupRef}>
+        <Suspense fallback={null}>
           {pieces.map((piece, index) => (
             <DisplayPiece piece={piece} key={index} />
           ))}
-        </group>
-      </Suspense>
+        </Suspense>
+      </group>
     </group>
   );
 };
