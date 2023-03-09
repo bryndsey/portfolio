@@ -6,7 +6,7 @@ import { AboutPage } from "./AboutPage";
 import { PedalsPage } from "./react/music/pedals/PedalsPage";
 import { ChoresPage } from "./react/chores/ChoresPage";
 import { TicTacToePage } from "./react/tictactoe/TicTacToePage";
-import { isFirefox, isSafari } from "react-device-detect";
+import { isChrome } from "react-device-detect";
 
 export interface PageComponentProps {
   startPageIndex: number;
@@ -26,9 +26,9 @@ const pagesShapes: Page[] = [
   { id: "pedals", component: PedalsPage, contentLength: 0.5 },
   // { id: "chores", component: ChoresPage, contentLength: 0.25 },
   { id: "tictactoeplus", component: TicTacToePage, contentLength: 0.5 },
-  ...(isFirefox || isSafari
-    ? []
-    : [{ id: "android", component: AndroidPage, contentLength: 0.5 }]),
+  ...(isChrome
+    ? [{ id: "android", component: AndroidPage, contentLength: 0.5 }]
+    : []),
   { id: "contact", component: ContactPage, contentLength: 0 },
 ];
 
