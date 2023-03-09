@@ -8,6 +8,7 @@ import { FaGithub } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import { RxSquare } from "react-icons/rx";
 import { SiItchdotio } from "react-icons/si";
+import { BsGooglePlay } from "react-icons/bs";
 import { IconType } from "react-icons";
 
 interface LinkData {
@@ -32,6 +33,13 @@ const links: LinkData[] = [
     iconColor: "white",
     backgroundColor: "bg-gray-800",
     displayName: "CodeSandbox",
+  },
+  {
+    url: "https://play.google.com/store/apps/developer?id=Bryndsey",
+    icon: BsGooglePlay,
+    iconColor: "white",
+    backgroundColor: "bg-amber-500",
+    displayName: "Google Play",
   },
   {
     url: "http://www.https://bryndsey.itch.io/.com/bryndsey",
