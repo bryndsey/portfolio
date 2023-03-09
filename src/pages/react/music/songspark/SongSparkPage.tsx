@@ -80,7 +80,7 @@ export const SongSparkPage = (props: PageComponentProps) => {
       >
         <ProjectDescription
           projectName="SongSpark"
-          descriptionText="SongSpark inspires songwriters with generated melodies and chord progressions"
+          descriptionText="Inspire your inner songwriter with generated melodies and chord progressions"
           url="https://songspark.bryanlindsey.dev"
           tags={[ReactTag]}
         />

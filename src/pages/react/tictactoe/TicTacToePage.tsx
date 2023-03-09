@@ -173,7 +173,7 @@ export const TicTacToePage = (props: PageComponentProps) => {
         >
           <ProjectDescription
             projectName="Tic-Tac-Toe+"
-            descriptionText="A unique twist on the classic game that adds a layer of strategy"
+            descriptionText="A unique twist on the classic game with an extra layer of strategy"
             tags={[ReactTag]}
             url="https://tictactoeplus.bryanlindsey.dev/"
           />
