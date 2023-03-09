@@ -55,7 +55,7 @@ function App() {
   return (
     <div id="App" className="bg-green-500 h-screen font-sans">
       <Canvas>
-        {showStats && <Stats />}
+        {import.meta.env.DEV && showStats && <Stats />}
         <CameraRig />
         <Suspense fallback={null}>
           <Environment files={HDRI} />
