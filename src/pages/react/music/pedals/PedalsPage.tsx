@@ -1,6 +1,6 @@
 import { GradientTexture, Html, Tube } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
-import { useRef } from "react";
+import { Suspense, useRef } from "react";
 import {
   CatmullRomCurve3,
   Color,
@@ -162,34 +162,36 @@ export const PedalsPage = (props: PageComponentProps) => {
           tags={[ReactTag]}
         />
       </Html>
-      <group
-        position={[viewport.width / 7, -0.2, 1]}
-        rotation={[1, -0.4, 0.5]}
-        scale={4}
-      >
-        <PedalModel />
-      </group>
-      <Tube args={[curve, 256, 0.02, 12]} ref={cableRef}>
-        <meshStandardMaterial
-          ref={textureRef}
-          opacity={0.5}
-          color={cableColor}
-          alphaTest={0.001}
-          side={DoubleSide}
-          roughness={0.8}
+      <Suspense fallback={null}>
+        <group
+          position={[viewport.width / 7, -0.2, 1]}
+          rotation={[1, -0.4, 0.5]}
+          scale={4}
         >
-          <GradientTexture
-            rotation={Math.PI * 0.5}
-            center={textureCenter}
-            stops={[0, 0.499, 0.501, 1]}
-            colors={["white", "white", "black", "black"]}
-            attach="alphaMap"
-          />
-        </meshStandardMaterial>
-      </Tube>
-      <group ref={cableEnd} scale={7}>
-        <CablePlugModel />
-      </group>
+          <PedalModel />
+        </group>
+        <Tube args={[curve, 256, 0.02, 12]} ref={cableRef}>
+          <meshStandardMaterial
+            ref={textureRef}
+            opacity={0.5}
+            color={cableColor}
+            alphaTest={0.001}
+            side={DoubleSide}
+            roughness={0.8}
+          >
+            <GradientTexture
+              rotation={Math.PI * 0.5}
+              center={textureCenter}
+              stops={[0, 0.499, 0.501, 1]}
+              colors={["white", "white", "black", "black"]}
+              attach="alphaMap"
+            />
+          </meshStandardMaterial>
+        </Tube>
+        <group ref={cableEnd} scale={7}>
+          <CablePlugModel />
+        </group>
+      </Suspense>
     </group>
   );
 };

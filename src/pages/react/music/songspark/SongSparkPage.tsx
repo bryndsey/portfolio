@@ -1,6 +1,6 @@
 import { Center, Html } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
-import { useRef } from "react";
+import { Suspense, useRef } from "react";
 import { Group } from "three";
 import { ProjectDescription, ReactTag } from "../../../../ProjectDescription";
 import { useHtmlPortal } from "../../../../useHtmlPortal";
@@ -85,13 +85,15 @@ export const SongSparkPage = (props: PageComponentProps) => {
           tags={[ReactTag]}
         />
       </Html>
-      <Center
-        position={[viewport.width / 5, 0, 0]}
-        rotation={[Math.PI / 2, -0.25, 0.6]}
-        scale={1.5}
-      >
-        <AcousticGuitar />
-      </Center>
+      <Suspense fallback={null}>
+        <Center
+          position={[viewport.width / 5, 0, 0]}
+          rotation={[Math.PI / 2, -0.25, 0.6]}
+          scale={1.5}
+        >
+          <AcousticGuitar />
+        </Center>
+      </Suspense>
     </group>
   );
 };

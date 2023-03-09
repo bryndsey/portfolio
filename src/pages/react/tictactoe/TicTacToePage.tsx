@@ -1,6 +1,6 @@
 import { Center, Html, Text3D } from "@react-three/drei";
 import { RootState, useFrame, useThree } from "@react-three/fiber";
-import { useRef } from "react";
+import { Suspense, useRef } from "react";
 import { Group } from "three";
 import { ProjectDescription, ReactTag } from "../../../ProjectDescription";
 import { useHtmlPortal } from "../../../useHtmlPortal";
@@ -179,11 +179,13 @@ export const TicTacToePage = (props: PageComponentProps) => {
           />
         </Html>
       </group>
-      <group ref={piecesGroupRef}>
-        {pieces.map((piece, index) => (
-          <DisplayPiece piece={piece} key={index} />
-        ))}
-      </group>
+      <Suspense fallback={null}>
+        <group ref={piecesGroupRef}>
+          {pieces.map((piece, index) => (
+            <DisplayPiece piece={piece} key={index} />
+          ))}
+        </group>
+      </Suspense>
     </group>
   );
 };

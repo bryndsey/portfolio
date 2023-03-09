@@ -1,7 +1,7 @@
 import { animated, useTransition } from "@react-spring/web";
 import { Html } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
-import { useRef, useState } from "react";
+import { Suspense, useRef, useState } from "react";
 import { Euler, Group, MathUtils } from "three";
 import { ProjectDescription } from "../../ProjectDescription";
 import { useHtmlPortal } from "../../useHtmlPortal";
@@ -205,9 +205,11 @@ export const AndroidPage = (props: PageComponentProps) => {
 
   return (
     <group ref={groupRef}>
-      <group ref={deviceGroupRef} position={[-10, 0, deviceZOffset]}>
-        <Device isOn={isDeviceOn} />
-      </group>
+      <Suspense fallback={null}>
+        <group ref={deviceGroupRef} position={[-10, 0, deviceZOffset]}>
+          <Device isOn={isDeviceOn} />
+        </group>
+      </Suspense>
       {/* <FloatingDescription showText={showText} /> */}
       {!isPortrait && <FloatingText showText={showText} />}
     </group>
