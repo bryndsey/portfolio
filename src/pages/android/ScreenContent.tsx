@@ -105,7 +105,7 @@ const AppDisplay = () => {
   const [selectedApp, selectApp] = useSelectedAndroidApp();
   if (selectedApp === null) throw new Error("Selected app should not be null");
   return (
-    <div className="h-full bg-gray-100 p-8">
+    <div className="h-full p-8">
       <button onClick={() => selectApp(null)} className="p-2 mb-4">
         <MdArrowBack size={"2rem"} />
       </button>
@@ -122,7 +122,7 @@ const AppDisplay = () => {
 
 const ScreenScaffold = (props: PropsWithChildren) => {
   return (
-    <div className="h-full flex flex-col bg-blue-300">
+    <div className="h-full flex flex-col bg-gradient-to-b from-sky-300 via-cyan-500 to-sky-700">
       <div className="w-full">
         <TopBar />
       </div>
