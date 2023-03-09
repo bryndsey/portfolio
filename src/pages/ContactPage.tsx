@@ -92,12 +92,12 @@ export const ContactPage = (props: PageComponentProps) => {
   return (
     <group ref={groupRef}>
       <Html ref={contentRef} fullscreen portal={{ current: htmlPortal }}>
-        <div className="h-full portrait:w-fit flex landscape:flex-row flex-col justify-evenly items-start m-auto landscape:items-center landscape:m-0 p-6">
+        <div className="h-full max-w-4xl w-fit sm:w-full grid sm:portrait:grid-cols-2 grid-cols-1 landscape:grid-cols-3 place-content-evenly gap-4 m-auto p-6 md:p-10">
           {links.map((link) => (
             <a
               href={link.url}
               key={link.url}
-              className="flex landscape:flex-col flex-row gap-10 landscape:gap-6 items-center"
+              className="flex landscape:flex-col sm:flex-col flex-row landscape:gap-6 sm:gap-6 gap-4 items-center justify-start"
             >
               <div className={`${link.backgroundColor} p-3 rounded-xl`}>
                 <link.icon
