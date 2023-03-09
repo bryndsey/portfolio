@@ -78,21 +78,19 @@ export const ContactPage = (props: PageComponentProps) => {
       <Html ref={contentRef} fullscreen portal={{ current: htmlPortal }}>
         <div className="h-full portrait:w-fit flex landscape:flex-row flex-col justify-evenly items-start m-auto landscape:items-center landscape:m-0 p-6">
           {links.map((link) => (
-            <div
+            <a
+              href={link.url}
               key={link.url}
               className="flex landscape:flex-col flex-row gap-10 landscape:gap-6 items-center"
             >
-              <a
-                href={link.url}
-                className={`${link.backgroundColor} p-3 rounded-xl`}
-              >
+              <div className={`${link.backgroundColor} p-3 rounded-xl`}>
                 <link.icon
                   className="w-8 h-8 sm:w-12 sm:h-12"
                   color={link.iconColor}
                 />
-              </a>
-              <p>{link.displayName}</p>
-            </div>
+              </div>
+              <p className="font-semibold">{link.displayName}</p>
+            </a>
           ))}
         </div>
       </Html>
