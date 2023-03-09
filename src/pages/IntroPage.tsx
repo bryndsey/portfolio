@@ -5,6 +5,17 @@ import { useHtmlPortal } from "../useHtmlPortal";
 import { PageComponentProps } from "./Pages";
 import { useScrollPages } from "./useScrollPages";
 
+export const IntroPageContent = () => {
+  return (
+    <div className="h-full m-auto w-3/4 flex justify-center items-center">
+      <p className="font-bold text-3xl leading-none md:text-5xl lg:text-7xl">
+        Hi. My name is <br />
+        <span style={{ fontSize: "3em" }}>Bryan Lindsey.</span>
+      </p>
+    </div>
+  );
+};
+
 export const IntroPage = (props: PageComponentProps) => {
   const htmlPortal = useHtmlPortal();
 
@@ -32,12 +43,7 @@ export const IntroPage = (props: PageComponentProps) => {
   return (
     <group ref={groupRef}>
       <Html ref={contentRef} fullscreen portal={{ current: htmlPortal }}>
-        <div className="h-full m-auto w-3/4 flex justify-center items-center">
-          <p className="font-bold text-3xl leading-none md:text-5xl lg:text-7xl">
-            Hi. My name is <br />
-            <span style={{ fontSize: "3em" }}>Bryan Lindsey.</span>
-          </p>
-        </div>
+        <IntroPageContent />
       </Html>
     </group>
   );
