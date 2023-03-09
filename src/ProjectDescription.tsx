@@ -52,7 +52,7 @@ const LinkButton = (props: LinkButtonProps) => {
   return (
     <a
       href={props.linkUrl}
-      className="px-3 sm:px-4 py-2 text-sm sm:text-lg bg-yellow-400 rounded hover:bg-yellow-300 active:bg-yellow-500 font-bold uppercase duration-300 w-fit"
+      className="px-3 sm:px-4 py-2 text-sm sm:text-lg bg-yellow-400 rounded hover:bg-yellow-300 active:bg-yellow-500 font-bold uppercase duration-300 w-fit select-none"
     >
       {props.actionText ?? "Try it"}
     </a>
