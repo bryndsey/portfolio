@@ -62,7 +62,7 @@ function App() {
           <Preload all />
         </Suspense>
         <ScrollControls pages={pages.totalPages}>
-          {/* <ambientLight intensity={0.5} /> */}
+          <ambientLight intensity={0.15} />
           {/* <directionalLight position={[10, 10, 10]} intensity={0.5} /> */}
           {pages.pagesWithStartIndex.map((page) => {
             return (
