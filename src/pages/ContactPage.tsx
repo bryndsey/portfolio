@@ -57,7 +57,7 @@ const links: LinkData[] = [
     displayName: "Sketchfab",
   },
   {
-    url: "https://www.linkedin.com/in/bryan-lindsey-1b320998",
+    url: "https://www.linkedin.com/in/bryan-c-lindsey/",
     icon: FaLinkedinIn,
     iconColor: "white",
     backgroundColor: "bg-blue-600",
