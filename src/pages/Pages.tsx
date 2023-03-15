@@ -22,7 +22,7 @@ interface Page {
 const pagesShapes: Page[] = [
   { id: "intro", component: IntroPage, contentLength: 0 },
   { id: "about", component: AboutPage, contentLength: 0 },
-  { id: "songspark", component: SongSparkPage, contentLength: 0.25 },
+  { id: "songspark", component: SongSparkPage, contentLength: 0.5 },
   { id: "pedals", component: PedalsPage, contentLength: 0.5 },
   // { id: "chores", component: ChoresPage, contentLength: 0.25 },
   { id: "tictactoeplus", component: TicTacToePage, contentLength: 0.5 },

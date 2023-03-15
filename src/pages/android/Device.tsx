@@ -10,10 +10,11 @@ interface DeviceScreenProps {
   width: number;
   height: number;
   resolutionScale?: number;
+  isOn: boolean;
 }
 
 const DeviceScreen = (props: DeviceScreenProps) => {
-  const { width, height, resolutionScale } = props;
+  const { width, height, resolutionScale, isOn } = props;
   const scaleFactor = resolutionScale === undefined ? 1 : resolutionScale;
 
   const htmlPortal = useHtmlPortal();
@@ -29,6 +30,8 @@ const DeviceScreen = (props: DeviceScreenProps) => {
         borderRadius: 10 * scaleFactor,
         width: 400 * width * scaleFactor,
         height: 400 * height * scaleFactor,
+        opacity: isOn ? 1 : 0,
+        pointerEvents: isOn ? "auto" : "none",
       }}
     >
       <ScreenContent />
@@ -52,7 +55,7 @@ const LockScreen = () => {
 };
 
 interface DeviceProps {
-  isOn?: boolean;
+  isOn: boolean;
 }
 
 export function Device(props: DeviceProps) {
@@ -69,15 +72,13 @@ export function Device(props: DeviceProps) {
       <PhoneModel scale={6} />
 
       <group position-z={0.03}>
-        {isOn ? (
-          <DeviceScreen
-            width={0.4}
-            height={0.89}
-            resolutionScale={resolutionScale}
-          />
-        ) : (
-          <LockScreen />
-        )}
+        <DeviceScreen
+          width={0.4}
+          height={0.89}
+          resolutionScale={resolutionScale}
+          isOn={isOn}
+        />
+        {!isOn && <LockScreen />}
         {/* <mesh position={[position[0], position[1], position[2] + 0.001]}>
         <planeGeometry args={[width - 0.02, height - 0.02]} />
         <meshPhysicalMaterial

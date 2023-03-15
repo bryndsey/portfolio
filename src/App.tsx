@@ -7,14 +7,20 @@ import {
   Stats,
   useHelper,
 } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 // import { useControls } from "theatric";
-import { CameraHelper } from "three";
+import { CameraHelper, MathUtils, Vector3 } from "three";
 import HDRI from "./assets/empty_warehouse_01_1k.hdr?url";
 import { pages } from "./pages/Pages";
 
 const cameraPosition = { x: 0, y: 0, z: 3 };
+
+const targetCameraPositionVector = new Vector3(
+  cameraPosition.x,
+  cameraPosition.y,
+  cameraPosition.z
+);
 
 const CameraRig = () => {
   // const { debugCamera } = useControls({
@@ -24,6 +30,10 @@ const CameraRig = () => {
 
   const mainCameraRef = useRef<THREE.PerspectiveCamera>(null!);
   useHelper(debugCamera ? mainCameraRef : null, CameraHelper);
+
+  useFrame((state) => {
+    mainCameraRef.current.position.lerp(targetCameraPositionVector, 0.1);
+  });
 
   return (
     <>
@@ -55,7 +65,40 @@ function App() {
 
   return (
     <div id="App" className="bg-green-500 h-screen font-sans">
-      <Canvas>
+      <Canvas
+        onPointerMove={(e) => {
+          if (e.pointerType === "mouse") {
+            const normalizedX = MathUtils.mapLinear(
+              e.clientX,
+              0,
+              e.currentTarget.clientWidth,
+              -1,
+              1
+            );
+
+            // Go from positive to negative to map properly
+            const normalizedY = MathUtils.mapLinear(
+              e.clientY,
+              0,
+              e.currentTarget.clientHeight,
+              1,
+              -1
+            );
+            targetCameraPositionVector.set(
+              cameraPosition.x + normalizedX / 50,
+              cameraPosition.y + normalizedY / 50,
+              cameraPosition.z
+            );
+          }
+        }}
+        onPointerLeave={() => {
+          targetCameraPositionVector.set(
+            cameraPosition.x,
+            cameraPosition.y,
+            cameraPosition.z
+          );
+        }}
+      >
         {import.meta.env.DEV && showStats && <Stats />}
         <CameraRig />
         <Suspense fallback={null}>
