@@ -25,6 +25,8 @@ const cableColor = new Color(0.03, 0.03, 0.03);
 
 const textureCenter = new Vector2(0.5, 0.5);
 
+const groupTargetPosition = new Vector3();
+
 export const PedalsPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
   const cableRef = useRef<Mesh>(null!);
@@ -91,12 +93,23 @@ export const PedalsPage = (props: PageComponentProps) => {
       if (descriptionRef.current === null) return;
       descriptionRef.current.hidden = !isPageVisible;
 
-      if (!isPageVisible) return;
-
       const yPercent = enterAmount + exitAmount;
 
       const viewportHeight = state.viewport.height;
-      groupRef.current.position.setY(yPercent * viewportHeight);
+      groupTargetPosition.setY(yPercent * viewportHeight);
+
+      if (!isPageVisible) {
+        // If not visible, immediately move to target so we don't have any weird movement
+        // when it does become visible
+        groupRef.current.position.set(
+          groupTargetPosition.x,
+          groupTargetPosition.y,
+          groupTargetPosition.z
+        );
+        return;
+      }
+
+      groupRef.current.position.lerp(groupTargetPosition, 0.25);
 
       const cableAnimationFinishPercent = 0.9;
       const cableProgressPercent = MathUtils.mapLinear(
