@@ -1,7 +1,7 @@
 import { Center, Html } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
-import { Group, MathUtils } from "three";
+import { Group, MathUtils, Vector3 } from "three";
 import { ProjectDescription, ReactTag } from "../../../../ProjectDescription";
 import { useHtmlPortal } from "../../../../useHtmlPortal";
 import { useScreenState } from "../../../../useScreenState";
@@ -10,7 +10,12 @@ import { useScrollPages } from "../../../useScrollPages";
 import { AcousticGuitar } from "./AcousticGuitar";
 import { KeyboardModel } from "./KeyboardModel";
 
+const groupTargetPosition = new Vector3();
+
 export const SongSparkPage = (props: PageComponentProps) => {
+  const { startPageIndex, exitPageIndex } = props;
+  const contentPageLength = exitPageIndex - startPageIndex;
+
   const groupRef = useRef<Group>(null);
   const descriptionRef = useRef<HTMLDivElement>(null);
   const guitarRef = useRef<Group>(null!);
@@ -28,8 +33,8 @@ export const SongSparkPage = (props: PageComponentProps) => {
   const htmlPortal = useHtmlPortal();
 
   useScrollPages(
-    props.startPageIndex,
-    props.exitPageIndex,
+    startPageIndex,
+    exitPageIndex,
     ({
       enterAmount,
       exitAmount,
@@ -43,18 +48,35 @@ export const SongSparkPage = (props: PageComponentProps) => {
       if (descriptionRef.current === null) return;
       descriptionRef.current.hidden = !isPageVisible;
 
-      if (!isPageVisible) return;
-
-      const yPercent = enterAmount + exitAmount;
-
       const viewportHeight = state.viewport.height;
-      groupRef.current.position.setY(yPercent * viewportHeight);
+      const yPercent = enterAmount + exitAmount;
+      groupTargetPosition.setY(yPercent * viewportHeight);
+
+      if (!isPageVisible) {
+        // If not visible, immediately move to target so we don't have any weird movement
+        // when it does become visible
+        groupRef.current.position.set(
+          groupTargetPosition.x,
+          groupTargetPosition.y,
+          groupTargetPosition.z
+        );
+        return;
+      }
+
+      groupRef.current.position.lerp(groupTargetPosition, 0.25);
 
       const showDescription = yPercent === 0;
       descriptionRef.current.style.opacity = showDescription ? "1" : "0";
 
+      // Multiply by 2 here to account for the fact that parent group has stopped moving
+      // - we double the speed here to keep it viusally constant
+      // It might be better long-term to decouple this from the parent so I don't
+      // have to do this
+      const contentMovementAmount = contentPageLength * 2;
       const totalProgress =
-        enterAmount + contentProgressAmount / 2 + exitAmount;
+        enterAmount +
+        contentProgressAmount * contentMovementAmount +
+        exitAmount;
 
       const guitarXOffset =
         screenState.deviceClass === "small" &&
@@ -79,7 +101,7 @@ export const SongSparkPage = (props: PageComponentProps) => {
       const keyboardProgress = MathUtils.mapLinear(
         totalProgress,
         -1,
-        1.5,
+        1 + contentMovementAmount,
         -3,
         2
       );
@@ -137,11 +159,7 @@ export const SongSparkPage = (props: PageComponentProps) => {
         />
       </Html>
       <Suspense fallback={null}>
-        <Center
-          rotation={[Math.PI / 2, -0.25, 0.6]}
-          scale={1.5}
-          ref={guitarRef}
-        >
+        <Center scale={1.5} ref={guitarRef}>
           <AcousticGuitar />
         </Center>
       </Suspense>
