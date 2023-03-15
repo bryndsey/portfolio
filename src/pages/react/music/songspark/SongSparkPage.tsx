@@ -53,7 +53,8 @@ export const SongSparkPage = (props: PageComponentProps) => {
       const showDescription = yPercent === 0;
       descriptionRef.current.style.opacity = showDescription ? "1" : "0";
 
-      const totalProgress = enterAmount + contentProgressAmount + exitAmount;
+      const totalProgress =
+        enterAmount + contentProgressAmount / 2 + exitAmount;
 
       const guitarXOffset =
         screenState.deviceClass === "small" &&
@@ -78,9 +79,9 @@ export const SongSparkPage = (props: PageComponentProps) => {
       const keyboardProgress = MathUtils.mapLinear(
         totalProgress,
         -1,
-        2,
+        1.5,
         -3,
-        1.75
+        2
       );
       keyboardRef.current.position.set(
         keyboardXOffset,
