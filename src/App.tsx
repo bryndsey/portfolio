@@ -7,7 +7,7 @@ import {
   Stats,
   useHelper,
 } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 // import { useControls } from "theatric";
 import { CameraHelper } from "three";
@@ -24,6 +24,14 @@ const CameraRig = () => {
 
   const mainCameraRef = useRef<THREE.PerspectiveCamera>(null!);
   useHelper(debugCamera ? mainCameraRef : null, CameraHelper);
+
+  useFrame((state) => {
+    mainCameraRef.current.position.set(
+      cameraPosition.x + (10 * state.mouse.x) / state.size.width,
+      cameraPosition.y + (10 * state.mouse.y) / state.size.height,
+      cameraPosition.z
+    );
+  });
 
   return (
     <>
