@@ -1,4 +1,4 @@
-import { Html } from "@react-three/drei";
+import { Html, ScreenSpace } from "@react-three/drei";
 import { useRef } from "react";
 import { Group } from "three";
 import { useHtmlPortal } from "../useHtmlPortal";
@@ -90,26 +90,38 @@ export const ContactPage = (props: PageComponentProps) => {
   );
 
   return (
-    <group ref={groupRef}>
-      <Html ref={contentRef} fullscreen portal={{ current: htmlPortal }}>
-        <div className="h-full max-w-4xl w-fit sm:w-full grid sm:portrait:grid-cols-2 grid-cols-1 landscape:grid-cols-3 place-content-evenly gap-4 m-auto p-6 md:p-10">
-          {links.map((link) => (
-            <a
-              href={link.url}
-              key={link.url}
-              className="flex landscape:flex-col sm:flex-col flex-row landscape:gap-6 sm:gap-6 gap-4 items-center justify-start"
-            >
-              <div className={`${link.backgroundColor} p-3 rounded-xl`}>
-                <link.icon
-                  className="w-8 h-8 sm:w-12 sm:h-12"
-                  color={link.iconColor}
-                />
-              </div>
-              <p className="font-semibold">{link.displayName}</p>
-            </a>
-          ))}
-        </div>
-      </Html>
-    </group>
+    <ScreenSpace depth={2}>
+      <group ref={groupRef}>
+        <Html
+          ref={contentRef}
+          fullscreen
+          portal={{ current: htmlPortal }}
+          className="bg-yellow-300"
+        >
+          <div className="h-full flex flex-col md:gap-4 items-center justify-center p-4 landscape:p-2 landscape:md:p-12 sm:p-8 md:p-12">
+            <h3 className="text-center pt-8 text-4xl landscape:text-2xl md:text-6xl landscape:md:text-6xl font-semibold">
+              More of my stuff:
+            </h3>
+            <div className="grow max-w-4xl w-fit sm:w-full grid sm:portrait:grid-cols-2 grid-cols-1 landscape:grid-cols-3 place-content-evenly gap-4 m-auto px-6 md:px-10">
+              {links.map((link) => (
+                <a
+                  href={link.url}
+                  key={link.url}
+                  className="flex landscape:flex-col sm:flex-col flex-row landscape:gap-6 sm:gap-6 gap-4 items-center justify-start"
+                >
+                  <div className={`${link.backgroundColor} p-3 rounded-xl`}>
+                    <link.icon
+                      className="w-8 h-8 sm:w-12 sm:h-12"
+                      color={link.iconColor}
+                    />
+                  </div>
+                  <p className="font-semibold">{link.displayName}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </Html>
+      </group>
+    </ScreenSpace>
   );
 };
