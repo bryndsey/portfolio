@@ -13,6 +13,7 @@ import { KeyboardModel } from "./KeyboardModel";
 export const SongSparkPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
   const descriptionRef = useRef<HTMLDivElement>(null);
+  const guitarRef = useRef<Group>(null!);
   const keyboardRef = useRef<Group>(null!);
 
   const viewport = useThree((state) => state.viewport);
@@ -52,6 +53,14 @@ export const SongSparkPage = (props: PageComponentProps) => {
       const showDescription = yPercent === 0;
       descriptionRef.current.style.opacity = showDescription ? "1" : "0";
 
+      const guitarXOffset =
+        screenState.deviceClass === "small" &&
+        screenState.orientation === "landscape"
+          ? state.viewport.width / 3
+          : state.viewport.width / 4;
+
+      guitarRef.current.position.setX(guitarXOffset);
+
       const keyboardXOffset =
         screenState.deviceClass === "small" &&
         screenState.orientation === "landscape"
@@ -59,7 +68,13 @@ export const SongSparkPage = (props: PageComponentProps) => {
           : -state.viewport.width / 5;
 
       const totalProgress = enterAmount + contentProgressAmount + exitAmount;
-      const keyboardProgress = MathUtils.mapLinear(totalProgress, -1, 2, -3, 2);
+      const keyboardProgress = MathUtils.mapLinear(
+        totalProgress,
+        -1,
+        2,
+        -3,
+        1.75
+      );
       keyboardRef.current.position.set(
         keyboardXOffset,
         -state.viewport.height * 0.25 + keyboardProgress,
@@ -115,19 +130,15 @@ export const SongSparkPage = (props: PageComponentProps) => {
       </Html>
       <Suspense fallback={null}>
         <Center
-          position={[viewport.width / 4, 0, 0]}
           rotation={[Math.PI / 2, -0.25, 0.6]}
           scale={1.5}
+          ref={guitarRef}
         >
           <AcousticGuitar />
         </Center>
       </Suspense>
       <Suspense fallback={null}>
-        <Center
-          rotation={[Math.PI / 2, 0.25, -0.6]}
-          scale={1.5}
-          ref={keyboardRef}
-        >
+        <Center scale={1.5} ref={keyboardRef}>
           <KeyboardModel />
         </Center>
       </Suspense>
