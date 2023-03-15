@@ -102,13 +102,13 @@ export const SongSparkPage = (props: PageComponentProps) => {
         totalProgress,
         -1,
         1 + contentMovementAmount,
-        -3,
-        2
+        -2,
+        1.5
       );
       keyboardRef.current.position.set(
         keyboardXOffset,
         -state.viewport.height * 0.25 + keyboardProgress,
-        -1.5
+        -2
       );
 
       keyboardRef.current.rotation.set(
