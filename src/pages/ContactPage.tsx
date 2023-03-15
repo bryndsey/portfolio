@@ -109,7 +109,9 @@ export const ContactPage = (props: PageComponentProps) => {
                   key={link.url}
                   className="flex landscape:flex-col sm:flex-col flex-row landscape:gap-6 sm:gap-6 gap-4 items-center justify-start"
                 >
-                  <div className={`${link.backgroundColor} p-3 rounded-xl`}>
+                  <div
+                    className={`${link.backgroundColor} p-4 rounded-3xl shadow-lg`}
+                  >
                     <link.icon
                       className="w-8 h-8 sm:w-12 sm:h-12"
                       color={link.iconColor}
