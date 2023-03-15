@@ -10,7 +10,7 @@ import {
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 // import { useControls } from "theatric";
-import { CameraHelper, Vector3 } from "three";
+import { CameraHelper, MathUtils, Vector3 } from "three";
 import HDRI from "./assets/empty_warehouse_01_1k.hdr?url";
 import { pages } from "./pages/Pages";
 
@@ -28,11 +28,6 @@ const CameraRig = () => {
   useHelper(debugCamera ? mainCameraRef : null, CameraHelper);
 
   useFrame((state) => {
-    targetCameraPositionVector.set(
-      cameraPosition.x + (10 * state.mouse.x) / state.size.width,
-      cameraPosition.y + (10 * state.mouse.y) / state.size.height,
-      cameraPosition.z
-    );
     mainCameraRef.current.position.lerp(targetCameraPositionVector, 0.1);
   });
 
@@ -66,7 +61,33 @@ function App() {
 
   return (
     <div id="App" className="bg-green-500 h-screen font-sans">
-      <Canvas>
+      <Canvas
+        onPointerMove={(e) => {
+          if (e.pointerType === "mouse") {
+            const normalizedX = MathUtils.mapLinear(
+              e.clientX,
+              0,
+              e.currentTarget.clientWidth,
+              -1,
+              1
+            );
+
+            // Go from positive to negative to map properly
+            const normalizedY = MathUtils.mapLinear(
+              e.clientY,
+              0,
+              e.currentTarget.clientHeight,
+              1,
+              -1
+            );
+            targetCameraPositionVector.set(
+              cameraPosition.x + normalizedX / 50,
+              cameraPosition.y + normalizedY / 50,
+              cameraPosition.z
+            );
+          }
+        }}
+      >
         {import.meta.env.DEV && showStats && <Stats />}
         <CameraRig />
         <Suspense fallback={null}>
