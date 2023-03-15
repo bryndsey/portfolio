@@ -91,6 +91,13 @@ function App() {
             );
           }
         }}
+        onPointerLeave={() => {
+          targetCameraPositionVector.set(
+            cameraPosition.x,
+            cameraPosition.y,
+            cameraPosition.z
+          );
+        }}
       >
         {import.meta.env.DEV && showStats && <Stats />}
         <CameraRig />
