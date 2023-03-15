@@ -10,11 +10,13 @@ import {
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 // import { useControls } from "theatric";
-import { CameraHelper } from "three";
+import { CameraHelper, Vector3 } from "three";
 import HDRI from "./assets/empty_warehouse_01_1k.hdr?url";
 import { pages } from "./pages/Pages";
 
 const cameraPosition = { x: 0, y: 0, z: 3 };
+
+const targetCameraPositionVector = new Vector3();
 
 const CameraRig = () => {
   // const { debugCamera } = useControls({
@@ -26,11 +28,12 @@ const CameraRig = () => {
   useHelper(debugCamera ? mainCameraRef : null, CameraHelper);
 
   useFrame((state) => {
-    mainCameraRef.current.position.set(
+    targetCameraPositionVector.set(
       cameraPosition.x + (10 * state.mouse.x) / state.size.width,
       cameraPosition.y + (10 * state.mouse.y) / state.size.height,
       cameraPosition.z
     );
+    mainCameraRef.current.position.lerp(targetCameraPositionVector, 0.1);
   });
 
   return (
