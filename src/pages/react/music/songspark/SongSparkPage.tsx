@@ -1,17 +1,19 @@
 import { Center, Html } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
-import { Group } from "three";
+import { Group, MathUtils } from "three";
 import { ProjectDescription, ReactTag } from "../../../../ProjectDescription";
 import { useHtmlPortal } from "../../../../useHtmlPortal";
 import { useScreenState } from "../../../../useScreenState";
 import { PageComponentProps } from "../../../Pages";
 import { useScrollPages } from "../../../useScrollPages";
 import { AcousticGuitar } from "./AcousticGuitar";
+import { KeyboardModel } from "./KeyboardModel";
 
 export const SongSparkPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
   const descriptionRef = useRef<HTMLDivElement>(null);
+  const keyboardRef = useRef<Group>(null!);
 
   const viewport = useThree((state) => state.viewport);
   const size = useThree((state) => state.size);
@@ -27,7 +29,13 @@ export const SongSparkPage = (props: PageComponentProps) => {
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
-    ({ enterAmount, exitAmount, isPageVisible, state }) => {
+    ({
+      enterAmount,
+      exitAmount,
+      contentProgressAmount,
+      isPageVisible,
+      state,
+    }) => {
       if (groupRef.current === null) return;
       groupRef.current.visible = isPageVisible;
 
@@ -43,6 +51,26 @@ export const SongSparkPage = (props: PageComponentProps) => {
 
       const showDescription = yPercent === 0;
       descriptionRef.current.style.opacity = showDescription ? "1" : "0";
+
+      const keyboardXOffset =
+        screenState.deviceClass === "small" &&
+        screenState.orientation === "landscape"
+          ? state.viewport.width / 6
+          : -state.viewport.width / 5;
+
+      const totalProgress = enterAmount + contentProgressAmount + exitAmount;
+      const keyboardProgress = MathUtils.mapLinear(totalProgress, -1, 2, -3, 2);
+      keyboardRef.current.position.set(
+        keyboardXOffset,
+        -state.viewport.height * 0.25 + keyboardProgress,
+        -1.5
+      );
+
+      keyboardRef.current.rotation.set(
+        Math.PI / 2 - 0.2,
+        0.25,
+        keyboardProgress / 2 - 0.6
+      );
     }
   );
 
@@ -87,11 +115,20 @@ export const SongSparkPage = (props: PageComponentProps) => {
       </Html>
       <Suspense fallback={null}>
         <Center
-          position={[viewport.width / 5, 0, 0]}
+          position={[viewport.width / 4, 0, 0]}
           rotation={[Math.PI / 2, -0.25, 0.6]}
           scale={1.5}
         >
           <AcousticGuitar />
+        </Center>
+      </Suspense>
+      <Suspense fallback={null}>
+        <Center
+          rotation={[Math.PI / 2, 0.25, -0.6]}
+          scale={1.5}
+          ref={keyboardRef}
+        >
+          <KeyboardModel />
         </Center>
       </Suspense>
     </group>
