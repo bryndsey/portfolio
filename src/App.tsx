@@ -16,7 +16,11 @@ import { pages } from "./pages/Pages";
 
 const cameraPosition = { x: 0, y: 0, z: 3 };
 
-const targetCameraPositionVector = new Vector3();
+const targetCameraPositionVector = new Vector3(
+  cameraPosition.x,
+  cameraPosition.y,
+  cameraPosition.z
+);
 
 const CameraRig = () => {
   // const { debugCamera } = useControls({
