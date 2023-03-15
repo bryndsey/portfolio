@@ -53,6 +53,8 @@ export const SongSparkPage = (props: PageComponentProps) => {
       const showDescription = yPercent === 0;
       descriptionRef.current.style.opacity = showDescription ? "1" : "0";
 
+      const totalProgress = enterAmount + contentProgressAmount + exitAmount;
+
       const guitarXOffset =
         screenState.deviceClass === "small" &&
         screenState.orientation === "landscape"
@@ -61,13 +63,18 @@ export const SongSparkPage = (props: PageComponentProps) => {
 
       guitarRef.current.position.setX(guitarXOffset);
 
+      guitarRef.current.rotation.set(
+        Math.PI / 2 + totalProgress / 50,
+        -0.25,
+        0.75 - totalProgress / 20
+      );
+
       const keyboardXOffset =
         screenState.deviceClass === "small" &&
         screenState.orientation === "landscape"
           ? state.viewport.width / 6
           : -state.viewport.width / 5;
 
-      const totalProgress = enterAmount + contentProgressAmount + exitAmount;
       const keyboardProgress = MathUtils.mapLinear(
         totalProgress,
         -1,
