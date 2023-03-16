@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @font-face {
+    font-family: BryanSans;
+    font-weight: 100;
+    src: local(BryanSans), url(./fonts/BryanSans-Regular.otf) format("opentype");
+  }
+}
+
 body {
   margin: 0;
   display: flex;
