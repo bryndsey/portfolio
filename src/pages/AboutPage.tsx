@@ -44,7 +44,7 @@ export const AboutPage = (props: PageComponentProps) => {
             <p className="font-semibold text-2xl sm:text-4xl md:text-6xl">
               {`I like to make things. ${listOfThingsIMake.join(". ")}.`}
             </p>
-            <p className="text-base sm:text-xl md:text-3xl text-center">
+            <p className="text-base sm:text-xl md:text-3xl text-center font-handwritten">
               {"Keep scrolling to see some things I've made."}
             </p>
           </div>
