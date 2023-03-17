@@ -31,7 +31,7 @@ const fullLandscapeAspect = 1.5;
 export const IntroPage = (props: PageComponentProps) => {
   const htmlPortal = useHtmlPortal();
 
-  const groupRef = useRef<Group>(null);
+  const groupRef = useRef<Group>(null!);
   const contentRef = useRef<HTMLDivElement>(null);
   const bubbleRef = useRef<Mesh>(null!);
   const avatarRef = useRef<Group>(null);
@@ -48,12 +48,11 @@ export const IntroPage = (props: PageComponentProps) => {
     props.startPageIndex,
     props.exitPageIndex,
     ({ enterAmount, exitAmount, isPageVisible, state }) => {
-      if (groupRef.current === null) return;
-
       groupRef.current.visible = isPageVisible;
 
-      if (contentRef.current === null) return;
-      contentRef.current.hidden = !isPageVisible;
+      if (contentRef.current !== null) {
+        contentRef.current.hidden = !isPageVisible;
+      }
 
       const yPercent = enterAmount + exitAmount;
 
