@@ -10,6 +10,7 @@ import {
   MdArrowBackIos,
   MdArrowBack,
 } from "react-icons/md";
+import { logAnalyticsEvent } from "../../firebase";
 
 interface DeviceAppIconProps {
   app: AndroidApp;
@@ -19,7 +20,13 @@ const DeviceAppIcon = (props: DeviceAppIconProps) => {
   const { app } = props;
   const [, selectApp] = useSelectedAndroidApp();
   return (
-    <button onClick={() => selectApp(props.app)} className="select-none">
+    <button
+      onClick={() => {
+        logAnalyticsEvent("android_app_selected", { appName: props.app.name });
+        selectApp(props.app);
+      }}
+      className="select-none"
+    >
       <div
         className={`${app.iconBackgroundColor} rounded-xl aspect-square shadow-md hover:shadow-lg active:shadow-sm transition-shadow overflow-clip`}
       >

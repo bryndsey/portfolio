@@ -1,5 +1,6 @@
 import { IconType } from "react-icons";
 import { FaAndroid, FaReact, FaUnity } from "react-icons/fa";
+import { logAnalyticsEvent } from "./firebase";
 
 interface ProjectDescriptionProps {
   projectName: string;
@@ -52,6 +53,11 @@ const LinkButton = (props: LinkButtonProps) => {
   return (
     <a
       href={props.linkUrl}
+      onClick={() =>
+        logAnalyticsEvent("project_link_clicked", {
+          projectLink: props.linkUrl,
+        })
+      }
       className="px-3 sm:px-4 py-2 text-sm sm:text-lg bg-yellow-400 rounded hover:bg-yellow-300 active:bg-yellow-500 font-bold uppercase duration-300 w-fit select-none"
     >
       {props.actionText ?? "Try it"}
