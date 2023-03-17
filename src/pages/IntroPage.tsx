@@ -11,7 +11,7 @@ import { useScrollPages } from "./useScrollPages";
 export const IntroPageContent = () => {
   return (
     <div className="max-w-lg m-auto p-8 flex">
-      <div className="flex flex-col justify-center font-bold leading-none text-5xl text-center font-handwritten">
+      <div className="flex flex-col justify-center font-bold leading-none text-4xl sm:text-5xl text-center font-handwritten">
         <p>Hi. My name is</p>
         <p
           className="leading-none"
@@ -62,14 +62,20 @@ export const IntroPage = (props: PageComponentProps) => {
         fullLandscapeAspect
       );
 
-      const bubbleFullLandscapePosition = { x: state.viewport.width / 4, y: 0 };
-      const bubbleFullPortraitPosition = { x: 0, y: state.viewport.height / 3 };
+      const bubbleFullLandscapePosition = {
+        x: state.viewport.width * 0.2,
+        y: 0,
+      };
+      const bubbleFullPortraitPosition = {
+        x: 0.1,
+        y: state.viewport.height * 0.25,
+      };
 
       const bubblePosition = {
         x: MathUtils.lerp(
           bubbleFullPortraitPosition.x,
           bubbleFullLandscapePosition.x,
-          currentAspectLerpVal
+          Math.pow(currentAspectLerpVal, 0.5)
         ),
         y: MathUtils.lerp(
           bubbleFullPortraitPosition.y,
@@ -79,7 +85,7 @@ export const IntroPage = (props: PageComponentProps) => {
       };
       bubbleRef.current.position.set(bubblePosition.x, bubblePosition.y, 0);
 
-      const bubbleScale = Math.max(state.viewport.width * 0.4, 0.5);
+      const bubbleScale = Math.max(state.viewport.width * 0.4, 0.75);
       bubbleRef.current.scale.setScalar(bubbleScale);
 
       const avatarFullLandscapePosition = {
@@ -87,15 +93,15 @@ export const IntroPage = (props: PageComponentProps) => {
         y: -state.viewport.height * 0.1,
       };
       const avatarFullPortraitPosition = {
-        x: 0,
-        y: -state.viewport.height * 0.1,
+        x: -0.1,
+        y: -state.viewport.height * 0.25,
       };
 
       const avatarPosition = {
         x: MathUtils.lerp(
           avatarFullPortraitPosition.x,
           avatarFullLandscapePosition.x,
-          currentAspectLerpVal
+          Math.pow(currentAspectLerpVal, 0.5)
         ),
         y: MathUtils.lerp(
           avatarFullPortraitPosition.y,
@@ -106,7 +112,7 @@ export const IntroPage = (props: PageComponentProps) => {
       avatarRef.current.position.set(avatarPosition.x, avatarPosition.y, 0.2);
 
       const avatarMaxScale = 1.5;
-      const avatarMinScale = 0.75;
+      const avatarMinScale = 1.2;
       avatarRef.current.scale.setScalar(
         MathUtils.lerp(avatarMinScale, avatarMaxScale, currentAspectLerpVal)
       );
