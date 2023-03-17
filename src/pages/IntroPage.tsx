@@ -1,5 +1,6 @@
 import { useSpringValue, easings, config } from "@react-spring/web";
 import { Center, Circle, Html, MeshDistortMaterial } from "@react-three/drei";
+import { useThree } from "@react-three/fiber";
 import { Suspense, useEffect, useRef } from "react";
 import { Group, MathUtils, Mesh } from "three";
 import { useHtmlPortal } from "../useHtmlPortal";
@@ -29,7 +30,7 @@ const fullPortraitAspect = 0.75;
 const fullLandscapeAspect = 1.5;
 
 export const IntroPage = (props: PageComponentProps) => {
-  const htmlPortal = useHtmlPortal();
+  const htmlPortal = useThree((state) => state.gl.domElement.parentElement!);
 
   const groupRef = useRef<Group>(null!);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -178,6 +179,7 @@ export const IntroPage = (props: PageComponentProps) => {
             ref={contentRef}
             transform
             distanceFactor={1}
+            pointerEvents={"none"}
             portal={{ current: htmlPortal }}
           >
             <IntroPageContent />
