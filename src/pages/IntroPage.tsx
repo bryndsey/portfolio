@@ -1,6 +1,6 @@
 import { useSpringValue, easings, config } from "@react-spring/web";
 import { Center, Circle, Html, MeshDistortMaterial } from "@react-three/drei";
-import { Suspense, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { Group, MathUtils, Mesh } from "three";
 import { useHtmlPortal } from "../useHtmlPortal";
 import { AvatarModel } from "./AvatarModel";
@@ -37,6 +37,10 @@ export const IntroPage = (props: PageComponentProps) => {
   const avatarRef = useRef<Group>(null);
 
   const avatarTransitionAnimationValue = useSpringValue(0, {
+    config: config.gentle,
+  });
+
+  const bubbleTransitionAnimationValue = useSpringValue(0, {
     config: config.gentle,
   });
 
@@ -88,11 +92,17 @@ export const IntroPage = (props: PageComponentProps) => {
       };
       bubbleRef.current.position.set(bubblePosition.x, bubblePosition.y, 0);
 
+      if (bubbleTransitionAnimationValue.goal === 0) {
+        bubbleTransitionAnimationValue.start(1);
+      }
+
       const bubbleScale =
         state.viewport.aspect > 1
           ? Math.min(state.viewport.width * 0.45, viewportHeight * 0.66)
           : Math.max(state.viewport.width * 0.45, 0.7);
-      bubbleRef.current.scale.setScalar(bubbleScale);
+      bubbleRef.current.scale.setScalar(
+        bubbleScale * bubbleTransitionAnimationValue.get()
+      );
 
       if (avatarRef.current === null) return;
 
