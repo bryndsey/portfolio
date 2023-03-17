@@ -1,5 +1,6 @@
 import {
   Environment,
+  Html,
   OrbitControls,
   PerspectiveCamera,
   Preload,
@@ -57,6 +58,16 @@ const CameraRig = () => {
   );
 };
 
+function LoadingIndicator() {
+  return (
+    <Html fullscreen className="h-screen flex place-content-center">
+      <div className="font-handwritten text-4xl m-auto text-center">
+        Loading . . .
+      </div>
+    </Html>
+  );
+}
+
 function App() {
   // const { showStats } = useControls({
   //   showStats: true,
@@ -101,23 +112,23 @@ function App() {
       >
         {import.meta.env.DEV && showStats && <Stats />}
         <CameraRig />
-        <Suspense fallback={<ambientLight intensity={0.75} />}>
+        <Suspense fallback={<LoadingIndicator />}>
           <Environment files={HDRI} />
           <Preload all />
+
+          <ScrollControls pages={pages.totalPages}>
+            <ambientLight intensity={0.15} />
+            {pages.pagesWithStartIndex.map((page) => {
+              return (
+                <page.page.component
+                  key={page.page.id}
+                  startPageIndex={page.startIndex}
+                  exitPageIndex={page.startIndex + page.page.contentLength}
+                />
+              );
+            })}
+          </ScrollControls>
         </Suspense>
-        <ScrollControls pages={pages.totalPages}>
-          <ambientLight intensity={0.15} />
-          {/* <directionalLight position={[10, 10, 10]} intensity={0.5} /> */}
-          {pages.pagesWithStartIndex.map((page) => {
-            return (
-              <page.page.component
-                key={page.page.id}
-                startPageIndex={page.startIndex}
-                exitPageIndex={page.startIndex + page.page.contentLength}
-              />
-            );
-          })}
-        </ScrollControls>
       </Canvas>
     </div>
   );

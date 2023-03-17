@@ -42,7 +42,7 @@ export const IntroPage = (props: PageComponentProps) => {
   });
 
   const bubbleTransitionAnimationValue = useSpringValue(0, {
-    config: config.gentle,
+    config: { ...config.stiff, precision: 0.0001, round: 0.005 },
   });
 
   useScrollPages(
@@ -92,7 +92,10 @@ export const IntroPage = (props: PageComponentProps) => {
       };
       bubbleRef.current.position.set(bubblePosition.x, bubblePosition.y, 0);
 
-      if (bubbleTransitionAnimationValue.goal === 0) {
+      if (
+        bubbleTransitionAnimationValue.goal === 0 &&
+        state.clock.elapsedTime > 0.66
+      ) {
         bubbleTransitionAnimationValue.start(1);
       }
 
@@ -180,6 +183,7 @@ export const IntroPage = (props: PageComponentProps) => {
             transform
             distanceFactor={1}
             pointerEvents={"none"}
+            position-z={0.1}
             portal={{ current: htmlPortal }}
           >
             <IntroPageContent />
