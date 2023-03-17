@@ -7,7 +7,7 @@ import { Suspense } from "react";
 import * as THREE from "three";
 import { CustomBlending, FrontSide, ZeroFactor } from "three";
 import { GLTF } from "three-stdlib";
-import Keyboard from "./keyboard.gltf?url";
+import Keyboard from "./keyboard.glb?url";
 
 type GLTFResult = GLTF & {
   nodes: {
