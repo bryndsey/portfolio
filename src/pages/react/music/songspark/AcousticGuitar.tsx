@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { useGLTF } from "@react-three/drei";
-import Guitar from "./guitar.gltf?url";
+import Guitar from "./guitar.glb?url";
 
 export function AcousticGuitar() {
   const gltf = useGLTF(Guitar);

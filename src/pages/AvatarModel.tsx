@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { useGLTF } from "@react-three/drei";
-import Avatar from "./avatar.gltf?url";
+import Avatar from "./avatar.glb?url";
 
 export function AvatarModel() {
   const gltf = useGLTF(Avatar);

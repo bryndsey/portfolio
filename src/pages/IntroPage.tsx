@@ -151,10 +151,22 @@ export const IntroPage = (props: PageComponentProps) => {
         0.2
       );
 
+      let avatarVelocityScale = 1;
+      if (Math.abs(avatarTransitionAnimationValue.velocity) > 0.0001) {
+        avatarVelocityScale = 1 - avatarTransitionAnimationValue.velocity * 40;
+      }
+
       const avatarMaxScale = viewportHeight;
       const avatarMinScale = 1.2;
-      avatarRef.current.scale.setScalar(
-        MathUtils.lerp(avatarMinScale, avatarMaxScale, currentAspectLerpVal)
+      const avatarBaseScale = MathUtils.lerp(
+        avatarMinScale,
+        avatarMaxScale,
+        currentAspectLerpVal
+      );
+      avatarRef.current.scale.set(
+        avatarBaseScale / Math.pow(avatarVelocityScale, 0.5),
+        avatarBaseScale * avatarVelocityScale,
+        avatarBaseScale / Math.pow(avatarVelocityScale, 0.5)
       );
 
       avatarRef.current.lookAt(

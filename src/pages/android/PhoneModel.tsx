@@ -6,7 +6,7 @@ import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { DoubleSide } from "three";
 import { GLTF } from "three-stdlib";
-import Phone from "./phone.gltf?url";
+import Phone from "./phone.glb?url";
 
 type GLTFResult = GLTF & {
   nodes: {
