@@ -1,16 +1,14 @@
 import { Center, Circle, Html, MeshDistortMaterial } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import { Group, MathUtils, Mesh } from "three";
 import { useHtmlPortal } from "../useHtmlPortal";
-import { useScreenState } from "../useScreenState";
 import { AvatarModel } from "./AvatarModel";
 import { PageComponentProps } from "./Pages";
 import { useScrollPages } from "./useScrollPages";
 
 export const IntroPageContent = () => {
   return (
-    <div className="max-w-lg m-auto p-8 flex">
+    <div className="max-w-xl m-auto p-8 flex">
       <div className="flex flex-col justify-center font-bold leading-none text-4xl sm:text-5xl text-center font-handwritten">
         <p>Hi. My name is</p>
         <p
@@ -75,7 +73,8 @@ export const IntroPage = (props: PageComponentProps) => {
         x: MathUtils.lerp(
           bubbleFullPortraitPosition.x,
           bubbleFullLandscapePosition.x,
-          Math.pow(currentAspectLerpVal, 0.5)
+          // Scale this exponentially to get the curve I want
+          Math.pow(currentAspectLerpVal, 0.3)
         ),
         y: MathUtils.lerp(
           bubbleFullPortraitPosition.y,
@@ -85,12 +84,15 @@ export const IntroPage = (props: PageComponentProps) => {
       };
       bubbleRef.current.position.set(bubblePosition.x, bubblePosition.y, 0);
 
-      const bubbleScale = Math.max(state.viewport.width * 0.4, 0.75);
+      const bubbleScale =
+        state.viewport.aspect > 1
+          ? Math.min(state.viewport.width * 0.45, viewportHeight * 0.66)
+          : Math.max(state.viewport.width * 0.45, 0.7);
       bubbleRef.current.scale.setScalar(bubbleScale);
 
       const avatarFullLandscapePosition = {
         x: -state.viewport.width * 0.25,
-        y: -state.viewport.height * 0.1,
+        y: -state.viewport.height * 0.05,
       };
       const avatarFullPortraitPosition = {
         x: -0.1,
@@ -101,7 +103,8 @@ export const IntroPage = (props: PageComponentProps) => {
         x: MathUtils.lerp(
           avatarFullPortraitPosition.x,
           avatarFullLandscapePosition.x,
-          Math.pow(currentAspectLerpVal, 0.5)
+          // Scale this exponentially to get the curve I want
+          Math.pow(currentAspectLerpVal, 0.3)
         ),
         y: MathUtils.lerp(
           avatarFullPortraitPosition.y,
@@ -111,17 +114,12 @@ export const IntroPage = (props: PageComponentProps) => {
       };
       avatarRef.current.position.set(avatarPosition.x, avatarPosition.y, 0.2);
 
-      const avatarMaxScale = 1.5;
+      const avatarMaxScale = viewportHeight;
       const avatarMinScale = 1.2;
       avatarRef.current.scale.setScalar(
         MathUtils.lerp(avatarMinScale, avatarMaxScale, currentAspectLerpVal)
       );
 
-      // avatarRef.current.position.set(
-      //   -state.viewport.width * 0.25,
-      //   -state.viewport.height * 0.1,
-      //   0.2
-      // );
       avatarRef.current.lookAt(
         state.camera.position.x,
         avatarRef.current.position.y + groupRef.current.position.y,
