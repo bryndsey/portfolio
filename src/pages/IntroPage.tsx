@@ -1,5 +1,6 @@
+import { useSpringValue, easings, config } from "@react-spring/web";
 import { Center, Circle, Html, MeshDistortMaterial } from "@react-three/drei";
-import { useRef } from "react";
+import { Suspense, useRef } from "react";
 import { Group, MathUtils, Mesh } from "three";
 import { useHtmlPortal } from "../useHtmlPortal";
 import { AvatarModel } from "./AvatarModel";
@@ -33,7 +34,11 @@ export const IntroPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const bubbleRef = useRef<Mesh>(null!);
-  const avatarRef = useRef<Group>(null!);
+  const avatarRef = useRef<Group>(null);
+
+  const avatarTransitionAnimationValue = useSpringValue(0, {
+    config: config.gentle,
+  });
 
   useScrollPages(
     props.startPageIndex,
@@ -42,7 +47,6 @@ export const IntroPage = (props: PageComponentProps) => {
       if (groupRef.current === null) return;
 
       groupRef.current.visible = isPageVisible;
-      avatarRef.current.visible = isPageVisible;
 
       if (contentRef.current === null) return;
       contentRef.current.hidden = !isPageVisible;
@@ -90,6 +94,15 @@ export const IntroPage = (props: PageComponentProps) => {
           : Math.max(state.viewport.width * 0.45, 0.7);
       bubbleRef.current.scale.setScalar(bubbleScale);
 
+      if (avatarRef.current === null) return;
+
+      const avatarTransitionTarget = Math.abs(yPercent) < 0.01 ? 1 : 0;
+      if (avatarTransitionAnimationValue.goal !== avatarTransitionTarget) {
+        avatarTransitionAnimationValue.start(avatarTransitionTarget);
+      }
+
+      const avatarOffscreenY = -viewportHeight;
+
       const avatarFullLandscapePosition = {
         x: -state.viewport.width * 0.25,
         y: -state.viewport.height * 0.05,
@@ -99,7 +112,7 @@ export const IntroPage = (props: PageComponentProps) => {
         y: -state.viewport.height * 0.25,
       };
 
-      const avatarPosition = {
+      const avatarOnscreenPosition = {
         x: MathUtils.lerp(
           avatarFullPortraitPosition.x,
           avatarFullLandscapePosition.x,
@@ -112,7 +125,18 @@ export const IntroPage = (props: PageComponentProps) => {
           currentAspectLerpVal
         ),
       };
-      avatarRef.current.position.set(avatarPosition.x, avatarPosition.y, 0.2);
+
+      const avatarActualY = MathUtils.lerp(
+        avatarOffscreenY,
+        avatarOnscreenPosition.y,
+        avatarTransitionAnimationValue.get()
+      );
+
+      avatarRef.current.position.set(
+        avatarOnscreenPosition.x,
+        avatarActualY,
+        0.2
+      );
 
       const avatarMaxScale = viewportHeight;
       const avatarMinScale = 1.2;
@@ -122,32 +146,35 @@ export const IntroPage = (props: PageComponentProps) => {
 
       avatarRef.current.lookAt(
         state.camera.position.x,
-        avatarRef.current.position.y + groupRef.current.position.y,
+        avatarRef.current.position.y,
         state.camera.position.z
       );
+
+      avatarRef.current.visible = isPageVisible;
     }
   );
 
   return (
-    <group ref={groupRef}>
-      <Circle args={[0.75, 64]} ref={bubbleRef}>
-        {/* <meshBasicMaterial color="white" /> */}
-        <MeshDistortMaterial
-          color={"white"}
-          distort={0.25}
-          factor={2}
-          speed={1}
-        />
-        <Html
-          ref={contentRef}
-          transform
-          distanceFactor={1}
-          portal={{ current: htmlPortal }}
-        >
-          <IntroPageContent />
-        </Html>
-      </Circle>
-      {/* <Text
+    <>
+      <group ref={groupRef}>
+        <Circle args={[0.75, 64]} ref={bubbleRef}>
+          {/* <meshBasicMaterial color="white" /> */}
+          <MeshDistortMaterial
+            color={"white"}
+            distort={0.25}
+            factor={2}
+            speed={1}
+          />
+          <Html
+            ref={contentRef}
+            transform
+            distanceFactor={1}
+            portal={{ current: htmlPortal }}
+          >
+            <IntroPageContent />
+          </Html>
+        </Circle>
+        {/* <Text
         font={BryanSans}
         color="black"
         fontSize={0.2}
@@ -156,11 +183,14 @@ export const IntroPage = (props: PageComponentProps) => {
       >
         Hi, my name is Bryan Lindsey
       </Text> */}
-      <Center ref={avatarRef}>
-        <AvatarModel />
-      </Center>
-      {/* <Svg src={Avatar} scale={0.0005} position={[0.1, 0.1, 1]} /> */}
-      {/* <Sphere args={[0.25]} position={[-1, 0, 0.5]}></Sphere> */}
-    </group>
+      </group>
+      <Suspense fallback={null}>
+        <Center ref={avatarRef}>
+          <AvatarModel />
+        </Center>
+        {/* <Svg src={Avatar} scale={0.0005} position={[0.1, 0.1, 1]} /> */}
+        {/* <Sphere args={[0.25]} position={[-1, 0, 0.5]}></Sphere> */}
+      </Suspense>
+    </>
   );
 };
