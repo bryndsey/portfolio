@@ -109,8 +109,8 @@ export const ContactPage = (props: PageComponentProps) => {
                   href={link.url}
                   key={link.url}
                   onClick={() =>
-                    logAnalyticsEvent("external_link_clicked", {
-                      linkUrl: link.url,
+                    logAnalyticsEvent("bryan_external_link_clicked", {
+                      bryan_link_url: link.url,
                     })
                   }
                   className="flex landscape:flex-col sm:flex-col flex-row landscape:gap-6 sm:gap-6 gap-4 items-center justify-start"

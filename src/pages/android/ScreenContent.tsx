@@ -22,7 +22,9 @@ const DeviceAppIcon = (props: DeviceAppIconProps) => {
   return (
     <button
       onClick={() => {
-        logAnalyticsEvent("android_app_selected", { appName: props.app.name });
+        logAnalyticsEvent("bryan_android_app_selected", {
+          bryan_app_name: props.app.name,
+        });
         selectApp(props.app);
       }}
       className="select-none"
