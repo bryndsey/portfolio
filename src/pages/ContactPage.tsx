@@ -11,6 +11,7 @@ import { SiItchdotio } from "react-icons/si";
 import { BsGooglePlay } from "react-icons/bs";
 import { IoCubeSharp } from "react-icons/io5";
 import { IconType } from "react-icons";
+import { logAnalyticsEvent } from "../firebase";
 
 interface LinkData {
   url: string;
@@ -107,6 +108,11 @@ export const ContactPage = (props: PageComponentProps) => {
                 <a
                   href={link.url}
                   key={link.url}
+                  onClick={() =>
+                    logAnalyticsEvent("bryan_external_link_clicked", {
+                      bryan_link_url: link.url,
+                    })
+                  }
                   className="flex landscape:flex-col sm:flex-col flex-row landscape:gap-6 sm:gap-6 gap-4 items-center justify-start"
                 >
                   <div
