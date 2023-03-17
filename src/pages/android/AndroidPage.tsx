@@ -124,7 +124,7 @@ const FloatingText = (props: FloatingTextProps) => {
               <p className="text-center text-7xl lg:text-8xl font-semibold mb-6">
                 Android Projects
               </p>
-              <p className="text-center text-2xl">
+              <p className="text-center text-2xl font-handwritten font-bold">
                 (Tap the icons to learn more)
               </p>
             </animated.div>

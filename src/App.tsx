@@ -101,7 +101,7 @@ function App() {
       >
         {import.meta.env.DEV && showStats && <Stats />}
         <CameraRig />
-        <Suspense fallback={null}>
+        <Suspense fallback={<ambientLight intensity={0.75} />}>
           <Environment files={HDRI} />
           <Preload all />
         </Suspense>
