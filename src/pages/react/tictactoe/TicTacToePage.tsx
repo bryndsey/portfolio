@@ -1,7 +1,18 @@
 import { Center, Html, Text3D } from "@react-three/drei";
 import { RootState, useFrame, useThree } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
-import { Group } from "three";
+import {
+  CustomBlending,
+  FrontSide,
+  Group,
+  Material,
+  MathUtils,
+  MeshStandardMaterial,
+  SrcAlphaFactor,
+  SrcAlphaSaturateFactor,
+  SrcColorFactor,
+  ZeroFactor,
+} from "three";
 import { ProjectDescription, ReactTag } from "../../../ProjectDescription";
 import { useHtmlPortal } from "../../../useHtmlPortal";
 import { useScreenState } from "../../../useScreenState";
@@ -24,7 +35,7 @@ const pieces: PieceData[] = [
   {
     type: XPiece,
     positionFn: (state) => [-0.1, 1.75, -1.5],
-    rotation: [-0.4, 0.07, 0.2],
+    rotation: [0.4, 0.07, -0.2],
     scale: 0.33,
   },
   {
@@ -69,11 +80,15 @@ interface DisplayPieceProps {
 const DisplayPiece = ({ piece }: DisplayPieceProps) => {
   const { positionFn, rotation, scale, type } = piece;
   const ref = useRef<Group>(null!);
+  const materialRef = useRef<MeshStandardMaterial>(null!);
 
   const [rotX, rotY, rotZ] = rotation;
   useFrame((state) => {
     const [posX, posY, posZ] = positionFn(state);
     ref.current.position.set(posX, posY, posZ);
+    const opacity =
+      posZ >= -0.5 ? 1 : 1 - MathUtils.mapLinear(posZ, -0.5, -5, 0.1, 0.2);
+    materialRef.current.opacity = opacity;
   });
 
   return (
@@ -87,7 +102,16 @@ const DisplayPiece = ({ piece }: DisplayPieceProps) => {
         curveSegments={32}
       >
         {type.shape}
-        <meshStandardMaterial color={type.color} roughness={0.5} />
+        <meshStandardMaterial
+          ref={materialRef}
+          color={type.color}
+          roughness={0.5}
+          transparent
+          // side={FrontSide}
+          blending={CustomBlending}
+          blendDst={ZeroFactor}
+          // blendSrc={SrcAlphaFactor}
+        />
       </Text3D>
     </Center>
   );
