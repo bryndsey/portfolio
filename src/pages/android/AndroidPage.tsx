@@ -1,6 +1,7 @@
 import { animated, useTransition } from "@react-spring/web";
 import { Html } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
+import { stat } from "fs";
 import { Suspense, useRef, useState } from "react";
 import { Euler, Group, MathUtils } from "three";
 import { useHtmlPortal } from "../../useHtmlPortal";
@@ -69,17 +70,30 @@ const deviceRotation = new Euler();
 const deviceZOffset = 1.25;
 
 export const AndroidPage = (props: PageComponentProps) => {
-  const groupRef = useRef<Group>(null);
+  const groupRef = useRef<Group>(null!);
   const deviceGroupRef = useRef<Group>(null);
+
+  const labelText = useRef<HTMLDivElement>(null);
+  const labelTextGroup = useRef<Group>(null);
 
   const [showText, setShowText] = useState(false);
 
   const [isDeviceOn, setIsDeviceOn] = useState(false);
 
-  const viewport = useThree((state) => state.viewport);
-  const isPortrait = viewport.aspect < 1;
+  const screenState = useScreenState();
+  const isPortrait = screenState.orientation === "portrait";
 
   const frustumWidthAtZOffset = useCameraFrustumWidthAtDepth(deviceZOffset);
+
+  const htmlPortal = useHtmlPortal();
+
+  const viewport = useThree((state) => state.viewport);
+
+  const descriptionScaleFactor =
+    screenState.deviceClass === "small" &&
+    screenState.orientation === "landscape"
+      ? 1.5
+      : 2;
 
   useScrollPages(
     props.startPageIndex,
@@ -92,14 +106,30 @@ export const AndroidPage = (props: PageComponentProps) => {
       state,
     }) => {
       const progress = enterAmount + exitAmount;
-      if (groupRef.current === null) return;
 
       groupRef.current.visible = isPageVisible;
 
-      const deviceOnState =
+      const isOnPageContent =
         isPageVisible && contentProgressAmount > 0 && contentProgressAmount < 1;
-      if (deviceOnState != isDeviceOn) {
-        setIsDeviceOn(deviceOnState);
+      if (isOnPageContent != isDeviceOn) {
+        setIsDeviceOn(isOnPageContent);
+      }
+
+      if (labelText.current !== null) {
+        labelText.current.style.width = `${state.size.width * 0.5}`;
+        labelText.current.hidden = !isOnPageContent;
+      }
+
+      if (labelTextGroup.current !== null) {
+        labelTextGroup.current.position.setX(state.viewport.width * 0.225);
+        labelTextGroup.current.visible = isPageVisible;
+        labelTextGroup.current.position.setY(
+          MathUtils.lerp(
+            -state.viewport.height,
+            state.viewport.height,
+            contentProgressAmount
+          )
+        );
       }
 
       if (!isPageVisible) return;
@@ -140,7 +170,24 @@ export const AndroidPage = (props: PageComponentProps) => {
           <Device isOn={isDeviceOn} />
         </group>
       </Suspense>
-      {!isPortrait && <FloatingText showText={showText} />}
+      {!isPortrait && (
+        <group ref={labelTextGroup}>
+          <Html
+            ref={labelText}
+            center
+            portal={{ current: htmlPortal }}
+            distanceFactor={descriptionScaleFactor}
+          >
+            <p className="text-center text-7xl lg:text-8xl font-semibold mb-6">
+              Android Projects
+            </p>
+            <p className="text-center text-2xl font-handwritten font-bold">
+              (Tap the icons to learn more)
+            </p>
+          </Html>
+        </group>
+      )}
+      {/* {!isPortrait && <FloatingText showText={showText} />} */}
     </group>
   );
 };
