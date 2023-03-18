@@ -87,19 +87,24 @@ export const AndroidPage = (props: PageComponentProps) => {
 
       const targetXPosition = isPortrait ? 0 : -frustumWidthAtZOffset * 0.2;
 
-      const position = MathUtils.lerp(
+      const xPosition = MathUtils.lerp(
         targetXPosition,
         Math.min(-frustumWidthAtZOffset / 2, -1.5),
-        Math.abs(progress)
+        MathUtils.smoothstep(Math.abs(progress), 0, 1)
       );
-      deviceGroupRef.current.position.setX(position);
+      deviceGroupRef.current.position.setX(xPosition);
+
+      const zPosition =
+        deviceZOffset -
+        (1 - MathUtils.smootherstep(contentProgressAmount, 0, 1)) * 0.1;
+      deviceGroupRef.current.position.setZ(zPosition);
 
       const targetYRotation = isPortrait ? 0 : 0.2;
 
       const currentRotation = MathUtils.lerp(
         targetYRotation,
         Math.PI * Math.min(state.viewport.width, 2.5),
-        Math.abs(progress)
+        MathUtils.smoothstep(Math.abs(progress), 0, 1)
       );
 
       deviceRotation.set(0, currentRotation, 0);
