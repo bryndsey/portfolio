@@ -3,82 +3,12 @@ import { Html } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { Suspense, useRef, useState } from "react";
 import { Euler, Group, MathUtils } from "three";
-import { ProjectDescription } from "../../ProjectDescription";
 import { useHtmlPortal } from "../../useHtmlPortal";
 import { useScreenState } from "../../useScreenState";
 import { useCameraFrustumWidthAtDepth } from "../../utils";
 import { PageComponentProps } from "../Pages";
 import { useScrollPages } from "../useScrollPages";
 import { Device } from "./Device";
-import { useSelectedAndroidApp } from "./useSelectedAndroidApp";
-
-interface FloatingDescriptionProps {
-  showText: boolean;
-}
-
-const FloatingDescription = (props: FloatingDescriptionProps) => {
-  const { showText } = props;
-  const [selectedApp] = useSelectedAndroidApp();
-  const selectedAppTransitions = useTransition(selectedApp, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-    config: { duration: 300 },
-    exitBeforeEnter: true,
-  });
-
-  const showTextTransitions = useTransition(showText, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-    config: { duration: 300 },
-  });
-
-  const htmlPortal = useHtmlPortal();
-
-  const size = useThree((state) => state.size);
-  const viewport = useThree((state) => state.viewport);
-
-  return (
-    <group>
-      <Html
-        transform
-        style={{
-          width: size.width * 0.4,
-          // backgroundColor: "rgba(0, 0, 0, 0.2)",
-        }}
-        position={[viewport.width / 4, viewport.height / 6, 0]}
-        portal={{ current: htmlPortal }}
-        distanceFactor={1}
-      >
-        {showTextTransitions(
-          (showStyle, show) =>
-            show && (
-              <animated.div style={showStyle}>
-                {selectedAppTransitions((style, app) => (
-                  <animated.div style={style}>
-                    {app ? (
-                      <ProjectDescription
-                        projectName={app.name}
-                        descriptionText={app.description}
-                        url={app.url}
-                        actionText={"Play Store"}
-                        tags={app.projectTags}
-                      />
-                    ) : (
-                      <div className="text-center text-2xl">
-                        Select an app to learn more
-                      </div>
-                    )}
-                  </animated.div>
-                ))}
-              </animated.div>
-            )
-        )}
-      </Html>
-    </group>
-  );
-};
 
 interface FloatingTextProps {
   showText: boolean;
@@ -210,7 +140,6 @@ export const AndroidPage = (props: PageComponentProps) => {
           <Device isOn={isDeviceOn} />
         </group>
       </Suspense>
-      {/* <FloatingDescription showText={showText} /> */}
       {!isPortrait && <FloatingText showText={showText} />}
     </group>
   );
