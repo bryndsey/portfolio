@@ -11,60 +11,6 @@ import { PageComponentProps } from "../Pages";
 import { useScrollPages } from "../useScrollPages";
 import { Device } from "./Device";
 
-interface FloatingTextProps {
-  showText: boolean;
-}
-
-const FloatingText = (props: FloatingTextProps) => {
-  const { showText } = props;
-
-  const showTextTransitions = useTransition(showText, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-    config: { duration: 300 },
-  });
-
-  const htmlPortal = useHtmlPortal();
-
-  const size = useThree((state) => state.size);
-  const viewport = useThree((state) => state.viewport);
-
-  const screenState = useScreenState();
-  const descriptionScaleFactor =
-    screenState.deviceClass === "small" &&
-    screenState.orientation === "landscape"
-      ? 1.5
-      : 2;
-
-  return (
-    <Html
-      center
-      style={{
-        width: size.width * 0.5,
-        // backgroundColor: "rgba(0, 0, 0, 0.2)",
-      }}
-      position={[viewport.width * 0.225, 0, 0]}
-      portal={{ current: htmlPortal }}
-      distanceFactor={descriptionScaleFactor}
-    >
-      {showTextTransitions(
-        (showStyle, show) =>
-          show && (
-            <animated.div style={showStyle}>
-              <p className="text-center text-7xl lg:text-8xl font-semibold mb-6">
-                Android Projects
-              </p>
-              <p className="text-center text-2xl font-handwritten font-bold">
-                (Tap the icons to learn more)
-              </p>
-            </animated.div>
-          )
-      )}
-    </Html>
-  );
-};
-
 const deviceRotation = new Euler();
 
 const deviceZOffset = 1.25;
