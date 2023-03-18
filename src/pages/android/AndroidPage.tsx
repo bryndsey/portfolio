@@ -33,8 +33,6 @@ export const AndroidPage = (props: PageComponentProps) => {
 
   const htmlPortal = useHtmlPortal();
 
-  const viewport = useThree((state) => state.viewport);
-
   const descriptionScaleFactor =
     screenState.deviceClass === "small" &&
     screenState.orientation === "landscape"
