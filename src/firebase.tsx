@@ -16,10 +16,19 @@ const firebaseConfig = {
   measurementId: "G-BN01QZZRC9",
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+let logGoogleAnalyticsEvent: (event: string, payload?: any) => void;
+if (import.meta.env.DEV) {
+  logGoogleAnalyticsEvent = (event: string, payload?: any) => {
+    console.debug("Analytic event logged", event, payload);
+  };
+} else {
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
 
-export function logAnalyticsEvent(event: string, payload?: any) {
-  logEvent(analytics, event, payload);
+  logGoogleAnalyticsEvent = (event: string, payload?: any) => {
+    logEvent(analytics, event, payload);
+  };
 }
+
+export const logAnalyticsEvent = logGoogleAnalyticsEvent;
