@@ -66,9 +66,18 @@ const FloatingThing = (props: { thing: ThingIMake }) => {
 
     const floatOffset = [
       // Offset by amount of a different component for more apparent randomness
-      0.1 * Math.sin((state.clock.elapsedTime + position[1] * 10) * 0.3),
-      0.1 * Math.sin((state.clock.elapsedTime + position[2] * 6) * 0.2),
-      0.025 * Math.sin((state.clock.elapsedTime + position[0] * 4) * 0.4),
+      0.1 *
+        Math.sin(
+          (state.clock.elapsedTime + (position[1] + position[2]) * 80) * 0.3
+        ),
+      0.066 *
+        Math.sin(
+          (state.clock.elapsedTime + (position[2] + position[0]) * 60) * 0.2
+        ),
+      0.025 *
+        Math.sin(
+          (state.clock.elapsedTime + (position[0] + position[1]) * 70) * 0.4
+        ),
     ];
 
     groupRef.current.position.set(
