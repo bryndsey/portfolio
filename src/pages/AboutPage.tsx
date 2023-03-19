@@ -113,7 +113,12 @@ export const AboutPage = (props: PageComponentProps) => {
   return (
     <Suspense fallback={null}>
       <group ref={groupRef}>
-        <Html ref={contentRef} fullscreen portal={{ current: htmlPortal }}>
+        <Html
+          ref={contentRef}
+          fullscreen
+          portal={{ current: htmlPortal }}
+          zIndexRange={[0, 0]}
+        >
           <div className="h-full w-full flex flex-col justify-between m-auto px-4 py-8">
             <p className="font-semibold text-5xl md:text-7xl font-handwritten text-center">
               I like to make things.
