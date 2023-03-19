@@ -1,9 +1,8 @@
-import { useSpringValue, easings, config } from "@react-spring/web";
-import { Center, Circle, Html, MeshDistortMaterial } from "@react-three/drei";
+import { config, useSpringValue } from "@react-spring/web";
+import { Circle, Html, MeshDistortMaterial } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
-import { Suspense, useEffect, useRef } from "react";
+import { Suspense, useRef } from "react";
 import { Group, MathUtils, Mesh } from "three";
-import { useHtmlPortal } from "../useHtmlPortal";
 import { AvatarModel } from "./AvatarModel";
 import { PageComponentProps } from "./Pages";
 import { useScrollPages } from "./useScrollPages";
@@ -12,9 +11,9 @@ export const IntroPageContent = () => {
   return (
     <div className="max-w-xl m-auto p-8 flex">
       <div className="flex flex-col justify-center font-bold leading-none text-4xl sm:text-5xl text-center font-handwritten">
-        <p>Hi. My name is</p>
+        <p className="text-stone-600">Hi. My name is</p>
         <p
-          className="leading-none"
+          className="leading-none font-extrabold"
           style={{
             fontSize: "3em",
           }}
@@ -82,7 +81,7 @@ export const IntroPage = (props: PageComponentProps) => {
           bubbleFullPortraitPosition.x,
           bubbleFullLandscapePosition.x,
           // Scale this exponentially to get the curve I want
-          Math.pow(currentAspectLerpVal, 0.3)
+          Math.pow(currentAspectLerpVal, 0.175)
         ),
         y: MathUtils.lerp(
           bubbleFullPortraitPosition.y,
@@ -109,20 +108,20 @@ export const IntroPage = (props: PageComponentProps) => {
 
       if (avatarRef.current === null) return;
 
-      const avatarTransitionTarget = Math.abs(yPercent) < 0.01 ? 1 : 0;
+      const avatarTransitionTarget = Math.abs(yPercent) < 0.05 ? 1 : 0;
       if (avatarTransitionAnimationValue.goal !== avatarTransitionTarget) {
         avatarTransitionAnimationValue.start(avatarTransitionTarget);
       }
 
-      const avatarOffscreenY = -viewportHeight;
+      const avatarOffscreenY = -viewportHeight * 1.5;
 
       const avatarFullLandscapePosition = {
         x: -state.viewport.width * 0.25,
-        y: -state.viewport.height * 0.05,
+        y: -state.viewport.height * 0.4,
       };
       const avatarFullPortraitPosition = {
         x: -0.1,
-        y: -state.viewport.height * 0.25,
+        y: -state.viewport.height * 0.4,
       };
 
       const avatarOnscreenPosition = {
@@ -130,7 +129,7 @@ export const IntroPage = (props: PageComponentProps) => {
           avatarFullPortraitPosition.x,
           avatarFullLandscapePosition.x,
           // Scale this exponentially to get the curve I want
-          Math.pow(currentAspectLerpVal, 0.3)
+          Math.pow(currentAspectLerpVal, 0.175)
         ),
         y: MathUtils.lerp(
           avatarFullPortraitPosition.y,
@@ -156,6 +155,15 @@ export const IntroPage = (props: PageComponentProps) => {
         avatarVelocityScale = 1 - avatarTransitionAnimationValue.velocity * 40;
       }
 
+      const avatarIdleLoopInput = Math.sin(state.clock.elapsedTime * 2.5);
+      const avatarIdleLoopScale = MathUtils.mapLinear(
+        avatarIdleLoopInput,
+        -1,
+        1,
+        0.99,
+        1.01
+      );
+
       const avatarMaxScale = viewportHeight;
       const avatarMinScale = 1.2;
       const avatarBaseScale = MathUtils.lerp(
@@ -163,10 +171,13 @@ export const IntroPage = (props: PageComponentProps) => {
         avatarMaxScale,
         currentAspectLerpVal
       );
+
+      const avatarAlteredScale = avatarVelocityScale * avatarIdleLoopScale;
+
       avatarRef.current.scale.set(
-        avatarBaseScale / Math.pow(avatarVelocityScale, 0.5),
-        avatarBaseScale * avatarVelocityScale,
-        avatarBaseScale / Math.pow(avatarVelocityScale, 0.5)
+        avatarBaseScale / Math.pow(avatarAlteredScale, 0.5),
+        avatarBaseScale * avatarAlteredScale,
+        avatarBaseScale / Math.pow(avatarAlteredScale, 0.5)
       );
 
       avatarRef.current.lookAt(
@@ -212,9 +223,11 @@ export const IntroPage = (props: PageComponentProps) => {
       </Text> */}
       </group>
       <Suspense fallback={null}>
-        <Center ref={avatarRef}>
+        {/* <Center ref={centeredAvatarRef}> */}
+        <group ref={avatarRef}>
           <AvatarModel />
-        </Center>
+        </group>
+        {/* </Center> */}
         {/* <Svg src={Avatar} scale={0.0005} position={[0.1, 0.1, 1]} /> */}
         {/* <Sphere args={[0.25]} position={[-1, 0, 0.5]}></Sphere> */}
       </Suspense>

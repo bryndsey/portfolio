@@ -1,22 +1,126 @@
-import { Html } from "@react-three/drei";
+import { Billboard, Float, Html, Text } from "@react-three/drei";
+import { RootState, useFrame, useThree } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
-import { Group } from "three";
+import { Group, MathUtils, Vector3 } from "three";
 import { useHtmlPortal } from "../useHtmlPortal";
 import { PageComponentProps } from "./Pages";
 import { useScrollPages } from "./useScrollPages";
 
-const listOfThingsIMake = [
-  "React apps",
-  "Music",
-  "Games",
-  "3D models",
-  "Android apps",
+interface ThingIMake {
+  name: string;
+  positionFn: (state: RootState) => number[];
+}
+
+const newListOfThingsIMake: ThingIMake[] = [
+  {
+    name: "React apps",
+    positionFn: (state) => [
+      state.viewport.width * 0.1,
+      state.viewport.height * 0.1,
+      0.4,
+    ],
+  },
+  {
+    name: "Music",
+    positionFn: (state) => [
+      state.viewport.width * -0.25,
+      state.viewport.height * 0.2,
+      -0.1,
+    ],
+  },
+  {
+    name: "Games",
+    positionFn: (state) => [
+      state.viewport.width * 0.3,
+      state.viewport.height * -0.175,
+      -0.1,
+    ],
+  },
+  {
+    name: "3D models",
+    positionFn: (state) => [0, state.viewport.height * -0.25, 0.1],
+  },
+  {
+    name: "Android apps",
+    positionFn: (state) => [
+      state.viewport.width * -0.25,
+      state.viewport.height * -0.1,
+      -0.35,
+    ],
+  },
 ];
+
+const groupWorldPosition = new Vector3();
+
+const FloatingThing = (props: { thing: ThingIMake }) => {
+  const { thing } = props;
+
+  // const htmlPortal = useHtmlPortal();
+  const htmlPortal = useThree((state) => state.gl.domElement.parentElement!);
+
+  const groupRef = useRef<Group>(null!);
+  const htmlRef = useRef<HTMLDivElement>(null);
+
+  useFrame((state) => {
+    const position = thing.positionFn(state);
+
+    const floatOffset = [
+      // Offset by amount of a different component for more apparent randomness
+      0.1 * Math.sin((state.clock.elapsedTime + position[1] * 10) * 0.3),
+      0.1 * Math.sin((state.clock.elapsedTime + position[2] * 6) * 0.2),
+      0.025 * Math.sin((state.clock.elapsedTime + position[0] * 4) * 0.4),
+    ];
+
+    groupRef.current.position.set(
+      position[0] + floatOffset[0],
+      position[1] + floatOffset[1],
+      position[2] + floatOffset[2]
+    );
+
+    if (htmlRef.current === null) return;
+    const zPositionOpacity = MathUtils.mapLinear(
+      position[2],
+      -0.5,
+      0.5,
+      0.3,
+      0.8
+    );
+
+    groupWorldPosition.set(0, 0, 0);
+    const worldPosition = groupRef.current.localToWorld(groupWorldPosition);
+    const yPositionOpacity = MathUtils.smoothstep(
+      worldPosition.y,
+      -state.viewport.height * 0.4,
+      -state.viewport.height * 0.2
+    );
+
+    htmlRef.current.style.opacity = `${zPositionOpacity * yPositionOpacity}`;
+
+    htmlRef.current.hidden = !groupRef.current.visible;
+  });
+
+  return (
+    <group ref={groupRef}>
+      <Html
+        ref={htmlRef}
+        transform
+        portal={{ current: htmlPortal }}
+        distanceFactor={1}
+        pointerEvents={"none"}
+      >
+        <p className="text-2xl sm:text-4xl md:text-6xl font-extrabold whitespace-nowrap">
+          {thing.name}
+        </p>
+      </Html>
+    </group>
+  );
+};
 
 export const AboutPage = (props: PageComponentProps) => {
   const htmlPortal = useHtmlPortal();
   const groupRef = useRef<Group>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const wordCloudGroupRef = useRef<Group>(null!);
 
   useScrollPages(
     props.startPageIndex,
@@ -25,6 +129,13 @@ export const AboutPage = (props: PageComponentProps) => {
       if (groupRef.current === null) return;
 
       groupRef.current.visible = isPageVisible;
+
+      if (wordCloudGroupRef.current.visible != isPageVisible) {
+        wordCloudGroupRef.current.children.forEach(
+          (child) => (child.visible = isPageVisible)
+        );
+        wordCloudGroupRef.current.visible = isPageVisible;
+      }
 
       if (contentRef.current === null) return;
       contentRef.current.hidden = !isPageVisible;
@@ -39,16 +150,26 @@ export const AboutPage = (props: PageComponentProps) => {
   return (
     <Suspense fallback={null}>
       <group ref={groupRef}>
-        <Html ref={contentRef} fullscreen portal={{ current: htmlPortal }}>
-          <div className="h-full w-3/4 flex flex-col justify-around m-auto">
-            <p className="font-semibold text-2xl sm:text-4xl md:text-6xl">
-              {`I like to make things. ${listOfThingsIMake.join(". ")}.`}
+        <Html
+          ref={contentRef}
+          fullscreen
+          portal={{ current: htmlPortal }}
+          zIndexRange={[0, 0]}
+        >
+          <div className="h-full w-full flex flex-col justify-between m-auto px-4 py-8">
+            <p className="font-semibold text-5xl md:text-7xl font-handwritten text-center">
+              I like to make things.
             </p>
-            <p className="text-base sm:text-xl md:text-3xl text-center font-handwritten">
+            <p className="text-xl md:text-4xl text-center font-handwritten">
               {"Keep scrolling to see some things I've made."}
             </p>
           </div>
         </Html>
+        <group ref={wordCloudGroupRef}>
+          {newListOfThingsIMake.map((thing) => (
+            <FloatingThing key={thing.name} thing={thing} />
+          ))}
+        </group>
       </group>
     </Suspense>
   );
