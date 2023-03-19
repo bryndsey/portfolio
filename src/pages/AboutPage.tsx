@@ -61,7 +61,19 @@ const FloatingThing = (props: { thing: ThingIMake }) => {
 
   useFrame((state) => {
     const position = thing.positionFn(state);
-    groupRef.current.position.set(position[0], position[1], position[2]);
+
+    const floatOffset = [
+      // Offset by amount of a different component for more apparent randomness
+      0.1 * Math.sin((state.clock.elapsedTime + position[1] * 10) * 0.3),
+      0.1 * Math.sin((state.clock.elapsedTime + position[2] * 6) * 0.2),
+      0.025 * Math.sin((state.clock.elapsedTime + position[0] * 4) * 0.4),
+    ];
+
+    groupRef.current.position.set(
+      position[0] + floatOffset[0],
+      position[1] + floatOffset[1],
+      position[2] + floatOffset[2]
+    );
 
     if (htmlRef.current === null) return;
     const positionalOpacity = MathUtils.mapLinear(
