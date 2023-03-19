@@ -82,7 +82,7 @@ const FloatingThing = (props: { thing: ThingIMake }) => {
         portal={{ current: htmlPortal }}
         distanceFactor={1}
       >
-        <p className="text-2xl sm:text-4xl md:text-6xl font-bold whitespace-nowrap">
+        <p className="text-2xl sm:text-4xl md:text-6xl font-extrabold whitespace-nowrap">
           {thing.name}
         </p>
       </Html>
