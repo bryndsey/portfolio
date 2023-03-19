@@ -1,155 +1,43 @@
 import { animated, useTransition } from "@react-spring/web";
 import { Html } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
+import { stat } from "fs";
 import { Suspense, useRef, useState } from "react";
 import { Euler, Group, MathUtils } from "three";
-import { ProjectDescription } from "../../ProjectDescription";
 import { useHtmlPortal } from "../../useHtmlPortal";
 import { useScreenState } from "../../useScreenState";
 import { useCameraFrustumWidthAtDepth } from "../../utils";
 import { PageComponentProps } from "../Pages";
 import { useScrollPages } from "../useScrollPages";
 import { Device } from "./Device";
-import { useSelectedAndroidApp } from "./useSelectedAndroidApp";
-
-interface FloatingDescriptionProps {
-  showText: boolean;
-}
-
-const FloatingDescription = (props: FloatingDescriptionProps) => {
-  const { showText } = props;
-  const [selectedApp] = useSelectedAndroidApp();
-  const selectedAppTransitions = useTransition(selectedApp, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-    config: { duration: 300 },
-    exitBeforeEnter: true,
-  });
-
-  const showTextTransitions = useTransition(showText, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-    config: { duration: 300 },
-  });
-
-  const htmlPortal = useHtmlPortal();
-
-  const size = useThree((state) => state.size);
-  const viewport = useThree((state) => state.viewport);
-
-  return (
-    <group>
-      <Html
-        transform
-        style={{
-          width: size.width * 0.4,
-          // backgroundColor: "rgba(0, 0, 0, 0.2)",
-        }}
-        position={[viewport.width / 4, viewport.height / 6, 0]}
-        portal={{ current: htmlPortal }}
-        distanceFactor={1}
-      >
-        {showTextTransitions(
-          (showStyle, show) =>
-            show && (
-              <animated.div style={showStyle}>
-                {selectedAppTransitions((style, app) => (
-                  <animated.div style={style}>
-                    {app ? (
-                      <ProjectDescription
-                        projectName={app.name}
-                        descriptionText={app.description}
-                        url={app.url}
-                        actionText={"Play Store"}
-                        tags={app.projectTags}
-                      />
-                    ) : (
-                      <div className="text-center text-2xl">
-                        Select an app to learn more
-                      </div>
-                    )}
-                  </animated.div>
-                ))}
-              </animated.div>
-            )
-        )}
-      </Html>
-    </group>
-  );
-};
-
-interface FloatingTextProps {
-  showText: boolean;
-}
-
-const FloatingText = (props: FloatingTextProps) => {
-  const { showText } = props;
-
-  const showTextTransitions = useTransition(showText, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-    config: { duration: 300 },
-  });
-
-  const htmlPortal = useHtmlPortal();
-
-  const size = useThree((state) => state.size);
-  const viewport = useThree((state) => state.viewport);
-
-  const screenState = useScreenState();
-  const descriptionScaleFactor =
-    screenState.deviceClass === "small" &&
-    screenState.orientation === "landscape"
-      ? 1.5
-      : 2;
-
-  return (
-    <Html
-      center
-      style={{
-        width: size.width * 0.5,
-        // backgroundColor: "rgba(0, 0, 0, 0.2)",
-      }}
-      position={[viewport.width * 0.225, 0, 0]}
-      portal={{ current: htmlPortal }}
-      distanceFactor={descriptionScaleFactor}
-    >
-      {showTextTransitions(
-        (showStyle, show) =>
-          show && (
-            <animated.div style={showStyle}>
-              <p className="text-center text-7xl lg:text-8xl font-semibold mb-6">
-                Android Projects
-              </p>
-              <p className="text-center text-2xl font-handwritten font-bold">
-                (Tap the icons to learn more)
-              </p>
-            </animated.div>
-          )
-      )}
-    </Html>
-  );
-};
 
 const deviceRotation = new Euler();
 
 const deviceZOffset = 1.25;
 
 export const AndroidPage = (props: PageComponentProps) => {
-  const groupRef = useRef<Group>(null);
+  const groupRef = useRef<Group>(null!);
   const deviceGroupRef = useRef<Group>(null);
+
+  const labelText = useRef<HTMLDivElement>(null);
+  const labelTextGroup = useRef<Group>(null);
 
   const [showText, setShowText] = useState(false);
 
   const [isDeviceOn, setIsDeviceOn] = useState(false);
 
-  const viewport = useThree((state) => state.viewport);
-  const isPortrait = viewport.aspect < 1;
+  const screenState = useScreenState();
+  const isPortrait = screenState.orientation === "portrait";
 
   const frustumWidthAtZOffset = useCameraFrustumWidthAtDepth(deviceZOffset);
+
+  const htmlPortal = useHtmlPortal();
+
+  const descriptionScaleFactor =
+    screenState.deviceClass === "small" &&
+    screenState.orientation === "landscape"
+      ? 1.5
+      : 2;
 
   useScrollPages(
     props.startPageIndex,
@@ -162,14 +50,30 @@ export const AndroidPage = (props: PageComponentProps) => {
       state,
     }) => {
       const progress = enterAmount + exitAmount;
-      if (groupRef.current === null) return;
 
       groupRef.current.visible = isPageVisible;
 
-      const deviceOnState =
+      const isOnPageContent =
         isPageVisible && contentProgressAmount > 0 && contentProgressAmount < 1;
-      if (deviceOnState != isDeviceOn) {
-        setIsDeviceOn(deviceOnState);
+      if (isOnPageContent != isDeviceOn) {
+        setIsDeviceOn(isOnPageContent);
+      }
+
+      if (labelText.current !== null) {
+        labelText.current.style.width = `${state.size.width * 0.5}`;
+        labelText.current.hidden = !isOnPageContent;
+      }
+
+      if (labelTextGroup.current !== null) {
+        labelTextGroup.current.position.setX(state.viewport.width * 0.225);
+        labelTextGroup.current.visible = isPageVisible;
+        labelTextGroup.current.position.setY(
+          MathUtils.lerp(
+            -state.viewport.height,
+            state.viewport.height,
+            contentProgressAmount
+          )
+        );
       }
 
       if (!isPageVisible) return;
@@ -183,19 +87,24 @@ export const AndroidPage = (props: PageComponentProps) => {
 
       const targetXPosition = isPortrait ? 0 : -frustumWidthAtZOffset * 0.2;
 
-      const position = MathUtils.lerp(
+      const xPosition = MathUtils.lerp(
         targetXPosition,
         Math.min(-frustumWidthAtZOffset / 2, -1.5),
-        Math.abs(progress)
+        MathUtils.smoothstep(Math.abs(progress), 0, 1)
       );
-      deviceGroupRef.current.position.setX(position);
+      deviceGroupRef.current.position.setX(xPosition);
+
+      const zPosition =
+        deviceZOffset -
+        (1 - MathUtils.smootherstep(contentProgressAmount, 0, 1)) * 0.1;
+      deviceGroupRef.current.position.setZ(zPosition);
 
       const targetYRotation = isPortrait ? 0 : 0.2;
 
       const currentRotation = MathUtils.lerp(
         targetYRotation,
         Math.PI * Math.min(state.viewport.width, 2.5),
-        Math.abs(progress)
+        MathUtils.smoothstep(Math.abs(progress), 0, 1)
       );
 
       deviceRotation.set(0, currentRotation, 0);
@@ -210,8 +119,24 @@ export const AndroidPage = (props: PageComponentProps) => {
           <Device isOn={isDeviceOn} />
         </group>
       </Suspense>
-      {/* <FloatingDescription showText={showText} /> */}
-      {!isPortrait && <FloatingText showText={showText} />}
+      {!isPortrait && (
+        <group ref={labelTextGroup}>
+          <Html
+            ref={labelText}
+            center
+            portal={{ current: htmlPortal }}
+            distanceFactor={descriptionScaleFactor}
+          >
+            <p className="text-center text-7xl lg:text-8xl font-semibold mb-6">
+              Android Projects
+            </p>
+            <p className="text-center text-2xl font-handwritten font-bold">
+              (Tap the icons to learn more)
+            </p>
+          </Html>
+        </group>
+      )}
+      {/* {!isPortrait && <FloatingText showText={showText} />} */}
     </group>
   );
 };

@@ -27,7 +27,7 @@ const pagesShapes: Page[] = [
   // { id: "chores", component: ChoresPage, contentLength: 0.25 },
   { id: "tictactoeplus", component: TicTacToePage, contentLength: 0.5 },
   ...(isChrome
-    ? [{ id: "android", component: AndroidPage, contentLength: 0.25 }]
+    ? [{ id: "android", component: AndroidPage, contentLength: 0.5 }]
     : []),
   { id: "contact", component: ContactPage, contentLength: 0 },
 ];
