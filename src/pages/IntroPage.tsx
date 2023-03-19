@@ -109,7 +109,7 @@ export const IntroPage = (props: PageComponentProps) => {
 
       if (avatarRef.current === null) return;
 
-      const avatarTransitionTarget = Math.abs(yPercent) < 0.01 ? 1 : 0;
+      const avatarTransitionTarget = Math.abs(yPercent) < 0.05 ? 1 : 0;
       if (avatarTransitionAnimationValue.goal !== avatarTransitionTarget) {
         avatarTransitionAnimationValue.start(avatarTransitionTarget);
       }
