@@ -1,9 +1,8 @@
-import { useSpringValue, easings, config } from "@react-spring/web";
-import { Center, Circle, Html, MeshDistortMaterial } from "@react-three/drei";
+import { config, useSpringValue } from "@react-spring/web";
+import { Circle, Html, MeshDistortMaterial } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
-import { Suspense, useEffect, useRef } from "react";
+import { Suspense, useRef } from "react";
 import { Group, MathUtils, Mesh } from "three";
-import { useHtmlPortal } from "../useHtmlPortal";
 import { AvatarModel } from "./AvatarModel";
 import { PageComponentProps } from "./Pages";
 import { useScrollPages } from "./useScrollPages";
@@ -12,9 +11,9 @@ export const IntroPageContent = () => {
   return (
     <div className="max-w-xl m-auto p-8 flex">
       <div className="flex flex-col justify-center font-bold leading-none text-4xl sm:text-5xl text-center font-handwritten">
-        <p>Hi. My name is</p>
+        <p className="text-stone-600">Hi. My name is</p>
         <p
-          className="leading-none"
+          className="leading-none font-extrabold"
           style={{
             fontSize: "3em",
           }}
