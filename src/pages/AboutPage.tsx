@@ -50,6 +50,8 @@ const newListOfThingsIMake: ThingIMake[] = [
   },
 ];
 
+const groupWorldPosition = new Vector3();
+
 const FloatingThing = (props: { thing: ThingIMake }) => {
   const { thing } = props;
 
@@ -76,14 +78,23 @@ const FloatingThing = (props: { thing: ThingIMake }) => {
     );
 
     if (htmlRef.current === null) return;
-    const positionalOpacity = MathUtils.mapLinear(
+    const zPositionOpacity = MathUtils.mapLinear(
       position[2],
       -0.5,
       0.5,
       0.3,
       0.8
     );
-    htmlRef.current.style.opacity = `${positionalOpacity}`;
+
+    groupWorldPosition.set(0, 0, 0);
+    const worldPosition = groupRef.current.localToWorld(groupWorldPosition);
+    const yPositionOpacity = MathUtils.smoothstep(
+      worldPosition.y,
+      -state.viewport.height * 0.4,
+      -state.viewport.height * 0.2
+    );
+
+    htmlRef.current.style.opacity = `${zPositionOpacity * yPositionOpacity}`;
 
     htmlRef.current.hidden = !groupRef.current.visible;
   });
