@@ -17,7 +17,7 @@ const newListOfThingsIMake: ThingIMake[] = [
     positionFn: (state) => [
       state.viewport.width * 0.1,
       state.viewport.height * 0.1,
-      0.3,
+      0.4,
     ],
   },
   {
@@ -25,11 +25,11 @@ const newListOfThingsIMake: ThingIMake[] = [
     positionFn: (state) => [
       state.viewport.width * -0.25,
       state.viewport.height * 0.2,
-      0.1,
+      -0.1,
     ],
   },
   {
-    name: "3D models",
+    name: "Games",
     positionFn: (state) => [
       state.viewport.width * 0.3,
       state.viewport.height * -0.175,
@@ -37,8 +37,8 @@ const newListOfThingsIMake: ThingIMake[] = [
     ],
   },
   {
-    name: "Games",
-    positionFn: (state) => [0, state.viewport.height * -0.3, 0.05],
+    name: "3D models",
+    positionFn: (state) => [0, state.viewport.height * -0.25, 0.1],
   },
   {
     name: "Android apps",
@@ -63,10 +63,10 @@ const FloatingThing = (props: { thing: ThingIMake }) => {
 
     htmlRef.current.style.opacity = `${MathUtils.mapLinear(
       position[2],
-      -3,
-      1,
-      0,
-      1
+      -0.5,
+      0.5,
+      0.3,
+      0.8
     )}`;
   });
 
