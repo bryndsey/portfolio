@@ -1,5 +1,5 @@
 import { Billboard, Float, Html, Text } from "@react-three/drei";
-import { RootState, useFrame } from "@react-three/fiber";
+import { RootState, useFrame, useThree } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import { Group, MathUtils, Vector3 } from "three";
 import { useHtmlPortal } from "../useHtmlPortal";
@@ -53,7 +53,9 @@ const newListOfThingsIMake: ThingIMake[] = [
 const FloatingThing = (props: { thing: ThingIMake }) => {
   const { thing } = props;
 
-  const htmlPortal = useHtmlPortal();
+  // const htmlPortal = useHtmlPortal();
+  const htmlPortal = useThree((state) => state.gl.domElement.parentElement!);
+
   const groupRef = useRef<Group>(null!);
   const htmlRef = useRef<HTMLDivElement>(null);
 
@@ -81,6 +83,7 @@ const FloatingThing = (props: { thing: ThingIMake }) => {
         transform
         portal={{ current: htmlPortal }}
         distanceFactor={1}
+        pointerEvents={"none"}
       >
         <p className="text-2xl sm:text-4xl md:text-6xl font-extrabold whitespace-nowrap">
           {thing.name}
