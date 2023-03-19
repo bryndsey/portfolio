@@ -55,19 +55,23 @@ const FloatingThing = (props: { thing: ThingIMake }) => {
 
   const htmlPortal = useHtmlPortal();
   const groupRef = useRef<Group>(null!);
-  const htmlRef = useRef<HTMLDivElement>(null!);
+  const htmlRef = useRef<HTMLDivElement>(null);
 
   useFrame((state) => {
     const position = thing.positionFn(state);
     groupRef.current.position.set(position[0], position[1], position[2]);
 
-    htmlRef.current.style.opacity = `${MathUtils.mapLinear(
+    if (htmlRef.current === null) return;
+    const positionalOpacity = MathUtils.mapLinear(
       position[2],
       -0.5,
       0.5,
       0.3,
       0.8
-    )}`;
+    );
+    htmlRef.current.style.opacity = `${positionalOpacity}`;
+
+    htmlRef.current.hidden = !groupRef.current.visible;
   });
 
   return (
@@ -99,6 +103,13 @@ export const AboutPage = (props: PageComponentProps) => {
       if (groupRef.current === null) return;
 
       groupRef.current.visible = isPageVisible;
+
+      if (wordCloudGroupRef.current.visible != isPageVisible) {
+        wordCloudGroupRef.current.children.forEach(
+          (child) => (child.visible = isPageVisible)
+        );
+        wordCloudGroupRef.current.visible = isPageVisible;
+      }
 
       if (contentRef.current === null) return;
       contentRef.current.hidden = !isPageVisible;
