@@ -125,8 +125,6 @@ export const TicTacToePage = (props: PageComponentProps) => {
 
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const viewport = useThree((state) => state.viewport);
-
   const screenState = useScreenState();
   const descriptionScaleFactor =
     screenState.deviceClass === "small" &&
@@ -151,11 +149,29 @@ export const TicTacToePage = (props: PageComponentProps) => {
       if (contentRef.current === null) return;
       contentRef.current.hidden = !isPageVisible;
 
+      const viewport = state.viewport;
+
+      const descriptionWidth =
+        screenState.orientation === "portrait" &&
+        screenState.deviceClass === "small"
+          ? viewport.width * viewport.factor * 0.8
+          : viewport.width * viewport.factor * 0.45;
+
+      contentRef.current.style.width = `${descriptionWidth}px`;
+
+      const [descriptionX, descriptionY] =
+        screenState.orientation === "portrait" &&
+        screenState.deviceClass === "small"
+          ? [0, viewport.height * -0.2]
+          : [viewport.width * 0.2, 0];
+
       const descriptionScrollAmount = enterAmount + exitAmount;
+
+      descriptionGroupRef.current.position.setX(descriptionX);
 
       const viewportHeight = state.viewport.height;
       descriptionGroupRef.current.position.setY(
-        descriptionScrollAmount * viewportHeight
+        descriptionScrollAmount * viewportHeight + descriptionY
       );
 
       const showDescription = descriptionScrollAmount === 0;
@@ -168,18 +184,6 @@ export const TicTacToePage = (props: PageComponentProps) => {
     }
   );
 
-  const descriptionWidth =
-    screenState.orientation === "portrait" &&
-    screenState.deviceClass === "small"
-      ? viewport.width * viewport.factor * 0.8
-      : viewport.width * viewport.factor * 0.45;
-
-  const [descriptionX, descriptionY] =
-    screenState.orientation === "portrait" &&
-    screenState.deviceClass === "small"
-      ? [0, viewport.height * -0.2]
-      : [viewport.width * 0.2, 0];
-
   return (
     <group ref={pageGroupRef}>
       <group ref={descriptionGroupRef}>
@@ -187,9 +191,7 @@ export const TicTacToePage = (props: PageComponentProps) => {
           ref={contentRef}
           center
           portal={{ current: htmlPortal }}
-          position={[descriptionX, descriptionY, 0]}
           style={{
-            width: descriptionWidth,
             transition: "opacity 300ms",
           }}
           className="portrait:rounded-2xl portrait:p-4 portrait:bg-white portrait:bg-opacity-90 portrait:backdrop-blur"
