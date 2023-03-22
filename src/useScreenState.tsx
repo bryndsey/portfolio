@@ -1,5 +1,4 @@
 import { useThree } from "@react-three/fiber";
-import { useEffect, useMemo, useRef, useState } from "react";
 
 const smallSize = 640;
 const tabletSize = 768;
@@ -42,10 +41,6 @@ export const useScreenState = (): ScreenState => {
       );
     }
   );
-
-  useEffect(() => {
-    console.log("State changed");
-  }, [screenState]);
 
   return screenState;
 };
