@@ -66,7 +66,7 @@ const links: LinkData[] = [
   },
 ];
 
-export const ContactPage = (props: PageComponentProps) => {
+export const LinksPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
