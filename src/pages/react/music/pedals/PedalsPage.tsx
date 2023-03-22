@@ -4,7 +4,6 @@ import { Suspense, useRef } from "react";
 import {
   CatmullRomCurve3,
   Color,
-  DoubleSide,
   Group,
   MathUtils,
   Mesh,
@@ -33,10 +32,10 @@ export const PedalsPage = (props: PageComponentProps) => {
   const cableEnd = useRef<Group>(null!);
   const textureRef = useRef<MeshStandardMaterial>(null!);
 
+  const descriptionGroupRef = useRef<Group>(null!);
   const descriptionRef = useRef<HTMLDivElement>(null);
 
   const viewport = useThree((state) => state.viewport);
-  const size = useThree((state) => state.size);
 
   const htmlPortal = useHtmlPortal();
 
@@ -44,7 +43,7 @@ export const PedalsPage = (props: PageComponentProps) => {
   const curve = new CatmullRomCurve3(
     [
       new Vector3(
-        -useCameraFrustumWidthAtDepth(curveStartDepth) / 2 - 1,
+        -useCameraFrustumWidthAtDepth(viewport, curveStartDepth) / 2 - 1,
         1.25,
         curveStartDepth
       ),
@@ -63,18 +62,6 @@ export const PedalsPage = (props: PageComponentProps) => {
     screenState.orientation === "landscape"
       ? 1.5
       : 2;
-
-  const descriptionWidth =
-    screenState.orientation === "portrait" &&
-    screenState.deviceClass === "small"
-      ? size.width * 0.8
-      : size.width * 0.5;
-
-  const [descriptionX, descriptionY] =
-    screenState.orientation === "portrait" &&
-    screenState.deviceClass === "small"
-      ? [0, viewport.height * 0.25]
-      : [-viewport.width * 0.15, viewport.height * 0.2];
 
   useScrollPages(
     props.startPageIndex,
@@ -150,31 +137,47 @@ export const PedalsPage = (props: PageComponentProps) => {
       const showContent =
         contentProgressAmount > 0 && contentProgressAmount < 1;
       descriptionRef.current.style.opacity = showContent ? "1" : "0";
+
+      const descriptionWidth =
+        screenState.orientation === "portrait" &&
+        screenState.deviceClass === "small"
+          ? state.size.width * 0.8
+          : state.size.width * 0.5;
+
+      descriptionRef.current.style.width = `${descriptionWidth}px`;
+
+      const [descriptionX, descriptionY] =
+        screenState.orientation === "portrait" &&
+        screenState.deviceClass === "small"
+          ? [0, viewport.height * 0.25]
+          : [-viewport.width * 0.15, viewport.height * 0.2];
+
+      descriptionGroupRef.current.position.set(descriptionX, descriptionY, 0);
     }
   );
 
   return (
     <group ref={groupRef}>
-      <Html
-        ref={descriptionRef}
-        center
-        style={{
-          width: descriptionWidth,
-          transition: "opacity 300ms",
-          // backgroundColor: "rgba(0, 0, 0, 0.2)",
-        }}
-        className="portrait:rounded-2xl portrait:p-4 portrait:bg-white portrait:bg-opacity-90 portrait:backdrop-blur"
-        position={[descriptionX, descriptionY, 0]}
-        portal={{ current: htmlPortal }}
-        distanceFactor={descriptionScaleFactor}
-      >
-        <ProjectDescription
-          projectName="Pedals"
-          descriptionText="Create a virtual pedal board of effects for guitar"
-          url="https://pedals.bryanlindsey.dev"
-          tags={[ReactTag]}
-        />
-      </Html>
+      <group ref={descriptionGroupRef}>
+        <Html
+          ref={descriptionRef}
+          center
+          style={{
+            transition: "opacity 300ms",
+            // backgroundColor: "rgba(0, 0, 0, 0.2)",
+          }}
+          className="portrait:rounded-2xl portrait:p-4 portrait:bg-white portrait:bg-opacity-90 portrait:backdrop-blur"
+          portal={{ current: htmlPortal }}
+          distanceFactor={descriptionScaleFactor}
+        >
+          <ProjectDescription
+            projectName="Pedals"
+            descriptionText="Create a virtual pedal board of effects for guitar"
+            url="https://pedals.bryanlindsey.dev"
+            tags={[ReactTag]}
+          />
+        </Html>
+      </group>
       <Suspense fallback={null}>
         <group
           position={[viewport.width / 7, -0.2, 1]}
@@ -189,7 +192,6 @@ export const PedalsPage = (props: PageComponentProps) => {
             opacity={0.5}
             color={cableColor}
             alphaTest={0.001}
-            side={DoubleSide}
             roughness={0.8}
           >
             <GradientTexture
