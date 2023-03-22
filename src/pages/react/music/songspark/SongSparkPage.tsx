@@ -9,6 +9,7 @@ import {
 } from "../../../../ProjectDescription";
 import { useHtmlPortal } from "../../../../useHtmlPortal";
 import { useScreenState } from "../../../../useScreenState";
+import { useSpringScaleVisibility } from "../../../../useSpringScaleVisibility";
 import { PageComponentProps } from "../../../Pages";
 import { useScrollPages } from "../../../useScrollPages";
 import { AcousticGuitar } from "./AcousticGuitar";
@@ -34,6 +35,8 @@ export const SongSparkPage = (props: PageComponentProps) => {
       : 2;
 
   const htmlPortal = useHtmlPortal();
+
+  const { springValue, setVisibility } = useSpringScaleVisibility();
 
   useScrollPages(
     startPageIndex,
@@ -69,19 +72,21 @@ export const SongSparkPage = (props: PageComponentProps) => {
       groupRef.current.position.lerp(groupTargetPosition, 0.25);
 
       const showDescription = yPercent === 0;
+      setVisibility(showDescription);
+      descriptionRef.current.style.scale = `${springValue.get()}`;
       descriptionRef.current.style.opacity = showDescription ? "1" : "0";
-      descriptionRef.current.style.minWidth = `${state.size.width * 0.6}px`;
+      descriptionRef.current.style.minWidth = `${state.size.width * 0.55}px`;
 
       const descriptionX =
         screenState.orientation === "portrait" &&
         screenState.deviceClass === "small"
-          ? -state.viewport.width * 0.075
-          : -state.viewport.width * 0.125;
+          ? -state.viewport.width * 0.435
+          : -state.viewport.width * 0.375;
 
       const descriptionY =
         screenState.orientation === "portrait"
-          ? state.viewport.height * 0.2
-          : state.viewport.height * 0.15;
+          ? state.viewport.height * 0.4
+          : state.viewport.height * 0.35;
 
       htmlRef.current?.position.set(descriptionX, descriptionY, 0);
 
@@ -141,7 +146,7 @@ export const SongSparkPage = (props: PageComponentProps) => {
       <group ref={htmlRef}>
         <Html
           ref={descriptionRef}
-          center
+          // center
           style={{
             transition: "opacity 300ms",
             // backgroundColor: "rgba(0, 0, 0, 0.2)",

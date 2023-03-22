@@ -4,6 +4,7 @@ import { RootState, useFrame, useThree } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import { Group, MathUtils, Vector3 } from "three";
 import { useHtmlPortal } from "../useHtmlPortal";
+import { useSpringScaleVisibility } from "../useSpringScaleVisibility";
 import { PageComponentProps } from "./Pages";
 import { useScrollPages } from "./useScrollPages";
 
@@ -64,7 +65,7 @@ const FloatingThing = (props: { thing: ThingIMake }) => {
   const groupRef = useRef<Group>(null!);
   const htmlRef = useRef<HTMLDivElement>(null);
 
-  const visibilitySpring = useSpringValue(0);
+  const { springValue, setVisibility } = useSpringScaleVisibility();
 
   useFrame((state) => {
     const position = thing.positionFn(state);
@@ -107,14 +108,9 @@ const FloatingThing = (props: { thing: ThingIMake }) => {
       worldPosition.y >
       -state.viewport.height * floatingTextVisibilityThreshold;
 
-    const visibilitySpringTarget = shouldBeVisible ? 1 : 0;
-    if (visibilitySpring.goal != visibilitySpringTarget) {
-      const currentConfig =
-        visibilitySpringTarget === 1 ? config.wobbly : { duration: 120 };
-      visibilitySpring.start(visibilitySpringTarget, { config: currentConfig });
-    }
+    setVisibility(shouldBeVisible);
 
-    groupRef.current.scale.setScalar(visibilitySpring.get());
+    groupRef.current.scale.setScalar(springValue.get());
 
     htmlRef.current.style.opacity = `${zPositionOpacity}`;
 
