@@ -8,9 +8,14 @@ import {
   MeshStandardMaterial,
   ZeroFactor,
 } from "three";
-import { ProjectDescription, ReactTag } from "../../../ProjectDescription";
+import {
+  ProjectDescription,
+  ReactTag,
+  ThreeJsTag,
+} from "../../../ProjectDescription";
 import { useHtmlPortal } from "../../../useHtmlPortal";
 import { useScreenState } from "../../../useScreenState";
+import { useSpringScaleVisibility } from "../../../useSpringScaleVisibility";
 import { PageComponentProps } from "../../Pages";
 import { useScrollPages } from "../../useScrollPages";
 import Font from "./Comfortaa_Bold.json";
@@ -127,6 +132,8 @@ export const TicTacToePage = (props: PageComponentProps) => {
       ? 1.5
       : 2;
 
+  const { springValue, setVisibility } = useSpringScaleVisibility();
+
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
@@ -157,8 +164,8 @@ export const TicTacToePage = (props: PageComponentProps) => {
       const [descriptionX, descriptionY] =
         screenState.orientation === "portrait" &&
         screenState.deviceClass === "small"
-          ? [0, viewport.height * -0.2]
-          : [viewport.width * 0.2, 0];
+          ? [-viewport.width * 0.4, 0]
+          : [0, viewport.height * 0.2];
 
       const descriptionScrollAmount = enterAmount + exitAmount;
 
@@ -170,6 +177,8 @@ export const TicTacToePage = (props: PageComponentProps) => {
       );
 
       const showDescription = descriptionScrollAmount === 0;
+      setVisibility(showDescription);
+      contentRef.current.style.scale = `${springValue.get()}`;
       contentRef.current.style.opacity = showDescription ? "1" : "0";
 
       const piecesScrollAmount =
@@ -184,18 +193,17 @@ export const TicTacToePage = (props: PageComponentProps) => {
       <group ref={descriptionGroupRef}>
         <Html
           ref={contentRef}
-          center
           portal={{ current: htmlPortal }}
           style={{
             transition: "opacity 300ms",
           }}
-          className="portrait:rounded-2xl portrait:p-4 portrait:bg-white portrait:bg-opacity-90 portrait:backdrop-blur"
+          className="rounded-2xl p-4 bg-white bg-opacity-80 backdrop-blur"
           distanceFactor={descriptionScaleFactor}
         >
           <ProjectDescription
             projectName="Tic-Tac-Toe+"
             descriptionText="A unique twist on the classic game with an extra layer of strategy"
-            tags={[ReactTag]}
+            tags={[ReactTag, ThreeJsTag]}
             url="https://tictactoeplus.bryanlindsey.dev/"
           />
         </Html>

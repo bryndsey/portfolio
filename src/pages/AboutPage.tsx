@@ -1,8 +1,10 @@
+import { config, useSpringValue } from "@react-spring/web";
 import { Billboard, Float, Html, Text } from "@react-three/drei";
 import { RootState, useFrame, useThree } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import { Group, MathUtils, Vector3 } from "three";
 import { useHtmlPortal } from "../useHtmlPortal";
+import { useSpringScaleVisibility } from "../useSpringScaleVisibility";
 import { PageComponentProps } from "./Pages";
 import { useScrollPages } from "./useScrollPages";
 
@@ -52,6 +54,8 @@ const newListOfThingsIMake: ThingIMake[] = [
 
 const groupWorldPosition = new Vector3();
 
+const floatingTextVisibilityThreshold = 0.3;
+
 const FloatingThing = (props: { thing: ThingIMake }) => {
   const { thing } = props;
 
@@ -60,6 +64,8 @@ const FloatingThing = (props: { thing: ThingIMake }) => {
 
   const groupRef = useRef<Group>(null!);
   const htmlRef = useRef<HTMLDivElement>(null);
+
+  const { springValue, setVisibility } = useSpringScaleVisibility();
 
   useFrame((state) => {
     const position = thing.positionFn(state);
@@ -97,13 +103,16 @@ const FloatingThing = (props: { thing: ThingIMake }) => {
 
     groupWorldPosition.set(0, 0, 0);
     const worldPosition = groupRef.current.localToWorld(groupWorldPosition);
-    const yPositionOpacity = MathUtils.smoothstep(
-      worldPosition.y,
-      -state.viewport.height * 0.4,
-      -state.viewport.height * 0.2
-    );
 
-    htmlRef.current.style.opacity = `${zPositionOpacity * yPositionOpacity}`;
+    const shouldBeVisible =
+      worldPosition.y >
+      -state.viewport.height * floatingTextVisibilityThreshold;
+
+    setVisibility(shouldBeVisible);
+
+    groupRef.current.scale.setScalar(springValue.get());
+
+    htmlRef.current.style.opacity = `${zPositionOpacity}`;
 
     htmlRef.current.hidden = !groupRef.current.visible;
   });
@@ -117,7 +126,7 @@ const FloatingThing = (props: { thing: ThingIMake }) => {
         distanceFactor={1}
         pointerEvents={"none"}
       >
-        <p className="text-2xl sm:text-4xl md:text-6xl font-extrabold whitespace-nowrap">
+        <p className="text-2xl 2xs:text-4xl xs:text-5xl md:text-6xl font-extrabold whitespace-nowrap">
           {thing.name}
         </p>
       </Html>

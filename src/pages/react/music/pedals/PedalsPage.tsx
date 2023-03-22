@@ -12,13 +12,19 @@ import {
   Vector3,
 } from "three";
 import { useCameraFrustumWidthAtDepth } from "../../../../utils";
-import { ProjectDescription, ReactTag } from "../../../../ProjectDescription";
+import {
+  KonvaTag,
+  ProjectDescription,
+  ReactTag,
+  WebAudioTag,
+} from "../../../../ProjectDescription";
 import { useHtmlPortal } from "../../../../useHtmlPortal";
 import { PageComponentProps } from "../../../Pages";
 import { useScrollPages } from "../../../useScrollPages";
 import { CablePlugModel } from "./CablePlugModel";
 import { PedalModel } from "./PedalModel";
 import { useScreenState } from "../../../../useScreenState";
+import { useSpringScaleVisibility } from "../../../../useSpringScaleVisibility";
 
 const cableColor = new Color(0.03, 0.03, 0.03);
 
@@ -62,6 +68,8 @@ export const PedalsPage = (props: PageComponentProps) => {
     screenState.orientation === "landscape"
       ? 1.5
       : 2;
+
+  const { springValue, setVisibility } = useSpringScaleVisibility();
 
   useScrollPages(
     props.startPageIndex,
@@ -136,6 +144,8 @@ export const PedalsPage = (props: PageComponentProps) => {
 
       const showContent =
         contentProgressAmount > 0 && contentProgressAmount < 1;
+      setVisibility(showContent);
+      descriptionRef.current.style.scale = `${springValue.get()}`;
       descriptionRef.current.style.opacity = showContent ? "1" : "0";
 
       const descriptionWidth =
@@ -149,8 +159,8 @@ export const PedalsPage = (props: PageComponentProps) => {
       const [descriptionX, descriptionY] =
         screenState.orientation === "portrait" &&
         screenState.deviceClass === "small"
-          ? [0, viewport.height * 0.25]
-          : [-viewport.width * 0.15, viewport.height * 0.2];
+          ? [-viewport.width * 0.4, viewport.height * 0.45]
+          : [-viewport.width * 0.4, viewport.height * 0.4];
 
       descriptionGroupRef.current.position.set(descriptionX, descriptionY, 0);
     }
@@ -161,12 +171,11 @@ export const PedalsPage = (props: PageComponentProps) => {
       <group ref={descriptionGroupRef}>
         <Html
           ref={descriptionRef}
-          center
           style={{
             transition: "opacity 300ms",
             // backgroundColor: "rgba(0, 0, 0, 0.2)",
           }}
-          className="portrait:rounded-2xl portrait:p-4 portrait:bg-white portrait:bg-opacity-90 portrait:backdrop-blur"
+          className="rounded-2xl p-4 bg-white bg-opacity-80 backdrop-blur"
           portal={{ current: htmlPortal }}
           distanceFactor={descriptionScaleFactor}
         >
@@ -174,7 +183,7 @@ export const PedalsPage = (props: PageComponentProps) => {
             projectName="Pedals"
             descriptionText="Create a virtual pedal board of effects for guitar"
             url="https://pedals.bryanlindsey.dev"
-            tags={[ReactTag]}
+            tags={[ReactTag, WebAudioTag, KonvaTag]}
           />
         </Html>
       </group>

@@ -1,5 +1,7 @@
 import { IconType } from "react-icons";
 import { FaAndroid, FaReact, FaUnity } from "react-icons/fa";
+import { SiThreedotjs, SiKonva } from "react-icons/si";
+import { GiSoundWaves } from "react-icons/gi";
 import { logAnalyticsEvent } from "./firebase";
 
 interface ProjectDescriptionProps {
@@ -22,11 +24,11 @@ const Tags = (props: TagsProps) => {
         return (
           <div
             key={tag.name}
-            className="tooltip tooltip-bottom"
+            className="tooltip tooltip-top xs:tooltip-bottom tooltip-secondary"
             data-tip={tag.name}
           >
             <div
-              className="p-1 sm:p-1.5 rounded-full"
+              className="p-1.5 sm:p-2 rounded-full"
               style={{
                 backgroundColor: tag.color,
               }}
@@ -72,12 +74,17 @@ export const ProjectDescription = (props: ProjectDescriptionProps) => {
       <h2 className="text-4xl sm:text-6xl font-bold">{props.projectName}</h2>
       <p className="text-2xl sm:text-3xl">{props.descriptionText}</p>
 
-      {props.url && (
-        <LinkButton linkUrl={props.url} actionText={props.actionText} />
-      )}
-      {/* <div className="flex flex-row flex-wrap items-center gap-2 sm:gap-4">
-        {props.tags && <Tags tags={props.tags} />}
-      </div> */}
+      <div className="flex flex-col-reverse xs:flex-row flex-wrap justify-between gap-3 xs:gap-2">
+        {props.url && (
+          <LinkButton linkUrl={props.url} actionText={props.actionText} />
+        )}
+        {props.tags && (
+          <div className="flex flex-row items-center gap-2">
+            <p className="text-sm m-0 opacity-50">Made with</p>
+            <Tags tags={props.tags} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
@@ -100,6 +107,27 @@ export const ReactTag: Tag = {
   name: "React",
   color: "rgb(20, 158, 202)",
   icon: FaReact,
+  iconColor: "white",
+};
+
+export const ThreeJsTag: Tag = {
+  name: "Three.js",
+  color: "rgb(24, 24, 24)",
+  icon: SiThreedotjs,
+  iconColor: "white",
+};
+
+export const KonvaTag: Tag = {
+  name: "Konva",
+  color: "#0d83cd",
+  icon: SiKonva,
+  iconColor: "white",
+};
+
+export const WebAudioTag: Tag = {
+  name: "Web Audio",
+  color: "#a16207",
+  icon: GiSoundWaves,
   iconColor: "white",
 };
 
