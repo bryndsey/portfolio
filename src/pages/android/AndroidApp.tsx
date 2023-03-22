@@ -11,7 +11,7 @@ export type AndroidApp = {
   icon?: string;
   iconBackgroundColor?: string;
   iconScale?: number;
-  projectTags: Tag[];
+  projectTags?: Tag[];
 };
 // TODO: Maybe move this into a context/state holder instead of global public variable
 
@@ -49,7 +49,6 @@ export const androidApps: AndroidApp[] = [
       "I've built apps for Android professionally since 2015. In that time, I've worked on apps for food ordering, banking, controlling smart lights, and more!",
     iconBackgroundColor: "bg-slate-500",
     icon: AndroidBryanIcon,
-    projectTags: [AndroidTag],
   },
   // {
   //   name: "Connected Light App",

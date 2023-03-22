@@ -12,7 +12,12 @@ import {
   Vector3,
 } from "three";
 import { useCameraFrustumWidthAtDepth } from "../../../../utils";
-import { ProjectDescription, ReactTag } from "../../../../ProjectDescription";
+import {
+  KonvaTag,
+  ProjectDescription,
+  ReactTag,
+  WebAudioTag,
+} from "../../../../ProjectDescription";
 import { useHtmlPortal } from "../../../../useHtmlPortal";
 import { PageComponentProps } from "../../../Pages";
 import { useScrollPages } from "../../../useScrollPages";
@@ -174,7 +179,7 @@ export const PedalsPage = (props: PageComponentProps) => {
             projectName="Pedals"
             descriptionText="Create a virtual pedal board of effects for guitar"
             url="https://pedals.bryanlindsey.dev"
-            tags={[ReactTag]}
+            tags={[ReactTag, WebAudioTag, KonvaTag]}
           />
         </Html>
       </group>

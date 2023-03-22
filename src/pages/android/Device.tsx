@@ -22,7 +22,6 @@ const DeviceScreen = (props: DeviceScreenProps) => {
   return (
     <Html
       transform
-      occlude
       portal={{ current: htmlPortal }}
       distanceFactor={1 / scaleFactor}
       style={{
