@@ -132,18 +132,11 @@ export const SongSparkPage = (props: PageComponentProps) => {
     }
   );
 
-  // const descriptionWidth =
-  //   screenState.orientation === "portrait" &&
-  //   screenState.deviceClass === "small"
-  //     ? viewport.width * viewport.factor * 0.8
-  //     : viewport.width * viewport.factor * 0.5;
-
   return (
     <group ref={groupRef}>
       <group ref={htmlRef}>
         <Html
           ref={descriptionRef}
-          occlude
           style={{
             transition: "opacity 300ms",
             // backgroundColor: "rgba(0, 0, 0, 0.2)",
