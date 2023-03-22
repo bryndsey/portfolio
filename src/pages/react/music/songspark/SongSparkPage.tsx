@@ -2,7 +2,11 @@ import { Center, Html } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import { Group, MathUtils, Vector3 } from "three";
-import { ProjectDescription, ReactTag } from "../../../../ProjectDescription";
+import {
+  ProjectDescription,
+  ReactTag,
+  WebAudioTag,
+} from "../../../../ProjectDescription";
 import { useHtmlPortal } from "../../../../useHtmlPortal";
 import { useScreenState } from "../../../../useScreenState";
 import { PageComponentProps } from "../../../Pages";
@@ -150,7 +154,7 @@ export const SongSparkPage = (props: PageComponentProps) => {
             projectName="SongSpark"
             descriptionText="Inspire your inner songwriter with generated melodies and chord progressions"
             url="https://songspark.bryanlindsey.dev"
-            tags={[ReactTag]}
+            tags={[ReactTag, WebAudioTag]}
           />
         </Html>
       </group>

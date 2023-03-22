@@ -111,6 +111,13 @@ export const ThreeJsTag: Tag = {
   iconColor: "white",
 };
 
+export const WebAudioTag: Tag = {
+  name: "Web Audio",
+  color: "#a16207",
+  icon: GiSoundWaves,
+  iconColor: "white",
+};
+
 export const UnityTag: Tag = {
   name: "Unity",
   color: "dimgray",
