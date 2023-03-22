@@ -117,7 +117,7 @@ const FloatingThing = (props: { thing: ThingIMake }) => {
         distanceFactor={1}
         pointerEvents={"none"}
       >
-        <p className="text-2xl sm:text-4xl md:text-6xl font-extrabold whitespace-nowrap">
+        <p className="text-2xl 2xs:text-4xl xs:text-5xl md:text-6xl font-extrabold whitespace-nowrap">
           {thing.name}
         </p>
       </Html>
