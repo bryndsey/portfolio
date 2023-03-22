@@ -36,7 +36,6 @@ export const PedalsPage = (props: PageComponentProps) => {
   const descriptionRef = useRef<HTMLDivElement>(null);
 
   const viewport = useThree((state) => state.viewport);
-  const size = useThree((state) => state.size);
 
   const htmlPortal = useHtmlPortal();
 
@@ -63,12 +62,6 @@ export const PedalsPage = (props: PageComponentProps) => {
     screenState.orientation === "landscape"
       ? 1.5
       : 2;
-
-  const descriptionWidth =
-    screenState.orientation === "portrait" &&
-    screenState.deviceClass === "small"
-      ? size.width * 0.8
-      : size.width * 0.5;
 
   const [descriptionX, descriptionY] =
     screenState.orientation === "portrait" &&
@@ -150,6 +143,14 @@ export const PedalsPage = (props: PageComponentProps) => {
       const showContent =
         contentProgressAmount > 0 && contentProgressAmount < 1;
       descriptionRef.current.style.opacity = showContent ? "1" : "0";
+
+      const descriptionWidth =
+        screenState.orientation === "portrait" &&
+        screenState.deviceClass === "small"
+          ? state.size.width * 0.8
+          : state.size.width * 0.5;
+
+      descriptionRef.current.style.width = `${descriptionWidth}px`;
     }
   );
 
@@ -159,7 +160,6 @@ export const PedalsPage = (props: PageComponentProps) => {
         ref={descriptionRef}
         center
         style={{
-          width: descriptionWidth,
           transition: "opacity 300ms",
           // backgroundColor: "rgba(0, 0, 0, 0.2)",
         }}
