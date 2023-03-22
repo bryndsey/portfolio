@@ -109,6 +109,7 @@ function App() {
             cameraPosition.z
           );
         }}
+        dpr={Math.min(window.devicePixelRatio, 2)}
       >
         {import.meta.env.DEV && showStats && <Stats />}
         <CameraRig />
