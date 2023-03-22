@@ -17,12 +17,11 @@ export const SongSparkPage = (props: PageComponentProps) => {
   const contentPageLength = exitPageIndex - startPageIndex;
 
   const groupRef = useRef<Group>(null);
+  const htmlRef = useRef<Group>(null);
   const descriptionRef = useRef<HTMLDivElement>(null);
   const guitarRef = useRef<Group>(null!);
   const keyboardRef = useRef<Group>(null!);
 
-  const viewport = useThree((state) => state.viewport);
-  const size = useThree((state) => state.size);
   const screenState = useScreenState();
   const descriptionScaleFactor =
     screenState.deviceClass === "small" &&
@@ -67,6 +66,20 @@ export const SongSparkPage = (props: PageComponentProps) => {
 
       const showDescription = yPercent === 0;
       descriptionRef.current.style.opacity = showDescription ? "1" : "0";
+      descriptionRef.current.style.minWidth = `${state.size.width / 2}`;
+
+      const descriptionX =
+        screenState.orientation === "portrait" &&
+        screenState.deviceClass === "small"
+          ? -state.viewport.width * 0.425
+          : -state.viewport.width * 0.375;
+
+      const descriptionY =
+        screenState.orientation === "portrait"
+          ? state.viewport.height * 0.4
+          : state.viewport.height * 0.25;
+
+      htmlRef.current?.position.set(descriptionX, descriptionY, 0);
 
       // Multiply by 2 here to account for the fact that parent group has stopped moving
       // - we double the speed here to keep it viusally constant
@@ -119,45 +132,34 @@ export const SongSparkPage = (props: PageComponentProps) => {
     }
   );
 
-  const descriptionWidth =
-    screenState.orientation === "portrait" &&
-    screenState.deviceClass === "small"
-      ? viewport.width * viewport.factor * 0.8
-      : viewport.width * viewport.factor * 0.5;
-
-  const descriptionX =
-    screenState.orientation === "portrait" &&
-    screenState.deviceClass === "small"
-      ? -viewport.width * 0.425
-      : -viewport.width * 0.375;
-
-  const descriptionY =
-    screenState.orientation === "portrait"
-      ? viewport.height * 0.4
-      : viewport.height * 0.25;
+  // const descriptionWidth =
+  //   screenState.orientation === "portrait" &&
+  //   screenState.deviceClass === "small"
+  //     ? viewport.width * viewport.factor * 0.8
+  //     : viewport.width * viewport.factor * 0.5;
 
   return (
     <group ref={groupRef}>
-      <Html
-        ref={descriptionRef}
-        occlude
-        style={{
-          minWidth: size.width / 2,
-          transition: "opacity 300ms",
-          // backgroundColor: "rgba(0, 0, 0, 0.2)",
-        }}
-        className="portrait:rounded-2xl portrait:p-4 portrait:bg-white portrait:bg-opacity-90 portrait:backdrop-blur"
-        position={[descriptionX, descriptionY, 0]}
-        portal={{ current: htmlPortal }}
-        distanceFactor={descriptionScaleFactor}
-      >
-        <ProjectDescription
-          projectName="SongSpark"
-          descriptionText="Inspire your inner songwriter with generated melodies and chord progressions"
-          url="https://songspark.bryanlindsey.dev"
-          tags={[ReactTag]}
-        />
-      </Html>
+      <group ref={htmlRef}>
+        <Html
+          ref={descriptionRef}
+          occlude
+          style={{
+            transition: "opacity 300ms",
+            // backgroundColor: "rgba(0, 0, 0, 0.2)",
+          }}
+          className="portrait:rounded-2xl portrait:p-4 portrait:bg-white portrait:bg-opacity-90 portrait:backdrop-blur"
+          portal={{ current: htmlPortal }}
+          distanceFactor={descriptionScaleFactor}
+        >
+          <ProjectDescription
+            projectName="SongSpark"
+            descriptionText="Inspire your inner songwriter with generated melodies and chord progressions"
+            url="https://songspark.bryanlindsey.dev"
+            tags={[ReactTag]}
+          />
+        </Html>
+      </group>
       <Suspense fallback={null}>
         <Center scale={1.5} ref={guitarRef}>
           <AcousticGuitar />
