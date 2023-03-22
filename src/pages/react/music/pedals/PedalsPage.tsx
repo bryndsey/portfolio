@@ -33,6 +33,7 @@ export const PedalsPage = (props: PageComponentProps) => {
   const cableEnd = useRef<Group>(null!);
   const textureRef = useRef<MeshStandardMaterial>(null!);
 
+  const descriptionGroupRef = useRef<Group>(null!);
   const descriptionRef = useRef<HTMLDivElement>(null);
 
   const viewport = useThree((state) => state.viewport);
@@ -62,12 +63,6 @@ export const PedalsPage = (props: PageComponentProps) => {
     screenState.orientation === "landscape"
       ? 1.5
       : 2;
-
-  const [descriptionX, descriptionY] =
-    screenState.orientation === "portrait" &&
-    screenState.deviceClass === "small"
-      ? [0, viewport.height * 0.25]
-      : [-viewport.width * 0.15, viewport.height * 0.2];
 
   useScrollPages(
     props.startPageIndex,
@@ -151,30 +146,39 @@ export const PedalsPage = (props: PageComponentProps) => {
           : state.size.width * 0.5;
 
       descriptionRef.current.style.width = `${descriptionWidth}px`;
+
+      const [descriptionX, descriptionY] =
+        screenState.orientation === "portrait" &&
+        screenState.deviceClass === "small"
+          ? [0, viewport.height * 0.25]
+          : [-viewport.width * 0.15, viewport.height * 0.2];
+
+      descriptionGroupRef.current.position.set(descriptionX, descriptionY, 0);
     }
   );
 
   return (
     <group ref={groupRef}>
-      <Html
-        ref={descriptionRef}
-        center
-        style={{
-          transition: "opacity 300ms",
-          // backgroundColor: "rgba(0, 0, 0, 0.2)",
-        }}
-        className="portrait:rounded-2xl portrait:p-4 portrait:bg-white portrait:bg-opacity-90 portrait:backdrop-blur"
-        position={[descriptionX, descriptionY, 0]}
-        portal={{ current: htmlPortal }}
-        distanceFactor={descriptionScaleFactor}
-      >
-        <ProjectDescription
-          projectName="Pedals"
-          descriptionText="Create a virtual pedal board of effects for guitar"
-          url="https://pedals.bryanlindsey.dev"
-          tags={[ReactTag]}
-        />
-      </Html>
+      <group ref={descriptionGroupRef}>
+        <Html
+          ref={descriptionRef}
+          center
+          style={{
+            transition: "opacity 300ms",
+            // backgroundColor: "rgba(0, 0, 0, 0.2)",
+          }}
+          className="portrait:rounded-2xl portrait:p-4 portrait:bg-white portrait:bg-opacity-90 portrait:backdrop-blur"
+          portal={{ current: htmlPortal }}
+          distanceFactor={descriptionScaleFactor}
+        >
+          <ProjectDescription
+            projectName="Pedals"
+            descriptionText="Create a virtual pedal board of effects for guitar"
+            url="https://pedals.bryanlindsey.dev"
+            tags={[ReactTag]}
+          />
+        </Html>
+      </group>
       <Suspense fallback={null}>
         <group
           position={[viewport.width / 7, -0.2, 1]}
