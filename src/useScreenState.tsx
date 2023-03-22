@@ -1,4 +1,5 @@
 import { useThree } from "@react-three/fiber";
+import { useMemo, useState } from "react";
 
 const smallSize = 640;
 const tabletSize = 768;
@@ -14,6 +15,18 @@ interface ScreenState {
 export const useScreenState = (): ScreenState => {
   const size = useThree((state) => state.size);
 
+  const [currentClass, setCurrentClass] = useState<DeviceClass>("small");
+  const [currentOrientation, setCurrentOrientation] =
+    useState<ScreenOrientation>("landscape");
+
+  const currentState = useMemo(
+    () => ({
+      deviceClass: currentClass,
+      orientation: currentOrientation,
+    }),
+    [currentClass, currentOrientation]
+  );
+
   const smallestSize = Math.min(size.width, size.height);
   const deviceClass: DeviceClass =
     smallestSize < smallSize
@@ -22,8 +35,16 @@ export const useScreenState = (): ScreenState => {
       ? "tablet"
       : "large";
 
+  if (currentClass !== deviceClass) {
+    setCurrentClass(deviceClass);
+  }
+
   const orientation: ScreenOrientation =
     size.width <= size.height ? "portrait" : "landscape";
 
-  return { deviceClass: deviceClass, orientation: orientation };
+  if (currentOrientation !== orientation) {
+    setCurrentOrientation(orientation);
+  }
+
+  return currentState;
 };
