@@ -44,7 +44,7 @@ export const PedalsPage = (props: PageComponentProps) => {
   const curve = new CatmullRomCurve3(
     [
       new Vector3(
-        -useCameraFrustumWidthAtDepth(curveStartDepth) / 2 - 1,
+        -useCameraFrustumWidthAtDepth(viewport, curveStartDepth) / 2 - 1,
         1.25,
         curveStartDepth
       ),

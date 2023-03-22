@@ -29,8 +29,6 @@ export const AndroidPage = (props: PageComponentProps) => {
   const screenState = useScreenState();
   const isPortrait = screenState.orientation === "portrait";
 
-  const frustumWidthAtZOffset = useCameraFrustumWidthAtDepth(deviceZOffset);
-
   const htmlPortal = useHtmlPortal();
 
   const descriptionScaleFactor =
@@ -85,6 +83,10 @@ export const AndroidPage = (props: PageComponentProps) => {
         setShowText(shouldShowText);
       }
 
+      const frustumWidthAtZOffset = useCameraFrustumWidthAtDepth(
+        state.viewport,
+        deviceZOffset
+      );
       const targetXPosition = isPortrait ? 0 : -frustumWidthAtZOffset * 0.2;
 
       const xPosition = MathUtils.lerp(
