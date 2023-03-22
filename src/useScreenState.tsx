@@ -1,11 +1,14 @@
 import { useThree } from "@react-three/fiber";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const smallSize = 640;
 const tabletSize = 768;
 
-type DeviceClass = "small" | "tablet" | "large";
-type ScreenOrientation = "landscape" | "portrait";
+const deviceClasses = ["small", "tablet", "large"] as const;
+type DeviceClass = typeof deviceClasses[number];
+
+const screenOrientations = ["landscape", "portrait"] as const;
+type ScreenOrientation = typeof screenOrientations[number];
 
 interface ScreenState {
   deviceClass: DeviceClass;
@@ -13,38 +16,36 @@ interface ScreenState {
 }
 
 export const useScreenState = (): ScreenState => {
-  const size = useThree((state) => state.size);
+  const screenState = useThree(
+    (state) => {
+      const size = state.size;
+      const smallestSize = Math.min(size.width, size.height);
+      const deviceClass: DeviceClass =
+        smallestSize < smallSize
+          ? "small"
+          : smallestSize < tabletSize
+          ? "tablet"
+          : "large";
 
-  const [currentClass, setCurrentClass] = useState<DeviceClass>("small");
-  const [currentOrientation, setCurrentOrientation] =
-    useState<ScreenOrientation>("landscape");
+      const orientation: ScreenOrientation =
+        size.width <= size.height ? "portrait" : "landscape";
 
-  const currentState = useMemo(
-    () => ({
-      deviceClass: currentClass,
-      orientation: currentOrientation,
-    }),
-    [currentClass, currentOrientation]
+      return {
+        deviceClass: deviceClass,
+        orientation: orientation,
+      } as ScreenState;
+    },
+    (state, newState) => {
+      return (
+        newState.deviceClass === state.deviceClass &&
+        newState.orientation === state.orientation
+      );
+    }
   );
 
-  const smallestSize = Math.min(size.width, size.height);
-  const deviceClass: DeviceClass =
-    smallestSize < smallSize
-      ? "small"
-      : smallestSize < tabletSize
-      ? "tablet"
-      : "large";
+  useEffect(() => {
+    console.log("State changed");
+  }, [screenState]);
 
-  if (currentClass !== deviceClass) {
-    setCurrentClass(deviceClass);
-  }
-
-  const orientation: ScreenOrientation =
-    size.width <= size.height ? "portrait" : "landscape";
-
-  if (currentOrientation !== orientation) {
-    setCurrentOrientation(orientation);
-  }
-
-  return currentState;
+  return screenState;
 };
