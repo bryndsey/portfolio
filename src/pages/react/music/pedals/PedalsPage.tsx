@@ -13,6 +13,7 @@ import {
 } from "three";
 import { useCameraFrustumWidthAtDepth } from "../../../../utils";
 import {
+  KonvaTag,
   ProjectDescription,
   ReactTag,
   WebAudioTag,
@@ -178,7 +179,7 @@ export const PedalsPage = (props: PageComponentProps) => {
             projectName="Pedals"
             descriptionText="Create a virtual pedal board of effects for guitar"
             url="https://pedals.bryanlindsey.dev"
-            tags={[ReactTag, WebAudioTag]}
+            tags={[ReactTag, WebAudioTag, KonvaTag]}
           />
         </Html>
       </group>

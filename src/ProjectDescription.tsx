@@ -111,6 +111,13 @@ export const ThreeJsTag: Tag = {
   iconColor: "white",
 };
 
+export const KonvaTag: Tag = {
+  name: "Konva",
+  color: "#0d83cd",
+  icon: SiKonva,
+  iconColor: "white",
+};
+
 export const WebAudioTag: Tag = {
   name: "Web Audio",
   color: "#a16207",
