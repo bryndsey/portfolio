@@ -24,7 +24,7 @@ const Tags = (props: TagsProps) => {
         return (
           <div
             key={tag.name}
-            className="tooltip tooltip-bottom tooltip-secondary"
+            className="tooltip tooltip-top xs:tooltip-bottom tooltip-secondary"
             data-tip={tag.name}
           >
             <div
