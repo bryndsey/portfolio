@@ -12,6 +12,7 @@ import {
   ProjectDescription,
   ReactTag,
   ThreeJsTag,
+  TypescriptTag,
 } from "../../../ProjectDescription";
 import { useHtmlPortal } from "../../../useHtmlPortal";
 import { useScreenState } from "../../../useScreenState";
@@ -203,7 +204,7 @@ export const TicTacToePage = (props: PageComponentProps) => {
           <ProjectDescription
             projectName="Tic-Tac-Toe+"
             descriptionText="A unique twist on the classic game with an extra layer of strategy"
-            tags={[ReactTag, ThreeJsTag]}
+            tags={[ReactTag, TypescriptTag, ThreeJsTag]}
             url="https://tictactoeplus.bryanlindsey.dev/"
           />
         </Html>

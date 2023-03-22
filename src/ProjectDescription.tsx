@@ -1,6 +1,6 @@
 import { IconType } from "react-icons";
 import { FaAndroid, FaReact, FaUnity } from "react-icons/fa";
-import { SiThreedotjs, SiKonva } from "react-icons/si";
+import { SiThreedotjs, SiKonva, SiTypescript } from "react-icons/si";
 import { GiSoundWaves } from "react-icons/gi";
 import { logAnalyticsEvent } from "./firebase";
 
@@ -74,7 +74,7 @@ export const ProjectDescription = (props: ProjectDescriptionProps) => {
       <h2 className="text-4xl sm:text-6xl font-bold">{props.projectName}</h2>
       <p className="text-2xl sm:text-3xl">{props.descriptionText}</p>
 
-      <div className="flex flex-col-reverse xs:flex-row flex-wrap justify-between gap-3 xs:gap-2">
+      <div className="flex flex-col-reverse xs:flex-row xs:flex-wrap-reverse justify-between gap-y-4 gap-x-6">
         {props.url && (
           <LinkButton linkUrl={props.url} actionText={props.actionText} />
         )}
@@ -107,6 +107,13 @@ export const ReactTag: Tag = {
   name: "React",
   color: "rgb(20, 158, 202)",
   icon: FaReact,
+  iconColor: "white",
+};
+
+export const TypescriptTag: Tag = {
+  name: "TypeScript",
+  color: "#3178c6",
+  icon: SiTypescript,
   iconColor: "white",
 };
 

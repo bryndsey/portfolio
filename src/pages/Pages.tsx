@@ -1,7 +1,7 @@
-import { ContactPage } from "./ContactPage";
+import { LinksPage } from "./LinksPage";
 import { AndroidPage } from "./android/AndroidPage";
 import { SongSparkPage } from "./react/music/songspark/SongSparkPage";
-import { IntroPage } from "./IntroPage";
+import { IntroPage } from "./intro/IntroPage";
 import { AboutPage } from "./AboutPage";
 import { PedalsPage } from "./react/music/pedals/PedalsPage";
 import { ChoresPage } from "./react/chores/ChoresPage";
@@ -29,7 +29,7 @@ const pagesShapes: Page[] = [
   ...(isChrome
     ? [{ id: "android", component: AndroidPage, contentLength: 0.5 }]
     : []),
-  { id: "contact", component: ContactPage, contentLength: 0 },
+  { id: "links", component: LinksPage, contentLength: 0 },
 ];
 
 type PageWithStartIndex = { page: Page; startIndex: number };
