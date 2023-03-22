@@ -1,5 +1,6 @@
 import { IconType } from "react-icons";
 import { FaAndroid, FaReact, FaUnity } from "react-icons/fa";
+import { SiThreedotjs } from "react-icons/si";
 import { logAnalyticsEvent } from "./firebase";
 
 interface ProjectDescriptionProps {
@@ -100,6 +101,13 @@ export const ReactTag: Tag = {
   name: "React",
   color: "rgb(20, 158, 202)",
   icon: FaReact,
+  iconColor: "white",
+};
+
+export const ThreeJsTag: Tag = {
+  name: "Three.js",
+  color: "rgb(24, 24, 24)",
+  icon: SiThreedotjs,
   iconColor: "white",
 };
 

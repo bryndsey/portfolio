@@ -8,7 +8,11 @@ import {
   MeshStandardMaterial,
   ZeroFactor,
 } from "three";
-import { ProjectDescription, ReactTag } from "../../../ProjectDescription";
+import {
+  ProjectDescription,
+  ReactTag,
+  ThreeJsTag,
+} from "../../../ProjectDescription";
 import { useHtmlPortal } from "../../../useHtmlPortal";
 import { useScreenState } from "../../../useScreenState";
 import { PageComponentProps } from "../../Pages";
@@ -195,7 +199,7 @@ export const TicTacToePage = (props: PageComponentProps) => {
           <ProjectDescription
             projectName="Tic-Tac-Toe+"
             descriptionText="A unique twist on the classic game with an extra layer of strategy"
-            tags={[ReactTag]}
+            tags={[ReactTag, ThreeJsTag]}
             url="https://tictactoeplus.bryanlindsey.dev/"
           />
         </Html>
