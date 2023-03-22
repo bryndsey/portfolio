@@ -10,7 +10,7 @@ import { useScrollPages } from "./useScrollPages";
 export const IntroPageContent = () => {
   return (
     <div className="max-w-xl m-auto p-8 flex">
-      <div className="flex flex-col justify-center font-bold leading-none text-4xl sm:text-5xl text-center font-handwritten">
+      <div className="flex flex-col justify-center font-bold leading-none text-4xl xs:text-5xl text-center font-handwritten">
         <p className="text-stone-600">Hi. My name is</p>
         <p
           className="leading-none font-extrabold"
