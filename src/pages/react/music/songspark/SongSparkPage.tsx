@@ -71,13 +71,13 @@ export const SongSparkPage = (props: PageComponentProps) => {
       const descriptionX =
         screenState.orientation === "portrait" &&
         screenState.deviceClass === "small"
-          ? -state.viewport.width * 0.425
-          : -state.viewport.width * 0.375;
+          ? -state.viewport.width * 0.075
+          : -state.viewport.width * 0.125;
 
       const descriptionY =
         screenState.orientation === "portrait"
-          ? state.viewport.height * 0.4
-          : state.viewport.height * 0.25;
+          ? state.viewport.height * 0.2
+          : state.viewport.height * 0.15;
 
       htmlRef.current?.position.set(descriptionX, descriptionY, 0);
 
@@ -137,11 +137,12 @@ export const SongSparkPage = (props: PageComponentProps) => {
       <group ref={htmlRef}>
         <Html
           ref={descriptionRef}
+          center
           style={{
             transition: "opacity 300ms",
             // backgroundColor: "rgba(0, 0, 0, 0.2)",
           }}
-          className="portrait:rounded-2xl portrait:p-4 portrait:bg-white portrait:bg-opacity-90 portrait:backdrop-blur"
+          className="rounded-2xl p-4 bg-white bg-opacity-80 backdrop-blur"
           portal={{ current: htmlPortal }}
           distanceFactor={descriptionScaleFactor}
         >

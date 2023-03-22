@@ -189,7 +189,7 @@ export const TicTacToePage = (props: PageComponentProps) => {
           style={{
             transition: "opacity 300ms",
           }}
-          className="portrait:rounded-2xl portrait:p-4 portrait:bg-white portrait:bg-opacity-90 portrait:backdrop-blur"
+          className="rounded-2xl p-4 bg-white bg-opacity-80 backdrop-blur"
           distanceFactor={descriptionScaleFactor}
         >
           <ProjectDescription
