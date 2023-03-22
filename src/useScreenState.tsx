@@ -1,10 +1,14 @@
 import { useThree } from "@react-three/fiber";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const smallSize = 640;
 const tabletSize = 768;
 
-type DeviceClass = "small" | "tablet" | "large";
-type ScreenOrientation = "landscape" | "portrait";
+const deviceClasses = ["small", "tablet", "large"] as const;
+type DeviceClass = typeof deviceClasses[number];
+
+const screenOrientations = ["landscape", "portrait"] as const;
+type ScreenOrientation = typeof screenOrientations[number];
 
 interface ScreenState {
   deviceClass: DeviceClass;
@@ -12,18 +16,36 @@ interface ScreenState {
 }
 
 export const useScreenState = (): ScreenState => {
-  const size = useThree((state) => state.size);
+  const screenState = useThree(
+    (state) => {
+      const size = state.size;
+      const smallestSize = Math.min(size.width, size.height);
+      const deviceClass: DeviceClass =
+        smallestSize < smallSize
+          ? "small"
+          : smallestSize < tabletSize
+          ? "tablet"
+          : "large";
 
-  const smallestSize = Math.min(size.width, size.height);
-  const deviceClass: DeviceClass =
-    smallestSize < smallSize
-      ? "small"
-      : smallestSize < tabletSize
-      ? "tablet"
-      : "large";
+      const orientation: ScreenOrientation =
+        size.width <= size.height ? "portrait" : "landscape";
 
-  const orientation: ScreenOrientation =
-    size.width <= size.height ? "portrait" : "landscape";
+      return {
+        deviceClass: deviceClass,
+        orientation: orientation,
+      } as ScreenState;
+    },
+    (state, newState) => {
+      return (
+        newState.deviceClass === state.deviceClass &&
+        newState.orientation === state.orientation
+      );
+    }
+  );
 
-  return { deviceClass: deviceClass, orientation: orientation };
+  useEffect(() => {
+    console.log("State changed");
+  }, [screenState]);
+
+  return screenState;
 };

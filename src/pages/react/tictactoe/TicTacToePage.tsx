@@ -1,16 +1,11 @@
 import { Center, Html, Text3D } from "@react-three/drei";
-import { RootState, useFrame, useThree } from "@react-three/fiber";
+import { RootState, useFrame } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import {
   CustomBlending,
-  FrontSide,
   Group,
-  Material,
   MathUtils,
   MeshStandardMaterial,
-  SrcAlphaFactor,
-  SrcAlphaSaturateFactor,
-  SrcColorFactor,
   ZeroFactor,
 } from "three";
 import { ProjectDescription, ReactTag } from "../../../ProjectDescription";
