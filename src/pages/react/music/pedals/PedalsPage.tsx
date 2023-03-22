@@ -16,6 +16,7 @@ import {
   KonvaTag,
   ProjectDescription,
   ReactTag,
+  TypescriptTag,
   WebAudioTag,
 } from "../../../../ProjectDescription";
 import { useHtmlPortal } from "../../../../useHtmlPortal";
@@ -183,7 +184,7 @@ export const PedalsPage = (props: PageComponentProps) => {
             projectName="Pedals"
             descriptionText="Create a virtual pedal board of effects for guitar"
             url="https://pedals.bryanlindsey.dev"
-            tags={[ReactTag, WebAudioTag, KonvaTag]}
+            tags={[ReactTag, TypescriptTag, WebAudioTag, KonvaTag]}
           />
         </Html>
       </group>
