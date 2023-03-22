@@ -4,7 +4,6 @@ import { Suspense, useRef } from "react";
 import {
   CatmullRomCurve3,
   Color,
-  DoubleSide,
   Group,
   MathUtils,
   Mesh,
@@ -193,7 +192,6 @@ export const PedalsPage = (props: PageComponentProps) => {
             opacity={0.5}
             color={cableColor}
             alphaTest={0.001}
-            side={DoubleSide}
             roughness={0.8}
           >
             <GradientTexture
