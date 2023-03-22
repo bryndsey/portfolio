@@ -1,3 +1,4 @@
+import { config, useSpringValue } from "@react-spring/web";
 import { Billboard, Float, Html, Text } from "@react-three/drei";
 import { RootState, useFrame, useThree } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
@@ -52,6 +53,8 @@ const newListOfThingsIMake: ThingIMake[] = [
 
 const groupWorldPosition = new Vector3();
 
+const floatingTextVisibilityThreshold = 0.3;
+
 const FloatingThing = (props: { thing: ThingIMake }) => {
   const { thing } = props;
 
@@ -60,6 +63,8 @@ const FloatingThing = (props: { thing: ThingIMake }) => {
 
   const groupRef = useRef<Group>(null!);
   const htmlRef = useRef<HTMLDivElement>(null);
+
+  const visibilitySpring = useSpringValue(0);
 
   useFrame((state) => {
     const position = thing.positionFn(state);
@@ -97,13 +102,21 @@ const FloatingThing = (props: { thing: ThingIMake }) => {
 
     groupWorldPosition.set(0, 0, 0);
     const worldPosition = groupRef.current.localToWorld(groupWorldPosition);
-    const yPositionOpacity = MathUtils.smoothstep(
-      worldPosition.y,
-      -state.viewport.height * 0.4,
-      -state.viewport.height * 0.2
-    );
 
-    htmlRef.current.style.opacity = `${zPositionOpacity * yPositionOpacity}`;
+    const shouldBeVisible =
+      worldPosition.y >
+      -state.viewport.height * floatingTextVisibilityThreshold;
+
+    const visibilitySpringTarget = shouldBeVisible ? 1 : 0;
+    if (visibilitySpring.goal != visibilitySpringTarget) {
+      const currentConfig =
+        visibilitySpringTarget === 1 ? config.wobbly : { duration: 120 };
+      visibilitySpring.start(visibilitySpringTarget, { config: currentConfig });
+    }
+
+    groupRef.current.scale.setScalar(visibilitySpring.get());
+
+    htmlRef.current.style.opacity = `${zPositionOpacity}`;
 
     htmlRef.current.hidden = !groupRef.current.visible;
   });
