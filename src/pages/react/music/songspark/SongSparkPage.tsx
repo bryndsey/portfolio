@@ -66,7 +66,7 @@ export const SongSparkPage = (props: PageComponentProps) => {
 
       const showDescription = yPercent === 0;
       descriptionRef.current.style.opacity = showDescription ? "1" : "0";
-      descriptionRef.current.style.minWidth = `${state.size.width / 2}`;
+      descriptionRef.current.style.minWidth = `${state.size.width / 2}px`;
 
       const descriptionX =
         screenState.orientation === "portrait" &&
