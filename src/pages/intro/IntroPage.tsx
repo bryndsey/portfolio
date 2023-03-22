@@ -4,8 +4,8 @@ import { useThree } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import { Group, MathUtils, Mesh } from "three";
 import { AvatarModel } from "./AvatarModel";
-import { PageComponentProps } from "./Pages";
-import { useScrollPages } from "./useScrollPages";
+import { PageComponentProps } from "../Pages";
+import { useScrollPages } from "../useScrollPages";
 
 export const IntroPageContent = () => {
   return (

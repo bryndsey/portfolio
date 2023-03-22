@@ -1,7 +1,7 @@
 import { LinksPage } from "./LinksPage";
 import { AndroidPage } from "./android/AndroidPage";
 import { SongSparkPage } from "./react/music/songspark/SongSparkPage";
-import { IntroPage } from "./IntroPage";
+import { IntroPage } from "./intro/IntroPage";
 import { AboutPage } from "./AboutPage";
 import { PedalsPage } from "./react/music/pedals/PedalsPage";
 import { ChoresPage } from "./react/chores/ChoresPage";
