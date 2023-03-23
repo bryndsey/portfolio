@@ -27,15 +27,10 @@ const Tags = (props: TagsProps) => {
             className="tooltip tooltip-top xs:tooltip-bottom tooltip-secondary"
             data-tip={tag.name}
           >
-            <div
-              className="p-1.5 sm:p-2 rounded-full"
-              style={{
-                backgroundColor: tag.color,
-              }}
-            >
+            <div className="p-1.5 sm:p-2 rounded-full bg-neutral-300">
               <tag.icon
                 className="w-3 h-3 sm:w-4 sm:h-4"
-                color={tag.iconColor}
+                color={"#000000aa"} //tag.iconColor}
               />
               {/* {tag.name} */}
             </div>
