@@ -20,6 +20,7 @@
     "daisyui": "^2.51.3",
     "firebase": "^9.18.0",
     "jotai": "^2.0.3",
+    "r3f-perf": "^7.1.2",
     "react": "^18.2.0",
     "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
