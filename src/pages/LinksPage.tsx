@@ -44,7 +44,7 @@ const links: LinkData[] = [
     displayName: "Google Play",
   },
   {
-    url: "http://www.https://bryndsey.itch.io/.com/bryndsey",
+    url: "https://bryndsey.itch.io/",
     icon: SiItchdotio,
     iconColor: "white",
     backgroundColor: "bg-red-500",
