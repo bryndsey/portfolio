@@ -1,17 +1,18 @@
-import { GradientTexture, Html, Tube } from "@react-three/drei";
+import { Html, Tube } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import {
   CatmullRomCurve3,
   Color,
+  DataTexture,
   Group,
   MathUtils,
   Mesh,
   MeshStandardMaterial,
+  NearestFilter,
   Vector2,
   Vector3,
 } from "three";
-import { useCameraFrustumWidthAtDepth } from "../../../../utils";
 import {
   KonvaTag,
   ProjectDescription,
@@ -20,18 +21,25 @@ import {
   WebAudioTag,
 } from "../../../../ProjectDescription";
 import { useHtmlPortal } from "../../../../useHtmlPortal";
+import { useScreenState } from "../../../../useScreenState";
+import { useSpringScaleVisibility } from "../../../../useSpringScaleVisibility";
+import { useCameraFrustumWidthAtDepth } from "../../../../utils";
 import { PageComponentProps } from "../../../Pages";
 import { useScrollPages } from "../../../useScrollPages";
 import { CablePlugModel } from "./CablePlugModel";
 import { PedalModel } from "./PedalModel";
-import { useScreenState } from "../../../../useScreenState";
-import { useSpringScaleVisibility } from "../../../../useSpringScaleVisibility";
 
 const cableColor = new Color(0.03, 0.03, 0.03);
 
 const textureCenter = new Vector2(0.5, 0.5);
 
 const groupTargetPosition = new Vector3();
+
+const textureData = new Uint8Array([255, 255, 255, 255, 0, 0, 0, 255]);
+const texture = new DataTexture(textureData, 2, 1);
+texture.magFilter = NearestFilter;
+texture.minFilter = NearestFilter;
+texture.needsUpdate = true;
 
 export const PedalsPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
@@ -128,7 +136,11 @@ export const PedalsPage = (props: PageComponentProps) => {
 
       const cableTextureOffset = targetLength / curve.getLength() - 0.5;
 
-      textureRef.current.alphaMap?.offset.setY(cableTextureOffset);
+      // textureRef.current.alphaMap?.offset.setY(cableTextureOffset);
+      if (cableTextureOffset !== texture.offset.x) {
+        texture.offset.setX(-cableTextureOffset);
+        texture.needsUpdate = true;
+      }
 
       const pointPosition = curve.getPoint(cableProgressPercent);
       const pointTangent = curve.getTangent(cableProgressPercent);
@@ -204,12 +216,11 @@ export const PedalsPage = (props: PageComponentProps) => {
             alphaTest={0.001}
             roughness={0.8}
           >
-            <GradientTexture
-              rotation={Math.PI * 0.5}
-              center={textureCenter}
-              stops={[0, 0.499, 0.501, 1]}
-              colors={["white", "white", "black", "black"]}
+            <primitive
+              dispose={null}
+              object={texture}
               attach="alphaMap"
+              center={textureCenter}
             />
           </meshStandardMaterial>
         </Tube>
