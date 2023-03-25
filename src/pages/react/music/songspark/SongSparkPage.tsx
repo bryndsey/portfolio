@@ -133,7 +133,7 @@ export const SongSparkPage = (props: PageComponentProps) => {
 
       keyboardRef.current.position.set(
         keyboardXOffset,
-        -state.viewport.height * 0.25 + backgroundProgress,
+        -state.viewport.height * 0.33 + backgroundProgress * 0.85,
         -2
       );
 
@@ -143,14 +143,20 @@ export const SongSparkPage = (props: PageComponentProps) => {
         backgroundProgress / 2 - 0.6
       );
 
+      const violinXOffset =
+        screenState.deviceClass === "small" &&
+        screenState.orientation === "landscape"
+          ? state.viewport.width / 4
+          : -state.viewport.width * 0.2;
+
       violinRef.current.position.set(
-        0,
-        state.viewport.height * 0.25 + backgroundProgress * 0.5,
+        violinXOffset,
+        state.viewport.height * 0.33 + backgroundProgress * 0.33,
         -1
       );
 
       violinRef.current.rotation.set(
-        Math.PI * 0.175 * backgroundProgress,
+        Math.PI * 0.15 * backgroundProgress,
         0.25 * backgroundProgress + 0.25,
         0.5
       );
