@@ -15,6 +15,7 @@ import { PageComponentProps } from "../../../Pages";
 import { useScrollPages } from "../../../useScrollPages";
 import { AcousticGuitar } from "./AcousticGuitar";
 import { KeyboardModel } from "./KeyboardModel";
+import { ViolinModel } from "./ViolinModel";
 
 const groupTargetPosition = new Vector3();
 
@@ -27,6 +28,7 @@ export const SongSparkPage = (props: PageComponentProps) => {
   const descriptionRef = useRef<HTMLDivElement>(null);
   const guitarRef = useRef<Group>(null!);
   const keyboardRef = useRef<Group>(null!);
+  const violinRef = useRef<Group>(null!);
 
   const screenState = useScreenState();
   const descriptionScaleFactor =
@@ -121,23 +123,42 @@ export const SongSparkPage = (props: PageComponentProps) => {
           ? state.viewport.width / 6
           : -state.viewport.width / 5;
 
-      const keyboardProgress = MathUtils.mapLinear(
+      const backgroundProgress = MathUtils.mapLinear(
         totalProgress,
         -1,
         1 + contentMovementAmount,
         -2,
         1.5
       );
+
       keyboardRef.current.position.set(
         keyboardXOffset,
-        -state.viewport.height * 0.25 + keyboardProgress,
+        -state.viewport.height * 0.33 + backgroundProgress * 0.85,
         -2
       );
 
       keyboardRef.current.rotation.set(
         Math.PI / 2 - 0.2,
         0.25,
-        keyboardProgress / 2 - 0.6
+        backgroundProgress / 2 - 0.6
+      );
+
+      const violinXOffset =
+        screenState.deviceClass === "small" &&
+        screenState.orientation === "landscape"
+          ? state.viewport.width / 4
+          : -state.viewport.width * 0.2;
+
+      violinRef.current.position.set(
+        violinXOffset,
+        state.viewport.height * 0.33 + backgroundProgress * 0.33,
+        -1
+      );
+
+      violinRef.current.rotation.set(
+        Math.PI * 0.15 * backgroundProgress,
+        0.25 * backgroundProgress + 0.25,
+        0.5
       );
     }
   );
@@ -164,6 +185,11 @@ export const SongSparkPage = (props: PageComponentProps) => {
           />
         </Html>
       </group>
+      <Suspense fallback={null}>
+        <Center scale={1.5} ref={violinRef}>
+          <ViolinModel />
+        </Center>
+      </Suspense>
       <Suspense fallback={null}>
         <Center scale={1.5} ref={guitarRef}>
           <AcousticGuitar />

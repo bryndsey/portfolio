@@ -9,6 +9,7 @@ import {
   useHelper,
 } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
+import { Perf } from "r3f-perf";
 import { Suspense, useRef } from "react";
 // import { useControls } from "theatric";
 import { CameraHelper, MathUtils, Vector3 } from "three";
@@ -112,6 +113,7 @@ function App() {
         dpr={Math.min(window.devicePixelRatio, 2)}
       >
         {import.meta.env.DEV && showStats && <Stats />}
+        {import.meta.env.DEV && showStats && <Perf position="bottom-left" />}
         <CameraRig />
         <Suspense fallback={<LoadingIndicator />}>
           <Environment files={HDRI} />
