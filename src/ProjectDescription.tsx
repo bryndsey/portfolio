@@ -1,6 +1,11 @@
 import { IconType } from "react-icons";
 import { FaAndroid, FaReact, FaUnity } from "react-icons/fa";
-import { SiThreedotjs, SiKonva, SiTypescript } from "react-icons/si";
+import {
+  SiThreedotjs,
+  SiKonva,
+  SiTypescript,
+  SiTailwindcss,
+} from "react-icons/si";
 import { GiSoundWaves } from "react-icons/gi";
 import { logAnalyticsEvent } from "./firebase";
 
@@ -109,6 +114,13 @@ export const TypescriptTag: Tag = {
   name: "TypeScript",
   color: "#3178c6",
   icon: SiTypescript,
+  iconColor: "white",
+};
+
+export const TailwindTag: Tag = {
+  name: "Tailwind CSS",
+  color: "#3178c6",
+  icon: SiTailwindcss,
   iconColor: "white",
 };
 

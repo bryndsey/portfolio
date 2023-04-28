@@ -5,6 +5,7 @@ import { Group, MathUtils, Vector3 } from "three";
 import {
   ProjectDescription,
   ReactTag,
+  TailwindTag,
   TypescriptTag,
   WebAudioTag,
 } from "../../../../ProjectDescription";
@@ -181,7 +182,7 @@ export const SongSparkPage = (props: PageComponentProps) => {
             projectName="SongSpark"
             descriptionText="Inspire your inner songwriter with generated melodies and chord progressions"
             url="https://songspark.bryanlindsey.dev"
-            tags={[ReactTag, TypescriptTag, WebAudioTag]}
+            tags={[ReactTag, TypescriptTag, TailwindTag, WebAudioTag]}
           />
         </Html>
       </group>
