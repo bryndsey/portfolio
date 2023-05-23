@@ -6,6 +6,7 @@ import {
   Preload,
   ScrollControls,
   Stats,
+  View,
   useHelper,
 } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
@@ -16,6 +17,7 @@ import { CameraHelper, MathUtils, Vector2, Vector3 } from "three";
 import HDRI from "./assets/empty_warehouse_01_1k.hdr?url";
 import { pages } from "./pages/Pages";
 import { LinkPageContents } from "./pages/LinksPage";
+import { AvatarModel } from "./pages/intro/AvatarModel";
 
 const lastNormalizedMousePosition = new Vector2();
 export let normalizedMousePosition: Vector2 | null = null;
@@ -151,9 +153,16 @@ function App_old() {
 }
 
 function App() {
+  const eventSource = useRef<HTMLDivElement>(null!);
+  const heroSectionTrackingRef = useRef<HTMLDivElement>(null!);
+
   return (
-    <div id="App" className="font-sans">
-      <div id="hero-section" className="h-screen bg-green-500"></div>
+    <div id="App" className="font-sans relative" ref={eventSource}>
+      <div
+        id="hero-section"
+        className="h-screen bg-green-500"
+        ref={heroSectionTrackingRef}
+      />
       <section id="about" className="p-8 min-h-screen">
         <h2 className="text-6xl font-extrabold">About Me</h2>
         {"Here is where my 'About Me' content will go."}
@@ -201,6 +210,15 @@ function App() {
         {/* This is placeholder content for now - I want to make a better version of this */}
         <LinkPageContents />
       </section>
+      <div className="fixed top-0 left-0 right-0 h-screen">
+        <Canvas eventSource={eventSource}>
+          <View track={heroSectionTrackingRef}>
+            <CameraRig />
+            <ambientLight intensity={0.15} />
+            <AvatarModel />
+          </View>
+        </Canvas>
+      </div>
     </div>
   );
 }
