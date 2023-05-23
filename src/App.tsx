@@ -88,7 +88,7 @@ function LoadingIndicator() {
   );
 }
 
-function App() {
+function App_old() {
   // const { showStats } = useControls({
   //   showStats: true,
   // });
@@ -145,6 +145,45 @@ function App() {
           </ScrollControls>
         </Suspense>
       </Canvas>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <div id="App" className="font-sans">
+      <div id="hero-section" className="h-screen bg-green-500"></div>
+      <section id="about" className="p-8">
+        <h2>About Me</h2>
+        {"Here is where my 'About Me' content will go."}
+        <br />
+        {"Here is where my 'About Me' content will go."}
+        <br />
+        {"Here is where my 'About Me' content will go."}
+        <br />
+        {"Here is where my 'About Me' content will go."}
+        <br />
+        {"Here is where my 'About Me' content will go."}
+        <br />
+      </section>
+      <section id="project-list" className="p-8 bg-green-500 min-h-screen">
+        <h2>Projects</h2>
+        <ul className="flex flex-col justify-stretch font-handwritten text-4xl font-extrabold">
+          <li>SongSpark</li>
+          <li>Pedals</li>
+          <li>Tic-Tac-Toe+</li>
+          <li>Android Projects</li>
+        </ul>
+      </section>
+      <section id="links" className="p-8 bg-yellow-300">
+        <h2>More of my stuff</h2>
+        <ul>
+          <li>Github</li>
+          <li>CodeSandbox</li>
+          <li>LinkedIn</li>
+          <li>Google Play</li>
+        </ul>
+      </section>
     </div>
   );
 }
