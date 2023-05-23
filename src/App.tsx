@@ -12,9 +12,12 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
 import { Suspense, useRef } from "react";
 // import { useControls } from "theatric";
-import { CameraHelper, MathUtils, Vector3 } from "three";
+import { CameraHelper, MathUtils, Vector2, Vector3 } from "three";
 import HDRI from "./assets/empty_warehouse_01_1k.hdr?url";
 import { pages } from "./pages/Pages";
+
+const lastNormalizedMousePosition = new Vector2();
+export let normalizedMousePosition: Vector2 | null = null;
 
 const cameraPosition = { x: 0, y: 0, z: 3 };
 
@@ -33,8 +36,24 @@ const CameraRig = () => {
   const mainCameraRef = useRef<THREE.PerspectiveCamera>(null!);
   useHelper(debugCamera ? mainCameraRef : null, CameraHelper);
 
-  useFrame((state) => {
-    mainCameraRef.current.position.lerp(targetCameraPositionVector, 0.1);
+  useFrame(() => {
+    let lerpFactor = 0.1;
+    if (normalizedMousePosition === null) {
+      targetCameraPositionVector.set(
+        cameraPosition.x,
+        cameraPosition.y,
+        cameraPosition.z
+      );
+      lerpFactor = 0.025;
+    } else {
+      targetCameraPositionVector.set(
+        cameraPosition.x + normalizedMousePosition.x / 50,
+        cameraPosition.y + normalizedMousePosition.y / 50,
+        cameraPosition.z
+      );
+    }
+
+    mainCameraRef.current.position.lerp(targetCameraPositionVector, lerpFactor);
   });
 
   return (
@@ -96,19 +115,12 @@ function App() {
               1,
               -1
             );
-            targetCameraPositionVector.set(
-              cameraPosition.x + normalizedX / 50,
-              cameraPosition.y + normalizedY / 50,
-              cameraPosition.z
-            );
+            lastNormalizedMousePosition.set(normalizedX, normalizedY);
+            normalizedMousePosition = lastNormalizedMousePosition;
           }
         }}
         onPointerLeave={() => {
-          targetCameraPositionVector.set(
-            cameraPosition.x,
-            cameraPosition.y,
-            cameraPosition.z
-          );
+          normalizedMousePosition = null;
         }}
         dpr={Math.min(window.devicePixelRatio, 2)}
       >
