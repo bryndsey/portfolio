@@ -12,17 +12,21 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
 import { Suspense, useRef } from "react";
 // import { useControls } from "theatric";
-import { CameraHelper, MathUtils, Vector3 } from "three";
+import { CameraHelper, MathUtils, Vector2, Vector3 } from "three";
 import HDRI from "./assets/empty_warehouse_01_1k.hdr?url";
 import { pages } from "./pages/Pages";
 
 const cameraPosition = { x: 0, y: 0, z: 3 };
 
-const targetCameraPositionVector = new Vector3(
+export const targetCameraPositionVector = new Vector3(
   cameraPosition.x,
   cameraPosition.y,
   cameraPosition.z
 );
+
+const lastNormalizedMousePosition = new Vector2();
+export let normalizedMousePosition: Vector2 | null =
+  lastNormalizedMousePosition;
 
 const CameraRig = () => {
   // const { debugCamera } = useControls({
@@ -101,6 +105,8 @@ function App() {
               cameraPosition.y + normalizedY / 50,
               cameraPosition.z
             );
+            lastNormalizedMousePosition.set(normalizedX, normalizedY);
+            normalizedMousePosition = lastNormalizedMousePosition;
           }
         }}
         onPointerLeave={() => {
@@ -109,6 +115,7 @@ function App() {
             cameraPosition.y,
             cameraPosition.z
           );
+          normalizedMousePosition = null;
         }}
         dpr={Math.min(window.devicePixelRatio, 2)}
       >
