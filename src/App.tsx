@@ -210,8 +210,38 @@ function App() {
         {/* This is placeholder content for now - I want to make a better version of this */}
         <LinkPageContents />
       </section>
-      <div className="fixed top-0 left-0 right-0 h-screen">
-        <Canvas eventSource={eventSource}>
+      <div
+        className="fixed top-0 left-0 right-0 h-screen"
+        onPointerMove={(e) => {
+          if (e.pointerType === "mouse") {
+            const normalizedX = MathUtils.mapLinear(
+              e.clientX,
+              0,
+              e.currentTarget.clientWidth,
+              -1,
+              1
+            );
+
+            // Go from positive to negative to map properly
+            const normalizedY = MathUtils.mapLinear(
+              e.clientY,
+              0,
+              e.currentTarget.clientHeight,
+              1,
+              -1
+            );
+            lastNormalizedMousePosition.set(normalizedX, normalizedY);
+            normalizedMousePosition = lastNormalizedMousePosition;
+          }
+        }}
+        onPointerLeave={() => {
+          normalizedMousePosition = null;
+        }}
+      >
+        <Canvas
+          eventSource={eventSource}
+          dpr={Math.min(window.devicePixelRatio, 2)}
+        >
           <View track={heroSectionTrackingRef}>
             <CameraRig />
             <ambientLight intensity={0.15} />
