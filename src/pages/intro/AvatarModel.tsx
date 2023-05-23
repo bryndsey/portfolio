@@ -55,10 +55,7 @@ export function AvatarModel(props: JSX.IntrinsicElements["group"]) {
       targetVector.y -= 0.13;
     }
 
-    const actualLookVector = lastTargetVector.lerp(
-      targetVector,
-      state.clock.getDelta() * 250
-    );
+    const actualLookVector = lastTargetVector.lerp(targetVector, 0.1);
     headGroup.current.lookAt(actualLookVector);
   });
 
