@@ -1,10 +1,10 @@
-import { Suspense, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
-import Avatar from "./avatar.glb?url";
-import { GLTF } from "three-stdlib";
-import { Group, MathUtils, Vector3 } from "three";
 import { useFrame } from "@react-three/fiber";
-import { normalizedMousePosition, targetCameraPositionVector } from "../../App";
+import { Suspense, useRef } from "react";
+import { Group, Vector3 } from "three";
+import { GLTF } from "three-stdlib";
+import { normalizedMousePosition } from "../../App";
+import Avatar from "./avatar.glb?url";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -42,9 +42,11 @@ export function AvatarModel(props: JSX.IntrinsicElements["group"]) {
   useFrame((state) => {
     if (headGroup.current === null) return;
 
+    let lerpFactor = 0.1;
     if (normalizedMousePosition === null) {
       targetVector.set(0, 0, 0);
       targetVector.unproject(state.camera);
+      lerpFactor = 0.025;
     } else {
       targetVector.set(
         normalizedMousePosition.x,
@@ -55,7 +57,7 @@ export function AvatarModel(props: JSX.IntrinsicElements["group"]) {
       targetVector.y -= 0.13;
     }
 
-    const actualLookVector = lastTargetVector.lerp(targetVector, 0.1);
+    const actualLookVector = lastTargetVector.lerp(targetVector, lerpFactor);
     headGroup.current.lookAt(actualLookVector);
   });
 

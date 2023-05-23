@@ -38,12 +38,14 @@ const CameraRig = () => {
   useHelper(debugCamera ? mainCameraRef : null, CameraHelper);
 
   useFrame(() => {
+    let lerpFactor = 0.1;
     if (normalizedMousePosition === null) {
       targetCameraPositionVector.set(
         cameraPosition.x,
         cameraPosition.y,
         cameraPosition.z
       );
+      lerpFactor = 0.025;
     } else {
       targetCameraPositionVector.set(
         cameraPosition.x + normalizedMousePosition.x / 50,
@@ -52,7 +54,7 @@ const CameraRig = () => {
       );
     }
 
-    mainCameraRef.current.position.lerp(targetCameraPositionVector, 0.1);
+    mainCameraRef.current.position.lerp(targetCameraPositionVector, lerpFactor);
   });
 
   return (
