@@ -2,8 +2,9 @@ import { Suspense, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import Avatar from "./avatar.glb?url";
 import { GLTF } from "three-stdlib";
-import { Group, Vector3 } from "three";
+import { Group, MathUtils, Vector3 } from "three";
 import { useFrame } from "@react-three/fiber";
+import { normalizedMousePosition, targetCameraPositionVector } from "../../App";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -32,7 +33,8 @@ type GLTFResult = GLTF & {
   };
 };
 
-const vector = new Vector3();
+const lastTargetVector = new Vector3();
+const targetVector = new Vector3();
 export function AvatarModel(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF(Avatar) as GLTFResult;
   const headGroup = useRef<Group | null>(null);
@@ -40,12 +42,24 @@ export function AvatarModel(props: JSX.IntrinsicElements["group"]) {
   useFrame((state) => {
     if (headGroup.current === null) return;
 
-    const offset = headGroup.current.getWorldPosition(vector);
-    headGroup.current.lookAt(
-      state.pointer.x - offset.x,
-      state.pointer.y,
-      state.camera.position.z
+    if (normalizedMousePosition === null) {
+      targetVector.set(0, 0, 0);
+      targetVector.unproject(state.camera);
+    } else {
+      targetVector.set(
+        normalizedMousePosition.x,
+        normalizedMousePosition.y,
+        0.9
+      );
+      targetVector.unproject(state.camera);
+      targetVector.y -= 0.13;
+    }
+
+    const actualLookVector = lastTargetVector.lerp(
+      targetVector,
+      state.clock.getDelta() * 250
     );
+    headGroup.current.lookAt(actualLookVector);
   });
 
   return (
