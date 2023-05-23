@@ -66,6 +66,40 @@ const links: LinkData[] = [
   },
 ];
 
+export function LinkPageContents() {
+  return (
+    <div className="h-full flex flex-col md:gap-4 items-center justify-center p-4 landscape:p-2 landscape:md:p-12 sm:p-8 md:p-12">
+      <h3 className="text-center pt-8 text-4xl landscape:text-2xl md:text-6xl landscape:md:text-6xl font-bold font-handwritten">
+        More of my stuff:
+      </h3>
+      <div className="grow max-w-4xl w-fit sm:w-full grid sm:portrait:grid-cols-2 grid-cols-1 landscape:grid-cols-3 place-content-evenly gap-4 m-auto px-6 md:px-10">
+        {links.map((link) => (
+          <a
+            href={link.url}
+            key={link.url}
+            onClick={() =>
+              logAnalyticsEvent("bryan_external_link_clicked", {
+                bryan_link_url: link.url,
+              })
+            }
+            className="flex landscape:flex-col sm:flex-col flex-row landscape:gap-6 sm:gap-6 gap-4 items-center justify-start"
+          >
+            <div
+              className={`${link.backgroundColor} p-4 rounded-3xl shadow-lg`}
+            >
+              <link.icon
+                className="w-8 h-8 sm:w-12 sm:h-12"
+                color={link.iconColor}
+              />
+            </div>
+            <p className="font-semibold">{link.displayName}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export const LinksPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -99,35 +133,7 @@ export const LinksPage = (props: PageComponentProps) => {
           portal={{ current: htmlPortal }}
           className="bg-yellow-300"
         >
-          <div className="h-full flex flex-col md:gap-4 items-center justify-center p-4 landscape:p-2 landscape:md:p-12 sm:p-8 md:p-12">
-            <h3 className="text-center pt-8 text-4xl landscape:text-2xl md:text-6xl landscape:md:text-6xl font-bold font-handwritten">
-              More of my stuff:
-            </h3>
-            <div className="grow max-w-4xl w-fit sm:w-full grid sm:portrait:grid-cols-2 grid-cols-1 landscape:grid-cols-3 place-content-evenly gap-4 m-auto px-6 md:px-10">
-              {links.map((link) => (
-                <a
-                  href={link.url}
-                  key={link.url}
-                  onClick={() =>
-                    logAnalyticsEvent("bryan_external_link_clicked", {
-                      bryan_link_url: link.url,
-                    })
-                  }
-                  className="flex landscape:flex-col sm:flex-col flex-row landscape:gap-6 sm:gap-6 gap-4 items-center justify-start"
-                >
-                  <div
-                    className={`${link.backgroundColor} p-4 rounded-3xl shadow-lg`}
-                  >
-                    <link.icon
-                      className="w-8 h-8 sm:w-12 sm:h-12"
-                      color={link.iconColor}
-                    />
-                  </div>
-                  <p className="font-semibold">{link.displayName}</p>
-                </a>
-              ))}
-            </div>
-          </div>
+          <LinkPageContents />
         </Html>
       </group>
     </ScreenSpace>
