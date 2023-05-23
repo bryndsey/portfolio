@@ -15,6 +15,7 @@ import { Suspense, useRef } from "react";
 import { CameraHelper, MathUtils, Vector2, Vector3 } from "three";
 import HDRI from "./assets/empty_warehouse_01_1k.hdr?url";
 import { pages } from "./pages/Pages";
+import { LinkPageContents } from "./pages/LinksPage";
 
 const lastNormalizedMousePosition = new Vector2();
 export let normalizedMousePosition: Vector2 | null = null;
@@ -153,8 +154,8 @@ function App() {
   return (
     <div id="App" className="font-sans">
       <div id="hero-section" className="h-screen bg-green-500"></div>
-      <section id="about" className="p-8">
-        <h2>About Me</h2>
+      <section id="about" className="p-8 min-h-screen">
+        <h2 className="text-6xl font-extrabold">About Me</h2>
         {"Here is where my 'About Me' content will go."}
         <br />
         {"Here is where my 'About Me' content will go."}
@@ -166,23 +167,39 @@ function App() {
         {"Here is where my 'About Me' content will go."}
         <br />
       </section>
-      <section id="project-list" className="p-8 bg-green-500 min-h-screen">
-        <h2>Projects</h2>
-        <ul className="flex flex-col justify-stretch font-handwritten text-4xl font-extrabold">
-          <li>SongSpark</li>
-          <li>Pedals</li>
-          <li>Tic-Tac-Toe+</li>
-          <li>Android Projects</li>
+      <section
+        id="project-list"
+        className="p-8 bg-green-500 min-h-screen flex flex-col"
+      >
+        <h2 className="text-6xl font-extrabold">Projects</h2>
+        <ul className="flex flex-col flex-grow gap-4 justify-evenly  ">
+          <li>
+            <h3 className="text-4xl font-handwritten font-extrabold">
+              SongSpark
+            </h3>
+            <p>Tagline here</p>
+          </li>
+          <li>
+            <h3 className="text-4xl font-handwritten font-extrabold">Pedals</h3>
+            <p>Tagline here</p>
+          </li>
+          <li>
+            <h3 className="text-4xl font-handwritten font-extrabold">
+              Tic-Tac-Toe+
+            </h3>
+            <p>Tagline here</p>
+          </li>
+          <li>
+            <h3 className="text-4xl font-handwritten font-extrabold">
+              Android Projects
+            </h3>
+            <p>Tagline here</p>
+          </li>
         </ul>
       </section>
       <section id="links" className="p-8 bg-yellow-300">
-        <h2>More of my stuff</h2>
-        <ul>
-          <li>Github</li>
-          <li>CodeSandbox</li>
-          <li>LinkedIn</li>
-          <li>Google Play</li>
-        </ul>
+        {/* This is placeholder content for now - I want to make a better version of this */}
+        <LinkPageContents />
       </section>
     </div>
   );
