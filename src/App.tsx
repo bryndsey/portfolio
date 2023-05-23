@@ -17,8 +17,7 @@ import HDRI from "./assets/empty_warehouse_01_1k.hdr?url";
 import { pages } from "./pages/Pages";
 
 const lastNormalizedMousePosition = new Vector2();
-export let normalizedMousePosition: Vector2 | null =
-  lastNormalizedMousePosition;
+export let normalizedMousePosition: Vector2 | null = null;
 
 const cameraPosition = { x: 0, y: 0, z: 3 };
 
