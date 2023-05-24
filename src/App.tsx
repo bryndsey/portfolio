@@ -162,6 +162,31 @@ function App() {
         id="hero-section"
         className="h-screen bg-green-500"
         ref={heroSectionTrackingRef}
+        onMouseMove={(e) => {
+          const rect = e.currentTarget.getBoundingClientRect();
+
+          const normalizedX = MathUtils.mapLinear(
+            e.nativeEvent.offsetX,
+            0,
+            rect.width,
+            -1,
+            1
+          );
+
+          // Go from positive to negative to map properly
+          const normalizedY = MathUtils.mapLinear(
+            e.nativeEvent.offsetY,
+            0,
+            rect.height,
+            1,
+            -1
+          );
+          lastNormalizedMousePosition.set(normalizedX, normalizedY);
+          normalizedMousePosition = lastNormalizedMousePosition;
+        }}
+        onPointerLeave={() => {
+          normalizedMousePosition = null;
+        }}
       />
       <section id="about" className="p-8 min-h-screen">
         <h2 className="text-6xl font-extrabold">About Me</h2>
@@ -210,47 +235,20 @@ function App() {
         {/* This is placeholder content for now - I want to make a better version of this */}
         <LinkPageContents />
       </section>
-      <div
-        className="fixed top-0 left-0 right-0 h-screen"
-        onPointerMove={(e) => {
-          if (e.pointerType === "mouse") {
-            const normalizedX = MathUtils.mapLinear(
-              e.clientX,
-              0,
-              e.currentTarget.clientWidth,
-              -1,
-              1
-            );
 
-            // Go from positive to negative to map properly
-            const normalizedY = MathUtils.mapLinear(
-              e.clientY,
-              0,
-              e.currentTarget.clientHeight,
-              1,
-              -1
-            );
-            lastNormalizedMousePosition.set(normalizedX, normalizedY);
-            normalizedMousePosition = lastNormalizedMousePosition;
-          }
-        }}
-        onPointerLeave={() => {
-          normalizedMousePosition = null;
-        }}
+      <Canvas
+        style={{ position: "fixed", top: "0", left: "0", right: "0" }}
+        eventSource={eventSource}
+        dpr={Math.min(window.devicePixelRatio, 2)}
       >
-        <Canvas
-          eventSource={eventSource}
-          dpr={Math.min(window.devicePixelRatio, 2)}
-        >
-          {import.meta.env.DEV && <Stats />}
-          {import.meta.env.DEV && <Perf position="bottom-left" />}
-          <View track={heroSectionTrackingRef}>
-            <CameraRig />
-            <ambientLight intensity={0.15} />
-            <AvatarModel />
-          </View>
-        </Canvas>
-      </div>
+        {import.meta.env.DEV && <Stats />}
+        {import.meta.env.DEV && <Perf position="bottom-left" />}
+        <View track={heroSectionTrackingRef}>
+          <CameraRig />
+          <ambientLight intensity={0.15} />
+          <AvatarModel position-y={-0.5} />
+        </View>
+      </Canvas>
     </div>
   );
 }
