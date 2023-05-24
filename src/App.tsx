@@ -242,6 +242,8 @@ function App() {
           eventSource={eventSource}
           dpr={Math.min(window.devicePixelRatio, 2)}
         >
+          {import.meta.env.DEV && <Stats />}
+          {import.meta.env.DEV && <Perf position="bottom-left" />}
           <View track={heroSectionTrackingRef}>
             <CameraRig />
             <ambientLight intensity={0.15} />
