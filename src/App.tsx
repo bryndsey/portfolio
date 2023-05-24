@@ -254,3 +254,21 @@ function App() {
 }
 
 export default App;
+
+function ProjectDescriptionPage() {
+  return (
+    <div className="grid grid-cols-2 min-h-screen">
+      <section className="p-8">
+        <h2 className="text-6xl font-bold">Project title</h2>
+        <br />
+        <p>
+          This is the project description. It will be kinda long and take up
+          more space.
+        </p>
+        <button className="bg-yellow-300 p-2 rounded">Try it out!</button>
+        <p>Tech stack info here</p>
+      </section>
+      <div id="project-hero-display" className="bg-green-500"></div>
+    </div>
+  );
+}
