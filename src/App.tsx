@@ -15,6 +15,7 @@ import { Suspense, useRef } from "react";
 import { CameraHelper, MathUtils, Vector2, Vector3 } from "three";
 import HDRI from "./assets/empty_warehouse_01_1k.hdr?url";
 import { pages } from "./pages/Pages";
+import { ReactLenis } from "@studio-freight/react-lenis";
 
 const lastNormalizedMousePosition = new Vector2();
 export let normalizedMousePosition: Vector2 | null = null;
@@ -95,43 +96,45 @@ function App() {
   const showStats = import.meta.env.DEV;
 
   return (
-    <div id="App" className="bg-green-500 h-screen font-sans">
-      <Canvas
-        onPointerMove={(e) => {
-          if (e.pointerType === "mouse") {
-            const normalizedX = MathUtils.mapLinear(
-              e.clientX,
-              0,
-              e.currentTarget.clientWidth,
-              -1,
-              1
-            );
+    <ReactLenis root>
+      <div style={{ height: `${pages.totalPages * 100}vh` }} />
+      <div id="App" className="bg-green-500 h-screen font-sans fixed inset-0">
+        <Canvas
+          onPointerMove={(e) => {
+            if (e.pointerType === "mouse") {
+              const normalizedX = MathUtils.mapLinear(
+                e.clientX,
+                0,
+                e.currentTarget.clientWidth,
+                -1,
+                1
+              );
 
-            // Go from positive to negative to map properly
-            const normalizedY = MathUtils.mapLinear(
-              e.clientY,
-              0,
-              e.currentTarget.clientHeight,
-              1,
-              -1
-            );
-            lastNormalizedMousePosition.set(normalizedX, normalizedY);
-            normalizedMousePosition = lastNormalizedMousePosition;
-          }
-        }}
-        onPointerLeave={() => {
-          normalizedMousePosition = null;
-        }}
-        dpr={Math.min(window.devicePixelRatio, 2)}
-      >
-        {import.meta.env.DEV && showStats && <Stats />}
-        {import.meta.env.DEV && showStats && <Perf position="bottom-left" />}
-        <CameraRig />
-        <Suspense fallback={<LoadingIndicator />}>
-          <Environment files={HDRI} />
-          <Preload all />
+              // Go from positive to negative to map properly
+              const normalizedY = MathUtils.mapLinear(
+                e.clientY,
+                0,
+                e.currentTarget.clientHeight,
+                1,
+                -1
+              );
+              lastNormalizedMousePosition.set(normalizedX, normalizedY);
+              normalizedMousePosition = lastNormalizedMousePosition;
+            }
+          }}
+          onPointerLeave={() => {
+            normalizedMousePosition = null;
+          }}
+          dpr={Math.min(window.devicePixelRatio, 2)}
+        >
+          {import.meta.env.DEV && showStats && <Stats />}
+          {import.meta.env.DEV && showStats && <Perf position="bottom-left" />}
+          <CameraRig />
+          <Suspense fallback={<LoadingIndicator />}>
+            <Environment files={HDRI} />
+            <Preload all />
 
-          <ScrollControls pages={pages.totalPages}>
+            {/* <ScrollControls pages={pages.totalPages}> */}
             <ambientLight intensity={0.15} />
             {pages.pagesWithStartIndex.map((page) => {
               return (
@@ -142,10 +145,11 @@ function App() {
                 />
               );
             })}
-          </ScrollControls>
-        </Suspense>
-      </Canvas>
-    </div>
+            {/* </ScrollControls> */}
+          </Suspense>
+        </Canvas>
+      </div>
+    </ReactLenis>
   );
 }
 
