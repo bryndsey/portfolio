@@ -21,7 +21,6 @@ export function useScrollPages(
 ) {
   const scrollProgress = useRef(0);
 
-  // const scrollData = useScroll();
   useLenis((lenis: Lenis) => {
     scrollProgress.current = lenis.progress;
   });
@@ -43,10 +42,6 @@ export function useScrollPages(
         0,
         1
       ) - 1;
-    // scrollData.range(
-    //   enterVisiblePageIndex / pages.totalPages,
-    //   enterTransitionLength / pages.totalPages
-    // ) - 1;
 
     const contentPages = endPageIndex - startPageIndex;
     const contentProgressAmount = MathUtils.clamp(
@@ -59,11 +54,6 @@ export function useScrollPages(
       1
     );
 
-    // scrollData.range(
-    //   startPageIndex / pages.totalPages,
-    //   contentPages / pages.totalPages
-    // );
-
     const exitAmount = MathUtils.clamp(
       MathUtils.inverseLerp(
         endPageIndex / pages.totalPages,
@@ -74,22 +64,10 @@ export function useScrollPages(
       1
     );
 
-    // scrollData.range(
-    //   endPageIndex / pages.totalPages,
-    //   exitTransitionLength / pages.totalPages
-    // );
-
     const isVisible =
-      scrollProgress.current >
-        enterVisiblePageIndex / pages.totalPages - 0.001 &&
+      scrollProgress.current > enterVisiblePageIndex / pages.totalPages &&
       scrollProgress.current <
-        (enterVisiblePageIndex + totalVisibleLength) / pages.totalPages + 0.001;
-
-    // scrollData.visible(
-    //   enterVisiblePageIndex / pages.totalPages,
-    //   totalVisibleLength / pages.totalPages,
-    //   -0.001
-    // );
+        (enterVisiblePageIndex + totalVisibleLength) / pages.totalPages;
 
     progressCallback({
       enterAmount: enterAmount,
