@@ -98,7 +98,10 @@ function App() {
   return (
     <ReactLenis root>
       <div style={{ height: `${pages.totalPages * 100}vh` }} />
-      <div id="App" className="bg-green-500 h-screen font-sans fixed inset-0">
+      <div
+        id="App"
+        className="bg-gradient-radial from-green-400 to-green-500 h-screen font-sans fixed inset-0"
+      >
         <Canvas
           onPointerMove={(e) => {
             if (e.pointerType === "mouse") {

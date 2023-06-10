@@ -19,6 +19,9 @@ module.exports = {
           ...defaultTheme.fontFamily.sans,
         ],
       },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+      },
     },
   },
   plugins: [require("daisyui")],
