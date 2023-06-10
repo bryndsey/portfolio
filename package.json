@@ -17,6 +17,7 @@
     "@react-spring/web": "^9.7.2",
     "@react-three/drei": "^9.74.6",
     "@react-three/fiber": "^8.13.0",
+    "@studio-freight/react-lenis": "^0.0.21",
     "daisyui": "^2.52.0",
     "firebase": "^9.22.2",
     "jotai": "^2.1.1",
