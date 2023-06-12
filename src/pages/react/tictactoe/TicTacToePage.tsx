@@ -171,11 +171,7 @@ export const TicTacToePage = (props: PageComponentProps) => {
       const descriptionScrollAmount = enterAmount + exitAmount;
 
       descriptionGroupRef.current.position.setX(descriptionX);
-
-      const viewportHeight = state.viewport.height;
-      descriptionGroupRef.current.position.setY(
-        descriptionScrollAmount * viewportHeight + descriptionY
-      );
+      descriptionGroupRef.current.position.setY(descriptionY);
 
       const showDescription = descriptionScrollAmount === 0;
       setVisibility(showDescription);
@@ -185,6 +181,7 @@ export const TicTacToePage = (props: PageComponentProps) => {
       const piecesScrollAmount =
         2 * (enterAmount + contentProgressAmount * 0.5 + exitAmount);
 
+      const viewportHeight = state.viewport.height;
       piecesGroupRef.current.position.setY(piecesScrollAmount * viewportHeight);
     }
   );
