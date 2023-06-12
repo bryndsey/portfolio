@@ -1,7 +1,14 @@
 import { shaderMaterial } from "@react-three/drei";
 import { MaterialNode, extend } from "@react-three/fiber";
-import { Color } from "three";
+import { Color, ShaderMaterial } from "three";
 
+export type BlobUniforms = {
+  uTime: number;
+  uBlobbiness: number;
+  color: Color;
+  uOpacity: number;
+  offset: number;
+};
 export const BlobShaderMaterial = shaderMaterial(
   {
     uTime: 0,
@@ -9,7 +16,7 @@ export const BlobShaderMaterial = shaderMaterial(
     color: new Color("green"),
     uOpacity: 1,
     offset: Math.random(),
-  },
+  } as BlobUniforms,
   `
   varying vec2 vUv;
     void main() {
@@ -86,7 +93,9 @@ extend({ BlobShaderMaterial });
 declare module "@react-three/fiber" {
   interface ThreeElements {
     blobShaderMaterial: MaterialNode<
-      BlobShaderMaterial,
+      ShaderMaterial & {
+        key: string;
+      } & BlobUniforms,
       typeof BlobShaderMaterial
     >;
   }
