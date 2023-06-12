@@ -3,7 +3,7 @@ import { MaterialNode, extend } from "@react-three/fiber";
 import { Color } from "three";
 
 export const BlobShaderMaterial = shaderMaterial(
-  { uTime: 0, uBlobbiness: 1, color: new Color("green") },
+  { uTime: 0, uBlobbiness: 1, color: new Color("green"), uOpacity: 1 },
   `
   varying vec2 vUv;
     void main() {
@@ -16,6 +16,7 @@ export const BlobShaderMaterial = shaderMaterial(
     uniform float uTime;
     uniform float uBlobbiness;
     uniform vec3 color;
+    uniform float uOpacity;
     varying vec2 vUv;
     void main() {
       vec2 wavedUv = vec2(
@@ -23,15 +24,9 @@ export const BlobShaderMaterial = shaderMaterial(
         vUv.y + sin(vUv.x * 5.1 + uTime) * 0.05 * uBlobbiness
       );
       float strength = step(0.4, distance(wavedUv, vec2(0.5)));
-      gl_FragColor.rgba = vec4(color.xyz, (1.0 - strength) * 0.33);
+      gl_FragColor.rgba = vec4(color.xyz, (1.0 - strength) * uOpacity);
     }
-  `,
-  (material) => {
-    if (material === undefined) return;
-    material.depthWrite = false;
-    material.depthTest = false;
-    // material.blending = AdditiveBlending;
-  }
+  `
 );
 extend({ BlobShaderMaterial });
 
