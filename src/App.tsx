@@ -1,5 +1,6 @@
 import {
   Environment,
+  Float,
   Html,
   OrbitControls,
   PerspectiveCamera,
@@ -138,18 +139,39 @@ function App() {
             <Environment files={HDRI} />
             <Preload all />
 
-            <group position={[-1, 1, -6]}>
-              <Blob speed={0.3} blobbiness={1} size={2} opacity={0.2} />
-            </group>
-            <group position={[1, -1, -6]}>
-              <Blob
-                speed={0.3}
-                blobbiness={1}
-                size={4}
-                color={"green"}
-                opacity={0.2}
-              />
-            </group>
+            <Float floatIntensity={0.5} speed={0.66}>
+              <group position={[2.66, 1, -6]}>
+                <Blob
+                  speed={0.2}
+                  blobbiness={1}
+                  size={1.5}
+                  color={"limegreen"}
+                  opacity={0.15}
+                />
+              </group>
+            </Float>
+            <Float floatIntensity={0.5} speed={0.66}>
+              <group position={[-2.5, 2.5, -8]}>
+                <Blob
+                  speed={0.2}
+                  blobbiness={1.2}
+                  size={3}
+                  color={"limegreen"}
+                  opacity={0.15}
+                />
+              </group>
+            </Float>
+            <Float floatIntensity={0.5} speed={0.5}>
+              <group position={[-0.5, -3.5, -7]}>
+                <Blob
+                  speed={0.2}
+                  blobbiness={1.1}
+                  size={6.5}
+                  color={"limegreen"}
+                  opacity={0.15}
+                />
+              </group>
+            </Float>
 
             {/* <ScrollControls pages={pages.totalPages}> */}
             <ambientLight intensity={0.15} />
