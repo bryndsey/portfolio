@@ -130,7 +130,7 @@ export const TicTacToePage = (props: PageComponentProps) => {
   const descriptionScaleFactor =
     screenState.deviceClass === "small" &&
     screenState.orientation === "landscape"
-      ? 1.5
+      ? 1.25
       : 2;
 
   const { springValue, setVisibility } = useSpringScaleVisibility();
@@ -158,6 +158,8 @@ export const TicTacToePage = (props: PageComponentProps) => {
         screenState.orientation === "portrait" &&
         screenState.deviceClass === "small"
           ? viewport.width * viewport.factor * 0.8
+          : screenState.deviceClass === "small"
+          ? viewport.width * viewport.factor * 0.6
           : viewport.width * viewport.factor * 0.45;
 
       contentRef.current.style.width = `${descriptionWidth}px`;
@@ -166,7 +168,7 @@ export const TicTacToePage = (props: PageComponentProps) => {
         screenState.orientation === "portrait" &&
         screenState.deviceClass === "small"
           ? [-viewport.width * 0.4, 0]
-          : [0, viewport.height * 0.2];
+          : [0, viewport.height * 0.33];
 
       const descriptionScrollAmount = enterAmount + exitAmount;
 
