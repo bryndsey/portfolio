@@ -138,7 +138,18 @@ function App() {
             <Environment files={HDRI} />
             <Preload all />
 
-            <Blob speed={0.3} blobbiness={1} size={2} />
+            <group position={[-1, 1, -6]}>
+              <Blob speed={0.3} blobbiness={1} size={2} opacity={0.2} />
+            </group>
+            <group position={[1, -1, -6]}>
+              <Blob
+                speed={0.3}
+                blobbiness={1}
+                size={4}
+                color={"green"}
+                opacity={0.2}
+              />
+            </group>
 
             {/* <ScrollControls pages={pages.totalPages}> */}
             <ambientLight intensity={0.15} />

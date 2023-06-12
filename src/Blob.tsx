@@ -22,6 +22,8 @@ export function Blob(props: BlobProps) {
   } = props;
   const blobMaterialRef = useRef<BlobShaderMaterial>(null!);
 
+  const offset = useRef(Math.random() * 4);
+
   useFrame((state, delta) => {
     blobMaterialRef.current.uTime += delta * speed;
   });
@@ -36,6 +38,7 @@ export function Blob(props: BlobProps) {
         color={color}
         uOpacity={opacity}
         uBlobbiness={blobbiness}
+        offset={offset.current}
       />
     </Plane>
   );
