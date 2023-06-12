@@ -95,7 +95,7 @@ function BackgroundBlobs() {
   return (
     <>
       <Float floatIntensity={0.5} speed={0.66}>
-        <group position={[2.66, 1, -6]}>
+        <group position={[2.66, 1, -5]}>
           <Blob
             speed={0.2}
             blobbiness={1}
@@ -106,7 +106,7 @@ function BackgroundBlobs() {
         </group>
       </Float>
       <Float floatIntensity={0.5} speed={0.66}>
-        <group position={[-2.5, 2.5, -8]}>
+        <group position={[-2.5, 2.5, -6]}>
           <Blob
             speed={0.2}
             blobbiness={1.2}
@@ -117,7 +117,7 @@ function BackgroundBlobs() {
         </group>
       </Float>
       <Float floatIntensity={0.5} speed={0.5}>
-        <group position={[-0.5, -3.5, -7]}>
+        <group position={[-0.5, -3.5, -5]}>
           <Blob
             speed={0.2}
             blobbiness={1.1}
