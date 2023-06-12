@@ -138,7 +138,7 @@ function App() {
             <Environment files={HDRI} />
             <Preload all />
 
-            <Blob speed={0.3} blobbiness={2} />
+            <Blob speed={0.3} blobbiness={1} size={2} />
 
             {/* <ScrollControls pages={pages.totalPages}> */}
             <ambientLight intensity={0.15} />
