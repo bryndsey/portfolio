@@ -43,9 +43,9 @@ texture.needsUpdate = true;
 
 export const PedalsPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
-  const cableRef = useRef<Mesh>(null!);
-  const cableEnd = useRef<Group>(null!);
-  const textureRef = useRef<MeshStandardMaterial>(null!);
+  const cableRef = useRef<Mesh>(null);
+  const cableEnd = useRef<Group>(null);
+  const textureRef = useRef<MeshStandardMaterial>(null);
 
   const descriptionGroupRef = useRef<Group>(null!);
   const descriptionRef = useRef<HTMLDivElement>(null);
@@ -142,18 +142,22 @@ export const PedalsPage = (props: PageComponentProps) => {
         texture.needsUpdate = true;
       }
 
-      const pointPosition = curve.getPoint(cableProgressPercent);
-      const pointTangent = curve.getTangent(cableProgressPercent);
-      cableEnd.current.position.set(
-        pointPosition.x,
-        pointPosition.y,
-        pointPosition.z
-      );
+      if (cableEnd.current !== null) {
+        const pointPosition = curve.getPoint(cableProgressPercent);
+        const pointTangent = curve.getTangent(cableProgressPercent);
+        cableEnd.current.position.set(
+          pointPosition.x,
+          pointPosition.y,
+          pointPosition.z
+        );
 
-      const rotationTarget = cableRef.current.localToWorld(
-        pointTangent.add(pointPosition)
-      );
-      cableEnd.current.lookAt(rotationTarget);
+        if (cableRef.current !== null) {
+          const rotationTarget = cableRef.current.localToWorld(
+            pointTangent.add(pointPosition)
+          );
+          cableEnd.current.lookAt(rotationTarget);
+        }
+      }
 
       const showContent =
         contentProgressAmount > 0 && contentProgressAmount < 1;

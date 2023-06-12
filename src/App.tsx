@@ -1,5 +1,6 @@
 import {
   Environment,
+  Float,
   Html,
   OrbitControls,
   PerspectiveCamera,
@@ -15,6 +16,8 @@ import { Suspense, useRef } from "react";
 import { CameraHelper, MathUtils, Vector2, Vector3 } from "three";
 import HDRI from "./assets/empty_warehouse_01_1k.hdr?url";
 import { pages } from "./pages/Pages";
+import { ReactLenis } from "@studio-freight/react-lenis";
+import { Blob } from "./Blob";
 
 const lastNormalizedMousePosition = new Vector2();
 export let normalizedMousePosition: Vector2 | null = null;
@@ -88,6 +91,46 @@ function LoadingIndicator() {
   );
 }
 
+function BackgroundBlobs() {
+  return (
+    <>
+      <Float floatIntensity={0.5} speed={0.66}>
+        <group position={[2.66, 1, -5]}>
+          <Blob
+            speed={0.2}
+            blobbiness={1}
+            size={1.5}
+            color={"limegreen"}
+            opacity={0.15}
+          />
+        </group>
+      </Float>
+      <Float floatIntensity={0.5} speed={0.66}>
+        <group position={[-2.5, 2.5, -6]}>
+          <Blob
+            speed={0.2}
+            blobbiness={1.2}
+            size={3}
+            color={"limegreen"}
+            opacity={0.15}
+          />
+        </group>
+      </Float>
+      <Float floatIntensity={0.5} speed={0.5}>
+        <group position={[-0.5, -3.5, -5]}>
+          <Blob
+            speed={0.2}
+            blobbiness={1.1}
+            size={6.5}
+            color={"limegreen"}
+            opacity={0.15}
+          />
+        </group>
+      </Float>
+    </>
+  );
+}
+
 function App() {
   // const { showStats } = useControls({
   //   showStats: true,
@@ -95,43 +138,49 @@ function App() {
   const showStats = import.meta.env.DEV;
 
   return (
-    <div id="App" className="bg-green-500 h-screen font-sans">
-      <Canvas
-        onPointerMove={(e) => {
-          if (e.pointerType === "mouse") {
-            const normalizedX = MathUtils.mapLinear(
-              e.clientX,
-              0,
-              e.currentTarget.clientWidth,
-              -1,
-              1
-            );
-
-            // Go from positive to negative to map properly
-            const normalizedY = MathUtils.mapLinear(
-              e.clientY,
-              0,
-              e.currentTarget.clientHeight,
-              1,
-              -1
-            );
-            lastNormalizedMousePosition.set(normalizedX, normalizedY);
-            normalizedMousePosition = lastNormalizedMousePosition;
-          }
-        }}
-        onPointerLeave={() => {
-          normalizedMousePosition = null;
-        }}
-        dpr={Math.min(window.devicePixelRatio, 2)}
+    <ReactLenis root>
+      <div style={{ height: `${pages.totalPages * 100}vh` }} />
+      <div
+        id="App"
+        className="bg-gradient-radial from-green-400 to-green-500 h-screen font-sans fixed inset-0"
       >
-        {import.meta.env.DEV && showStats && <Stats />}
-        {import.meta.env.DEV && showStats && <Perf position="bottom-left" />}
-        <CameraRig />
-        <Suspense fallback={<LoadingIndicator />}>
-          <Environment files={HDRI} />
-          <Preload all />
+        <Canvas
+          onPointerMove={(e) => {
+            if (e.pointerType === "mouse") {
+              const normalizedX = MathUtils.mapLinear(
+                e.clientX,
+                0,
+                e.currentTarget.clientWidth,
+                -1,
+                1
+              );
 
-          <ScrollControls pages={pages.totalPages}>
+              // Go from positive to negative to map properly
+              const normalizedY = MathUtils.mapLinear(
+                e.clientY,
+                0,
+                e.currentTarget.clientHeight,
+                1,
+                -1
+              );
+              lastNormalizedMousePosition.set(normalizedX, normalizedY);
+              normalizedMousePosition = lastNormalizedMousePosition;
+            }
+          }}
+          onPointerLeave={() => {
+            normalizedMousePosition = null;
+          }}
+          dpr={Math.min(window.devicePixelRatio, 2)}
+        >
+          {import.meta.env.DEV && showStats && <Stats />}
+          {import.meta.env.DEV && showStats && <Perf position="bottom-left" />}
+          <CameraRig />
+          <Suspense fallback={<LoadingIndicator />}>
+            <Environment files={HDRI} />
+            <Preload all />
+
+            <BackgroundBlobs />
+            {/* <ScrollControls pages={pages.totalPages}> */}
             <ambientLight intensity={0.15} />
             {pages.pagesWithStartIndex.map((page) => {
               return (
@@ -142,10 +191,11 @@ function App() {
                 />
               );
             })}
-          </ScrollControls>
-        </Suspense>
-      </Canvas>
-    </div>
+            {/* </ScrollControls> */}
+          </Suspense>
+        </Canvas>
+      </div>
+    </ReactLenis>
   );
 }
 

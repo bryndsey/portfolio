@@ -1,5 +1,9 @@
-import { useScroll } from "@react-three/drei";
 import { RootState, useFrame } from "@react-three/fiber";
+import { useLenis } from "@studio-freight/react-lenis";
+import Lenis from "@studio-freight/lenis";
+import { useRef } from "react";
+import { MathUtils } from "three";
+import { pages } from "./Pages";
 
 type ScrollPageProgress = {
   enterAmount: number;
@@ -15,7 +19,12 @@ export function useScrollPages(
   endPageIndex: number,
   progressCallback: (progress: ScrollPageProgress) => void
 ) {
-  const scrollData = useScroll();
+  const scrollProgress = useRef(0);
+
+  useLenis((lenis: Lenis) => {
+    scrollProgress.current = lenis.progress;
+  });
+
   useFrame((state, delta) => {
     const enterTransitionLength = 1;
     const enterVisiblePageIndex = startPageIndex - 1;
@@ -23,29 +32,42 @@ export function useScrollPages(
     const exitVisiblePageIndex = endPageIndex + exitTransitionLength;
     const totalVisibleLength = exitVisiblePageIndex - enterVisiblePageIndex;
 
-    const totalPages = scrollData.pages;
     const enterAmount =
-      scrollData.range(
-        enterVisiblePageIndex / totalPages,
-        enterTransitionLength / totalPages
+      MathUtils.clamp(
+        MathUtils.inverseLerp(
+          enterVisiblePageIndex / pages.totalPages,
+          (enterVisiblePageIndex + enterTransitionLength) / pages.totalPages,
+          scrollProgress.current
+        ),
+        0,
+        1
       ) - 1;
 
     const contentPages = endPageIndex - startPageIndex;
-    const contentProgressAmount = scrollData.range(
-      startPageIndex / totalPages,
-      contentPages / totalPages
+    const contentProgressAmount = MathUtils.clamp(
+      MathUtils.inverseLerp(
+        startPageIndex / pages.totalPages,
+        (startPageIndex + contentPages) / pages.totalPages,
+        scrollProgress.current
+      ),
+      0,
+      1
     );
 
-    const exitAmount = scrollData.range(
-      endPageIndex / totalPages,
-      exitTransitionLength / totalPages
+    const exitAmount = MathUtils.clamp(
+      MathUtils.inverseLerp(
+        endPageIndex / pages.totalPages,
+        (endPageIndex + exitTransitionLength) / pages.totalPages,
+        scrollProgress.current
+      ),
+      0,
+      1
     );
 
-    const isVisible = scrollData.visible(
-      enterVisiblePageIndex / totalPages,
-      totalVisibleLength / totalPages,
-      -0.001
-    );
+    const isVisible =
+      scrollProgress.current > enterVisiblePageIndex / pages.totalPages &&
+      scrollProgress.current <
+        (enterVisiblePageIndex + totalVisibleLength) / pages.totalPages;
 
     progressCallback({
       enterAmount: enterAmount,
