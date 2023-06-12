@@ -1,8 +1,8 @@
 import { Plane } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
-import { BlobShaderMaterial } from "./BlobShaderMaterial";
-import { ColorRepresentation } from "three";
+import { BlobShaderMaterial, BlobUniforms } from "./BlobShaderMaterial";
+import { ColorRepresentation, ShaderMaterial } from "three";
 
 interface BlobProps {
   speed?: number;
@@ -20,7 +20,11 @@ export function Blob(props: BlobProps) {
     color = "green",
     opacity = 1,
   } = props;
-  const blobMaterialRef = useRef<BlobShaderMaterial>(null!);
+  const blobMaterialRef = useRef<
+    ShaderMaterial & {
+      key: string;
+    } & BlobUniforms
+  >(null!);
 
   const offset = useRef(Math.random() * 4);
 
@@ -33,7 +37,6 @@ export function Blob(props: BlobProps) {
       <blobShaderMaterial
         key={BlobShaderMaterial.key}
         ref={blobMaterialRef}
-        // depthWrite={false}
         transparent
         color={color}
         uOpacity={opacity}
