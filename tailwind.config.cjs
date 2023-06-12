@@ -15,7 +15,6 @@ module.exports = {
         handwritten: [
           "BryanSans",
           "Bradley Hand",
-          "cursive",
           ...defaultTheme.fontFamily.sans,
         ],
       },
