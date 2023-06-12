@@ -27,9 +27,9 @@ export const SongSparkPage = (props: PageComponentProps) => {
   const groupRef = useRef<Group>(null);
   const htmlRef = useRef<Group>(null);
   const descriptionRef = useRef<HTMLDivElement>(null);
-  const guitarRef = useRef<Group>(null!);
-  const keyboardRef = useRef<Group>(null!);
-  const violinRef = useRef<Group>(null!);
+  const guitarRef = useRef<Group>(null);
+  const keyboardRef = useRef<Group>(null);
+  const violinRef = useRef<Group>(null);
 
   const screenState = useScreenState();
   const descriptionScaleFactor =
@@ -104,25 +104,21 @@ export const SongSparkPage = (props: PageComponentProps) => {
         contentProgressAmount * contentMovementAmount +
         exitAmount;
 
-      const guitarXOffset =
-        screenState.deviceClass === "small" &&
-        screenState.orientation === "landscape"
-          ? state.viewport.width / 3
-          : state.viewport.width / 4;
+      if (guitarRef.current !== null) {
+        const guitarXOffset =
+          screenState.deviceClass === "small" &&
+          screenState.orientation === "landscape"
+            ? state.viewport.width / 3
+            : state.viewport.width / 4;
 
-      guitarRef.current.position.setX(guitarXOffset);
+        guitarRef.current.position.setX(guitarXOffset);
 
-      guitarRef.current.rotation.set(
-        Math.PI / 2 + totalProgress / 50,
-        -0.25,
-        0.75 - totalProgress / 20
-      );
-
-      const keyboardXOffset =
-        screenState.deviceClass === "small" &&
-        screenState.orientation === "landscape"
-          ? state.viewport.width / 6
-          : -state.viewport.width / 5;
+        guitarRef.current.rotation.set(
+          Math.PI / 2 + totalProgress / 50,
+          -0.25,
+          0.75 - totalProgress / 20
+        );
+      }
 
       const backgroundProgress = MathUtils.mapLinear(
         totalProgress,
@@ -132,35 +128,45 @@ export const SongSparkPage = (props: PageComponentProps) => {
         1.5
       );
 
-      keyboardRef.current.position.set(
-        keyboardXOffset,
-        -state.viewport.height * 0.33 + backgroundProgress * 0.85,
-        -2
-      );
+      if (keyboardRef.current !== null) {
+        const keyboardXOffset =
+          screenState.deviceClass === "small" &&
+          screenState.orientation === "landscape"
+            ? state.viewport.width / 6
+            : -state.viewport.width / 5;
 
-      keyboardRef.current.rotation.set(
-        Math.PI / 2 - 0.2,
-        0.25,
-        backgroundProgress / 2 - 0.6
-      );
+        keyboardRef.current.position.set(
+          keyboardXOffset,
+          -state.viewport.height * 0.33 + backgroundProgress * 0.85,
+          -2
+        );
 
-      const violinXOffset =
-        screenState.deviceClass === "small" &&
-        screenState.orientation === "landscape"
-          ? state.viewport.width / 4
-          : -state.viewport.width * 0.2;
+        keyboardRef.current.rotation.set(
+          Math.PI / 2 - 0.2,
+          0.25,
+          backgroundProgress / 2 - 0.6
+        );
+      }
 
-      violinRef.current.position.set(
-        violinXOffset,
-        state.viewport.height * 0.33 + backgroundProgress * 0.33,
-        -1
-      );
+      if (violinRef.current !== null) {
+        const violinXOffset =
+          screenState.deviceClass === "small" &&
+          screenState.orientation === "landscape"
+            ? state.viewport.width / 4
+            : -state.viewport.width * 0.2;
 
-      violinRef.current.rotation.set(
-        Math.PI * 0.15 * backgroundProgress,
-        0.25 * backgroundProgress + 0.25,
-        0.5
-      );
+        violinRef.current.position.set(
+          violinXOffset,
+          state.viewport.height * 0.33 + backgroundProgress * 0.33,
+          -1
+        );
+
+        violinRef.current.rotation.set(
+          Math.PI * 0.15 * backgroundProgress,
+          0.25 * backgroundProgress + 0.25,
+          0.5
+        );
+      }
     }
   );
 
