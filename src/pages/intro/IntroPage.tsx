@@ -6,6 +6,7 @@ import { Group, MathUtils, Mesh } from "three";
 import { AvatarModel } from "./AvatarModel";
 import { PageComponentProps } from "../Pages";
 import { useScrollPages } from "../useScrollPages";
+import { Blob } from "../../Blob";
 
 export const IntroPageContent = () => {
   return (
@@ -33,7 +34,7 @@ export const IntroPage = (props: PageComponentProps) => {
 
   const groupRef = useRef<Group>(null!);
   const contentRef = useRef<HTMLDivElement>(null);
-  const bubbleRef = useRef<Mesh>(null!);
+  const bubbleRef = useRef<Group>(null!);
   const avatarRef = useRef<Group>(null);
 
   const avatarTransitionAnimationValue = useSpringValue(0, {
@@ -193,14 +194,9 @@ export const IntroPage = (props: PageComponentProps) => {
   return (
     <>
       <group ref={groupRef}>
-        <Circle args={[0.75, 64]} ref={bubbleRef}>
-          {/* <meshBasicMaterial color="white" /> */}
-          <MeshDistortMaterial
-            color={"white"}
-            distort={0.25}
-            factor={2}
-            speed={1}
-          />
+        <group ref={bubbleRef}>
+          <Blob size={1.85} color={"white"} speed={0.25} />
+
           <Html
             ref={contentRef}
             transform
@@ -211,16 +207,7 @@ export const IntroPage = (props: PageComponentProps) => {
           >
             <IntroPageContent />
           </Html>
-        </Circle>
-        {/* <Text
-        font={BryanSans}
-        color="black"
-        fontSize={0.2}
-        overflowWrap={"normal"}
-        maxWidth={viewport.width / 2}
-      >
-        Hi, my name is Bryan Lindsey
-      </Text> */}
+        </group>
       </group>
       <Suspense fallback={null}>
         {/* <Center ref={centeredAvatarRef}> */}

@@ -94,8 +94,8 @@ function LoadingIndicator() {
 function BackgroundBlobs() {
   return (
     <>
-      <Float floatIntensity={0.5} speed={0.66}>
-        <group position={[2.66, 1, -5]}>
+      <Float floatIntensity={0.5} speed={0.66} rotationIntensity={0.5}>
+        <group position={[2.66, 1, -5.5]}>
           <Blob
             speed={0.2}
             blobbiness={1}
@@ -105,7 +105,7 @@ function BackgroundBlobs() {
           />
         </group>
       </Float>
-      <Float floatIntensity={0.5} speed={0.66}>
+      <Float floatIntensity={0.5} speed={0.66} rotationIntensity={0.5}>
         <group position={[-2.5, 2.5, -6]}>
           <Blob
             speed={0.2}
@@ -116,7 +116,7 @@ function BackgroundBlobs() {
           />
         </group>
       </Float>
-      <Float floatIntensity={0.5} speed={0.5}>
+      <Float floatIntensity={0.5} speed={0.5} rotationIntensity={0.5}>
         <group position={[-0.5, -3.5, -5]}>
           <Blob
             speed={0.2}
