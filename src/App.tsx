@@ -167,8 +167,16 @@ function App() {
               normalizedMousePosition = lastNormalizedMousePosition;
             }
           }}
-          onPointerLeave={() => {
-            normalizedMousePosition = null;
+          onPointerLeave={(e) => {
+            const clientRect = e.currentTarget.getBoundingClientRect();
+            if (
+              e.clientX < clientRect.left ||
+              e.clientY < clientRect.top ||
+              e.clientX > clientRect.right ||
+              e.clientY > clientRect.bottom
+            ) {
+              normalizedMousePosition = null;
+            }
           }}
           dpr={Math.min(window.devicePixelRatio, 2)}
         >
