@@ -146,7 +146,7 @@ function App() {
           innerSize={20}
           innerScale={2}
           outerAlpha={0}
-          innerStyle={{ backgroundColor: "rgba(0, 150, 60, 0.95)" }}
+          innerStyle={{ backgroundColor: "rgba(0, 150, 60, 0.97)" }}
         />
       </div>
       <div
