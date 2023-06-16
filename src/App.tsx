@@ -18,6 +18,7 @@ import HDRI from "./assets/empty_warehouse_01_1k.hdr?url";
 import { pages } from "./pages/Pages";
 import { ReactLenis } from "@studio-freight/react-lenis";
 import { Blob } from "./Blob";
+import AnimatedCursor from "react-animated-cursor";
 
 const lastNormalizedMousePosition = new Vector2();
 export let normalizedMousePosition: Vector2 | null = null;
@@ -140,6 +141,14 @@ function App() {
   return (
     <ReactLenis root>
       <div style={{ height: `${pages.totalPages * 100}vh` }} />
+      <div>
+        <AnimatedCursor
+          innerSize={20}
+          innerScale={2}
+          outerAlpha={0}
+          innerStyle={{ backgroundColor: "rgba(0, 150, 60, 0.97)" }}
+        />
+      </div>
       <div
         id="App"
         className="bg-gradient-radial from-green-400 to-green-500 h-screen font-sans fixed inset-0"
@@ -167,8 +176,16 @@ function App() {
               normalizedMousePosition = lastNormalizedMousePosition;
             }
           }}
-          onPointerLeave={() => {
-            normalizedMousePosition = null;
+          onPointerLeave={(e) => {
+            const clientRect = e.currentTarget.getBoundingClientRect();
+            if (
+              e.clientX < clientRect.left ||
+              e.clientY < clientRect.top ||
+              e.clientX > clientRect.right ||
+              e.clientY > clientRect.bottom
+            ) {
+              normalizedMousePosition = null;
+            }
           }}
           dpr={Math.min(window.devicePixelRatio, 2)}
         >
