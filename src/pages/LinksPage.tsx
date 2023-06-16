@@ -103,7 +103,7 @@ export const LinksPage = (props: PageComponentProps) => {
             <h3 className="text-center pt-8 text-4xl landscape:text-2xl md:text-6xl landscape:md:text-6xl font-bold font-handwritten">
               More of my stuff:
             </h3>
-            <div className="grow max-w-4xl w-fit sm:w-full grid sm:portrait:grid-cols-2 grid-cols-1 landscape:grid-cols-3 place-content-evenly gap-4 m-auto px-6 md:px-10">
+            <div className="grow max-w-4xl w-fit sm:w-full grid sm:portrait:grid-cols-2 grid-cols-1 landscape:grid-cols-3 place-content-evenly sm:place-items-center gap-4 m-auto px-6 md:px-10">
               {links.map((link) => (
                 <a
                   href={link.url}
