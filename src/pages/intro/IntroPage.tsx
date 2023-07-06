@@ -7,6 +7,7 @@ import { AvatarModel } from "./AvatarModel";
 import { PageComponentProps } from "../Pages";
 import { useScrollPages } from "../useScrollPages";
 import { Blob } from "../../Blob";
+import { useIsLoaded } from "../../useIsLoaded";
 
 export const IntroPageContent = () => {
   return (
@@ -45,6 +46,8 @@ export const IntroPage = (props: PageComponentProps) => {
     config: { ...config.stiff, precision: 0.0001, round: 0.005 },
   });
 
+  const isLoaded = useIsLoaded();
+
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
@@ -53,6 +56,13 @@ export const IntroPage = (props: PageComponentProps) => {
 
       if (contentRef.current !== null) {
         contentRef.current.hidden = !isPageVisible;
+      }
+
+      if (avatarRef.current === null) return;
+      avatarRef.current.visible = isPageVisible;
+
+      if (!isLoaded) {
+        return;
       }
 
       const yPercent = enterAmount + exitAmount;
@@ -106,8 +116,6 @@ export const IntroPage = (props: PageComponentProps) => {
       bubbleRef.current.scale.setScalar(
         bubbleScale * bubbleTransitionAnimationValue.get()
       );
-
-      if (avatarRef.current === null) return;
 
       const avatarTransitionTarget = Math.abs(yPercent) < 0.05 ? 1 : 0;
       if (avatarTransitionAnimationValue.goal !== avatarTransitionTarget) {
@@ -186,8 +194,6 @@ export const IntroPage = (props: PageComponentProps) => {
         avatarRef.current.position.y,
         state.camera.position.z
       );
-
-      avatarRef.current.visible = isPageVisible;
     }
   );
 
