@@ -94,7 +94,7 @@ function LoadingIndicator() {
         className="font-handwritten text-4xl m-auto text-center"
         style={{
           scale: loadingTransistionValue.to((value) =>
-            easings.easeOutBack(1 - value)
+            easings.easeOutBack(1 - Math.min(1, value * 2))
           ),
         }}
       >

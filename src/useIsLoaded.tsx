@@ -6,7 +6,9 @@ type LoadingState = "loading" | "transistion" | "loaded";
 
 export function useIsLoaded() {
   const [loadingState, setLoadingState] = useState<LoadingState>("loading");
-  const loadingTransistionValue = useSpringValue(0);
+  const loadingTransistionValue = useSpringValue(0, {
+    config: { duration: 750 },
+  });
   const finishedLoading = useProgress(
     (state) => !state.active && state.progress === 100
   );
