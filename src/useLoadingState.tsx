@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 type LoadingState = "loading" | "transistion" | "loaded";
 
-export function useIsLoaded() {
+export function useLoadingState() {
   const [loadingState, setLoadingState] = useState<LoadingState>("loading");
   const loadingTransistionValue = useSpringValue(0, {
     config: { duration: 750 },

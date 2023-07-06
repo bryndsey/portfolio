@@ -19,7 +19,7 @@ import { pages } from "./pages/Pages";
 import { ReactLenis } from "@studio-freight/react-lenis";
 import { Blob } from "./Blob";
 import AnimatedCursor from "react-animated-cursor";
-import { useIsLoaded } from "./useIsLoaded";
+import { useLoadingState } from "./useLoadingState";
 import { animated } from "@react-spring/three";
 import { animated as animatedDom } from "@react-spring/web";
 import { easings } from "@react-spring/web";
@@ -87,7 +87,7 @@ const CameraRig = () => {
 };
 
 function LoadingIndicator() {
-  const { loadingTransistionValue } = useIsLoaded();
+  const { loadingTransistionValue } = useLoadingState();
   return (
     <Html fullscreen className="h-screen flex place-content-center">
       <animatedDom.div
@@ -105,7 +105,7 @@ function LoadingIndicator() {
 }
 
 function BackgroundBlobs() {
-  const { loadingTransistionValue } = useIsLoaded();
+  const { loadingTransistionValue } = useLoadingState();
   return (
     <>
       <animated.group
@@ -169,7 +169,7 @@ function App() {
   // });
   const showStats = import.meta.env.DEV;
 
-  const { loadingState } = useIsLoaded();
+  const { loadingState } = useLoadingState();
 
   return (
     <ReactLenis root>

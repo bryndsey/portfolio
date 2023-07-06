@@ -7,7 +7,7 @@ import { AvatarModel } from "./AvatarModel";
 import { PageComponentProps } from "../Pages";
 import { useScrollPages } from "../useScrollPages";
 import { Blob } from "../../Blob";
-import { useIsLoaded } from "../../useIsLoaded";
+import { useLoadingState } from "../../useLoadingState";
 
 export const IntroPageContent = () => {
   return (
@@ -46,7 +46,7 @@ export const IntroPage = (props: PageComponentProps) => {
     config: { ...config.stiff, precision: 0.0001, round: 0.005 },
   });
 
-  const { loadingTransistionValue } = useIsLoaded();
+  const { loadingTransistionValue } = useLoadingState();
 
   useScrollPages(
     props.startPageIndex,
