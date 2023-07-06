@@ -19,6 +19,10 @@ import { pages } from "./pages/Pages";
 import { ReactLenis } from "@studio-freight/react-lenis";
 import { Blob } from "./Blob";
 import AnimatedCursor from "react-animated-cursor";
+import { useIsLoaded } from "./useIsLoaded";
+import { animated } from "@react-spring/three";
+import { animated as animatedDom } from "@react-spring/web";
+import { easings } from "@react-spring/web";
 
 const lastNormalizedMousePosition = new Vector2();
 export let normalizedMousePosition: Vector2 | null = null;
@@ -83,18 +87,27 @@ const CameraRig = () => {
 };
 
 function LoadingIndicator() {
+  const { loadingTransistionValue } = useIsLoaded();
   return (
     <Html fullscreen className="h-screen flex place-content-center">
-      <div className="font-handwritten text-4xl m-auto text-center">
+      <animatedDom.div
+        className="font-handwritten text-4xl m-auto text-center"
+        style={{
+          scale: loadingTransistionValue.to((value) =>
+            easings.easeOutBack(1 - value)
+          ),
+        }}
+      >
         Loading . . .
-      </div>
+      </animatedDom.div>
     </Html>
   );
 }
 
 function BackgroundBlobs() {
+  const { loadingTransistionValue } = useIsLoaded();
   return (
-    <>
+    <animated.group scale={loadingTransistionValue}>
       <Float floatIntensity={0.5} speed={0.66} rotationIntensity={0.5}>
         <group position={[2.66, 1, -5.5]}>
           <Blob
@@ -128,7 +141,7 @@ function BackgroundBlobs() {
           />
         </group>
       </Float>
-    </>
+    </animated.group>
   );
 }
 
@@ -137,6 +150,8 @@ function App() {
   //   showStats: true,
   // });
   const showStats = import.meta.env.DEV;
+
+  const { loadingState } = useIsLoaded();
 
   return (
     <ReactLenis root>
@@ -192,7 +207,8 @@ function App() {
           {import.meta.env.DEV && showStats && <Stats />}
           {import.meta.env.DEV && showStats && <Perf position="bottom-left" />}
           <CameraRig />
-          <Suspense fallback={<LoadingIndicator />}>
+          {loadingState !== "loaded" && <LoadingIndicator />}
+          <Suspense fallback={null}>
             <Environment files={HDRI} />
             <Preload all />
 
