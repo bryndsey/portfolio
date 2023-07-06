@@ -46,13 +46,13 @@ export const IntroPage = (props: PageComponentProps) => {
     config: { ...config.stiff, precision: 0.0001, round: 0.005 },
   });
 
-  const isLoaded = useIsLoaded();
+  const { loadingTransistionValue } = useIsLoaded();
 
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
     ({ enterAmount, exitAmount, isPageVisible, state }) => {
-      const hasLoaded = isLoaded.get() === 1;
+      const hasLoaded = loadingTransistionValue.get() === 1;
       const showContents = isPageVisible && hasLoaded;
 
       groupRef.current.visible = showContents;
