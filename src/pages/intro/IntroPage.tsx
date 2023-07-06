@@ -52,17 +52,17 @@ export const IntroPage = (props: PageComponentProps) => {
     props.startPageIndex,
     props.exitPageIndex,
     ({ enterAmount, exitAmount, isPageVisible, state }) => {
-      groupRef.current.visible = isPageVisible;
+      const hasLoaded = isLoaded.get() === 1;
+      const showContents = isPageVisible && hasLoaded;
+
+      groupRef.current.visible = showContents;
 
       if (contentRef.current !== null) {
-        contentRef.current.hidden = !isPageVisible;
+        contentRef.current.hidden = !showContents;
       }
 
-      if (avatarRef.current === null) return;
-      avatarRef.current.visible = isPageVisible;
-
-      if (!isLoaded) {
-        return;
+      if (avatarRef.current !== null) {
+        avatarRef.current.visible = showContents;
       }
 
       const yPercent = enterAmount + exitAmount;
@@ -102,13 +102,6 @@ export const IntroPage = (props: PageComponentProps) => {
       };
       bubbleRef.current.position.set(bubblePosition.x, bubblePosition.y, 0);
 
-      if (
-        bubbleTransitionAnimationValue.goal === 0 &&
-        state.clock.elapsedTime > 0.66
-      ) {
-        bubbleTransitionAnimationValue.start(1);
-      }
-
       const bubbleScale =
         state.viewport.aspect > 1
           ? Math.min(state.viewport.width * 0.45, viewportHeight * 0.66)
@@ -116,11 +109,6 @@ export const IntroPage = (props: PageComponentProps) => {
       bubbleRef.current.scale.setScalar(
         bubbleScale * bubbleTransitionAnimationValue.get()
       );
-
-      const avatarTransitionTarget = Math.abs(yPercent) < 0.05 ? 1 : 0;
-      if (avatarTransitionAnimationValue.goal !== avatarTransitionTarget) {
-        avatarTransitionAnimationValue.start(avatarTransitionTarget);
-      }
 
       const avatarOffscreenY = -viewportHeight * 1.5;
 
@@ -152,6 +140,8 @@ export const IntroPage = (props: PageComponentProps) => {
         avatarOnscreenPosition.y,
         avatarTransitionAnimationValue.get()
       );
+
+      if (avatarRef.current === null) return;
 
       avatarRef.current.position.set(
         avatarOnscreenPosition.x,
@@ -194,6 +184,20 @@ export const IntroPage = (props: PageComponentProps) => {
         avatarRef.current.position.y,
         state.camera.position.z
       );
+
+      if (!hasLoaded) return;
+
+      if (
+        bubbleTransitionAnimationValue.goal === 0 &&
+        state.clock.elapsedTime > 0.66
+      ) {
+        bubbleTransitionAnimationValue.start(1);
+      }
+
+      const avatarTransitionTarget = Math.abs(yPercent) < 0.05 ? 1 : 0;
+      if (avatarTransitionAnimationValue.goal !== avatarTransitionTarget) {
+        avatarTransitionAnimationValue.start(avatarTransitionTarget);
+      }
     }
   );
 
