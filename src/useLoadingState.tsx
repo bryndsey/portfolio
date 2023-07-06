@@ -19,9 +19,9 @@ export function useLoadingState() {
       loadingTransistionValue.start(actualTarget, {
         onChange(result) {
           if (
+            loadingState !== "transistion" &&
             result.value !== 0 &&
-            result.value !== 1 &&
-            loadingState !== "transistion"
+            result.value !== 1
           ) {
             setLoadingState("transistion");
           }
