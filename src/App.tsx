@@ -11,7 +11,7 @@ import {
 } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
-import { Suspense, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 // import { useControls } from "theatric";
 import { CameraHelper, MathUtils, Vector2, Vector3 } from "three";
 import HDRI from "./assets/empty_warehouse_01_1k.hdr?url";
@@ -21,7 +21,7 @@ import { Blob } from "./Blob";
 import AnimatedCursor from "react-animated-cursor";
 import { useLoadingState } from "./useLoadingState";
 import { animated } from "@react-spring/three";
-import { animated as animatedDom } from "@react-spring/web";
+import { animated as animatedDom, useSpringValue } from "@react-spring/web";
 import { easings } from "@react-spring/web";
 
 const lastNormalizedMousePosition = new Vector2();
@@ -88,6 +88,13 @@ const CameraRig = () => {
 
 function LoadingIndicator() {
   const { loadingTransistionValue } = useLoadingState();
+  const initialAnimationValue = useSpringValue(0, {
+    config: { duration: 450, easing: easings.easeOutBack },
+  });
+
+  useEffect(() => {
+    initialAnimationValue.start(1);
+  }, []);
   return (
     <Html fullscreen className="h-screen flex place-content-center">
       <animatedDom.div
@@ -98,7 +105,13 @@ function LoadingIndicator() {
           ),
         }}
       >
-        Loading . . .
+        <animatedDom.div
+          style={{
+            scale: initialAnimationValue,
+          }}
+        >
+          Loading . . .
+        </animatedDom.div>
       </animatedDom.div>
     </Html>
   );
