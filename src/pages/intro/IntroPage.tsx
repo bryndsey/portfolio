@@ -7,6 +7,7 @@ import { AvatarModel } from "./AvatarModel";
 import { PageComponentProps } from "../Pages";
 import { useScrollPages } from "../useScrollPages";
 import { Blob } from "../../Blob";
+import { useLoadingState } from "../../useLoadingState";
 
 export const IntroPageContent = () => {
   return (
@@ -45,14 +46,23 @@ export const IntroPage = (props: PageComponentProps) => {
     config: { ...config.stiff, precision: 0.0001, round: 0.005 },
   });
 
+  const { loadingTransistionValue } = useLoadingState();
+
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
     ({ enterAmount, exitAmount, isPageVisible, state }) => {
-      groupRef.current.visible = isPageVisible;
+      const hasLoaded = loadingTransistionValue.get() === 1;
+      const showContents = isPageVisible && hasLoaded;
+
+      groupRef.current.visible = showContents;
 
       if (contentRef.current !== null) {
-        contentRef.current.hidden = !isPageVisible;
+        contentRef.current.hidden = !showContents;
+      }
+
+      if (avatarRef.current !== null) {
+        avatarRef.current.visible = showContents;
       }
 
       const yPercent = enterAmount + exitAmount;
@@ -92,13 +102,6 @@ export const IntroPage = (props: PageComponentProps) => {
       };
       bubbleRef.current.position.set(bubblePosition.x, bubblePosition.y, 0);
 
-      if (
-        bubbleTransitionAnimationValue.goal === 0 &&
-        state.clock.elapsedTime > 0.66
-      ) {
-        bubbleTransitionAnimationValue.start(1);
-      }
-
       const bubbleScale =
         state.viewport.aspect > 1
           ? Math.min(state.viewport.width * 0.45, viewportHeight * 0.66)
@@ -106,13 +109,6 @@ export const IntroPage = (props: PageComponentProps) => {
       bubbleRef.current.scale.setScalar(
         bubbleScale * bubbleTransitionAnimationValue.get()
       );
-
-      if (avatarRef.current === null) return;
-
-      const avatarTransitionTarget = Math.abs(yPercent) < 0.05 ? 1 : 0;
-      if (avatarTransitionAnimationValue.goal !== avatarTransitionTarget) {
-        avatarTransitionAnimationValue.start(avatarTransitionTarget);
-      }
 
       const avatarOffscreenY = -viewportHeight * 1.5;
 
@@ -144,6 +140,8 @@ export const IntroPage = (props: PageComponentProps) => {
         avatarOnscreenPosition.y,
         avatarTransitionAnimationValue.get()
       );
+
+      if (avatarRef.current === null) return;
 
       avatarRef.current.position.set(
         avatarOnscreenPosition.x,
@@ -187,7 +185,19 @@ export const IntroPage = (props: PageComponentProps) => {
         state.camera.position.z
       );
 
-      avatarRef.current.visible = isPageVisible;
+      if (!hasLoaded) return;
+
+      if (
+        bubbleTransitionAnimationValue.goal === 0 &&
+        state.clock.elapsedTime > 0.66
+      ) {
+        bubbleTransitionAnimationValue.start(1);
+      }
+
+      const avatarTransitionTarget = Math.abs(yPercent) < 0.05 ? 1 : 0;
+      if (avatarTransitionAnimationValue.goal !== avatarTransitionTarget) {
+        avatarTransitionAnimationValue.start(avatarTransitionTarget);
+      }
     }
   );
 

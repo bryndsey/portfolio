@@ -11,7 +11,7 @@ import {
 } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
-import { Suspense, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 // import { useControls } from "theatric";
 import { CameraHelper, MathUtils, Vector2, Vector3 } from "three";
 import HDRI from "./assets/empty_warehouse_01_1k.hdr?url";
@@ -19,6 +19,10 @@ import { pages } from "./pages/Pages";
 import { ReactLenis } from "@studio-freight/react-lenis";
 import { Blob } from "./Blob";
 import AnimatedCursor from "react-animated-cursor";
+import { useLoadingState } from "./useLoadingState";
+import { animated } from "@react-spring/three";
+import { animated as animatedDom, useSpringValue } from "@react-spring/web";
+import { easings } from "@react-spring/web";
 
 const lastNormalizedMousePosition = new Vector2();
 export let normalizedMousePosition: Vector2 | null = null;
@@ -83,51 +87,91 @@ const CameraRig = () => {
 };
 
 function LoadingIndicator() {
+  const { loadingTransistionValue } = useLoadingState();
+  const initialAnimationValue = useSpringValue(0, {
+    config: { duration: 450, easing: easings.easeOutBack },
+  });
+
+  useEffect(() => {
+    initialAnimationValue.start(1);
+  }, []);
   return (
     <Html fullscreen className="h-screen flex place-content-center">
-      <div className="font-handwritten text-4xl m-auto text-center">
-        Loading . . .
-      </div>
+      <animatedDom.div
+        className="font-handwritten text-4xl m-auto text-center"
+        style={{
+          scale: loadingTransistionValue.to((value) =>
+            easings.easeOutBack(1 - Math.min(1, value * 2))
+          ),
+        }}
+      >
+        <animatedDom.div
+          style={{
+            scale: initialAnimationValue,
+          }}
+        >
+          Loading . . .
+        </animatedDom.div>
+      </animatedDom.div>
     </Html>
   );
 }
 
 function BackgroundBlobs() {
+  const { loadingTransistionValue } = useLoadingState();
   return (
     <>
-      <Float floatIntensity={0.5} speed={0.66} rotationIntensity={0.5}>
-        <group position={[2.66, 1, -5.5]}>
-          <Blob
-            speed={0.2}
-            blobbiness={1}
-            size={1.5}
-            color={"limegreen"}
-            opacity={0.15}
-          />
-        </group>
-      </Float>
-      <Float floatIntensity={0.5} speed={0.66} rotationIntensity={0.5}>
-        <group position={[-2.5, 2.5, -6]}>
-          <Blob
-            speed={0.2}
-            blobbiness={1.2}
-            size={3}
-            color={"limegreen"}
-            opacity={0.15}
-          />
-        </group>
-      </Float>
-      <Float floatIntensity={0.5} speed={0.5} rotationIntensity={0.5}>
-        <group position={[-0.5, -3.5, -5]}>
-          <Blob
-            speed={0.2}
-            blobbiness={1.1}
-            size={6.5}
-            color={"limegreen"}
-            opacity={0.15}
-          />
-        </group>
-      </Float>
+      <animated.group
+        position-y={loadingTransistionValue
+          .to((value) => easings.easeOutExpo(value))
+          .to([0, 1], [3, 0])}
+      >
+        <Float floatIntensity={0.5} speed={0.66} rotationIntensity={0.5}>
+          <group position={[2.66, 1, -5.5]}>
+            <Blob
+              speed={0.2}
+              blobbiness={1}
+              size={1.5}
+              color={"limegreen"}
+              opacity={0.15}
+            />
+          </group>
+        </Float>
+      </animated.group>
+      <animated.group
+        position-y={loadingTransistionValue
+          .to((value) => easings.easeOutCirc(value))
+          .to([0, 1], [3, 0])}
+      >
+        <Float floatIntensity={0.5} speed={0.66} rotationIntensity={0.5}>
+          <group position={[-2.5, 2.5, -6]}>
+            <Blob
+              speed={0.2}
+              blobbiness={1.2}
+              size={3}
+              color={"limegreen"}
+              opacity={0.15}
+            />
+          </group>
+        </Float>
+      </animated.group>
+      <animated.group
+        position-y={loadingTransistionValue
+          .to((value) => easings.easeOutSine(value))
+          .to([0, 1], [-3, 0])}
+      >
+        <Float floatIntensity={0.5} speed={0.5} rotationIntensity={0.5}>
+          <group position={[-0.5, -3.5, -5]}>
+            <Blob
+              speed={0.2}
+              blobbiness={1.1}
+              size={6.5}
+              color={"limegreen"}
+              opacity={0.15}
+            />
+          </group>
+        </Float>
+      </animated.group>
     </>
   );
 }
@@ -137,6 +181,8 @@ function App() {
   //   showStats: true,
   // });
   const showStats = import.meta.env.DEV;
+
+  const { loadingState } = useLoadingState();
 
   return (
     <ReactLenis root>
@@ -192,7 +238,8 @@ function App() {
           {import.meta.env.DEV && showStats && <Stats />}
           {import.meta.env.DEV && showStats && <Perf position="bottom-left" />}
           <CameraRig />
-          <Suspense fallback={<LoadingIndicator />}>
+          {loadingState !== "loaded" && <LoadingIndicator />}
+          <Suspense fallback={null}>
             <Environment files={HDRI} />
             <Preload all />
 
