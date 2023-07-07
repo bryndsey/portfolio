@@ -33,6 +33,7 @@ export function useLoadingState() {
             setLoadingState("loaded");
           }
         },
+        delay: 250,
       });
     }
   }, [finishedLoading]);
