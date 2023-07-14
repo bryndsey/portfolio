@@ -5,7 +5,6 @@ import {
   OrbitControls,
   PerspectiveCamera,
   Preload,
-  ScrollControls,
   Stats,
   useHelper,
 } from "@react-three/drei";
