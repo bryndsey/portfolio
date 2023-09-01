@@ -263,7 +263,7 @@ function App() {
 
             <BackgroundBlobs />
             {/* <ambientLight intensity={0.15} /> */}
-            <EffectComposer>
+            <EffectComposer disableNormalPass>
               <N8AO
                 aoRadius={0.5}
                 distanceFalloff={0.08}
