@@ -22,6 +22,7 @@ import { useLoadingState } from "./useLoadingState";
 import { animated } from "@react-spring/three";
 import { animated as animatedDom, useSpringValue } from "@react-spring/web";
 import { easings } from "@react-spring/web";
+import { EffectComposer, N8AO } from "@react-three/postprocessing";
 
 const lastNormalizedMousePosition = new Vector2();
 export let normalizedMousePosition: Vector2 | null = null;
