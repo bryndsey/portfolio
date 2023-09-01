@@ -23,7 +23,7 @@ type GLTFResult = GLTF & {
   };
   materials: {
     hair: THREE.MeshStandardMaterial;
-    eye: THREE.MeshPhysicalMaterial;
+    eye: THREE.MeshStandardMaterial;
     nose: THREE.MeshStandardMaterial;
     skin: THREE.MeshStandardMaterial;
     Pants: THREE.MeshStandardMaterial;
