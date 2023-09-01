@@ -3,12 +3,13 @@ import {
   Float,
   Html,
   OrbitControls,
+  PerformanceMonitor,
   PerspectiveCamera,
   Preload,
   Stats,
   useHelper,
 } from "@react-three/drei";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
 import { Suspense, useEffect, useRef } from "react";
 // import { useControls } from "theatric";
@@ -176,6 +177,22 @@ function BackgroundBlobs() {
   );
 }
 
+function PerformanceControl() {
+  const setDpr = useThree((state) => state.setDpr);
+  return (
+    <PerformanceMonitor
+      factor={0.6}
+      bounds={(refreshRate) => {
+        return refreshRate > 60 ? [50, 60] : [25, 45];
+      }}
+      onChange={({ factor }) => {
+        const newDpr = 0.5 + 1.5 * factor;
+        setDpr(Math.min(window.devicePixelRatio, newDpr));
+      }}
+    ></PerformanceMonitor>
+  );
+}
+
 function App() {
   // const { showStats } = useControls({
   //   showStats: true,
@@ -233,8 +250,9 @@ function App() {
               normalizedMousePosition = null;
             }
           }}
-          dpr={Math.min(window.devicePixelRatio, 2)}
         >
+          <PerformanceControl />
+
           {import.meta.env.DEV && showStats && <Stats />}
           {import.meta.env.DEV && showStats && <Perf position="bottom-left" />}
           <CameraRig />
