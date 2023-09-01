@@ -131,7 +131,7 @@ function BackgroundBlobs() {
               speed={0.2}
               blobbiness={1}
               size={1.5}
-              color={"limegreen"}
+              color={"#16a34a"}
               opacity={0.15}
             />
           </group>
@@ -148,7 +148,7 @@ function BackgroundBlobs() {
               speed={0.2}
               blobbiness={1.2}
               size={3}
-              color={"limegreen"}
+              color={"#16a34a"}
               opacity={0.15}
             />
           </group>
@@ -165,7 +165,7 @@ function BackgroundBlobs() {
               speed={0.2}
               blobbiness={1.1}
               size={6.5}
-              color={"limegreen"}
+              color={"#16a34a"}
               opacity={0.15}
             />
           </group>
