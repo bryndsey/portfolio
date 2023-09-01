@@ -244,7 +244,19 @@ function App() {
 
             <BackgroundBlobs />
             {/* <ScrollControls pages={pages.totalPages}> */}
-            <ambientLight intensity={0.15} />
+            {/* <ambientLight intensity={0.15} /> */}
+            <EffectComposer>
+              <N8AO
+                aoRadius={0.5}
+                distanceFalloff={0.08}
+                intensity={6}
+                quality="medium"
+                halfRes
+                depthAwareUpsampling
+              />
+              {/* <SMAA /> */}
+            </EffectComposer>
+
             {pages.pagesWithStartIndex.map((page) => {
               return (
                 <page.page.component
