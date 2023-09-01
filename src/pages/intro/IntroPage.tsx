@@ -1,13 +1,13 @@
 import { config, useSpringValue } from "@react-spring/web";
-import { Circle, Html, MeshDistortMaterial } from "@react-three/drei";
+import { Html } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
-import { Group, MathUtils, Mesh } from "three";
-import { AvatarModel } from "./AvatarModel";
-import { PageComponentProps } from "../Pages";
-import { useScrollPages } from "../useScrollPages";
+import { Group, MathUtils } from "three";
 import { Blob } from "../../Blob";
 import { useLoadingState } from "../../useLoadingState";
+import { PageComponentProps } from "../Pages";
+import { useScrollPages } from "../useScrollPages";
+import { AvatarModel } from "./AvatarModel";
 
 export const IntroPageContent = () => {
   return (

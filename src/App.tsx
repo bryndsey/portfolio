@@ -244,7 +244,6 @@ function App() {
             <Preload all />
 
             <BackgroundBlobs />
-            {/* <ScrollControls pages={pages.totalPages}> */}
             {/* <ambientLight intensity={0.15} /> */}
             <EffectComposer>
               <N8AO
@@ -255,7 +254,6 @@ function App() {
                 halfRes
                 depthAwareUpsampling
               />
-              {/* <SMAA /> */}
             </EffectComposer>
 
             {pages.pagesWithStartIndex.map((page) => {
@@ -267,7 +265,6 @@ function App() {
                 />
               );
             })}
-            {/* </ScrollControls> */}
           </Suspense>
         </Canvas>
       </div>
