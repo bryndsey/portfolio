@@ -250,6 +250,9 @@ function App() {
               normalizedMousePosition = null;
             }
           }}
+          gl={{
+            powerPreference: "high-performance",
+          }}
         >
           <PerformanceControl />
 
