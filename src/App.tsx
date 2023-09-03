@@ -72,6 +72,7 @@ const CameraRig = () => {
         makeDefault={!debugCamera}
         position={[cameraPosition.x, cameraPosition.y, cameraPosition.z]}
         fov={35}
+        far={10}
       />
       {debugCamera && (
         <>
