@@ -183,8 +183,9 @@ function PerformanceControl() {
   return (
     <PerformanceMonitor
       factor={0.6}
+      threshold={0.9}
       bounds={(refreshRate) => {
-        return refreshRate > 60 ? [50, 60] : [25, 45];
+        return refreshRate > 60 ? [55, 65] : [25, 45];
       }}
       onChange={({ factor }) => {
         const newDpr = 1 + 1 * factor;
