@@ -186,7 +186,7 @@ function PerformanceControl() {
         return refreshRate > 60 ? [50, 60] : [25, 45];
       }}
       onChange={({ factor }) => {
-        const newDpr = 0.5 + 1.5 * factor;
+        const newDpr = 1 + 1 * factor;
         setDpr(Math.min(window.devicePixelRatio, newDpr));
       }}
     ></PerformanceMonitor>
