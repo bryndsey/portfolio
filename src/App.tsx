@@ -253,7 +253,9 @@ function App() {
           }}
           gl={{
             powerPreference: "high-performance",
+            stencil: false,
           }}
+          shadows={false}
         >
           <PerformanceControl />
 
