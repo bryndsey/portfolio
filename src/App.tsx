@@ -260,7 +260,7 @@ function App() {
         >
           <PerformanceControl />
 
-          {import.meta.env.DEV && showStats && <Stats />}
+          {/* {import.meta.env.DEV && showStats && <Stats />} */}
           {import.meta.env.DEV && showStats && <Perf position="bottom-left" />}
           <CameraRig />
           {loadingState !== "loaded" && <LoadingIndicator />}
