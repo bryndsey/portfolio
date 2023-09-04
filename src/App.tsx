@@ -3,12 +3,13 @@ import {
   Float,
   Html,
   OrbitControls,
+  PerformanceMonitor,
   PerspectiveCamera,
   Preload,
   Stats,
   useHelper,
 } from "@react-three/drei";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
 import { Suspense, useEffect, useRef } from "react";
 // import { useControls } from "theatric";
@@ -22,6 +23,7 @@ import { useLoadingState } from "./useLoadingState";
 import { animated } from "@react-spring/three";
 import { animated as animatedDom, useSpringValue } from "@react-spring/web";
 import { easings } from "@react-spring/web";
+import { EffectComposer, N8AO } from "@react-three/postprocessing";
 
 const lastNormalizedMousePosition = new Vector2();
 export let normalizedMousePosition: Vector2 | null = null;
@@ -70,6 +72,7 @@ const CameraRig = () => {
         makeDefault={!debugCamera}
         position={[cameraPosition.x, cameraPosition.y, cameraPosition.z]}
         fov={35}
+        far={10}
       />
       {debugCamera && (
         <>
@@ -131,7 +134,7 @@ function BackgroundBlobs() {
               speed={0.2}
               blobbiness={1}
               size={1.5}
-              color={"limegreen"}
+              color={"#16a34a"}
               opacity={0.15}
             />
           </group>
@@ -148,7 +151,7 @@ function BackgroundBlobs() {
               speed={0.2}
               blobbiness={1.2}
               size={3}
-              color={"limegreen"}
+              color={"#16a34a"}
               opacity={0.15}
             />
           </group>
@@ -165,13 +168,30 @@ function BackgroundBlobs() {
               speed={0.2}
               blobbiness={1.1}
               size={6.5}
-              color={"limegreen"}
+              color={"#16a34a"}
               opacity={0.15}
             />
           </group>
         </Float>
       </animated.group>
     </>
+  );
+}
+
+function PerformanceControl() {
+  const setDpr = useThree((state) => state.setDpr);
+  return (
+    <PerformanceMonitor
+      factor={0.6}
+      threshold={0.9}
+      bounds={(refreshRate) => {
+        return refreshRate > 60 ? [55, 65] : [25, 45];
+      }}
+      onChange={({ factor }) => {
+        const newDpr = 1 + 1 * factor;
+        setDpr(Math.min(window.devicePixelRatio, newDpr));
+      }}
+    ></PerformanceMonitor>
   );
 }
 
@@ -232,9 +252,15 @@ function App() {
               normalizedMousePosition = null;
             }
           }}
-          dpr={Math.min(window.devicePixelRatio, 2)}
+          gl={{
+            powerPreference: "high-performance",
+            stencil: false,
+          }}
+          shadows={false}
         >
-          {import.meta.env.DEV && showStats && <Stats />}
+          <PerformanceControl />
+
+          {/* {import.meta.env.DEV && showStats && <Stats />} */}
           {import.meta.env.DEV && showStats && <Perf position="bottom-left" />}
           <CameraRig />
           {loadingState !== "loaded" && <LoadingIndicator />}
@@ -243,8 +269,18 @@ function App() {
             <Preload all />
 
             <BackgroundBlobs />
-            {/* <ScrollControls pages={pages.totalPages}> */}
-            <ambientLight intensity={0.15} />
+            {/* <ambientLight intensity={0.15} /> */}
+            <EffectComposer disableNormalPass>
+              <N8AO
+                aoRadius={0.5}
+                distanceFalloff={0.08}
+                intensity={6}
+                quality="medium"
+                halfRes
+                depthAwareUpsampling
+              />
+            </EffectComposer>
+
             {pages.pagesWithStartIndex.map((page) => {
               return (
                 <page.page.component
@@ -254,7 +290,6 @@ function App() {
                 />
               );
             })}
-            {/* </ScrollControls> */}
           </Suspense>
         </Canvas>
       </div>

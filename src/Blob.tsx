@@ -1,8 +1,8 @@
 import { Plane } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
-import { BlobShaderMaterial, BlobUniforms } from "./BlobShaderMaterial";
 import { ColorRepresentation, ShaderMaterial } from "three";
+import { BlobShaderMaterial, BlobUniforms } from "./BlobShaderMaterial";
 
 interface BlobProps {
   speed?: number;
@@ -42,6 +42,7 @@ export function Blob(props: BlobProps) {
         uOpacity={opacity}
         uBlobbiness={blobbiness}
         offset={offset.current}
+        depthWrite={false}
       />
     </Plane>
   );

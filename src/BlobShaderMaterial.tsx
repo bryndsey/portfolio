@@ -84,7 +84,7 @@ float cnoise(vec2 P)
         vUv.y + (cnoise(vUv + uTime + offset) - 0.5) * 0.05 * uBlobbiness
       );
       float strength = step(0.4, distance(wavedUv, vec2(0.5)));
-      gl_FragColor.rgba = vec4(color.xyz, (1.0 - strength) * uOpacity);
+      gl_FragColor.rgba = vec4((color.xyz * uOpacity), (1.0 - strength) * uOpacity);
     }
   `
 );
