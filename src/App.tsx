@@ -204,7 +204,7 @@ function App() {
   const { loadingState } = useLoadingState();
 
   return (
-    <ReactLenis root>
+    <ReactLenis root options={{ syncTouch: true, touchInertiaMultiplier: 10 }}>
       <div style={{ height: `${pages.totalPages * 100}vh` }} />
       <div>
         <AnimatedCursor
@@ -216,7 +216,7 @@ function App() {
       </div>
       <div
         id="App"
-        className="bg-gradient-radial from-green-400 to-green-500 h-screen font-sans fixed inset-0"
+        className="bg-gradient-radial from-green-400 to-green-500 h-[100dvh] font-sans fixed inset-0"
       >
         <Canvas
           onPointerMove={(e) => {
