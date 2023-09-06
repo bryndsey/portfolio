@@ -212,7 +212,7 @@ export const PedalsPage = (props: PageComponentProps) => {
         >
           <PedalModel />
         </group>
-        <Tube args={[curve, 256, 0.02, 12]} ref={cableRef}>
+        <Tube args={[curve, 256, 0.02, 4]} ref={cableRef}>
           <meshStandardMaterial
             ref={textureRef}
             opacity={0.5}
