@@ -8,28 +8,29 @@ import Avatar from "./avatar.glb?url";
 
 type GLTFResult = GLTF & {
   nodes: {
-    Eyebrows: THREE.Mesh;
-    Eyes: THREE.Mesh;
-    Nose: THREE.Mesh;
-    Hair_Parted: THREE.Mesh;
-    Head: THREE.Mesh;
+    Body: THREE.Mesh;
     PantsLegs: THREE.Mesh;
     Shoes_1: THREE.Mesh;
     Shoes_2: THREE.Mesh;
     PantsTop: THREE.Mesh;
-    Body: THREE.Mesh;
-    Sleeves_Down: THREE.Mesh;
     Arms_Down: THREE.Mesh;
+    Sleeves_Down: THREE.Mesh;
+    Ears: THREE.Mesh;
+    Eyebrows: THREE.Mesh;
+    Eyes: THREE.Mesh;
+    Hair_Parted: THREE.Mesh;
+    Head: THREE.Mesh;
+    Nose: THREE.Mesh;
   };
   materials: {
-    hair: THREE.MeshStandardMaterial;
-    eye: THREE.MeshStandardMaterial;
-    nose: THREE.MeshStandardMaterial;
-    skin: THREE.MeshStandardMaterial;
+    Shirt: THREE.MeshStandardMaterial;
     Pants: THREE.MeshStandardMaterial;
     Shoes_main: THREE.MeshStandardMaterial;
     Shoes_bottom: THREE.MeshStandardMaterial;
-    Shirt: THREE.MeshStandardMaterial;
+    skin: THREE.MeshStandardMaterial;
+    hair: THREE.MeshStandardMaterial;
+    eye: THREE.MeshStandardMaterial;
+    nose: THREE.MeshStandardMaterial;
   };
 };
 
@@ -65,6 +66,7 @@ export function AvatarModel(props: JSX.IntrinsicElements["group"]) {
     <Suspense fallback={null}>
       <group {...props} dispose={null}>
         <group position={[0, 0.38, 0]} ref={headGroup}>
+          <mesh geometry={nodes.Ears.geometry} material={materials.skin} />
           <mesh
             geometry={nodes.Eyebrows.geometry}
             material={materials.hair}

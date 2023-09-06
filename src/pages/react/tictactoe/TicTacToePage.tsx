@@ -92,6 +92,9 @@ const DisplayPiece = ({ piece }: DisplayPieceProps) => {
     materialRef.current.opacity = opacity;
   });
 
+  const bevelSegments = scale === 1 ? 4 : scale === 0.75 ? 2 : 0;
+  const curveSegments = scale === 1 ? 26 : scale === 0.75 ? 20 : 4;
+
   return (
     <Center ref={ref} rotation={[rotX, rotY, rotZ]} scale={scale}>
       <Text3D
@@ -99,8 +102,8 @@ const DisplayPiece = ({ piece }: DisplayPieceProps) => {
         bevelEnabled
         bevelSize={0.01}
         bevelThickness={0.025}
-        bevelSegments={6}
-        curveSegments={32}
+        bevelSegments={bevelSegments}
+        curveSegments={curveSegments}
       >
         {type.shape}
         <meshStandardMaterial
