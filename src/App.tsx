@@ -195,6 +195,21 @@ function PerformanceControl() {
   );
 }
 
+function Postprocessing() {
+  return (
+    <EffectComposer disableNormalPass>
+      <N8AO
+        aoRadius={0.5}
+        distanceFalloff={0.08}
+        intensity={6}
+        quality="medium"
+        halfRes
+        depthAwareUpsampling
+      />
+    </EffectComposer>
+  );
+}
+
 function App() {
   // const { showStats } = useControls({
   //   showStats: true,
@@ -270,16 +285,7 @@ function App() {
 
             <BackgroundBlobs />
             {/* <ambientLight intensity={0.15} /> */}
-            <EffectComposer disableNormalPass>
-              <N8AO
-                aoRadius={0.5}
-                distanceFalloff={0.08}
-                intensity={6}
-                quality="medium"
-                halfRes
-                depthAwareUpsampling
-              />
-            </EffectComposer>
+            <Postprocessing />
 
             {pages.pagesWithStartIndex.map((page) => {
               return (
