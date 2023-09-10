@@ -1,6 +1,6 @@
 import { Float } from "@react-three/drei";
 import { Blob } from "./Blob";
-import { useLoadingState } from "./hooks/useLoadingState";
+import { useLoadingState } from "../hooks/useLoadingState";
 import { animated } from "@react-spring/three";
 import { easings } from "@react-spring/web";
 

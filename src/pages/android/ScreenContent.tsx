@@ -10,7 +10,7 @@ import {
   MdArrowBackIos,
   MdArrowBack,
 } from "react-icons/md";
-import { logAnalyticsEvent } from "../../firebase";
+import { logAnalyticsEvent } from "../../analytics/firebase";
 
 interface DeviceAppIconProps {
   app: AndroidApp;
