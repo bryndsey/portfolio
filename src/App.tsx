@@ -2,18 +2,15 @@ import {
   Environment,
   Float,
   Html,
-  OrbitControls,
   PerformanceMonitor,
-  PerspectiveCamera,
   Preload,
   Stats,
-  useHelper,
 } from "@react-three/drei";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, useThree } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
-import { Suspense, useEffect, useRef } from "react";
+import { Suspense, useEffect } from "react";
 // import { useControls } from "theatric";
-import { CameraHelper, MathUtils, Vector2, Vector3 } from "three";
+import { MathUtils, Vector2 } from "three";
 import HDRI from "./assets/empty_warehouse_01_1k.hdr?url";
 import { pages } from "./pages/Pages";
 import { ReactLenis } from "@studio-freight/react-lenis";
@@ -24,69 +21,10 @@ import { animated } from "@react-spring/three";
 import { animated as animatedDom, useSpringValue } from "@react-spring/web";
 import { easings } from "@react-spring/web";
 import { EffectComposer, N8AO } from "@react-three/postprocessing";
+import { CameraRig } from "./CameraRig";
 
 const lastNormalizedMousePosition = new Vector2();
 export let normalizedMousePosition: Vector2 | null = null;
-
-const cameraPosition = { x: 0, y: 0, z: 3 };
-
-const targetCameraPositionVector = new Vector3(
-  cameraPosition.x,
-  cameraPosition.y,
-  cameraPosition.z
-);
-
-const CameraRig = () => {
-  // const { debugCamera } = useControls({
-  //   debugCamera: false,
-  // });
-  const debugCamera = false;
-
-  const mainCameraRef = useRef<THREE.PerspectiveCamera>(null!);
-  useHelper(debugCamera ? mainCameraRef : null, CameraHelper);
-
-  useFrame(() => {
-    let lerpFactor = 0.1;
-    if (normalizedMousePosition === null) {
-      targetCameraPositionVector.set(
-        cameraPosition.x,
-        cameraPosition.y,
-        cameraPosition.z
-      );
-      lerpFactor = 0.025;
-    } else {
-      targetCameraPositionVector.set(
-        cameraPosition.x + normalizedMousePosition.x / 50,
-        cameraPosition.y + normalizedMousePosition.y / 50,
-        cameraPosition.z
-      );
-    }
-
-    mainCameraRef.current.position.lerp(targetCameraPositionVector, lerpFactor);
-  });
-
-  return (
-    <>
-      <PerspectiveCamera
-        ref={mainCameraRef}
-        makeDefault={!debugCamera}
-        position={[cameraPosition.x, cameraPosition.y, cameraPosition.z]}
-        fov={35}
-        far={10}
-      />
-      {debugCamera && (
-        <>
-          <PerspectiveCamera
-            makeDefault={debugCamera}
-            position={[cameraPosition.x, cameraPosition.y, cameraPosition.z]}
-            fov={46}
-          />
-          <OrbitControls enabled={debugCamera} />
-        </>
-      )}
-    </>
-  );
-};
 
 function LoadingIndicator() {
   const { loadingTransistionValue } = useLoadingState();
