@@ -32,41 +32,41 @@ function App() {
       <div
         id="App"
         className="bg-gradient-radial from-green-400 to-green-500 h-[100dvh] font-sans fixed inset-0"
+        onPointerMove={(e) => {
+          if (e.pointerType === "mouse") {
+            const normalizedX = MathUtils.mapLinear(
+              e.clientX,
+              0,
+              e.currentTarget.clientWidth,
+              -1,
+              1
+            );
+
+            // Go from positive to negative to map properly
+            const normalizedY = MathUtils.mapLinear(
+              e.clientY,
+              0,
+              e.currentTarget.clientHeight,
+              1,
+              -1
+            );
+            lastNormalizedMousePosition.set(normalizedX, normalizedY);
+            normalizedMousePosition = lastNormalizedMousePosition;
+          }
+        }}
+        onPointerLeave={(e) => {
+          const clientRect = e.currentTarget.getBoundingClientRect();
+          if (
+            e.clientX < clientRect.left ||
+            e.clientY < clientRect.top ||
+            e.clientX > clientRect.right ||
+            e.clientY > clientRect.bottom
+          ) {
+            normalizedMousePosition = null;
+          }
+        }}
       >
         <Canvas
-          onPointerMove={(e) => {
-            if (e.pointerType === "mouse") {
-              const normalizedX = MathUtils.mapLinear(
-                e.clientX,
-                0,
-                e.currentTarget.clientWidth,
-                -1,
-                1
-              );
-
-              // Go from positive to negative to map properly
-              const normalizedY = MathUtils.mapLinear(
-                e.clientY,
-                0,
-                e.currentTarget.clientHeight,
-                1,
-                -1
-              );
-              lastNormalizedMousePosition.set(normalizedX, normalizedY);
-              normalizedMousePosition = lastNormalizedMousePosition;
-            }
-          }}
-          onPointerLeave={(e) => {
-            const clientRect = e.currentTarget.getBoundingClientRect();
-            if (
-              e.clientX < clientRect.left ||
-              e.clientY < clientRect.top ||
-              e.clientX > clientRect.right ||
-              e.clientY > clientRect.bottom
-            ) {
-              normalizedMousePosition = null;
-            }
-          }}
           gl={{
             powerPreference: "high-performance",
             stencil: false,
