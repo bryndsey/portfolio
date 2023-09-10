@@ -1,11 +1,11 @@
 import { Environment, Preload } from "@react-three/drei";
 import { Suspense } from "react";
-import HDRI from "./assets/empty_warehouse_01_1k.hdr?url";
-import { pages } from "./pages/Pages";
-import { useLoadingState } from "./hooks/useLoadingState";
+import HDRI from "../assets/empty_warehouse_01_1k.hdr?url";
+import { pages } from "../pages/Pages";
+import { useLoadingState } from "../hooks/useLoadingState";
 import { CameraRig } from "./CameraRig";
 import { LoadingIndicator } from "./LoadingIndicator";
-import { BackgroundBlobs } from "./blobs/BackgroundBlobs";
+import { BackgroundBlobs } from "../blobs/BackgroundBlobs";
 import { Postprocessing } from "./Postprocessing";
 
 export function Scene() {

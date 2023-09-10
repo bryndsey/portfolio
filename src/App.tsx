@@ -6,8 +6,8 @@ import { MathUtils, Vector2 } from "three";
 import { pages } from "./pages/Pages";
 import { ReactLenis } from "@studio-freight/react-lenis";
 import AnimatedCursor from "react-animated-cursor";
-import { PerformanceControl } from "./PerformanceControl";
-import { Scene } from "./Scene";
+import { PerformanceControl } from "./scene/PerformanceControl";
+import { Scene } from "./scene/Scene";
 
 const lastNormalizedMousePosition = new Vector2();
 export let normalizedMousePosition: Vector2 | null = null;

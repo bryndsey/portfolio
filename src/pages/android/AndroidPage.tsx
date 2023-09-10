@@ -6,7 +6,7 @@ import { Suspense, useRef, useState } from "react";
 import { Euler, Group, MathUtils } from "three";
 import { useHtmlPortal } from "../../hooks/useHtmlPortal";
 import { useScreenState } from "../../hooks/useScreenState";
-import { useCameraFrustumWidthAtDepth } from "../../utils";
+import { useCameraFrustumWidthAtDepth } from "../utils";
 import { PageComponentProps } from "../Pages";
 import { useScrollPages } from "../useScrollPages";
 import { Device } from "./Device";
