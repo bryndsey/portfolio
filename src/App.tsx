@@ -1,19 +1,13 @@
-import { Environment, Preload, Stats } from "@react-three/drei";
+import { Stats } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
-import { Suspense } from "react";
 // import { useControls } from "theatric";
 import { MathUtils, Vector2 } from "three";
-import HDRI from "./assets/empty_warehouse_01_1k.hdr?url";
 import { pages } from "./pages/Pages";
 import { ReactLenis } from "@studio-freight/react-lenis";
 import AnimatedCursor from "react-animated-cursor";
-import { useLoadingState } from "./useLoadingState";
-import { CameraRig } from "./CameraRig";
-import { LoadingIndicator } from "./LoadingIndicator";
-import { BackgroundBlobs } from "./BackgroundBlobs";
 import { PerformanceControl } from "./PerformanceControl";
-import { Postprocessing } from "./Postprocessing";
+import { Scene } from "./Scene";
 
 const lastNormalizedMousePosition = new Vector2();
 export let normalizedMousePosition: Vector2 | null = null;
@@ -23,8 +17,6 @@ function App() {
   //   showStats: true,
   // });
   const showStats = import.meta.env.DEV;
-
-  const { loadingState } = useLoadingState();
 
   return (
     <ReactLenis root options={{ syncTouch: true, touchInertiaMultiplier: 10 }}>
@@ -82,29 +74,10 @@ function App() {
           shadows={false}
         >
           <PerformanceControl />
-
           {/* {import.meta.env.DEV && showStats && <Stats />} */}
           {import.meta.env.DEV && showStats && <Perf position="bottom-left" />}
-          <CameraRig />
-          {loadingState !== "loaded" && <LoadingIndicator />}
-          <Suspense fallback={null}>
-            <Environment files={HDRI} />
-            <Preload all />
 
-            <BackgroundBlobs />
-            {/* <ambientLight intensity={0.15} /> */}
-            <Postprocessing />
-
-            {pages.pagesWithStartIndex.map((page) => {
-              return (
-                <page.page.component
-                  key={page.page.id}
-                  startPageIndex={page.startIndex}
-                  exitPageIndex={page.startIndex + page.page.contentLength}
-                />
-              );
-            })}
-          </Suspense>
+          <Scene />
         </Canvas>
       </div>
     </ReactLenis>
