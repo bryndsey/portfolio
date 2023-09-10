@@ -8,10 +8,10 @@ import {
   TailwindTag,
   TypescriptTag,
   WebAudioTag,
-} from "../../../../ProjectDescription";
-import { useHtmlPortal } from "../../../../useHtmlPortal";
-import { useScreenState } from "../../../../useScreenState";
-import { useSpringScaleVisibility } from "../../../../useSpringScaleVisibility";
+} from "../../../components/ProjectDescription";
+import { useHtmlPortal } from "../../../../hooks/useHtmlPortal";
+import { useScreenState } from "../../../../hooks/useScreenState";
+import { useSpringScaleVisibility } from "../../../../hooks/useSpringScaleVisibility";
 import { PageComponentProps } from "../../../Pages";
 import { useScrollPages } from "../../../useScrollPages";
 import { AcousticGuitar } from "./AcousticGuitar";

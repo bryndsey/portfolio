@@ -4,7 +4,7 @@ import { useThree } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import { Group, MathUtils } from "three";
 import { Blob } from "../../Blob";
-import { useLoadingState } from "../../useLoadingState";
+import { useLoadingState } from "../../hooks/useLoadingState";
 import { PageComponentProps } from "../Pages";
 import { useScrollPages } from "../useScrollPages";
 import { AvatarModel } from "./AvatarModel";

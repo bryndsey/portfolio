@@ -2,8 +2,11 @@ import { Html, Sphere } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import { Group, MathUtils } from "three";
-import { ProjectDescription, ReactTag } from "../../../ProjectDescription";
-import { useHtmlPortal } from "../../../useHtmlPortal";
+import {
+  ProjectDescription,
+  ReactTag,
+} from "../../components/ProjectDescription";
+import { useHtmlPortal } from "../../../hooks/useHtmlPortal";
 import { PageComponentProps } from "../../Pages";
 import { useScrollPages } from "../../useScrollPages";
 import { GarbageCanModel } from "./GarbageCanModel";
