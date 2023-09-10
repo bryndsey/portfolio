@@ -1,14 +1,13 @@
 import {
   Environment,
   Float,
-  Html,
   PerformanceMonitor,
   Preload,
   Stats,
 } from "@react-three/drei";
 import { Canvas, useThree } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 // import { useControls } from "theatric";
 import { MathUtils, Vector2 } from "three";
 import HDRI from "./assets/empty_warehouse_01_1k.hdr?url";
@@ -18,44 +17,13 @@ import { Blob } from "./Blob";
 import AnimatedCursor from "react-animated-cursor";
 import { useLoadingState } from "./useLoadingState";
 import { animated } from "@react-spring/three";
-import { animated as animatedDom, useSpringValue } from "@react-spring/web";
 import { easings } from "@react-spring/web";
 import { EffectComposer, N8AO } from "@react-three/postprocessing";
 import { CameraRig } from "./CameraRig";
+import { LoadingIndicator } from "./LoadingIndicator";
 
 const lastNormalizedMousePosition = new Vector2();
 export let normalizedMousePosition: Vector2 | null = null;
-
-function LoadingIndicator() {
-  const { loadingTransistionValue } = useLoadingState();
-  const initialAnimationValue = useSpringValue(0, {
-    config: { duration: 450, easing: easings.easeOutBack },
-  });
-
-  useEffect(() => {
-    initialAnimationValue.start(1);
-  }, []);
-  return (
-    <Html fullscreen className="h-screen flex place-content-center">
-      <animatedDom.div
-        className="font-handwritten text-4xl m-auto text-center"
-        style={{
-          scale: loadingTransistionValue.to((value) =>
-            easings.easeOutBack(1 - Math.min(1, value * 2))
-          ),
-        }}
-      >
-        <animatedDom.div
-          style={{
-            scale: initialAnimationValue,
-          }}
-        >
-          Loading . . .
-        </animatedDom.div>
-      </animatedDom.div>
-    </Html>
-  );
-}
 
 function BackgroundBlobs() {
   const { loadingTransistionValue } = useLoadingState();
