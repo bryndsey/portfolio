@@ -1,7 +1,10 @@
 import { Center, Html } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import { Group, MathUtils, Vector3 } from "three";
+import { useHtmlPortal } from "../../../../hooks/useHtmlPortal";
+import { useScreenState } from "../../../../hooks/useScreenState";
+import { useSpringScaleVisibility } from "../../../../hooks/useSpringScaleVisibility";
+import { PageComponentProps } from "../../../Pages";
 import {
   ProjectDescription,
   ReactTag,
@@ -9,10 +12,6 @@ import {
   TypescriptTag,
   WebAudioTag,
 } from "../../../components/ProjectDescription";
-import { useHtmlPortal } from "../../../../hooks/useHtmlPortal";
-import { useScreenState } from "../../../../hooks/useScreenState";
-import { useSpringScaleVisibility } from "../../../../hooks/useSpringScaleVisibility";
-import { PageComponentProps } from "../../../Pages";
 import { useScrollPages } from "../../../useScrollPages";
 import { AcousticGuitar } from "./AcousticGuitar";
 import { KeyboardModel } from "./KeyboardModel";
@@ -176,11 +175,7 @@ export const SongSparkPage = (props: PageComponentProps) => {
         <Html
           ref={descriptionRef}
           // center
-          style={{
-            transition: "opacity 300ms",
-            // backgroundColor: "rgba(0, 0, 0, 0.2)",
-          }}
-          className="rounded-2xl p-6 sm:p-8 bg-white bg-opacity-80 backdrop-blur"
+          className="rounded-2xl p-6 sm:p-8 bg-white bg-opacity-80 backdrop-blur transition-opacity duration-300"
           portal={{ current: htmlPortal }}
           distanceFactor={descriptionScaleFactor}
         >

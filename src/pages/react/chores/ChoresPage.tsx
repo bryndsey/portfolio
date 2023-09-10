@@ -61,8 +61,8 @@ export const ChoresPage = (props: PageComponentProps) => {
         position={[viewport.width / 4, 0, 0]}
         style={{
           width: (viewport.width * viewport.factor) / 2,
-          transition: "opacity 300ms",
         }}
+        className="transition-opacity duration-300"
       >
         <ProjectDescription
           projectName="Chore Chart"

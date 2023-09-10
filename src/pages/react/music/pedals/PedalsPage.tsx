@@ -188,11 +188,7 @@ export const PedalsPage = (props: PageComponentProps) => {
       <group ref={descriptionGroupRef}>
         <Html
           ref={descriptionRef}
-          style={{
-            transition: "opacity 300ms",
-            // backgroundColor: "rgba(0, 0, 0, 0.2)",
-          }}
-          className="rounded-2xl p-6 sm:p-8 bg-white bg-opacity-80 backdrop-blur"
+          className="rounded-2xl p-6 sm:p-8 bg-white bg-opacity-80 backdrop-blur transition-opacity duration-300"
           portal={{ current: htmlPortal }}
           distanceFactor={descriptionScaleFactor}
         >
