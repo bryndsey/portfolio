@@ -2,7 +2,7 @@ import { OrbitControls, PerspectiveCamera, useHelper } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import { CameraHelper, Vector3 } from "three";
-import { normalizedMousePosition } from "@/App";
+import { normalizedMousePosition } from "@/mousePosition";
 
 const cameraPosition = { x: 0, y: 0, z: 3 };
 
