@@ -6,7 +6,8 @@
   @font-face {
     font-family: BryanSans;
     font-weight: 100;
-    src: local(BryanSans), url(./fonts/BryanSans-Regular.otf) format("opentype");
+    src: local(BryanSans),
+      url(./assets/fonts/BryanSans-Regular.otf) format("opentype");
   }
 }
 
