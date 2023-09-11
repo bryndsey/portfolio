@@ -35,7 +35,7 @@ interface PieceData {
 const pieces: PieceData[] = [
   {
     type: XPiece,
-    positionFn: (state) => [-0.1, 1.75, -1.5],
+    positionFn: () => [-0.1, 1.75, -1.5],
     rotation: [0.4, 0.07, -0.2],
     scale: 0.33,
   },
