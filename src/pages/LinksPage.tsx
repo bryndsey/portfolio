@@ -1,7 +1,7 @@
 import { Html, ScreenSpace } from "@react-three/drei";
 import { useRef } from "react";
 import { Group } from "three";
-import { useHtmlPortal } from "../useHtmlPortal";
+import { useHtmlPortal } from "../hooks/useHtmlPortal";
 import { PageComponentProps } from "./Pages";
 import { useScrollPages } from "./useScrollPages";
 import { FaGithub } from "react-icons/fa";
@@ -11,7 +11,7 @@ import { SiItchdotio } from "react-icons/si";
 import { BsGooglePlay } from "react-icons/bs";
 import { IoCubeSharp } from "react-icons/io5";
 import { IconType } from "react-icons";
-import { logAnalyticsEvent } from "../firebase";
+import { logAnalyticsEvent } from "@analytics/firebase";
 
 interface LinkData {
   url: string;

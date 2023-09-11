@@ -27,6 +27,7 @@ module.exports = {
     semi: ["warn", "always"],
     "linebreak-style": ["warn", "unix"],
     "react/react-in-jsx-scope": "off",
-    "react/no-unknown-property": "warn",
+    // Not necessarily ideal, but used since certain r3f properties are flagged
+    "react/no-unknown-property": "off",
   },
 };

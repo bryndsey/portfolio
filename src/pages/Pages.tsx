@@ -4,9 +4,9 @@ import { SongSparkPage } from "./react/music/songspark/SongSparkPage";
 import { IntroPage } from "./intro/IntroPage";
 import { AboutPage } from "./AboutPage";
 import { PedalsPage } from "./react/music/pedals/PedalsPage";
-import { ChoresPage } from "./react/chores/ChoresPage";
+// import { ChoresPage } from "./react/chores/ChoresPage";
 import { TicTacToePage } from "./react/tictactoe/TicTacToePage";
-import { isChrome, isIOS, isSafari } from "react-device-detect";
+import { isIOS, isSafari } from "react-device-detect";
 
 export interface PageComponentProps {
   startPageIndex: number;

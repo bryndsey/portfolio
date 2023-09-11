@@ -1,5 +1,3 @@
-import { useThree } from "@react-three/fiber";
-
 // NOTE: This function makes a lot of assumptions about the angle and position
 // of the camera, and will probably break if the camera is moved or angled much
 
