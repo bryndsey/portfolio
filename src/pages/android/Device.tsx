@@ -1,7 +1,7 @@
 import { Center, Html, Svg, Text } from "@react-three/drei";
 import { MeshBasicMaterial } from "three";
-import { useHtmlPortal } from "../../hooks/useHtmlPortal";
-import { useScreenState } from "../../hooks/useScreenState";
+import { useHtmlPortal } from "@hooks/useHtmlPortal";
+import { useScreenState } from "@hooks/useScreenState";
 import LockIcon from "./icons/lock_FILL0_wght400_GRAD0_opsz48.svg";
 import { PhoneModel } from "./PhoneModel";
 import { ScreenContent } from "./ScreenContent";

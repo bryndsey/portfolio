@@ -7,7 +7,7 @@ import {
   SiTailwindcss,
 } from "react-icons/si";
 import { GiSoundWaves } from "react-icons/gi";
-import { logAnalyticsEvent } from "../../analytics/firebase";
+import { logAnalyticsEvent } from "@analytics/firebase";
 
 interface ProjectDescriptionProps {
   projectName: string;

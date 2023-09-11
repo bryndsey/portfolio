@@ -11,7 +11,7 @@ import { SiItchdotio } from "react-icons/si";
 import { BsGooglePlay } from "react-icons/bs";
 import { IoCubeSharp } from "react-icons/io5";
 import { IconType } from "react-icons";
-import { logAnalyticsEvent } from "../analytics/firebase";
+import { logAnalyticsEvent } from "@analytics/firebase";
 
 interface LinkData {
   url: string;

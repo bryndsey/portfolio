@@ -13,12 +13,12 @@ import {
   ReactTag,
   ThreeJsTag,
   TypescriptTag,
-} from "../../components/ProjectDescription";
-import { useHtmlPortal } from "../../../hooks/useHtmlPortal";
-import { useScreenState } from "../../../hooks/useScreenState";
-import { useSpringScaleVisibility } from "../../../hooks/useSpringScaleVisibility";
-import { PageComponentProps } from "../../Pages";
-import { useScrollPages } from "../../useScrollPages";
+} from "@pages/components/ProjectDescription";
+import { useHtmlPortal } from "@hooks/useHtmlPortal";
+import { useScreenState } from "@hooks/useScreenState";
+import { useSpringScaleVisibility } from "@hooks/useSpringScaleVisibility";
+import { PageComponentProps } from "@pages/Pages";
+import { useScrollPages } from "@pages/useScrollPages";
 import Font from "./Comfortaa_Bold.json";
 
 const XPiece = { color: "red", shape: "x" } as const;

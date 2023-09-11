@@ -3,10 +3,10 @@ import { Html } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import { Group, MathUtils } from "three";
-import { Blob } from "../../blobs/Blob";
-import { useLoadingState } from "../../hooks/useLoadingState";
-import { PageComponentProps } from "../Pages";
-import { useScrollPages } from "../useScrollPages";
+import { Blob } from "@/blobs/Blob";
+import { useLoadingState } from "@hooks/useLoadingState";
+import { PageComponentProps } from "@pages/Pages";
+import { useScrollPages } from "@pages/useScrollPages";
 import { AvatarModel } from "./AvatarModel";
 
 export const IntroPageContent = () => {

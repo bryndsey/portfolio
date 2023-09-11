@@ -1,18 +1,18 @@
 import { Center, Html } from "@react-three/drei";
 import { Suspense, useRef } from "react";
 import { Group, MathUtils, Vector3 } from "three";
-import { useHtmlPortal } from "../../../../hooks/useHtmlPortal";
-import { useScreenState } from "../../../../hooks/useScreenState";
-import { useSpringScaleVisibility } from "../../../../hooks/useSpringScaleVisibility";
-import { PageComponentProps } from "../../../Pages";
+import { useHtmlPortal } from "@hooks/useHtmlPortal";
+import { useScreenState } from "@hooks/useScreenState";
+import { useSpringScaleVisibility } from "@hooks/useSpringScaleVisibility";
+import { PageComponentProps } from "@pages/Pages";
 import {
   ProjectDescription,
   ReactTag,
   TailwindTag,
   TypescriptTag,
   WebAudioTag,
-} from "../../../components/ProjectDescription";
-import { useScrollPages } from "../../../useScrollPages";
+} from "@pages/components/ProjectDescription";
+import { useScrollPages } from "@pages/useScrollPages";
 import { AcousticGuitar } from "./AcousticGuitar";
 import { KeyboardModel } from "./KeyboardModel";
 import { ViolinModel } from "./ViolinModel";

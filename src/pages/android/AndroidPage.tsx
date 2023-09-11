@@ -1,14 +1,11 @@
-import { animated, useTransition } from "@react-spring/web";
 import { Html } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
-import { stat } from "fs";
 import { Suspense, useRef, useState } from "react";
 import { Euler, Group, MathUtils } from "three";
-import { useHtmlPortal } from "../../hooks/useHtmlPortal";
-import { useScreenState } from "../../hooks/useScreenState";
-import { useCameraFrustumWidthAtDepth } from "../utils";
-import { PageComponentProps } from "../Pages";
-import { useScrollPages } from "../useScrollPages";
+import { useHtmlPortal } from "@hooks/useHtmlPortal";
+import { useScreenState } from "@hooks/useScreenState";
+import { PageComponentProps } from "@pages/Pages";
+import { useScrollPages } from "@pages/useScrollPages";
+import { useCameraFrustumWidthAtDepth } from "@pages/utils";
 import { Device } from "./Device";
 
 const deviceRotation = new Euler();

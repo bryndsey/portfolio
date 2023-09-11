@@ -1,6 +1,6 @@
 import { Html } from "@react-three/drei";
 import { useEffect } from "react";
-import { useLoadingState } from "../hooks/useLoadingState";
+import { useLoadingState } from "@hooks/useLoadingState";
 import { animated as animatedDom, useSpringValue } from "@react-spring/web";
 import { easings } from "@react-spring/web";
 

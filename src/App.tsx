@@ -1,13 +1,13 @@
-import { Stats } from "@react-three/drei";
+// import { Stats } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
 // import { useControls } from "theatric";
 import { MathUtils, Vector2 } from "three";
-import { pages } from "./pages/Pages";
+import { pages } from "@pages/Pages";
 import { ReactLenis } from "@studio-freight/react-lenis";
 import AnimatedCursor from "react-animated-cursor";
-import { PerformanceControl } from "./scene/PerformanceControl";
-import { Scene } from "./scene/Scene";
+import { PerformanceControl } from "@scene/PerformanceControl";
+import { Scene } from "@scene/Scene";
 
 const lastNormalizedMousePosition = new Vector2();
 export let normalizedMousePosition: Vector2 | null = null;
