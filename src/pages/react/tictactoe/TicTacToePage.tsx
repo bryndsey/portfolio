@@ -13,12 +13,12 @@ import {
   ReactTag,
   ThreeJsTag,
   TypescriptTag,
-} from "../../../ProjectDescription";
-import { useHtmlPortal } from "../../../useHtmlPortal";
-import { useScreenState } from "../../../useScreenState";
-import { useSpringScaleVisibility } from "../../../useSpringScaleVisibility";
-import { PageComponentProps } from "../../Pages";
-import { useScrollPages } from "../../useScrollPages";
+} from "@pages/components/ProjectDescription";
+import { useHtmlPortal } from "@hooks/useHtmlPortal";
+import { useScreenState } from "@hooks/useScreenState";
+import { useSpringScaleVisibility } from "@hooks/useSpringScaleVisibility";
+import { PageComponentProps } from "@pages/Pages";
+import { useScrollPages } from "@pages/useScrollPages";
 import Font from "./Comfortaa_Bold.json";
 
 const XPiece = { color: "red", shape: "x" } as const;
@@ -35,7 +35,7 @@ interface PieceData {
 const pieces: PieceData[] = [
   {
     type: XPiece,
-    positionFn: (state) => [-0.1, 1.75, -1.5],
+    positionFn: () => [-0.1, 1.75, -1.5],
     rotation: [0.4, 0.07, -0.2],
     scale: 0.33,
   },
@@ -197,10 +197,7 @@ export const TicTacToePage = (props: PageComponentProps) => {
         <Html
           ref={contentRef}
           portal={{ current: htmlPortal }}
-          style={{
-            transition: "opacity 300ms",
-          }}
-          className="rounded-2xl p-6 sm:p-8 bg-white bg-opacity-80 backdrop-blur"
+          className="rounded-2xl p-6 sm:p-8 bg-white bg-opacity-80 backdrop-blur transition-opacity duration-300"
           distanceFactor={descriptionScaleFactor}
         >
           <ProjectDescription

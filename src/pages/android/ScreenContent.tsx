@@ -1,7 +1,7 @@
 import { PropsWithChildren, useEffect, useState } from "react";
 import { useSelectedAndroidApp } from "./useSelectedAndroidApp";
 import { AndroidApp, androidApps } from "./AndroidApp";
-import { ProjectDescription } from "../../ProjectDescription";
+import { ProjectDescription } from "@pages/components/ProjectDescription";
 import {
   MdSignalWifiStatusbar3Bar,
   MdSignalCellular3Bar,
@@ -10,7 +10,7 @@ import {
   MdArrowBackIos,
   MdArrowBack,
 } from "react-icons/md";
-import { logAnalyticsEvent } from "../../firebase";
+import { logAnalyticsEvent } from "@analytics/firebase";
 
 interface DeviceAppIconProps {
   app: AndroidApp;

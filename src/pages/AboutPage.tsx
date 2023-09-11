@@ -1,10 +1,9 @@
-import { config, useSpringValue } from "@react-spring/web";
-import { Billboard, Float, Html, Text } from "@react-three/drei";
+import { Html } from "@react-three/drei";
 import { RootState, useFrame, useThree } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import { Group, MathUtils, Vector3 } from "three";
-import { useHtmlPortal } from "../useHtmlPortal";
-import { useSpringScaleVisibility } from "../useSpringScaleVisibility";
+import { useHtmlPortal } from "@hooks/useHtmlPortal";
+import { useSpringScaleVisibility } from "@hooks/useSpringScaleVisibility";
 import { PageComponentProps } from "./Pages";
 import { useScrollPages } from "./useScrollPages";
 

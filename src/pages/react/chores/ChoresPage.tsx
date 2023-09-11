@@ -2,10 +2,13 @@ import { Html, Sphere } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import { Group, MathUtils } from "three";
-import { ProjectDescription, ReactTag } from "../../../ProjectDescription";
-import { useHtmlPortal } from "../../../useHtmlPortal";
-import { PageComponentProps } from "../../Pages";
-import { useScrollPages } from "../../useScrollPages";
+import {
+  ProjectDescription,
+  ReactTag,
+} from "@pages/components/ProjectDescription";
+import { useHtmlPortal } from "@hooks/useHtmlPortal";
+import { PageComponentProps } from "@pages/Pages";
+import { useScrollPages } from "@pages/useScrollPages";
 import { GarbageCanModel } from "./GarbageCanModel";
 
 export const ChoresPage = (props: PageComponentProps) => {
@@ -58,8 +61,8 @@ export const ChoresPage = (props: PageComponentProps) => {
         position={[viewport.width / 4, 0, 0]}
         style={{
           width: (viewport.width * viewport.factor) / 2,
-          transition: "opacity 300ms",
         }}
+        className="transition-opacity duration-300"
       >
         <ProjectDescription
           projectName="Chore Chart"

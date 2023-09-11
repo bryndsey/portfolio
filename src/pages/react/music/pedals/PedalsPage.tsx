@@ -19,13 +19,13 @@ import {
   ReactTag,
   TypescriptTag,
   WebAudioTag,
-} from "../../../../ProjectDescription";
-import { useHtmlPortal } from "../../../../useHtmlPortal";
-import { useScreenState } from "../../../../useScreenState";
-import { useSpringScaleVisibility } from "../../../../useSpringScaleVisibility";
-import { useCameraFrustumWidthAtDepth } from "../../../../utils";
-import { PageComponentProps } from "../../../Pages";
-import { useScrollPages } from "../../../useScrollPages";
+} from "@pages/components/ProjectDescription";
+import { useHtmlPortal } from "@hooks/useHtmlPortal";
+import { useScreenState } from "@hooks/useScreenState";
+import { useSpringScaleVisibility } from "@hooks/useSpringScaleVisibility";
+import { useCameraFrustumWidthAtDepth } from "@pages/utils";
+import { PageComponentProps } from "@pages/Pages";
+import { useScrollPages } from "@pages/useScrollPages";
 import { CablePlugModel } from "./CablePlugModel";
 import { PedalModel } from "./PedalModel";
 
@@ -188,11 +188,7 @@ export const PedalsPage = (props: PageComponentProps) => {
       <group ref={descriptionGroupRef}>
         <Html
           ref={descriptionRef}
-          style={{
-            transition: "opacity 300ms",
-            // backgroundColor: "rgba(0, 0, 0, 0.2)",
-          }}
-          className="rounded-2xl p-6 sm:p-8 bg-white bg-opacity-80 backdrop-blur"
+          className="rounded-2xl p-6 sm:p-8 bg-white bg-opacity-80 backdrop-blur transition-opacity duration-300"
           portal={{ current: htmlPortal }}
           distanceFactor={descriptionScaleFactor}
         >
