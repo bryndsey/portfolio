@@ -1,7 +1,7 @@
 import { Html, ScreenSpace } from "@react-three/drei";
 import { useRef } from "react";
 import { Group } from "three";
-import { useHtmlPortal } from "../hooks/useHtmlPortal";
+import { useHtmlPortal } from "@hooks/useHtmlPortal";
 import { PageComponentProps } from "./Pages";
 import { useScrollPages } from "./useScrollPages";
 import { FaGithub } from "react-icons/fa";
