@@ -3,7 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import { Group, Vector3 } from "three";
 import { GLTF } from "three-stdlib";
-import { normalizedMousePosition } from "@/App";
+import { normalizedMousePosition } from "@/mousePosition";
 import Avatar from "./avatar.glb?url";
 
 type GLTFResult = GLTF & {
