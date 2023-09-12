@@ -12,6 +12,7 @@ import { BsGooglePlay } from "react-icons/bs";
 import { IoCubeSharp } from "react-icons/io5";
 import { IconType } from "react-icons";
 import { logAnalyticsEvent } from "@analytics/firebase";
+import { useScreenState } from "@hooks/useScreenState";
 
 interface LinkData {
   url: string;
@@ -90,6 +91,8 @@ export const LinksPage = (props: PageComponentProps) => {
     }
   );
 
+  const state = useScreenState();
+
   return (
     <ScreenSpace depth={2}>
       <group ref={groupRef}>
@@ -100,10 +103,10 @@ export const LinksPage = (props: PageComponentProps) => {
           className="bg-yellow-300"
         >
           <div className="h-full flex flex-col md:gap-4 items-center justify-center p-4 landscape:p-2 landscape:md:p-12 sm:p-8 md:p-12">
-            <h3 className="text-center pt-8 text-4xl landscape:text-2xl md:text-6xl landscape:md:text-6xl font-bold font-handwritten">
-              More of my stuff:
+            <h3 className="text-center pt-4 md:pt-8 text-4xl landscape:text-2xl md:text-6xl landscape:md:text-6xl font-bold font-handwritten">
+              More things:
             </h3>
-            <div className="grow max-w-4xl w-fit sm:w-full grid sm:portrait:grid-cols-2 grid-cols-1 landscape:grid-cols-3 place-content-evenly sm:place-items-center gap-4 m-auto px-6 md:px-10">
+            <div className="flex-1 max-w-4xl w-fit sm:w-full grid sm:portrait:grid-cols-2 grid-cols-1 landscape:grid-cols-3 place-content-evenly sm:place-items-center gap-4 m-auto px-6 md:px-10">
               {links.map((link) => (
                 <a
                   href={link.url}
@@ -113,17 +116,24 @@ export const LinksPage = (props: PageComponentProps) => {
                       bryan_link_url: link.url,
                     })
                   }
-                  className="flex landscape:flex-col sm:flex-col flex-row landscape:gap-6 sm:gap-6 gap-4 items-center justify-start"
+                  className="flex landscape:flex-col sm:flex-col flex-row gap-x-4 gap-y-2 md:gap-y-4 items-center justify-start"
                 >
                   <div
-                    className={`${link.backgroundColor} p-4 rounded-3xl shadow-lg`}
+                    className={`${link.backgroundColor} flex-shrink aspect-square p-2 md:p-4 rounded-[25%] shadow-lg`}
                   >
                     <link.icon
-                      className="w-8 h-8 sm:w-12 sm:h-12"
+                      className={
+                        state.orientation === "landscape" &&
+                        state.deviceClass === "small"
+                          ? "w-6 h-6"
+                          : "w-6 h-6 xs:w-8 xs:h-8 sm:w-10 sm:h-10"
+                      }
                       color={link.iconColor}
                     />
                   </div>
-                  <p className="font-semibold">{link.displayName}</p>
+                  <p className="font-semibold text-sm landscape:text-xs md:text-base landscape:md:text-base">
+                    {link.displayName}
+                  </p>
                 </a>
               ))}
             </div>
