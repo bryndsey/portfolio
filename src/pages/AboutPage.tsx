@@ -58,8 +58,7 @@ const floatingTextVisibilityThreshold = 0.3;
 const FloatingThing = (props: { thing: ThingIMake }) => {
   const { thing } = props;
 
-  // const htmlPortal = useHtmlPortal();
-  const htmlPortal = useThree((state) => state.gl.domElement.parentElement!);
+  const htmlPortal = useHtmlPortal();
 
   const groupRef = useRef<Group>(null!);
   const htmlRef = useRef<HTMLDivElement>(null);
