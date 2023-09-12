@@ -7,12 +7,12 @@ import { useSpringScaleVisibility } from "@hooks/useSpringScaleVisibility";
 import { PageComponentProps } from "./Pages";
 import { useScrollPages } from "./useScrollPages";
 
-interface ThingIMake {
+interface FloatingTextData {
   name: string;
   positionFn: (state: RootState) => number[];
 }
 
-const newListOfThingsIMake: ThingIMake[] = [
+const floatingTextList: FloatingTextData[] = [
   {
     name: "React apps",
     positionFn: (state) => [
@@ -55,8 +55,8 @@ const groupWorldPosition = new Vector3();
 
 const floatingTextVisibilityThreshold = 0.3;
 
-const FloatingThing = (props: { thing: ThingIMake }) => {
-  const { thing } = props;
+const FloatingText = (props: { textData: FloatingTextData }) => {
+  const { textData } = props;
 
   const htmlPortal = useHtmlPortal();
 
@@ -66,7 +66,7 @@ const FloatingThing = (props: { thing: ThingIMake }) => {
   const { springValue, setVisibility } = useSpringScaleVisibility();
 
   useFrame((state) => {
-    const position = thing.positionFn(state);
+    const position = textData.positionFn(state);
 
     const floatOffset = [
       // Offset by amount of a different component for more apparent randomness
@@ -125,7 +125,7 @@ const FloatingThing = (props: { thing: ThingIMake }) => {
         pointerEvents={"none"}
       >
         <p className="text-2xl 2xs:text-4xl xs:text-5xl md:text-6xl font-extrabold whitespace-nowrap">
-          {thing.name}
+          {textData.name}
         </p>
       </Html>
     </group>
@@ -182,8 +182,8 @@ export const AboutPage = (props: PageComponentProps) => {
           </div>
         </Html>
         <group ref={wordCloudGroupRef}>
-          {newListOfThingsIMake.map((thing) => (
-            <FloatingThing key={thing.name} thing={thing} />
+          {floatingTextList.map((thing) => (
+            <FloatingText key={thing.name} textData={thing} />
           ))}
         </group>
       </group>
