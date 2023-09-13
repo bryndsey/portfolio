@@ -64,10 +64,16 @@ const NavigationBar = () => {
   const [, selectApp] = useSelectedAndroidApp();
   return (
     <div className="flex flex-row justify-evenly bg-gray-700 bg-opacity-30 p-4">
-      <button onClick={() => selectApp(null)}>
+      <button
+        onClick={() => selectApp(null)}
+        aria-label="Android apps back button"
+      >
         <MdArrowBackIos color="white" className="w-6 h-6" />
       </button>
-      <button onClick={() => selectApp(null)}>
+      <button
+        onClick={() => selectApp(null)}
+        aria-label="Android apps home button"
+      >
         <MdOutlineCircle color="white" className="w-6 h-6" />
       </button>
     </div>
