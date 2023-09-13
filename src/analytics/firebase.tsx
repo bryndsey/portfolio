@@ -16,9 +16,9 @@ const firebaseConfig = {
   measurementId: "G-BN01QZZRC9",
 };
 
-let logGoogleAnalyticsEvent: (event: string, payload?: any) => void;
+let logGoogleAnalyticsEvent: (event: string, payload?: unknown) => void;
 if (import.meta.env.DEV) {
-  logGoogleAnalyticsEvent = (event: string, payload?: any) => {
+  logGoogleAnalyticsEvent = (event: string, payload?: unknown) => {
     console.debug("Analytic event logged", event, payload);
   };
 } else {
@@ -26,8 +26,9 @@ if (import.meta.env.DEV) {
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
 
-  logGoogleAnalyticsEvent = (event: string, payload?: any) => {
-    logEvent(analytics, event, payload);
+  logGoogleAnalyticsEvent = (event: string, payload?: unknown) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    logEvent(analytics, event, payload as any);
   };
 }
 
