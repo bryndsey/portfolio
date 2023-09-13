@@ -1,4 +1,4 @@
-import { Center, Html, Text3D } from "@react-three/drei";
+import { Center, FontData, Html, Text3D } from "@react-three/drei";
 import { RootState, useFrame } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import {
@@ -98,7 +98,7 @@ const DisplayPiece = ({ piece }: DisplayPieceProps) => {
   return (
     <Center ref={ref} rotation={[rotX, rotY, rotZ]} scale={scale}>
       <Text3D
-        font={Font as any}
+        font={Font as unknown as FontData}
         bevelEnabled
         bevelSize={0.01}
         bevelThickness={0.025}
