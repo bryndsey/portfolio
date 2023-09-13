@@ -33,3 +33,4 @@ Check `package.json` for a full list of dependencies
   - For example, extracting to a CMS
 - [ ] Consider SSR/SSG
   - Perhaps migrate to Next.js or Astro?
+- [ ] Improve Lighthouse score
