@@ -1,9 +1,9 @@
-import { Html } from "@react-three/drei";
-import { RootState, useFrame, useThree } from "@react-three/fiber";
-import { Suspense, useRef } from "react";
-import { Group, MathUtils, Vector3 } from "three";
 import { useHtmlPortal } from "@hooks/useHtmlPortal";
 import { useSpringScaleVisibility } from "@hooks/useSpringScaleVisibility";
+import { Html } from "@react-three/drei";
+import { RootState, useFrame } from "@react-three/fiber";
+import { Suspense, useRef } from "react";
+import { Group, MathUtils, Vector3 } from "three";
 import { PageComponentProps } from "./Pages";
 import { useScrollPages } from "./useScrollPages";
 
