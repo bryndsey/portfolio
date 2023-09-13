@@ -8,6 +8,7 @@ module.exports = {
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
+    "prettier",
   ],
   overrides: [],
   parser: "@typescript-eslint/parser",
@@ -22,10 +23,6 @@ module.exports = {
     },
   },
   rules: {
-    indent: ["warn", 2, { SwitchCase: 1 }],
-    quotes: ["warn", "double"],
-    semi: ["warn", "always"],
-    "linebreak-style": ["warn", "unix"],
     "react/react-in-jsx-scope": "off",
     // Not necessarily ideal, but used since certain r3f properties are flagged
     "react/no-unknown-property": "off",
