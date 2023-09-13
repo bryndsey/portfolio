@@ -24,7 +24,6 @@ Check `package.json` for a full list of dependencies
   - Perhaps utilizing routing
 - [ ] Continue cleaning up code
   - [ ] Clean up page architecture
-  - [ ] Fix/resolve lint errors/warnings
   - [ ] Remove old/unused code and comments
 - [ ] Add other projects
   - [ ] Frontend practice
@@ -34,3 +33,4 @@ Check `package.json` for a full list of dependencies
   - For example, extracting to a CMS
 - [ ] Consider SSR/SSG
   - Perhaps migrate to Next.js or Astro?
+- [ ] Improve Lighthouse score
