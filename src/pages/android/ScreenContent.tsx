@@ -36,6 +36,7 @@ const DeviceAppIcon = (props: DeviceAppIconProps) => {
           <img
             style={{ transform: `scale(${app.iconScale ?? 1})` }}
             src={app.icon}
+            alt={`${app.name} icon`}
           />
         )}
       </div>
