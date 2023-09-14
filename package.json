@@ -4,11 +4,15 @@
   "version": "1.7.12",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "dev-host": "vite --host",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "lint": "eslint src"
+    "dev-old": "vite",
+    "dev-host-old": "vite --host",
+    "build-old": "tsc && vite build",
+    "preview-old": "vite preview",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "tsc && astro build",
+    "preview": "astro preview",
+    "lint": "eslint src",
   },
   "dependencies": {
     "@react-spring/three": "^9.7.3",
@@ -17,6 +21,7 @@
     "@react-three/fiber": "^8.15.16",
     "@react-three/postprocessing": "^2.16.0",
     "@studio-freight/react-lenis": "^0.0.43",
+    "astro": "^3.0.13",
     "daisyui": "^2.52.0",
     "firebase": "^10.8.0",
     "jotai": "^2.6.4",
