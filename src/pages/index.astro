@@ -1,5 +1,7 @@
 ---
 // Welcome to Astro! Everything between these triple-dash code fences
+import App from "@/App";
+
 // is your "component frontmatter". It never runs in the browser.
 console.log("This runs in your terminal, not the browser!");
 ---
@@ -8,11 +10,6 @@ console.log("This runs in your terminal, not the browser!");
      some magic sprinkled in to help you build great templates. -->
 <html>
   <body>
-    <h1>Hello, World!</h1>
+    <App client:only="react" />
   </body>
 </html>
-<style>
-  h1 {
-    color: orange;
-  }
-</style>
