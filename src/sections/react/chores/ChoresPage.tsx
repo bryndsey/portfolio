@@ -5,10 +5,10 @@ import { Group, MathUtils } from "three";
 import {
   ProjectDescription,
   ReactTag,
-} from "@pages/components/ProjectDescription";
+} from "@/sections/components/ProjectDescription";
 import { useHtmlPortal } from "@hooks/useHtmlPortal";
-import { PageComponentProps } from "@pages/Pages";
-import { useScrollPages } from "@pages/useScrollPages";
+import { PageComponentProps } from "@/sections/Pages";
+import { useScrollPages } from "@/sections/useScrollPages";
 import { GarbageCanModel } from "./GarbageCanModel";
 
 export const ChoresPage = (props: PageComponentProps) => {

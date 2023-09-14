@@ -4,15 +4,15 @@ import { Group, MathUtils, Vector3 } from "three";
 import { useHtmlPortal } from "@hooks/useHtmlPortal";
 import { useScreenState } from "@hooks/useScreenState";
 import { useSpringScaleVisibility } from "@hooks/useSpringScaleVisibility";
-import { PageComponentProps } from "@pages/Pages";
+import { PageComponentProps } from "@/sections/Pages";
 import {
   ProjectDescription,
   ReactTag,
   TailwindTag,
   TypescriptTag,
   WebAudioTag,
-} from "@pages/components/ProjectDescription";
-import { useScrollPages } from "@pages/useScrollPages";
+} from "@/sections/components/ProjectDescription";
+import { useScrollPages } from "@/sections/useScrollPages";
 import { AcousticGuitar } from "./AcousticGuitar";
 import { KeyboardModel } from "./KeyboardModel";
 import { ViolinModel } from "./ViolinModel";
