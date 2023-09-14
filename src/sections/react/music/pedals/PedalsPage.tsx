@@ -19,13 +19,13 @@ import {
   ReactTag,
   TypescriptTag,
   WebAudioTag,
-} from "@pages/components/ProjectDescription";
+} from "@/sections/components/ProjectDescription";
 import { useHtmlPortal } from "@hooks/useHtmlPortal";
 import { useScreenState } from "@hooks/useScreenState";
 import { useSpringScaleVisibility } from "@hooks/useSpringScaleVisibility";
-import { useCameraFrustumWidthAtDepth } from "@pages/utils";
-import { PageComponentProps } from "@pages/Pages";
-import { useScrollPages } from "@pages/useScrollPages";
+import { useCameraFrustumWidthAtDepth } from "@/sections/utils";
+import { PageComponentProps } from "@/sections/Pages";
+import { useScrollPages } from "@/sections/useScrollPages";
 import { CablePlugModel } from "./CablePlugModel";
 import { PedalModel } from "./PedalModel";
 

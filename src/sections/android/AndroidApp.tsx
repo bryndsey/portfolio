@@ -1,4 +1,8 @@
-import { AndroidTag, Tag, UnityTag } from "@pages/components/ProjectDescription";
+import {
+  AndroidTag,
+  Tag,
+  UnityTag,
+} from "@/sections/components/ProjectDescription";
 import SongSparkIcon from "./icons/songspark_icon.png";
 import TapBandIcon from "./icons/tap_band_icon.png";
 import AndroidBryanIcon from "./icons/androidify_bryan.png";

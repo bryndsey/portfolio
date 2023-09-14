@@ -21,7 +21,7 @@
       "@assets/*": ["./src/assets/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@components/*": ["./src/components/*"],
-      "@pages/*": ["./src/pages/*"],
+      "@sections/*": ["./src/sections/*"],
       "@scene/*": ["./src/scene/*"],
       "@analytics/*": ["./src/analytics/*"]
     }
