@@ -47,7 +47,7 @@ const LockScreen = () => {
         Scroll to unlock
       </Text>
       <Center position-y={-0.2}>
-        <Svg src={LockIcon} scale={0.00005} fillMaterial={iconColor} />
+        <Svg src={LockIcon.src} scale={0.00005} fillMaterial={iconColor} />
       </Center>
     </group>
   );

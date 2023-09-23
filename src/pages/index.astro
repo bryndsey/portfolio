@@ -1,0 +1,40 @@
+---
+// Welcome to Astro! Everything between these triple-dash code fences
+import App from "@/App";
+---
+
+<!-- Below is your "component template." It's just HTML, but with
+     some magic sprinkled in to help you build great templates. -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, minimum-scale=1.0, maximum-scale=2.0"
+    />
+    <title>Bryan Lindsey</title>
+    <meta
+      name="description"
+      content="Bryan Lindsey's personal development portfolio"
+    />
+    <link rel="icon" type="image/svg" href="/src/assets/avatar.svg" />
+    <link
+      rel="preload"
+      type="font/otf"
+      href="/fonts/BryanSans-Regular.otf"
+      as="font"
+      crossorigin
+    />
+  </head>
+  <body>
+    <App client:only="react" />
+  </body>
+</html>
+<style is:global>
+  @font-face {
+    font-family: BryanSans;
+    font-weight: 100;
+    src: url(/fonts/BryanSans-Regular.otf) format("opentype");
+    font-display: "swap";
+  }
+</style>

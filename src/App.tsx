@@ -2,7 +2,7 @@
 import { Canvas } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
 // import { useControls } from "theatric";
-import { pages } from "@pages/Pages";
+import { pages } from "@sections/Pages";
 import { ReactLenis } from "@studio-freight/react-lenis";
 import AnimatedCursor from "react-animated-cursor";
 import { PerformanceControl } from "@scene/PerformanceControl";
