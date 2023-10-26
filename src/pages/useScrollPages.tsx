@@ -1,6 +1,5 @@
 import { RootState, useFrame } from "@react-three/fiber";
-import { useLenis } from "@studio-freight/react-lenis";
-import Lenis from "@studio-freight/lenis";
+import { LenisInstance, useLenis } from "@studio-freight/react-lenis";
 import { useRef } from "react";
 import { MathUtils } from "three";
 import { pages } from "./Pages";
@@ -21,7 +20,7 @@ export function useScrollPages(
 ) {
   const scrollProgress = useRef(0);
 
-  useLenis((lenis: Lenis) => {
+  useLenis((lenis: LenisInstance) => {
     scrollProgress.current = lenis.progress;
   });
 
