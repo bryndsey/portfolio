@@ -8,10 +8,7 @@
     "dev-host": "vite --host",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint src",
-    "test-component": "cypress run --component",
-    "test-e2e": "cypress run --e2e",
-    "cypress:open": "cypress open"
+    "lint": "eslint src"
   },
   "dependencies": {
     "@react-spring/three": "^9.7.3",
