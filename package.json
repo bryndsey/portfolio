@@ -12,7 +12,7 @@
     "start": "astro dev",
     "build": "tsc && astro build",
     "preview": "astro preview",
-    "lint": "eslint src",
+    "lint": "eslint src"
   },
   "dependencies": {
     "@astrojs/react": "^3.0.2",
