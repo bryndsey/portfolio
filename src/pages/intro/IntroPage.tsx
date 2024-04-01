@@ -22,6 +22,9 @@ export const IntroPageContent = () => {
         >
           Bryan Lindsey.
         </p>
+        <p className="text-stone-600" style={{ fontSize: "0.5em" }}>
+          (Scroll to see more)
+        </p>
       </div>
     </div>
   );
