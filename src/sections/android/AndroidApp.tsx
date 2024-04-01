@@ -1,4 +1,8 @@
-import { AndroidTag, Tag, UnityTag } from "@pages/components/ProjectDescription";
+import {
+  AndroidTag,
+  Tag,
+  UnityTag,
+} from "@/sections/components/ProjectDescription";
 import SongSparkIcon from "./icons/songspark_icon.png";
 import TapBandIcon from "./icons/tap_band_icon.png";
 import AndroidBryanIcon from "./icons/androidify_bryan.png";
@@ -20,7 +24,7 @@ export const androidApps: AndroidApp[] = [
     name: "SongSpark",
     description: "The original version of SongSpark, made on Android",
     url: "https://play.google.com/store/apps/details?id=com.bryndsey.songspark",
-    icon: SongSparkIcon,
+    icon: SongSparkIcon.src,
     iconBackgroundColor: "bg-blue-500",
     iconScale: 0.8,
     projectTags: [AndroidTag],
@@ -29,7 +33,7 @@ export const androidApps: AndroidApp[] = [
     name: "Tap Band",
     description: "Idle clicker game. Get a band together and rise to stardom",
     url: "https://play.google.com/store/apps/details?id=com.blinz117.tapband",
-    icon: TapBandIcon,
+    icon: TapBandIcon.src,
     iconBackgroundColor: "bg-red-800",
     iconScale: 0.8,
     projectTags: [AndroidTag, UnityTag],
@@ -39,7 +43,7 @@ export const androidApps: AndroidApp[] = [
     description:
       "Practice your aim to take down balloons with your trusty bow and arrow. Putting the AR in ARchery",
     url: "https://play.google.com/store/apps/details?id=com.bryndsey.tiltarcherytrainer",
-    icon: TiltArcheryTrainerIcon,
+    icon: TiltArcheryTrainerIcon.src,
     iconScale: 1.2,
     projectTags: [AndroidTag, UnityTag],
   },
@@ -48,7 +52,7 @@ export const androidApps: AndroidApp[] = [
     description:
       "I've built apps for Android professionally since 2015. In that time, I've worked on apps for food ordering, banking, controlling smart lights, and more!",
     iconBackgroundColor: "bg-slate-500",
-    icon: AndroidBryanIcon,
+    icon: AndroidBryanIcon.src,
   },
   // {
   //   name: "Connected Light App",
