@@ -1,7 +1,7 @@
 {
   "name": "portfolio",
   "private": true,
-  "version": "1.7.12",
+  "version": "1.8.0",
   "type": "module",
   "scripts": {
     "dev-old": "vite",
@@ -51,7 +51,6 @@
     "eslint-plugin-react": "^7.33.2",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.3.3",
-    "vite": "^5.1.1"
+    "typescript": "^5.3.3"
   }
 }
