@@ -9,6 +9,7 @@
     "build-old": "tsc && vite build",
     "preview-old": "vite preview",
     "dev": "astro dev",
+    "dev-host": "astro dev --host",
     "start": "astro dev",
     "build": "tsc && astro build",
     "preview": "astro preview",
