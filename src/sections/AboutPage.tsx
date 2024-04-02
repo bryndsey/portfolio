@@ -173,10 +173,10 @@ export const AboutPage = (props: PageComponentProps) => {
           zIndexRange={[0, 0]}
         >
           <div className="h-full w-full flex flex-col justify-between m-auto px-4 py-8">
-            <p className="font-semibold text-5xl sm:text-6xl md:text-7xl font-handwritten text-center">
+            <p className="text-5xl sm:text-6xl md:text-7xl text-center">
               I like to make things.
             </p>
-            <p className="text-xl xs:text-2xl sm:text-3xl md:text-4xl text-center font-handwritten">
+            <p className="text-xl xs:text-2xl sm:text-3xl md:text-4xl text-center">
               {"Keep scrolling to see some things I've made."}
             </p>
           </div>
