@@ -23,8 +23,8 @@ html.lenis {
 }
 
 .squiggly {
-  animation: squiggly-anim 0.34s linear infinite;
-  -webkit-animation: squiggly-anim 0.34s linear infinite;
+  animation: squiggly-anim 0.66s linear infinite;
+  -webkit-animation: squiggly-anim 0.66s linear infinite;
 }
 
 @keyframes squiggly-anim {
