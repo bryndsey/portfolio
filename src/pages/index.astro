@@ -3,6 +3,8 @@
 import App from "@/App";
 import "@fontsource/rubik-doodle-shadow";
 import "@fontsource-variable/rubik";
+import RubikDoodle from "@fontsource/rubik-doodle-shadow?url";
+import Rubik from "@fontsource-variable/rubik?url";
 import "@/index.css";
 ---
 
@@ -28,20 +30,8 @@ import "@/index.css";
       as="font"
       crossorigin
     />
-    <link
-      rel="preload"
-      type="font/woff2"
-      href="/node_modules/@fontsource-variable/rubik/files/rubik-latin-wght-normal.woff2"
-      as="font"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      type="font/woff2"
-      href="/node_modules/@fontsource/rubik-doodle-shadow/files/rubik-doodle-shadow-latin-400-normal.woff2"
-      as="font"
-      crossorigin
-    />
+    <link rel="preload" href=`${Rubik}` as="style" crossorigin />
+    <link rel="preload" href=`${RubikDoodle}` as="style" crossorigin />
   </head>
   <body>
     <App client:only="react" />
