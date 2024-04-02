@@ -15,7 +15,7 @@ export const IntroPageContent = () => {
       <div className="flex flex-col justify-center leading-none text-3xl xs:text-4xl text-center">
         <p className="text-stone-600">Hi. My name is</p>
         <p
-          className="leading-none font-handwritten tracking-wide"
+          className="leading-none font-handwritten tracking-wide squiggly"
           style={{
             fontSize: "3em",
           }}
