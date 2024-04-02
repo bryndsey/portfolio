@@ -13,10 +13,11 @@ module.exports = {
     extend: {
       fontFamily: {
         handwritten: [
-          "BryanSans",
-          "Bradley Hand",
+          "Rubik Doodle Shadow",
+          "Rubik Variable",
           ...defaultTheme.fontFamily.sans,
         ],
+        sans: ["Rubik Variable", ...defaultTheme.fontFamily.sans],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
