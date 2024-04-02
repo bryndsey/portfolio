@@ -37,6 +37,7 @@ function App() {
               stencil: false,
             }}
             shadows={false}
+            className="squiggly"
           >
             <PerformanceControl />
             {/* {import.meta.env.DEV && showStats && <Stats />} */}
