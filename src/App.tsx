@@ -10,6 +10,8 @@ import { Scene } from "@scene/Scene";
 import { MouseTracker } from "./mousePosition";
 import { GpuProvider, useGpuSettings } from "./gpuDetection";
 import { isFirefox, isSafari } from "react-device-detect";
+import { Cursor } from "react-creative-cursor";
+import "react-creative-cursor/dist/styles.css";
 
 function App() {
   return (
@@ -40,8 +42,7 @@ function AppContent() {
 
   return (
     <>
-      <div>
-        <AnimatedCursor
+      {/* <AnimatedCursor
           innerSize={20}
           innerScale={2}
           outerAlpha={0}
@@ -49,8 +50,12 @@ function AppContent() {
             backgroundColor: "rgba(0, 150, 60, 0.97)",
             animation: "squiggly-anim 0.66s linear infinite",
           }}
-        />
-      </div>
+        /> */}
+      <Cursor
+        animationDuration={0.2}
+        cursorSize={20}
+        cursorBackgrounColor="rgba(0, 150, 60, 0.97"
+      />
       <div
         id="App"
         className="bg-gradient-radial from-green-400 to-green-500 h-[100dvh] font-sans fixed inset-0"
