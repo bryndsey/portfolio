@@ -6,8 +6,12 @@ export function Postprocessing() {
   const gpuSettings = useGpuSettings();
   const showPostprocessing = gpuSettings === null || gpuSettings.tier > 1;
 
+  if (!showPostprocessing) {
+    return null;
+  }
+
   return (
-    <EffectComposer disableNormalPass enabled={showPostprocessing}>
+    <EffectComposer disableNormalPass>
       {/* <N8AO
         aoRadius={0.5}
         distanceFalloff={0.08}
