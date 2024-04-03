@@ -22,9 +22,8 @@ export const GpuProvider = ({ children }: { children: ReactNode }) => {
     const gpuTier = await getGPUTier();
 
     const useFallback =
-      gpuTier.type === "FALLBACK" ||
-      (gpuTier.device === undefined &&
-        gpuTier.gpu?.toLowerCase().includes("apple"));
+      gpuTier.device === undefined &&
+      gpuTier.gpu?.toLowerCase().includes("apple");
     // Pick reasonable default for fallback
     const tier = useFallback ? 2 : gpuTier.tier;
 
