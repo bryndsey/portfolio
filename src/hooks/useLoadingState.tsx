@@ -1,3 +1,4 @@
+import { useGpuSettings } from "@/gpuDetection";
 import { useSpringValue } from "@react-spring/web";
 import { useProgress } from "@react-three/drei";
 import { useEffect, useState } from "react";
@@ -5,12 +6,14 @@ import { useEffect, useState } from "react";
 type LoadingState = "loading" | "transistion" | "loaded";
 
 export function useLoadingState() {
+  const gpuSettings = useGpuSettings();
+
   const [loadingState, setLoadingState] = useState<LoadingState>("loading");
   const loadingTransistionValue = useSpringValue(0, {
     config: { duration: 750 },
   });
   const finishedLoading = useProgress(
-    (state) => !state.active && state.progress === 100
+    (state) => !state.active && state.progress === 100 && gpuSettings !== null
   );
 
   useEffect(() => {
