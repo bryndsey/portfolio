@@ -4,10 +4,10 @@ import { EffectComposer } from "@react-three/postprocessing";
 
 export function Postprocessing() {
   const gpuSettings = useGpuSettings();
-  const showPostprocessing = gpuSettings !== null && gpuSettings.tier > 1;
+  const showPostprocessing = gpuSettings === null || gpuSettings.tier > 1;
 
   return (
-    <EffectComposer disableNormalPass enabled={true}>
+    <EffectComposer disableNormalPass enabled={showPostprocessing}>
       {/* <N8AO
         aoRadius={0.5}
         distanceFalloff={0.08}
