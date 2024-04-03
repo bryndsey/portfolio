@@ -1,19 +1,14 @@
+import { useGpuSettings } from "@/gpuDetection";
 import { useSpringValue } from "@react-spring/web";
 import { useProgress } from "@react-three/drei";
 import { useEffect, useState } from "react";
-import { getGPUTier } from "detect-gpu";
 
 type LoadingState = "loading" | "transistion" | "loaded";
 
-export type GpuType = "mobile" | "desktop";
-export type GpuRating = {
-  type: GpuType;
-  tier: number;
-};
-
 export function useLoadingState() {
+  const gpuSettings = useGpuSettings();
+
   const [loadingState, setLoadingState] = useState<LoadingState>("loading");
-  const [gpuSettings, setGpuSettings] = useState<GpuRating | null>(null);
   const loadingTransistionValue = useSpringValue(0, {
     config: { duration: 750 },
   });
@@ -46,18 +41,5 @@ export function useLoadingState() {
     }
   }, [finishedLoading]);
 
-  useEffect(() => {
-    async function getGpuSettings() {
-      const gpuTier = await getGPUTier();
-      const rating: GpuRating = {
-        type: gpuTier.isMobile ? "mobile" : "desktop",
-        tier: gpuTier.tier,
-      };
-      setGpuSettings(rating);
-    }
-
-    getGpuSettings();
-  }, []);
-
-  return { loadingTransistionValue, loadingState, gpuSettings };
+  return { loadingTransistionValue, loadingState };
 }

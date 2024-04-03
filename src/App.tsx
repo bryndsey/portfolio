@@ -8,16 +8,30 @@ import AnimatedCursor from "react-animated-cursor";
 import { PerformanceControl } from "@scene/PerformanceControl";
 import { Scene } from "@scene/Scene";
 import { MouseTracker } from "./mousePosition";
+import { GpuProvider } from "./gpuDetection";
 
 function App() {
+  return (
+    <GpuProvider>
+      <ReactLenis
+        root
+        options={{ syncTouch: true, touchInertiaMultiplier: 10 }}
+      >
+        <div style={{ height: `${pages.totalPages * 100}vh` }} />
+        <AppContent />
+      </ReactLenis>
+    </GpuProvider>
+  );
+}
+
+function AppContent() {
   // const { showStats } = useControls({
   //   showStats: true,
   // });
   const showStats = import.meta.env.DEV;
 
   return (
-    <ReactLenis root options={{ syncTouch: true, touchInertiaMultiplier: 10 }}>
-      <div style={{ height: `${pages.totalPages * 100}vh` }} />
+    <>
       <div>
         <AnimatedCursor
           innerSize={20}
@@ -52,7 +66,7 @@ function App() {
           </Canvas>
         </MouseTracker>
       </div>
-    </ReactLenis>
+    </>
   );
 }
 
