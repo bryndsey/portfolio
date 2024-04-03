@@ -2,18 +2,14 @@
 import { Canvas } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
 // import { useControls } from "theatric";
-import { pages } from "@sections/Pages";
-import { ReactLenis } from "@studio-freight/react-lenis";
-import AnimatedCursor from "react-animated-cursor";
 import { PerformanceControl } from "@scene/PerformanceControl";
 import { Scene } from "@scene/Scene";
-import { MouseTracker, hasDetectedMouse } from "./mousePosition";
-import { GpuProvider, useGpuSettings } from "./gpuDetection";
+import { pages } from "@sections/Pages";
+import { ReactLenis } from "@studio-freight/react-lenis";
 import { isFirefox, isSafari } from "react-device-detect";
-import { useAtomValue } from "jotai";
-import { Cursor } from "react-creative-cursor";
-import "react-creative-cursor/dist/styles.css";
 import { CustomCursor } from "./CustomCursor";
+import { GpuProvider, useGpuSettings } from "./gpuDetection";
+import { MouseTracker } from "./mousePosition";
 
 function App() {
   return (
