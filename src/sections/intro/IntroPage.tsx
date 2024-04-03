@@ -12,7 +12,7 @@ import { AvatarModel } from "./AvatarModel";
 export const IntroPageContent = () => {
   return (
     <div className="max-w-xl m-auto p-8 flex">
-      <div className="flex flex-col justify-center leading-none text-2xl sm:text-3xl text-center">
+      <div className="flex flex-col justify-center leading-none text-3xl sm:text-4xl text-center">
         <p className="text-stone-600">Hi. My name is</p>
         <p
           className="leading-none font-handwritten tracking-wide squiggly"
@@ -86,7 +86,7 @@ export const IntroPage = (props: PageComponentProps) => {
         y: 0,
       };
       const bubbleFullPortraitPosition = {
-        x: 0.1,
+        x: 0,
         y: state.viewport.height * 0.25,
       };
 
