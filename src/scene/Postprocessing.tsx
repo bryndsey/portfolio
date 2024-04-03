@@ -1,14 +1,14 @@
 import { AO } from "@/ao";
-import { useGpuSettings } from "@/gpuDetection";
+// import { useGpuSettings } from "@/gpuDetection";
 import { EffectComposer } from "@react-three/postprocessing";
 
 export function Postprocessing() {
-  const gpuSettings = useGpuSettings();
-  const showPostprocessing = gpuSettings === null || gpuSettings.tier > 1;
+  // const gpuSettings = useGpuSettings();
+  // const showPostprocessing = gpuSettings === null || gpuSettings.tier > 1;
 
-  if (!showPostprocessing) {
-    return null;
-  }
+  // if (!showPostprocessing) {
+  //   return null;
+  // }
 
   return (
     <EffectComposer disableNormalPass>
