@@ -7,9 +7,10 @@ import { ReactLenis } from "@studio-freight/react-lenis";
 import AnimatedCursor from "react-animated-cursor";
 import { PerformanceControl } from "@scene/PerformanceControl";
 import { Scene } from "@scene/Scene";
-import { MouseTracker } from "./mousePosition";
+import { MouseTracker, hasDetectedMouse } from "./mousePosition";
 import { GpuProvider, useGpuSettings } from "./gpuDetection";
 import { isFirefox, isSafari } from "react-device-detect";
+import { useAtomValue } from "jotai";
 import { Cursor } from "react-creative-cursor";
 import "react-creative-cursor/dist/styles.css";
 
@@ -40,6 +41,8 @@ function AppContent() {
     gpuSettings.type === "desktop" &&
     gpuSettings.tier >= 2;
 
+  const mouseDetected = useAtomValue(hasDetectedMouse);
+
   return (
     <>
       {/* <AnimatedCursor
@@ -51,11 +54,13 @@ function AppContent() {
             animation: "squiggly-anim 0.66s linear infinite",
           }}
         /> */}
-      <Cursor
-        animationDuration={0.2}
-        cursorSize={20}
-        cursorBackgrounColor="rgba(0, 150, 60, 0.97"
-      />
+      {mouseDetected && (
+        <Cursor
+          animationDuration={0.2}
+          cursorSize={20}
+          cursorBackgrounColor="rgba(0, 150, 60, 0.97"
+        />
+      )}
       <div
         id="App"
         className="bg-gradient-radial from-green-400 to-green-500 h-[100dvh] font-sans fixed inset-0"
