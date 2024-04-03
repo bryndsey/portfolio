@@ -33,7 +33,7 @@ function AppContent() {
   const shouldBeSquiggly =
     gpuSettings !== null &&
     gpuSettings.type === "desktop" &&
-    gpuSettings.tier > 2;
+    gpuSettings.tier >= 2;
 
   return (
     <>
