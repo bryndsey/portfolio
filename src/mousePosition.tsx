@@ -1,3 +1,4 @@
+import { atom, useSetAtom } from "jotai";
 import { PropsWithChildren } from "react";
 import { MathUtils } from "three";
 
@@ -10,12 +11,16 @@ export type NormalizedMousePosition = {
 // will get overwritten by other usages.
 export let normalizedMousePosition: NormalizedMousePosition | null = null;
 
+export const hasDetectedMouse = atom(false);
+
 export function MouseTracker({ children }: PropsWithChildren) {
+  const setDetectedMouse = useSetAtom(hasDetectedMouse);
   return (
     <div
       className="w-full h-full"
       onPointerMove={(e) => {
         if (e.pointerType === "mouse") {
+          setDetectedMouse(true);
           const normalizedX = MathUtils.mapLinear(
             e.clientX,
             0,

@@ -8,9 +8,9 @@ This is my personal portfolio website, found at https://bryanlindsey.dev
 - Typescript
 - react-three-fiber + drei
 - TailwindCSS
-- Vite
+- Astro
 - react-spring
-- Lenis (and React-Lenis)
+- Lenis + React-Lenis
 - Jotai
 - ESLint
 - 3D models with Blender
@@ -20,17 +20,19 @@ Check `package.json` for a full list of dependencies
 ## To-dos
 
 - [ ] Expand "About" section
-- [ ] Expand page contents
+- [ ] Improve "Links" section design
+- [ ] Expand section contents
   - Perhaps utilizing routing
 - [ ] Continue cleaning up code
-  - [ ] Clean up page architecture
+  - [ ] Clean up section architecture
   - [ ] Remove old/unused code and comments
 - [ ] Add other projects
+  - [ ] RPG campaign generator
   - [ ] Frontend practice
   - [ ] Creative Developer's Brain
   - [ ] Chore Chart
 - [ ] Separate content from presentation
   - For example, extracting to a CMS
-- [ ] Consider SSR/SSG
-  - Perhaps migrate to Next.js or Astro?
+- [ ] Move more content to SSR
+- [ ] Improve performance
 - [ ] Improve Lighthouse score

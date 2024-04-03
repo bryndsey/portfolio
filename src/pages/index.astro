@@ -1,6 +1,11 @@
 ---
 // Welcome to Astro! Everything between these triple-dash code fences
 import App from "@/App";
+import "@fontsource/rubik-doodle-shadow";
+import "@fontsource-variable/rubik";
+import Rubik from "@fontsource-variable/rubik/files/rubik-latin-wght-normal.woff2?url";
+import RubikDoodle from "@fontsource/rubik-doodle-shadow/files/rubik-doodle-shadow-latin-400-normal.woff2?url";
+import "@/index.css";
 ---
 
 <!-- Below is your "component template." It's just HTML, but with
@@ -25,9 +30,82 @@ import App from "@/App";
       as="font"
       crossorigin
     />
+    <link
+      rel="preload"
+      type="font/woff2"
+      href=`${Rubik}`
+      as="font"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      type="font/woff2"
+      href=`${RubikDoodle}`
+      as="font"
+      crossorigin
+    />
   </head>
   <body>
     <App client:only="react" />
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+      <defs>
+        <filter id="squiggly-0">
+          <feTurbulence
+            id="turbulence"
+            baseFrequency="0.02"
+            numOctaves="3"
+            result="noise"
+            seed="0"></feTurbulence>
+          <feDisplacementMap
+            id="displacement"
+            in="SourceGraphic"
+            in2="noise"
+            scale="1"></feDisplacementMap>
+        </filter>
+        <filter id="squiggly-1">
+          <feTurbulence
+            id="turbulence"
+            baseFrequency="0.02"
+            numOctaves="3"
+            result="noise"
+            seed="1"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="2"
+          ></feDisplacementMap>
+        </filter>
+
+        <filter id="squiggly-2">
+          <feTurbulence
+            id="turbulence"
+            baseFrequency="0.02"
+            numOctaves="3"
+            result="noise"
+            seed="2"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="1"
+          ></feDisplacementMap>
+        </filter>
+        <filter id="squiggly-3">
+          <feTurbulence
+            id="turbulence"
+            baseFrequency="0.02"
+            numOctaves="3"
+            result="noise"
+            seed="3"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="2"
+          ></feDisplacementMap>
+        </filter>
+
+        <filter id="squiggly-4">
+          <feTurbulence
+            id="turbulence"
+            baseFrequency="0.02"
+            numOctaves="3"
+            result="noise"
+            seed="4"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="1"
+          ></feDisplacementMap>
+        </filter>
+      </defs>
+    </svg>
   </body>
 </html>
 <style is:global>

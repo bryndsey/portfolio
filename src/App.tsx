@@ -2,30 +2,45 @@
 import { Canvas } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
 // import { useControls } from "theatric";
-import { pages } from "@sections/Pages";
-import { ReactLenis } from "@studio-freight/react-lenis";
-import AnimatedCursor from "react-animated-cursor";
 import { PerformanceControl } from "@scene/PerformanceControl";
 import { Scene } from "@scene/Scene";
+import { pages } from "@sections/Pages";
+import { ReactLenis } from "@studio-freight/react-lenis";
+import { isFirefox, isSafari } from "react-device-detect";
+import { CustomCursor } from "./CustomCursor";
+import { GpuProvider, useGpuSettings } from "./gpuDetection";
 import { MouseTracker } from "./mousePosition";
 
 function App() {
+  return (
+    <GpuProvider>
+      <ReactLenis
+        root
+        options={{ syncTouch: true, touchInertiaMultiplier: 10 }}
+      >
+        <div style={{ height: `${pages.totalPages * 100}vh` }} />
+        <AppContent />
+      </ReactLenis>
+    </GpuProvider>
+  );
+}
+
+function AppContent() {
   // const { showStats } = useControls({
   //   showStats: true,
   // });
   const showStats = import.meta.env.DEV;
+  const gpuSettings = useGpuSettings();
+  const shouldBeSquiggly =
+    !isSafari &&
+    !isFirefox &&
+    gpuSettings !== null &&
+    gpuSettings.type === "desktop" &&
+    gpuSettings.tier >= 2;
 
   return (
-    <ReactLenis root options={{ syncTouch: true, touchInertiaMultiplier: 10 }}>
-      <div style={{ height: `${pages.totalPages * 100}vh` }} />
-      <div>
-        <AnimatedCursor
-          innerSize={20}
-          innerScale={2}
-          outerAlpha={0}
-          innerStyle={{ backgroundColor: "rgba(0, 150, 60, 0.97)" }}
-        />
-      </div>
+    <>
+      <CustomCursor />
       <div
         id="App"
         className="bg-gradient-radial from-green-400 to-green-500 h-[100dvh] font-sans fixed inset-0"
@@ -37,6 +52,7 @@ function App() {
               stencil: false,
             }}
             shadows={false}
+            className={shouldBeSquiggly ? "squiggly scale-[1.005]" : undefined}
           >
             <PerformanceControl />
             {/* {import.meta.env.DEV && showStats && <Stats />} */}
@@ -48,7 +64,7 @@ function App() {
           </Canvas>
         </MouseTracker>
       </div>
-    </ReactLenis>
+    </>
   );
 }
 
