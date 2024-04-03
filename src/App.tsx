@@ -7,9 +7,13 @@ import { ReactLenis } from "@studio-freight/react-lenis";
 import AnimatedCursor from "react-animated-cursor";
 import { PerformanceControl } from "@scene/PerformanceControl";
 import { Scene } from "@scene/Scene";
-import { MouseTracker } from "./mousePosition";
+import { MouseTracker, hasDetectedMouse } from "./mousePosition";
 import { GpuProvider, useGpuSettings } from "./gpuDetection";
 import { isFirefox, isSafari } from "react-device-detect";
+import { useAtomValue } from "jotai";
+import { Cursor } from "react-creative-cursor";
+import "react-creative-cursor/dist/styles.css";
+import { CustomCursor } from "./CustomCursor";
 
 function App() {
   return (
@@ -40,17 +44,7 @@ function AppContent() {
 
   return (
     <>
-      <div>
-        <AnimatedCursor
-          innerSize={20}
-          innerScale={2}
-          outerAlpha={0}
-          innerStyle={{
-            backgroundColor: "rgba(0, 150, 60, 0.97)",
-            animation: "squiggly-anim 0.66s linear infinite",
-          }}
-        />
-      </div>
+      <CustomCursor />
       <div
         id="App"
         className="bg-gradient-radial from-green-400 to-green-500 h-[100dvh] font-sans fixed inset-0"
