@@ -1,19 +1,19 @@
-import React, { forwardRef, useEffect, useMemo } from "react";
+import React, { forwardRef, useMemo } from "react";
 import { N8AOPostPass } from "n8ao";
 import { useThree } from "@react-three/fiber";
-import { useGpuSettings } from "./gpuDetection";
+// import { useGpuSettings } from "./gpuDetection";
 
 export const AO = forwardRef((_, ref) => {
-  const gpuSettings = useGpuSettings();
-  const qualityMode =
-    gpuSettings === null ||
-    gpuSettings.tier <= 1 ||
-    (gpuSettings.type === "mobile" && gpuSettings.tier === 2)
-      ? "Performance"
-      : gpuSettings.type === "mobile" ||
-        (gpuSettings.type === "desktop" && gpuSettings.tier === 2)
-      ? "Low"
-      : "Medium";
+  // const gpuSettings = useGpuSettings();
+  // const qualityMode =
+  //   gpuSettings === null ||
+  //   gpuSettings.tier <= 1 ||
+  //   (gpuSettings.type === "mobile" && gpuSettings.tier === 2)
+  //     ? "Performance"
+  //     : gpuSettings.type === "mobile" ||
+  //       (gpuSettings.type === "desktop" && gpuSettings.tier === 2)
+  //     ? "Low"
+  //     : "Medium";
   const three = useThree();
   const effect = useMemo(() => {
     const aoEffect = new N8AOPostPass(three.scene, three.camera);
@@ -24,9 +24,11 @@ export const AO = forwardRef((_, ref) => {
     aoEffect.configuration.depthAwareUpsampling = true;
     return aoEffect;
   }, [three.scene, three.camera]);
-  useEffect(() => {
-    effect.setQualityMode(qualityMode);
-  }, [effect, qualityMode]);
+
+  // useEffect(() => {
+  //   effect.setQualityMode(qualityMode);
+  // }, [effect, qualityMode]);
+
   return <primitive ref={ref} object={effect} dispose={null} />;
 });
 
