@@ -20,10 +20,19 @@ export const GpuProvider = ({ children }: { children: ReactNode }) => {
 
   const fetchGpuInfo = async function getGpuSettings() {
     const gpuTier = await getGPUTier();
+
+    const useFallback =
+      gpuTier.type === "FALLBACK" ||
+      (gpuTier.device === undefined &&
+        gpuTier.gpu?.toLowerCase().includes("apple"));
+    // Pick reasonable default for fallback
+    const tier = useFallback ? 2 : gpuTier.tier;
+
     const rating: GpuRating = {
       type: gpuTier.isMobile ? "mobile" : "desktop",
-      tier: gpuTier.tier,
+      tier,
     };
+
     setGpuSettings(rating);
   };
 
