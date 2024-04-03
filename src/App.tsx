@@ -9,7 +9,7 @@ import { PerformanceControl } from "@scene/PerformanceControl";
 import { Scene } from "@scene/Scene";
 import { MouseTracker } from "./mousePosition";
 import { GpuProvider, useGpuSettings } from "./gpuDetection";
-import { isSafari } from "react-device-detect";
+import { isFirefox, isSafari } from "react-device-detect";
 
 function App() {
   return (
@@ -33,6 +33,7 @@ function AppContent() {
   const gpuSettings = useGpuSettings();
   const shouldBeSquiggly =
     !isSafari &&
+    !isFirefox &&
     gpuSettings !== null &&
     gpuSettings.type === "desktop" &&
     gpuSettings.tier >= 2;
