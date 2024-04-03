@@ -25,7 +25,7 @@ export const AO = forwardRef((_, ref) => {
     aoEffect.setQualityMode(qualityMode);
     return aoEffect;
   }, [three.scene, three.camera, qualityMode]);
-  return <primitive ref={ref} object={effect} dispose={null} />;
+  return <primitive ref={ref} object={effect} />;
 });
 
 AO.displayName = "AO";
