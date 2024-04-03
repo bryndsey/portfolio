@@ -59,7 +59,7 @@ function AppContent() {
               stencil: false,
             }}
             shadows={false}
-            className={shouldBeSquiggly ? "squiggly" : undefined}
+            className={shouldBeSquiggly ? "squiggly scale-[1.005]" : undefined}
           >
             <PerformanceControl />
             {/* {import.meta.env.DEV && showStats && <Stats />} */}
