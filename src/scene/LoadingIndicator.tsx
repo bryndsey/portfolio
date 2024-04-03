@@ -27,6 +27,7 @@ export function LoadingIndicator() {
           style={{
             scale: initialAnimationValue,
           }}
+          className="squiggly"
         >
           Loading . . .
         </animatedDom.div>
