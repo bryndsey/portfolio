@@ -8,7 +8,7 @@ import AnimatedCursor from "react-animated-cursor";
 import { PerformanceControl } from "@scene/PerformanceControl";
 import { Scene } from "@scene/Scene";
 import { MouseTracker } from "./mousePosition";
-import { GpuProvider } from "./gpuDetection";
+import { GpuProvider, useGpuSettings } from "./gpuDetection";
 
 function App() {
   return (
@@ -29,6 +29,11 @@ function AppContent() {
   //   showStats: true,
   // });
   const showStats = import.meta.env.DEV;
+  const gpuSettings = useGpuSettings();
+  const shouldBeSquiggly =
+    gpuSettings !== null &&
+    gpuSettings.type === "desktop" &&
+    gpuSettings.tier > 2;
 
   return (
     <>
@@ -54,7 +59,7 @@ function AppContent() {
               stencil: false,
             }}
             shadows={false}
-            className="squiggly"
+            className={shouldBeSquiggly ? "squiggly" : undefined}
           >
             <PerformanceControl />
             {/* {import.meta.env.DEV && showStats && <Stats />} */}
