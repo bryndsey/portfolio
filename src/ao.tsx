@@ -24,7 +24,7 @@ export const AO = forwardRef((_, ref) => {
     aoEffect.configuration.depthAwareUpsampling = true;
     aoEffect.setQualityMode(qualityMode);
     return aoEffect;
-  }, [three]);
+  }, [three.scene, three.camera, qualityMode]);
   return <primitive ref={ref} object={effect} dispose={null} />;
 });
 
