@@ -1,4 +1,4 @@
-import React, { forwardRef, useMemo } from "react";
+import React, { forwardRef, useEffect, useMemo } from "react";
 import { N8AOPostPass } from "n8ao";
 import { useThree } from "@react-three/fiber";
 import { useGpuSettings } from "./gpuDetection";
@@ -22,10 +22,12 @@ export const AO = forwardRef((_, ref) => {
     aoEffect.configuration.intensity = 6;
     aoEffect.configuration.halfRes = true;
     aoEffect.configuration.depthAwareUpsampling = true;
-    aoEffect.setQualityMode(qualityMode);
     return aoEffect;
-  }, [three.scene, three.camera, qualityMode]);
-  return <primitive ref={ref} object={effect} />;
+  }, [three.scene, three.camera]);
+  useEffect(() => {
+    effect.setQualityMode(qualityMode);
+  }, [effect, qualityMode]);
+  return <primitive ref={ref} object={effect} dispose={null} />;
 });
 
 AO.displayName = "AO";
