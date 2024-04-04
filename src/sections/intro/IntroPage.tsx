@@ -22,8 +22,12 @@ export const IntroPageContent = () => {
         >
           Bryan Lindsey.
         </p>
-        <p className="text-stone-600" style={{ fontSize: "0.5em" }}>
-          (Scroll to see more)
+        <p className="mt-4">{"I'm a front-end developer."}</p>
+        <p className="text-stone-500 hidden sm:block text-xs sm:text-sm">
+          {"(Or software engineer. Or programmer. Whatever you wanna call it.)"}
+        </p>
+        <p className="text-stone-400 mt-4" style={{ fontSize: "0.5em" }}>
+          (Scroll for more)
         </p>
       </div>
     </div>
