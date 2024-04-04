@@ -131,7 +131,7 @@ const AppDisplay = () => {
         projectName={selectedApp.name}
         descriptionText={selectedApp.description}
         tags={selectedApp.projectTags}
-        url={selectedApp.url}
+        // url={selectedApp.url}
         actionText={"Play Store"}
       />
     </div>
