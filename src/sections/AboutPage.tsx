@@ -178,56 +178,62 @@ export const AboutPage = (props: PageComponentProps) => {
           zIndexRange={[0, 0]}
           className="p-4 sm:p-8 overflow-clip"
         >
-          <section className="h-full w-full flex flex-col flex-wrap justify-around gap-4 p-8 sm:p-12 bg-white bg-opacity-80 backdrop-blur rounded-3xl text-xl sm:text-2xl overflow-x-auto text-pretty">
-            <div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-handwritten">
-                {"I like making things."}
-              </h2>
-              <p className="mt-8 text-stone-500">{"For example, I once..."}</p>
-              <ul className="text-lg sm:text-xl md:text-2xl indent-2">
-                <li>{"...animated a dancing banana"}</li>
-                <li>
-                  {
-                    '...scanned my own head with LiDAR so I could 3D print a tiny "me"'
-                  }
-                </li>
-                <li>{"...spent 3 hours folding an origami moose"}</li>
-                <li>
-                  {
-                    "...made a VR version of that castle defense Flash game (you know the one...)"
-                  }
-                </li>
-              </ul>
-            </div>
-            <div>
-              <p className="mt-8">But mainly</p>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-handwritten">
-                {"I'm a front-end software engineer"}
-              </h2>
-              <p className="text-stone-500 text-xs">
-                {
-                  "(Or software developer. Or programmer. Whatever you wanna call it.)"
-                }
-              </p>
-              <p className="mt-4">
-                {
-                  'As with my hobbies though, when it comes to my work, I consider myself a "jack of all trades" - a technologist, if you will. I\'m often learning about and experimenting with all kinds of tools and tech.'
-                }
-              </p>
-            </div>
-            <div className="mt-8">
-              That being said, my typical tech stack includes:
-              <ul className="indent-4 text-lg sm:text-xl md:text-2xl">
-                <li>React</li>
-                <li>Typescript</li>
-                <li>TailwindCSS</li>
-                <li>Three.js + react-three-fiber</li>
-                <li>Astro</li>
-              </ul>
-            </div>
-          </section>
+          <AboutMe />
         </Html>
       </group>
     </Suspense>
   );
 };
+
+function AboutMe() {
+  return (
+    <section className="h-full w-full flex flex-col flex-wrap justify-around gap-4 p-8 sm:p-12 bg-white bg-opacity-80 backdrop-blur rounded-3xl text-xl sm:text-2xl overflow-x-auto text-pretty">
+      <div>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-handwritten">
+          {"I like making things."}
+        </h2>
+        <p className="mt-8 text-stone-500">{"For example, I once..."}</p>
+        <ul className="text-lg sm:text-xl md:text-2xl indent-2">
+          <li>{"...animated a dancing banana"}</li>
+          <li>
+            {
+              '...scanned my own head with LiDAR so I could 3D print a tiny "me"'
+            }
+          </li>
+          <li>{"...spent 3 hours folding an origami moose"}</li>
+          <li>
+            {
+              "...made a VR version of that castle defense Flash game (you know the one...)"
+            }
+          </li>
+        </ul>
+      </div>
+      <div>
+        <p className="mt-8">But mainly</p>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-handwritten">
+          {"I'm a front-end software engineer"}
+        </h2>
+        <p className="text-stone-500 text-xs">
+          {
+            "(Or software developer. Or programmer. Whatever you wanna call it.)"
+          }
+        </p>
+        <p className="mt-4">
+          {
+            'As with my hobbies though, when it comes to my work, I consider myself a "jack of all trades" - a technologist, if you will. I\'m often learning about and experimenting with all kinds of tools and tech.'
+          }
+        </p>
+      </div>
+      <div className="mt-8">
+        That being said, my typical tech stack includes:
+        <ul className="indent-4 text-lg sm:text-xl md:text-2xl">
+          <li>React</li>
+          <li>Typescript</li>
+          <li>TailwindCSS</li>
+          <li>Three.js + react-three-fiber</li>
+          <li>Astro</li>
+        </ul>
+      </div>
+    </section>
+  );
+}
