@@ -31,19 +31,26 @@ const links: LinkData[] = [
     displayName: "GitHub",
   },
   {
+    url: "https://www.linkedin.com/in/bryan-c-lindsey/",
+    icon: FaLinkedinIn,
+    iconColor: "white",
+    backgroundColor: "bg-blue-600",
+    displayName: "LinkedIn",
+  },
+  {
     url: "https://codesandbox.io/u/bryanlindsey",
     icon: RxSquare,
     iconColor: "white",
     backgroundColor: "bg-gray-800",
     displayName: "CodeSandbox",
   },
-  {
-    url: "https://play.google.com/store/apps/developer?id=Bryndsey",
-    icon: BsGooglePlay,
-    iconColor: "white",
-    backgroundColor: "bg-amber-500",
-    displayName: "Google Play",
-  },
+  // {
+  //   url: "https://play.google.com/store/apps/developer?id=Bryndsey",
+  //   icon: BsGooglePlay,
+  //   iconColor: "white",
+  //   backgroundColor: "bg-amber-500",
+  //   displayName: "Google Play",
+  // },
   {
     url: "https://bryndsey.itch.io/",
     icon: SiItchdotio,
@@ -57,13 +64,6 @@ const links: LinkData[] = [
     iconColor: "white",
     backgroundColor: "bg-sky-500",
     displayName: "Sketchfab",
-  },
-  {
-    url: "https://www.linkedin.com/in/bryan-c-lindsey/",
-    icon: FaLinkedinIn,
-    iconColor: "white",
-    backgroundColor: "bg-blue-600",
-    displayName: "LinkedIn",
   },
 ];
 
