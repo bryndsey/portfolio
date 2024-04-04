@@ -5,6 +5,7 @@ import {
   SiKonva,
   SiTypescript,
   SiTailwindcss,
+  SiAstro,
 } from "react-icons/si";
 import { GiSoundWaves } from "react-icons/gi";
 import { logAnalyticsEvent } from "@analytics/firebase";
@@ -100,6 +101,13 @@ export const AndroidTag: Tag = {
   name: "Android",
   color: "rgb(61, 220, 132)",
   icon: FaAndroid,
+  iconColor: "white",
+};
+
+export const AstroTag: Tag = {
+  name: "Astro",
+  color: "rgb(23, 24, 28)",
+  icon: SiAstro,
   iconColor: "white",
 };
 
