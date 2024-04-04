@@ -196,8 +196,8 @@ export const AboutPage = (props: PageComponentProps) => {
 
 function AboutMe() {
   return (
-    <section className="min-h-[75%] w-full flex flex-col flex-wrap gap-2 portrait:gap-4 sm:gap-4 p-4 sm:p-6 md:p-8 bg-white bg-opacity-80 backdrop-blur rounded-3xl text-xl sm:text-2xl overflow-x-auto text-pretty">
-      <h2 className="text-3xl sm:text-4xl md:text-6xl portrait:text-6xl font-handwritten">
+    <section className="min-h-[75%] w-full flex flex-col flex-wrap gap-2 portrait:gap-4 sm:gap-4 p-4 sm:p-6 md:p-8 bg-white bg-opacity-80 backdrop-blur rounded-3xl text-lg sm:text-xl md:text-2xl overflow-x-auto text-pretty">
+      <h2 className="text-3xl sm:text-4xl md:text-6xl portrait:text-6xl font-handwritten squiggly">
         {"I like to make things"}
       </h2>
       <div className="flex flex-col flex-grow landscape:flex-row landscape:items-end justify-between gap-x-[5%] gap-y-8">
