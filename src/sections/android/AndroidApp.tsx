@@ -47,13 +47,13 @@ export const androidApps: AndroidApp[] = [
     iconScale: 1.2,
     projectTags: [AndroidTag, UnityTag],
   },
-  {
-    name: "Professional Work",
-    description:
-      "I've built apps for Android professionally since 2015. In that time, I've worked on apps for food ordering, banking, controlling smart lights, and more!",
-    iconBackgroundColor: "bg-slate-500",
-    icon: AndroidBryanIcon.src,
-  },
+  // {
+  //   name: "Professional Work",
+  //   description:
+  //     "I've built apps for Android professionally since 2015. In that time, I've worked on apps for food ordering, banking, controlling smart lights, and more!",
+  //   iconBackgroundColor: "bg-slate-500",
+  //   icon: AndroidBryanIcon.src,
+  // },
   // {
   //   name: "Connected Light App",
   //   description: "Control smart lights via Bluetooth and Wi-fi",
