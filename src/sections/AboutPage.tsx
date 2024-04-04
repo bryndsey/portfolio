@@ -210,7 +210,7 @@ function AboutMe() {
           </p>
         </div>
         <div className="min-w-[33%]">
-          Frequent tech stack:
+          <h3 className="font-bold">Frequent tech stack:</h3>
           <ul className="text-lg sm:text-xl md:text-2xl">
             <li>
               <TechStackItem tag={ReactTag} />
