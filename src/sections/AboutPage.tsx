@@ -7,6 +7,15 @@ import { Group, MathUtils, Vector3 } from "three";
 import { PageComponentProps } from "./Pages";
 import { useScrollPages } from "./useScrollPages";
 
+import {
+  AstroTag,
+  ReactTag,
+  Tag,
+  TailwindTag,
+  ThreeJsTag,
+  TypescriptTag,
+} from "./components/ProjectDescription";
+
 interface FloatingTextData {
   name: string;
   positionFn: (state: RootState) => number[];
@@ -176,7 +185,7 @@ export const AboutPage = (props: PageComponentProps) => {
           fullscreen
           portal={{ current: htmlPortal }}
           zIndexRange={[0, 0]}
-          className="p-4 sm:p-8 overflow-clip"
+          className="p-4 sm:p-8 overflow-clip grid items-center"
         >
           <AboutMe />
         </Html>
@@ -187,53 +196,50 @@ export const AboutPage = (props: PageComponentProps) => {
 
 function AboutMe() {
   return (
-    <section className="h-full w-full flex flex-col flex-wrap justify-around gap-4 p-8 sm:p-12 bg-white bg-opacity-80 backdrop-blur rounded-3xl text-xl sm:text-2xl overflow-x-auto text-pretty">
-      <div>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-handwritten">
-          {"I like making things."}
-        </h2>
-        <p className="mt-8 text-stone-500">{"For example, I once..."}</p>
-        <ul className="text-lg sm:text-xl md:text-2xl indent-2">
-          <li>{"...animated a dancing banana"}</li>
-          <li>
+    <section className="min-h-[75%] w-full flex flex-col flex-wrap gap-2 portrait:gap-4 sm:gap-4 p-4 sm:p-6 md:p-8 bg-white bg-opacity-80 backdrop-blur rounded-3xl text-xl sm:text-2xl overflow-x-auto text-pretty">
+      <h2 className="text-3xl sm:text-4xl md:text-6xl portrait:text-6xl font-handwritten">
+        {"I like to make things"}
+      </h2>
+      <div className="flex flex-col flex-grow landscape:flex-row landscape:items-end justify-between gap-x-[5%] gap-y-8">
+        <div className="flex flex-col gap-6 max-w-[38ch]">
+          <p>Web apps. 3D models. Games. Music. Bad jokes.</p>
+          <p>
             {
-              '...scanned my own head with LiDAR so I could 3D print a tiny "me"'
+              "I especially like to make things that bring together creativity and problem-solving."
             }
-          </li>
-          <li>{"...spent 3 hours folding an origami moose"}</li>
-          <li>
-            {
-              "...made a VR version of that castle defense Flash game (you know the one...)"
-            }
-          </li>
-        </ul>
-      </div>
-      <div>
-        <p className="mt-8">But mainly</p>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-handwritten">
-          {"I'm a front-end software engineer"}
-        </h2>
-        <p className="text-stone-500 text-xs">
-          {
-            "(Or software developer. Or programmer. Whatever you wanna call it.)"
-          }
-        </p>
-        <p className="mt-4">
-          {
-            'As with my hobbies though, when it comes to my work, I consider myself a "jack of all trades" - a technologist, if you will. I\'m often learning about and experimenting with all kinds of tools and tech.'
-          }
-        </p>
-      </div>
-      <div className="mt-8">
-        That being said, my typical tech stack includes:
-        <ul className="indent-4 text-lg sm:text-xl md:text-2xl">
-          <li>React</li>
-          <li>Typescript</li>
-          <li>TailwindCSS</li>
-          <li>Three.js + react-three-fiber</li>
-          <li>Astro</li>
-        </ul>
+          </p>
+        </div>
+        <div className="min-w-[33%]">
+          Frequent tech stack:
+          <ul className="text-lg sm:text-xl md:text-2xl">
+            <li>
+              <TechStackItem tag={ReactTag} />
+            </li>
+            <li>
+              <TechStackItem tag={TypescriptTag} />
+            </li>
+            <li>
+              <TechStackItem tag={TailwindTag} />
+            </li>
+            <li>
+              <TechStackItem tag={AstroTag} />
+            </li>
+            <li>
+              <TechStackItem tag={ThreeJsTag} />
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
   );
 }
+
+function TechStackItem({ tag }: { tag: Tag }) {
+  return (
+    <div className="flex gap-2 items-center">
+      <tag.icon className="w-4 h-4 sm:w-6 sm:h-6" color={tag.color} />
+      {tag.name}
+    </div>
+  );
+}
+
