@@ -35,7 +35,7 @@ export const IntroPageContent = () => {
 };
 
 const fullPortraitAspect = 0.75;
-const fullLandscapeAspect = 1.5;
+const fullLandscapeAspect = 1.75;
 
 export const IntroPage = (props: PageComponentProps) => {
   const htmlPortal = useThree((state) => state.gl.domElement.parentElement!);
@@ -86,7 +86,7 @@ export const IntroPage = (props: PageComponentProps) => {
       );
 
       const bubbleFullLandscapePosition = {
-        x: state.viewport.width * 0.2,
+        x: state.viewport.width * 0.175,
         y: 0,
       };
       const bubbleFullPortraitPosition = {
@@ -120,7 +120,7 @@ export const IntroPage = (props: PageComponentProps) => {
       const avatarOffscreenY = -viewportHeight * 1.5;
 
       const avatarFullLandscapePosition = {
-        x: -state.viewport.width * 0.25,
+        x: -state.viewport.width * 0.275,
         y: -state.viewport.height * 0.4,
       };
       const avatarFullPortraitPosition = {
