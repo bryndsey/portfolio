@@ -196,8 +196,14 @@ export const AboutPage = (props: PageComponentProps) => {
 
 function AboutMe() {
   return (
-    <section className="min-h-[75%] w-full flex flex-col flex-wrap gap-2 portrait:gap-4 sm:gap-4 p-4 sm:p-6 md:p-8 bg-white bg-opacity-80 backdrop-blur rounded-3xl text-lg sm:text-xl md:text-2xl overflow-x-auto text-pretty">
-      <h2 className="text-3xl sm:text-4xl md:text-6xl portrait:text-6xl font-handwritten squiggly">
+    <section
+      className="min-h-[66%] w-full flex flex-col flex-wrap gap-2 portrait:gap-4 sm:gap-4 p-6 sm:p-8 bg-white rounded-3xl overflow-x-auto text-pretty"
+      style={{ fontSize: "calc(2vw + 2vh)" }}
+    >
+      <h2
+        className="font-handwritten squiggly leading-none"
+        style={{ fontSize: "calc(4vw + 4vh)" }}
+      >
         {"I like to make things"}
       </h2>
       <div className="flex flex-col flex-grow landscape:flex-row landscape:items-end justify-between gap-x-[5%] gap-y-8">
@@ -210,8 +216,8 @@ function AboutMe() {
           </p>
         </div>
         <div className="min-w-[33%]">
-          <h3 className="font-bold">Frequent tech stack:</h3>
-          <ul className="text-lg sm:text-xl md:text-2xl">
+          <h3 className="font-bold">Tech stack:</h3>
+          <ul>
             <li>
               <TechStackItem tag={ReactTag} />
             </li>
@@ -236,8 +242,8 @@ function AboutMe() {
 
 function TechStackItem({ tag }: { tag: Tag }) {
   return (
-    <div className="flex gap-2 items-center">
-      <tag.icon className="w-4 h-4 sm:w-6 sm:h-6" color={tag.color} />
+    <div className="flex gap-[0.5em] items-center">
+      <tag.icon className="size-[1em]" color={tag.color} />
       {tag.name}
     </div>
   );
