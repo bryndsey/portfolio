@@ -2,7 +2,7 @@ import { useHtmlPortal } from "@hooks/useHtmlPortal";
 import { useSpringScaleVisibility } from "@hooks/useSpringScaleVisibility";
 import { Html } from "@react-three/drei";
 import { RootState, useFrame } from "@react-three/fiber";
-import { Suspense, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { Group, MathUtils, Vector3 } from "three";
 import { PageComponentProps } from "./Pages";
 import { useScrollPages } from "./useScrollPages";
@@ -147,10 +147,20 @@ export const AboutPage = (props: PageComponentProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const wordCloudGroupRef = useRef<Group>(null!);
 
+  useEffect(() => {
+    if (contentRef.current !== null) {
+      contentRef.current.hidden = true;
+    }
+  }, []);
+
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
     ({ enterAmount, exitAmount, isPageVisible, state }) => {
+      if (contentRef.current !== null) {
+        contentRef.current.hidden = !isPageVisible;
+      }
+
       if (groupRef.current === null) return;
 
       groupRef.current.visible = isPageVisible;
@@ -161,9 +171,6 @@ export const AboutPage = (props: PageComponentProps) => {
         );
         wordCloudGroupRef.current.visible = isPageVisible;
       }
-
-      if (contentRef.current === null) return;
-      contentRef.current.hidden = !isPageVisible;
 
       const yPercent = enterAmount + exitAmount;
 
