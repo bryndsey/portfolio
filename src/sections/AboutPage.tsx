@@ -196,27 +196,24 @@ export const AboutPage = (props: PageComponentProps) => {
 
 function AboutMe() {
   return (
-    <section
-      className="min-h-[66%] w-full flex flex-col flex-wrap gap-2 portrait:gap-4 sm:gap-4 p-6 sm:p-8 bg-white rounded-3xl overflow-x-auto text-pretty"
-      style={{ fontSize: "calc(2vw + 2vh)" }}
-    >
-      <h2
-        className="font-handwritten squiggly leading-none"
-        style={{ fontSize: "calc(4vw + 4vh)" }}
-      >
+    <section className="min-h-[66%] w-full text-[calc(1.5vw+1.5vh)] flex flex-col flex-wrap gap-[1.5em] p-[2.5em] bg-white rounded-3xl overflow-x-auto text-pretty">
+      <h2 className="font-handwritten squiggly leading-none text-[calc(4vw+4vh)]">
         {"I like to make things"}
       </h2>
-      <div className="flex flex-col flex-grow landscape:flex-row landscape:items-end justify-between gap-x-[5%] gap-y-8">
-        <div className="flex flex-col gap-6 max-w-[38ch]">
+      <div className="flex flex-col flex-grow landscape:flex-row justify-between gap-x-[5%] gap-y-8">
+        <div className="flex flex-col gap-[1.5em] max-w-[38ch]">
           <p>Web apps. 3D models. Games. Music. Bad jokes.</p>
-          <p>
-            {
-              "I especially like to make things that bring together creativity and problem-solving."
-            }
-          </p>
+          <div>
+            <p>
+              {
+                "I especially like to make things that bring together creativity and problem-solving."
+              }
+            </p>
+            <p className="text-[1.25em]">🎨 + 🧩 = 🫶</p>
+          </div>
         </div>
-        <div className="min-w-[33%]">
-          <h3 className="font-bold">Tech stack:</h3>
+        <div className="min-w-[12em]">
+          <h3 className="font-bold">Frequent Tech Stack:</h3>
           <ul>
             <li>
               <TechStackItem tag={ReactTag} />
@@ -228,10 +225,10 @@ function AboutMe() {
               <TechStackItem tag={TailwindTag} />
             </li>
             <li>
-              <TechStackItem tag={AstroTag} />
+              <TechStackItem tag={ThreeJsTag} />
             </li>
             <li>
-              <TechStackItem tag={ThreeJsTag} />
+              <TechStackItem tag={AstroTag} />
             </li>
           </ul>
         </div>
