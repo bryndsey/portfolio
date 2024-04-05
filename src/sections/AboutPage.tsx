@@ -194,6 +194,14 @@ export const AboutPage = (props: PageComponentProps) => {
   );
 };
 
+const techStackTags: Tag[] = [
+  ReactTag,
+  TypescriptTag,
+  TailwindTag,
+  ThreeJsTag,
+  AstroTag,
+];
+
 function AboutMe() {
   return (
     <section className="min-h-[66%] w-full text-[calc(1.5vw+1.5vh)] flex flex-col flex-wrap gap-[1.5em] p-[2.5em] bg-white rounded-3xl overflow-x-auto text-pretty">
@@ -215,21 +223,9 @@ function AboutMe() {
         <div className="min-w-[12em]">
           <h3 className="font-bold">Frequent Tech Stack:</h3>
           <ul>
-            <li>
-              <TechStackItem tag={ReactTag} />
-            </li>
-            <li>
-              <TechStackItem tag={TypescriptTag} />
-            </li>
-            <li>
-              <TechStackItem tag={TailwindTag} />
-            </li>
-            <li>
-              <TechStackItem tag={ThreeJsTag} />
-            </li>
-            <li>
-              <TechStackItem tag={AstroTag} />
-            </li>
+            {techStackTags.map((tag) => (
+              <TechStackItem key={tag.name} tag={tag} />
+            ))}
           </ul>
         </div>
       </div>
