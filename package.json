@@ -38,7 +38,7 @@
     "react-animated-cursor": "^2.11.2",
     "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.12.0",
+    "react-icons": "^5.0.1",
     "theatric": "^0.7.0",
     "three": "0.163.0"
   },
