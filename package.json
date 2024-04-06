@@ -28,7 +28,7 @@
     "@react-three/postprocessing": "2.16.2",
     "@studio-freight/react-lenis": "^0.0.46",
     "astro": "^4.5.16",
-    "daisyui": "^2.52.0",
+    "daisyui": "^4.10.1",
     "detect-gpu": "^5.0.38",
     "firebase": "^10.10.0",
     "jotai": "^2.7.2",
