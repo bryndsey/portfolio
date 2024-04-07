@@ -13,6 +13,7 @@ import { IoCubeSharp } from "react-icons/io5";
 import { IconType } from "react-icons";
 import { logAnalyticsEvent } from "@analytics/firebase";
 import { ScreenState, useScreenState } from "@hooks/useScreenState";
+import { LinkButton } from "./components/LinkButton";
 
 interface LinkData {
   url: string;
@@ -137,7 +138,7 @@ function FooterLink({ link }: { link: LinkData }) {
   return (
     <a
       href={link.url}
-      className={`${link.backgroundColor} rounded-full p-2`}
+      className={`${link.backgroundColor} rounded-full p-2 shadow-sm`}
       onClick={() =>
         logAnalyticsEvent("bryan_external_link_clicked", {
           bryan_link_url: link.url,
@@ -157,23 +158,17 @@ function CallToActionContent() {
           Wanna get in touch?
         </h2>
         <p className="max-w-[40ch] text-pretty md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-          Interested in learning more about me, my work, or how we can
-          collaborate?
+          {
+            "Interested in learning more about me or any of the things I've made?"
+          }
         </p>
       </div>
       <div className="flex flex-row items-baseline gap-2">
-        <a
-          className="inline-flex h-10 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
-          href="mailto:me@bryanlindsey.dev"
-        >
-          Hit me up
-        </a>
-        <a
-          className="inline-flex h-10 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
-          href="https://www.linkedin.com/in/bryan-c-lindsey/"
-        >
-          Connect
-        </a>
+        <LinkButton text="Hit me up" linkUrl="mailto:me@bryanlindsey.dev" />
+        <LinkButton
+          text="Connect"
+          linkUrl="https://www.linkedin.com/in/bryan-c-lindsey/"
+        />
       </div>
     </div>
   );
