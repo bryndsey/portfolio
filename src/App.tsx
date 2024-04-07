@@ -40,7 +40,6 @@ function AppContent() {
 
   return (
     <>
-      <CustomCursor />
       <div
         id="App"
         className="bg-gradient-radial from-green-400 to-green-500 h-[100dvh] font-sans fixed inset-0"
@@ -64,6 +63,7 @@ function AppContent() {
           </Canvas>
         </MouseTracker>
       </div>
+      <CustomCursor />
     </>
   );
 }
