@@ -1,11 +1,12 @@
-import { useAtomValue } from "jotai";
 import AnimatedCursor from "react-animated-cursor";
-import { hasDetectedMouse } from "./mousePosition";
+import { useMediaQuery } from "usehooks-ts";
 
 export function CustomCursor() {
-  const mouseDetected = useAtomValue(hasDetectedMouse);
+  const hasMouse = useMediaQuery("(pointer: fine)");
 
-  if (!mouseDetected) return null;
+  if (!hasMouse) {
+    return null;
+  }
 
   return (
     <AnimatedCursor
