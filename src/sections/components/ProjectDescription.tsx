@@ -1,14 +1,14 @@
 import { IconType } from "react-icons";
 import { FaAndroid, FaReact, FaUnity } from "react-icons/fa";
-import {
-  SiThreedotjs,
-  SiKonva,
-  SiTypescript,
-  SiTailwindcss,
-  SiAstro,
-} from "react-icons/si";
 import { GiSoundWaves } from "react-icons/gi";
-import { logAnalyticsEvent } from "@analytics/firebase";
+import {
+  SiAstro,
+  SiKonva,
+  SiTailwindcss,
+  SiThreedotjs,
+  SiTypescript,
+} from "react-icons/si";
+import { LinkButton } from "./LinkButton";
 
 interface ProjectDescriptionProps {
   projectName: string;
@@ -47,27 +47,6 @@ const Tags = (props: TagsProps) => {
   );
 };
 
-interface LinkButtonProps {
-  linkUrl: string;
-  actionText?: string;
-}
-
-const LinkButton = (props: LinkButtonProps) => {
-  return (
-    <a
-      href={props.linkUrl}
-      onClick={() =>
-        logAnalyticsEvent("bryan_project_link_clicked", {
-          bryan_link_url: props.linkUrl,
-        })
-      }
-      className="px-3 sm:px-4 py-2 text-sm sm:text-lg bg-yellow-400 rounded hover:bg-yellow-300 active:bg-yellow-500 font-bold uppercase duration-300 w-fit select-none shadow hover:shadow-md active:shadow-sm hover:scale-105 active:scale-95"
-    >
-      {props.actionText ?? "Try it"}
-    </a>
-  );
-};
-
 export const ProjectDescription = (props: ProjectDescriptionProps) => {
   return (
     // TODO: Re-add ability to combine with props style (or remove props style?)
@@ -77,7 +56,7 @@ export const ProjectDescription = (props: ProjectDescriptionProps) => {
 
       <div className="flex flex-col-reverse xs:flex-row xs:flex-wrap-reverse justify-between gap-y-4 gap-x-6">
         {props.url && (
-          <LinkButton linkUrl={props.url} actionText={props.actionText} />
+          <LinkButton linkUrl={props.url} text={props.actionText ?? "Try it"} />
         )}
         {props.tags && (
           <div className="flex flex-row items-center gap-2">
