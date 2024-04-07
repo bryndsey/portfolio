@@ -111,8 +111,10 @@ type LinksPageContentProps = {
 
 function FooterContent() {
   return (
-    <section className="w-full h-full grid grid-rows-2">
-      <CallToActionContent />
+    <section className="w-full h-full flex flex-col">
+      <div className="flex-grow grid place-content-center">
+        <CallToActionContent />
+      </div>
       <Footer />
     </section>
   );
@@ -120,7 +122,7 @@ function FooterContent() {
 
 function Footer() {
   return (
-    <footer className="flex flex-col items-center justify-center space-y-4 text-center mt-10 bg-yellow-300">
+    <footer className="flex flex-col items-center justify-center space-y-4 text-center mt-10 p-4 bg-yellow-300">
       <div className="flex space-x-4">
         <a href="#">
           <SiGithub className="h-6 w-6" />
@@ -129,7 +131,7 @@ function Footer() {
           <FaLinkedinIn className="h-6 w-6" />
         </a>
       </div>
-      <p className="text-sm ">© 2024 Bryan Lindsey. All rights reserved.</p>
+      <p className="text-xs">© 2024 Bryan Lindsey. All rights reserved.</p>
     </footer>
   );
 }
