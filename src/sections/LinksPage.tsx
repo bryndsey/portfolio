@@ -124,12 +124,14 @@ function FooterContent() {
 function Footer() {
   return (
     <footer className="flex flex-col items-center justify-center space-y-4 text-center mt-10 p-4 bg-yellow-300">
-      <div className="flex space-x-4 p-2">
+      <div className="flex space-x-4 p-[2dvh]">
         {links.map((link) => (
           <FooterLink key={link.url} link={link} />
         ))}
       </div>
-      <p className="text-xs">© 2024 Bryan Lindsey. All rights reserved.</p>
+      <p className="text-xs text-yellow-600">
+        © 2024 Bryan Lindsey. All rights reserved.
+      </p>
     </footer>
   );
 }
