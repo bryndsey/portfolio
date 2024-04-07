@@ -4,12 +4,12 @@ const smallSize = 640;
 const tabletSize = 768;
 
 const deviceClasses = ["small", "tablet", "large"] as const;
-type DeviceClass = typeof deviceClasses[number];
+type DeviceClass = (typeof deviceClasses)[number];
 
 const screenOrientations = ["landscape", "portrait"] as const;
-type ScreenOrientation = typeof screenOrientations[number];
+type ScreenOrientation = (typeof screenOrientations)[number];
 
-interface ScreenState {
+export interface ScreenState {
   deviceClass: DeviceClass;
   orientation: ScreenOrientation;
 }

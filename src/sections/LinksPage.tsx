@@ -12,7 +12,7 @@ import { BsGooglePlay } from "react-icons/bs";
 import { IoCubeSharp } from "react-icons/io5";
 import { IconType } from "react-icons";
 import { logAnalyticsEvent } from "@analytics/firebase";
-import { useScreenState } from "@hooks/useScreenState";
+import { ScreenState, useScreenState } from "@hooks/useScreenState";
 
 interface LinkData {
   url: string;
@@ -102,44 +102,54 @@ export const LinksPage = (props: PageComponentProps) => {
           portal={{ current: htmlPortal }}
           className="bg-yellow-300"
         >
-          <div className="h-full flex flex-col md:gap-4 items-center justify-center p-4 landscape:p-2 landscape:md:p-12 sm:p-8 md:p-12">
-            <h3 className="text-center pt-4 md:pt-8 text-4xl landscape:text-2xl md:text-6xl landscape:md:text-6xl font-handwritten squiggly">
-              More things:
-            </h3>
-            <div className="flex-1 max-w-4xl w-fit sm:w-full grid sm:portrait:grid-cols-2 grid-cols-1 landscape:grid-cols-3 place-content-evenly sm:place-items-center gap-4 m-auto px-6 md:px-10">
-              {links.map((link) => (
-                <a
-                  href={link.url}
-                  key={link.url}
-                  onClick={() =>
-                    logAnalyticsEvent("bryan_external_link_clicked", {
-                      bryan_link_url: link.url,
-                    })
-                  }
-                  className="flex landscape:flex-col sm:flex-col flex-row gap-x-4 gap-y-2 md:gap-y-4 items-center justify-start"
-                >
-                  <div
-                    className={`${link.backgroundColor} flex-shrink aspect-square p-2 md:p-4 rounded-[25%] shadow-lg`}
-                  >
-                    <link.icon
-                      className={
-                        state.orientation === "landscape" &&
-                        state.deviceClass === "small"
-                          ? "w-6 h-6"
-                          : "w-6 h-6 xs:w-8 xs:h-8 sm:w-10 sm:h-10"
-                      }
-                      color={link.iconColor}
-                    />
-                  </div>
-                  <p className="font-semibold text-sm landscape:text-xs md:text-base landscape:md:text-base">
-                    {link.displayName}
-                  </p>
-                </a>
-              ))}
-            </div>
-          </div>
+          <LinksContent screenState={state} />
         </Html>
       </group>
     </ScreenSpace>
   );
 };
+
+type LinksPageContentProps = {
+  screenState: ScreenState;
+};
+
+function LinksContent({ screenState }: LinksPageContentProps) {
+  return (
+    <div className="h-full flex flex-col md:gap-4 items-center justify-center p-4 landscape:p-2 landscape:md:p-12 sm:p-8 md:p-12">
+      <h3 className="text-center pt-4 md:pt-8 text-4xl landscape:text-2xl md:text-6xl landscape:md:text-6xl font-handwritten squiggly">
+        More things:
+      </h3>
+      <div className="flex-1 max-w-4xl w-fit sm:w-full grid sm:portrait:grid-cols-2 grid-cols-1 landscape:grid-cols-3 place-content-evenly sm:place-items-center gap-4 m-auto px-6 md:px-10">
+        {links.map((link) => (
+          <a
+            href={link.url}
+            key={link.url}
+            onClick={() =>
+              logAnalyticsEvent("bryan_external_link_clicked", {
+                bryan_link_url: link.url,
+              })
+            }
+            className="flex landscape:flex-col sm:flex-col flex-row gap-x-4 gap-y-2 md:gap-y-4 items-center justify-start"
+          >
+            <div
+              className={`${link.backgroundColor} flex-shrink aspect-square p-2 md:p-4 rounded-[25%] shadow-lg`}
+            >
+              <link.icon
+                className={
+                  screenState.orientation === "landscape" &&
+                  screenState.deviceClass === "small"
+                    ? "w-6 h-6"
+                    : "w-6 h-6 xs:w-8 xs:h-8 sm:w-10 sm:h-10"
+                }
+                color={link.iconColor}
+              />
+            </div>
+            <p className="font-semibold text-sm landscape:text-xs md:text-base landscape:md:text-base">
+              {link.displayName}
+            </p>
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+}
