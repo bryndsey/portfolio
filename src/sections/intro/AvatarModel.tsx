@@ -3,6 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import { Group, Vector3 } from "three";
 import { GLTF } from "three-stdlib";
+import * as THREE from "three";
 import { normalizedMousePosition } from "@/mousePosition";
 import Avatar from "./avatar.glb?url";
 
