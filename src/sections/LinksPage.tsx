@@ -152,7 +152,7 @@ function FooterLink({ link }: { link: LinkData }) {
 
 function CallToActionContent() {
   return (
-    <div className="flex flex-col items-center justify-center text-center">
+    <div className="flex flex-col items-center justify-center text-center p-2">
       <h2 className="font-bold tracking-tighter text-[calc(3vh+3vw)]">
         Wanna get in touch?
       </h2>
