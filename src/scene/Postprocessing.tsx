@@ -7,7 +7,7 @@ export function Postprocessing() {
   const showPostprocessing = gpuSettings !== null && gpuSettings.tier > 1;
 
   return (
-    <EffectComposer disableNormalPass enabled={showPostprocessing}>
+    <EffectComposer enabled={showPostprocessing}>
       {/* <N8AO
         aoRadius={0.5}
         distanceFalloff={0.08}

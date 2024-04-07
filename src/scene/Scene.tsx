@@ -20,7 +20,7 @@ export function Scene() {
         <Preload all />
 
         <BackgroundBlobs />
-        {/* <ambientLight intensity={0.15} /> */}
+        <ambientLight intensity={0.75} />
         <Postprocessing />
 
         {pages.pagesWithStartIndex.map((page) => {

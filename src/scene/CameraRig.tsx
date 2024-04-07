@@ -1,7 +1,11 @@
 import { OrbitControls, PerspectiveCamera, useHelper } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
-import { CameraHelper, Vector3 } from "three";
+import {
+  CameraHelper,
+  PerspectiveCamera as ThreePerspectiveCamera,
+  Vector3,
+} from "three";
 import { normalizedMousePosition } from "@/mousePosition";
 
 const cameraPosition = { x: 0, y: 0, z: 3 };
@@ -18,7 +22,7 @@ export const CameraRig = () => {
   // });
   const debugCamera = false;
 
-  const mainCameraRef = useRef<THREE.PerspectiveCamera>(null!);
+  const mainCameraRef = useRef<ThreePerspectiveCamera>(null!);
   useHelper(debugCamera ? mainCameraRef : null, CameraHelper);
 
   useFrame(() => {
