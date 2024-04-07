@@ -124,7 +124,7 @@ function FooterContent() {
 function Footer() {
   return (
     <footer className="flex flex-col items-center justify-center space-y-4 text-center mt-10 p-4 bg-yellow-300">
-      <div className="flex space-x-4">
+      <div className="flex space-x-4 p-2">
         {links.map((link) => (
           <FooterLink key={link.url} link={link} />
         ))}
@@ -145,25 +145,21 @@ function FooterLink({ link }: { link: LinkData }) {
         })
       }
     >
-      <link.icon className="text-white size-4" />
+      <link.icon className="text-white size-5 md:size-6" />
     </a>
   );
 }
 
 function CallToActionContent() {
   return (
-    <div className="flex flex-col items-center justify-center space-y-4 text-center">
-      <div className="space-y-2">
-        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-          Wanna get in touch?
-        </h2>
-        <p className="max-w-[40ch] text-pretty md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-          {
-            "Interested in learning more about me or any of the things I've made?"
-          }
-        </p>
-      </div>
-      <div className="flex flex-row items-baseline gap-2">
+    <div className="flex flex-col items-center justify-center text-center">
+      <h2 className="font-bold tracking-tighter text-[calc(3vh+3vw)]">
+        Wanna get in touch?
+      </h2>
+      <p className="max-w-[40ch] text-pretty text-[calc(1.5vh+1.5vw)]">
+        {"Interested in learning more about me or any of the things I've made?"}
+      </p>
+      <div className="flex flex-row items-baseline gap-2 mt-4">
         <LinkButton text="Hit me up" linkUrl="mailto:me@bryanlindsey.dev" />
         <LinkButton
           text="Connect"
