@@ -156,8 +156,9 @@ function CallToActionContent() {
         <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
           Wanna get in touch?
         </h2>
-        <p className="max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-          Interested in learning more about my work or how we can collaborate?
+        <p className="max-w-[40ch] text-pretty md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+          Interested in learning more about me, my work, or how we can
+          collaborate?
         </p>
       </div>
       <div className="flex flex-row items-baseline gap-2">
