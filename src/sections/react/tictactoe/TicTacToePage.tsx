@@ -197,7 +197,7 @@ export const TicTacToePage = (props: PageComponentProps) => {
         <Html
           ref={contentRef}
           portal={{ current: htmlPortal }}
-          className="rounded-2xl p-6 sm:p-8 bg-white bg-opacity-80 backdrop-blur transition-opacity duration-300"
+          className="rounded-2xl p-6 sm:p-8 bg-white/90 backdrop-blur transition-opacity duration-300"
           distanceFactor={descriptionScaleFactor}
         >
           <ProjectDescription
