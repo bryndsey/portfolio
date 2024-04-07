@@ -7,7 +7,7 @@ import { useScrollPages } from "./useScrollPages";
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import { RxSquare } from "react-icons/rx";
-import { SiItchdotio } from "react-icons/si";
+import { SiGithub, SiItchdotio } from "react-icons/si";
 import { BsGooglePlay } from "react-icons/bs";
 import { IoCubeSharp } from "react-icons/io5";
 import { IconType } from "react-icons";
@@ -91,18 +91,14 @@ export const LinksPage = (props: PageComponentProps) => {
     }
   );
 
-  const state = useScreenState();
+  // const state = useScreenState();
 
   return (
     <ScreenSpace depth={2}>
       <group ref={groupRef}>
-        <Html
-          ref={contentRef}
-          fullscreen
-          portal={{ current: htmlPortal }}
-          className="bg-yellow-300"
-        >
-          <LinksContent screenState={state} />
+        <Html ref={contentRef} fullscreen portal={{ current: htmlPortal }}>
+          <FooterContent />
+          {/* <LinksContent screenState={state} /> */}
         </Html>
       </group>
     </ScreenSpace>
@@ -112,6 +108,52 @@ export const LinksPage = (props: PageComponentProps) => {
 type LinksPageContentProps = {
   screenState: ScreenState;
 };
+
+function FooterContent() {
+  return (
+    <section className="w-full h-full grid grid-rows-2">
+      <CallToActionContent />
+      <Footer />
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="flex flex-col items-center justify-center space-y-4 text-center mt-10 bg-yellow-300">
+      <div className="flex space-x-4">
+        <a href="#">
+          <SiGithub className="h-6 w-6" />
+        </a>
+        <a href="#">
+          <FaLinkedinIn className="h-6 w-6" />
+        </a>
+      </div>
+      <p className="text-sm ">© 2024 Bryan Lindsey. All rights reserved.</p>
+    </footer>
+  );
+}
+
+function CallToActionContent() {
+  return (
+    <div className="flex flex-col items-center justify-center space-y-4 text-center">
+      <div className="space-y-2">
+        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+          Wanna get in touch?
+        </h2>
+        <p className="max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+          Interested in learning more about my work or how we can collaborate?
+        </p>
+      </div>
+      <a
+        className="inline-flex h-10 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
+        href="#"
+      >
+        Contact Me
+      </a>
+    </div>
+  );
+}
 
 function LinksContent({ screenState }: LinksPageContentProps) {
   return (
