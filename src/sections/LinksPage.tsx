@@ -157,7 +157,9 @@ function CallToActionContent() {
         Wanna get in touch?
       </h2>
       <p className="max-w-[40ch] text-pretty text-[calc(1.5vh+1.5vw)]">
-        {"Interested in learning more about me or any of the things I've made?"}
+        {
+          "Interested in learning more about me or any of the things I've made? Let's chat!"
+        }
       </p>
       <div className="flex flex-row items-baseline gap-2 mt-4">
         <LinkButton text="Hit me up" linkUrl="mailto:me@bryanlindsey.dev" />
