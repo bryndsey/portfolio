@@ -124,15 +124,28 @@ function Footer() {
   return (
     <footer className="flex flex-col items-center justify-center space-y-4 text-center mt-10 p-4 bg-yellow-300">
       <div className="flex space-x-4">
-        <a href="#">
-          <SiGithub className="h-6 w-6" />
-        </a>
-        <a href="#">
-          <FaLinkedinIn className="h-6 w-6" />
-        </a>
+        {links.map((link) => (
+          <FooterLink key={link.url} link={link} />
+        ))}
       </div>
       <p className="text-xs">© 2024 Bryan Lindsey. All rights reserved.</p>
     </footer>
+  );
+}
+
+function FooterLink({ link }: { link: LinkData }) {
+  return (
+    <a
+      href={link.url}
+      className={`${link.backgroundColor} rounded-full p-2`}
+      onClick={() =>
+        logAnalyticsEvent("bryan_external_link_clicked", {
+          bryan_link_url: link.url,
+        })
+      }
+    >
+      <link.icon className="text-white size-4" />
+    </a>
   );
 }
 
