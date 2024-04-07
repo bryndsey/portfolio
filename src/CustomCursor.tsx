@@ -1,7 +1,8 @@
 import AnimatedCursor from "react-animated-cursor";
+import { useMediaQuery } from "usehooks-ts";
 
 export function CustomCursor() {
-  const hasMouse = matchMedia("(pointer: fine)").matches;
+  const hasMouse = useMediaQuery("(pointer: fine)");
 
   if (!hasMouse) {
     return null;
