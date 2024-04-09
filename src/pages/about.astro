@@ -1,0 +1,32 @@
+---
+import Layout from "./_layout.astro";
+---
+
+<Layout>
+  <main
+    id="App"
+    class="bg-gradient-radial from-green-400 to-green-500 h-[100dvh] font-sans fixed inset-0 p-8 space-y-4"
+  >
+    <div class="rounded-2xl p-6 sm:p-8 bg-white/90 backdrop-blur">
+      <h1 class="font-handwritten text-4xl">About Bryan</h1>
+      <p>(That's me!)</p>
+    </div>
+    <div class="w-full flex flex-row flex-wrap gap-6">
+      <div class="bg-red-500 min-h-16 flex-1 aspect-square">Placeholder</div>
+      <div
+        class="rounded-2xl p-6 sm:p-8 bg-white/90 backdrop-blur flex-1 min-w-80 max-w-[50%] flex flex-col justify-center gap-4"
+      >
+        <h2 class="text-xl font-bold">TODO: Add a title?</h2>
+        <p>
+          I'm a software engineer<span class="text-stone-500">*</span> focused on
+          front-end web development. I've been in the industry since 2012 doing desktop,
+          mobile, and web development. I've also been a consultant since 2015, working
+          with clients from 2-person startups to Fortune 500 companies.
+        </p>
+        <span class="text-xs text-stone-500">
+          *(Or developer. Or programmer. Whatever you want to call it)
+        </span>
+      </div>
+    </div>
+  </main>
+</Layout>
