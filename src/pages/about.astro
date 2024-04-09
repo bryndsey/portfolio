@@ -11,8 +11,10 @@ import Layout from "./_layout.astro";
       <h1 class="font-handwritten text-4xl">About Bryan</h1>
       <p>(That's me!)</p>
     </header>
-    <div class="w-full flex flex-row flex-wrap gap-6">
-      <div class="bg-red-500 min-h-16 flex-1 aspect-square">Placeholder</div>
+    <div class="w-full flex flex-col sm:flex-row gap-6">
+      <div class="bg-stone-500 min-h-16 flex-1 aspect-square">
+        Spinning Head Placeholder
+      </div>
       <div
         class="rounded-2xl p-6 sm:p-8 bg-white/90 backdrop-blur flex-1 min-w-80 max-w-[50%] flex flex-col justify-center gap-4"
       >
@@ -28,13 +30,20 @@ import Layout from "./_layout.astro";
         </span>
       </div>
     </div>
+    <h2 class="text-xl font-bold">The Longer Version...</h2>
     <section>
-      <h2 class="text-xl font-bold">The Longer Version</h2>
-      <span class="text-2xl">The platypus is a unique creature.</span><br /> It's
-      a mammal, but it lays eggs. It's got a bill and webbed feet like a duck, but
-      it's got fur like a mammal. It's got a tail like a beaver, but it's got a venomous
-      spur like a reptile. The playtpus took a unique evolutionary path to get to
-      where it is today.
+      <div class="flex flex-col sm:flex-row gap-4 items-center">
+        <p class="min-w-80 max-w-[50%]">
+          <span class="text-2xl">The platypus is a unique creature.</span> It's a
+          mammal, but it lays eggs. It's got a bill and webbed feet like a duck,
+          but it's got fur like a mammal. It's got a tail like a beaver, but it's
+          got a venomous spur like a reptile. The playtpus took a unique evolutionary
+          path to get to where it is today.
+        </p>
+        <div class="bg-amber-800 min-h-16 flex-1 aspect-square">
+          Platypus Placeholder
+        </div>
+      </div>
     </section>
     <section class="w-full overflow-x-clip">
       <h3 class="text-center">My Evolution</h3>
@@ -43,10 +52,10 @@ import Layout from "./_layout.astro";
           Growing up, I didn't have a computer at home. Perhaps unsurprisingly,
           I had never written any computer code until my time at <a
             href="https://www.centre.edu/">Centre College</a
-          >. I originally went there thinking I would be a Math major, but after
-          accidentally stumbling into a few encounters with coding, I fell in
-          love with it and somehow managed to graduate in 2012 with a degree in
-          Computer Science.
+          >. I was originally a Math major there, but after accidentally
+          stumbling into a few encounters with coding, I fell in love with it
+          and somehow managed to graduate in 2012 with a degree in Computer
+          Science.
         </p>
         <p class="w-[40ch] max-w-[75%] flex-shrink-0">
           The first few years of my career were also spent fumbling around and
