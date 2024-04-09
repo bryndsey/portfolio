@@ -5,28 +5,125 @@ import Layout from "./_layout.astro";
 <Layout>
   <main
     id="App"
-    class="bg-gradient-radial from-green-400 to-green-500 h-[100dvh] font-sans fixed inset-0 p-8 space-y-4"
+    class="bg-gradient-radial from-green-400 to-green-500 h-[100dvh] font-sans fixed inset-0 p-8 space-y-4 overflow-y-auto overflow-x-clip"
   >
-    <div class="rounded-2xl p-6 sm:p-8 bg-white/90 backdrop-blur">
+    <header class="rounded-2xl p-6 sm:p-8 bg-white/90 backdrop-blur">
       <h1 class="font-handwritten text-4xl">About Bryan</h1>
       <p>(That's me!)</p>
-    </div>
+    </header>
     <div class="w-full flex flex-row flex-wrap gap-6">
       <div class="bg-red-500 min-h-16 flex-1 aspect-square">Placeholder</div>
       <div
         class="rounded-2xl p-6 sm:p-8 bg-white/90 backdrop-blur flex-1 min-w-80 max-w-[50%] flex flex-col justify-center gap-4"
       >
-        <h2 class="text-xl font-bold">TODO: Add a title?</h2>
+        <h2 class="text-xl font-bold">TL;DR:</h2>
         <p>
           I'm a software engineer<span class="text-stone-500">*</span> focused on
-          front-end web development. I've been in the industry since 2012 doing desktop,
-          mobile, and web development. I've also been a consultant since 2015, working
-          with clients from 2-person startups to Fortune 500 companies.
+          front-end web development. I've picked up a wide set of skills over my
+          career, both technical and non-technical, and continue to adapt effectively
+          to new environments and technologies.
         </p>
         <span class="text-xs text-stone-500">
           *(Or developer. Or programmer. Whatever you want to call it)
         </span>
       </div>
     </div>
+    <section>
+      <h2 class="text-xl font-bold">The Longer Version</h2>
+      <span class="text-2xl">The platypus is a unique creature.</span><br /> It's
+      a mammal, but it lays eggs. It's got a bill and webbed feet like a duck, but
+      it's got fur like a mammal. It's got a tail like a beaver, but it's got a venomous
+      spur like a reptile. The playtpus took a unique evolutionary path to get to
+      where it is today.
+    </section>
+    <p class="text-center">...</p>
+    <section class="w-full overflow-x-clip">
+      <div class="flex flex-row overflow-x-auto">
+        <p class="w-[40ch]">
+          Growing up, I didn't have a computer at home. Perhaps unsurprisingly,
+          I had never written any computer code until my time at <a
+            href="https://www.centre.edu/">Centre College</a
+          >. I originally went there thinking I would be a Math major, but after
+          accidentally stumbling into a few encounters with coding, I fell in
+          love with it and somehow managed to graduate in 2012 with a degree in
+          Computer Science.
+        </p>
+        <p class="w-[40ch]">
+          The first few years of my career were also spent fumbling around... I
+          did enterprise desktop development with C++ and worked on an "ERP"
+          system using... X++ (yeah, don't ask).
+        </p>
+        <p class="w-[40ch]">
+          My curiosity drove me to evolve though. After taking some random
+          advice from a co-worker, I taught myself Android development and in
+          2015 landed a job doing it professionally. In addition to working with
+          a new tech stack, I also adapted from working at a product company to
+          consulting. During that time, I was also exposed to books like "Clean
+          Code", evolving my technical skills to "Senior Developer" status.
+        </p>
+        <p class="w-[40ch]">
+          Fast-forward to 2019, and a chance encounter with Reactled me to
+          learning it in my free time, and I later made the switch to full-time
+          web developer. As time has gone on, I've continued to inherit new
+          skills and tools, some of which you can see on display on this website
+          as well as in my
+          <a href="#">projects</a> (and some of which I can't share... NDAs, sorry
+          😔).
+        </p>
+      </div>
+    </section>
+    <p class="text-center">...</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 items-center gap-4">
+      <ul>
+        <h3>Platypus adaptability</h3>
+        <li>A great swimmer... also walks on land</li>
+        <li>
+          Can see, smell, hear, etc... also senses electric fields to find food
+        </li>
+        <li>
+          Freakin' adorable... could also straight up kill you with its
+          murder-spur if it needed to.
+        </li>
+      </ul>
+      <p class="rounded-2xl p-6 sm:p-8 bg-white 90 backdrop-blur text-2xl">
+        The platypus has many adaptations that give it a broad set of
+        capabilities.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 items-center gap-4">
+      <p class="rounded-2xl p-6 sm:p-8 bg-white 90 backdrop-blur text-2xl">
+        So too have my experiences helped me become adaptable.
+      </p>
+      <ul>
+        <h3>Bryan adaptability</h3>
+        <li>
+          Front-end web developer... also comfortable learning new tools and
+          tech stacks
+        </li>
+        <li>
+          Highly-technical developer... also experienced consultant and
+          non-technical communicator
+        </li>
+        <li>Problem-solver... also enjoys creativity</li>
+      </ul>
+    </div>
+    <section>
+      Am I forcing a metaphor about the platypus into my journey as a developer
+      because it's my favorite animal? Perhaps. But, I genuinely think the
+      platypus is a beautiful, intriguing, and sometimes underappreciated
+      creature because of the unique features it developed over its evolution; I
+      like to think that my own diverse background and ability to adapt to a
+      variety of environments makes me a similarly interesting and well-rounded
+      (if perhaps a little odd) <span class="line-through">creature</span> developer
+      and consultant.
+    </section>
+    <p class="text-center">...</p>
+    <section>
+      I currently work at Stellar Elements (originally Big Nerd Ranch when I
+      joined in 2018), where I've worked with clients ranging from 2-person
+      start-ups to Fortune 500 companies. My current project has me building a
+      React + Typescript component library and design system for a nationwide
+      fast food company.
+    </section>
   </main>
 </Layout>
