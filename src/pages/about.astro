@@ -2,17 +2,20 @@
 import Layout from "./_layout.astro";
 
 const evolutionSteps = [
-  `Growing up, I didn't have a computer at home. Perhaps unsurprisingly, I had never written any computer code until my time at Centre College. I was originally a Math major there, but after accidentally stumbling into a few encounters with coding, I fell in love with it and somehow managed to graduate in 2012 with a degree in Computer Science.`,
-  `The first few years of my career were also spent fumbling around but landing in places where I could learn and grow. I did enterprise desktop development with C++ and worked on an "ERP" system using... X++ (yeah, don't ask).`,
-  `My curiosity drove me to evolve though. After taking some random advice from a co-worker, I taught myself Android development and in 2015 landed a job doing it professionally. In addition to working with a new tech stack, I also adapted from working at a product company to consulting. During that time, I was also exposed to books like "Clean Code", evolving my technical skills to "Senior Developer" status.`,
-  `Fast-forward to 2019, and a chance encounter with React led me to learning it in my free time, and I later made the switch to full-time web developer. As time has gone on, I've continued to inherit new skills and tools, some of which you can see on display on this website as well as in my projects (and some of which I can't share... NDAs, sorry 😔).`,
+  `Growing up, I didn't have a computer at home. Perhaps unsurprisingly, I had never written any computer code until my time at Centre College, where I originally went as a Math major.`,
+  `After stumbling into a few encounters with code, I fell in love with development and graduated in 2012 with a degree in Computer Science.`,
+  `The first few years of my career were spent fumbling around but landing in places where I could learn and grow. I did enterprise desktop development with C++ and worked on an "ERP" system using... X++ (yeah, don't ask).`,
+  `After some random advice from a co-worker, I taught myself Android development and in 2015 landed a job doing Android. In addition to the new tech stack, I also adapted from working at product companies to consulting.`,
+  `I was also exposed to books like "Clean Code" and "Refactoring", which evolved my technical skills to "Senior Developer" status.`,
+  `A chance encounter led me to learning React in my free time starting in 2019, and I later made the switch to full-time web developer. `,
+  `As time has gone on, I've continued to inherit new skills and tools, some of which you can see on display on this website as well as in my projects (and some of which I can't share... NDAs, sorry 😔).`,
 ];
 ---
 
 <Layout>
   <main
     id="App"
-    class="bg-gradient-radial from-green-400 to-green-500 h-[100dvh] font-sans fixed inset-0 p-8 space-y-4 overflow-y-auto overflow-x-visible text-xl"
+    class="bg-gradient-radial from-green-400 to-green-500 h-[100dvh] font-sans fixed inset-0 p-8 space-y-48 overflow-y-auto overflow-x-visible text-xl"
   >
     <header class="rounded-2xl p-6 sm:p-8 bg-white/90 backdrop-blur">
       <h1 class="font-handwritten text-4xl">About Bryan</h1>
@@ -90,21 +93,24 @@ const evolutionSteps = [
           stacks
         </li>
         <li>
-          Highly-technical developer - also experienced consultant and
-          non-technical communicator
+          Highly-technical developer - also a product-focused consultant with
+          squishy people skills
         </li>
         <li>Problem-solver - also enjoys bringing creativy to projects</li>
       </ul>
     </div>
-    <section>
-      Am I forcing a metaphor because "platypus" is my favorite animal? Perhaps.
-      But, I genuinely think the platypus is a beautiful, intriguing, and
-      sometimes underappreciated creature because of the unique features it
-      developed over its evolution; I like to think that my own diverse
-      background and ability to adapt to a variety of environments makes me a
-      similarly interesting and well-rounded (if perhaps a little odd) <span
-        class="line-through">creature</span
-      > developer and consultant.
+    <section class="space-y-6">
+      <p>Am I forcing a metaphor because "platypus" is my favorite animal?</p>
+      <p>Perhaps.</p>
+      <p>
+        But, I genuinely think the platypus is a beautiful, intriguing, and
+        sometimes underappreciated creature because of the unique features it
+        developed over its evolution; I like to think that my own diverse
+        background and ability to adapt makes me a similarly interesting and
+        well-rounded (if perhaps a little odd) <span class="line-through"
+          >creature</span
+        > developer and consultant.
+      </p>
     </section>
     <p class="text-center">...</p>
     <section>
