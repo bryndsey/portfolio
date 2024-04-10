@@ -1,5 +1,29 @@
 ---
 import Layout from "./_layout.astro";
+
+const evolutionSteps = [
+  `Growing up, I didn't have a computer at home. Perhaps unsurprisingly,
+          I had never written any computer code until my time at Centre College.
+          I was originally a Math major there, but after accidentally stumbling
+          into a few encounters with coding, I fell in love with it and somehow
+          managed to graduate in 2012 with a degree in Computer Science.`,
+  ` The first few years of my career were also spent fumbling around and
+          landing in places where I could learn and grow. I did enterprise
+          desktop development with C++ and worked on an "ERP" system using...
+          X++ (yeah, don't ask).`,
+  ` My curiosity drove me to evolve though. After taking some random
+          advice from a co-worker, I taught myself Android development and in
+          2015 landed a job doing it professionally. In addition to working with
+          a new tech stack, I also adapted from working at a product company to
+          consulting. During that time, I was also exposed to books like "Clean
+          Code", evolving my technical skills to "Senior Developer" status.`,
+  ` Fast-forward to 2019, and a chance encounter with Reactled me to
+          learning it in my free time, and I later made the switch to full-time
+          web developer. As time has gone on, I've continued to inherit new
+          skills and tools, some of which you can see on display on this website
+          as well as in my projects (and some of which I can't share... NDAs,
+          sorry 😔).`,
+];
 ---
 
 <Layout>
@@ -48,38 +72,14 @@ import Layout from "./_layout.astro";
     <section class="w-full overflow-x-clip">
       <h3 class="text-center">My Evolution</h3>
       <div class="flex flex-row overflow-x-auto gap-16 py-4">
-        <p class="w-[40ch] max-w-[75%] flex-shrink-0">
-          Growing up, I didn't have a computer at home. Perhaps unsurprisingly,
-          I had never written any computer code until my time at <a
-            href="https://www.centre.edu/">Centre College</a
-          >. I was originally a Math major there, but after accidentally
-          stumbling into a few encounters with coding, I fell in love with it
-          and somehow managed to graduate in 2012 with a degree in Computer
-          Science.
-        </p>
-        <p class="w-[40ch] max-w-[75%] flex-shrink-0">
-          The first few years of my career were also spent fumbling around and
-          landing in places where I could learn and grow. I did enterprise
-          desktop development with C++ and worked on an "ERP" system using...
-          X++ (yeah, don't ask).
-        </p>
-        <p class="w-[40ch] max-w-[75%] flex-shrink-0">
-          My curiosity drove me to evolve though. After taking some random
-          advice from a co-worker, I taught myself Android development and in
-          2015 landed a job doing it professionally. In addition to working with
-          a new tech stack, I also adapted from working at a product company to
-          consulting. During that time, I was also exposed to books like "Clean
-          Code", evolving my technical skills to "Senior Developer" status.
-        </p>
-        <p class="w-[40ch] max-w-[75%] flex-shrink-0">
-          Fast-forward to 2019, and a chance encounter with Reactled me to
-          learning it in my free time, and I later made the switch to full-time
-          web developer. As time has gone on, I've continued to inherit new
-          skills and tools, some of which you can see on display on this website
-          as well as in my
-          <a href="#">projects</a> (and some of which I can't share... NDAs, sorry
-          😔).
-        </p>
+        {
+          evolutionSteps.map((step) => (
+            <div>
+              <div>Foo</div>
+              <p class="w-[40ch] max-w-[75%] flex-shrink-0">{step}</p>
+            </div>
+          ))
+        }
       </div>
     </section>
     <p class="text-center">...</p>
