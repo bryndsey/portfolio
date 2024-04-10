@@ -3,7 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
 // import { useControls } from "theatric";
 import { PerformanceControl } from "@scene/PerformanceControl";
-import { Scene } from "@scene/Scene";
+import { HomeScene, Scene } from "@scene/Scene";
 import { pages } from "@sections/Pages";
 import { ReactLenis } from "@studio-freight/react-lenis";
 import { isFirefox, isSafari } from "react-device-detect";
@@ -59,7 +59,7 @@ function AppContent() {
               <Perf position="bottom-left" />
             )}
 
-            <Scene />
+            <HomeScene />
           </Canvas>
         </MouseTracker>
       </div>

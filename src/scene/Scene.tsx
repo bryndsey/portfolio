@@ -8,7 +8,11 @@ import { LoadingIndicator } from "./LoadingIndicator";
 import { BackgroundBlobs } from "@/blobs/BackgroundBlobs";
 import { Postprocessing } from "./Postprocessing";
 
-export function Scene() {
+export interface SceneProps {
+  children?: React.ReactNode;
+}
+
+export function Scene({ children }: SceneProps) {
   const { loadingState } = useLoadingState();
 
   return (
@@ -19,20 +23,29 @@ export function Scene() {
         <Environment files={HDRI} />
         <Preload all />
 
-        <BackgroundBlobs />
         <ambientLight intensity={0.75} />
         <Postprocessing />
 
-        {pages.pagesWithStartIndex.map((page) => {
-          return (
-            <page.page.component
-              key={page.page.id}
-              startPageIndex={page.startIndex}
-              exitPageIndex={page.startIndex + page.page.contentLength}
-            />
-          );
-        })}
+        {children}
       </Suspense>
     </>
+  );
+}
+
+export function HomeScene() {
+  return (
+    <Scene>
+      <BackgroundBlobs />
+
+      {pages.pagesWithStartIndex.map((page) => {
+        return (
+          <page.page.component
+            key={page.page.id}
+            startPageIndex={page.startIndex}
+            exitPageIndex={page.startIndex + page.page.contentLength}
+          />
+        );
+      })}
+    </Scene>
   );
 }
