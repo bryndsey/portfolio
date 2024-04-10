@@ -3,7 +3,7 @@ import Layout from "./_layout.astro";
 
 const evolutionSteps = [
   `Growing up, I didn't have a computer at home. Perhaps unsurprisingly, I had never written any computer code until my time at Centre College. I was originally a Math major there, but after accidentally stumbling into a few encounters with coding, I fell in love with it and somehow managed to graduate in 2012 with a degree in Computer Science.`,
-  `The first few years of my career were also spent fumbling around and landing in places where I could learn and grow. I did enterprise desktop development with C++ and worked on an "ERP" system using... X++ (yeah, don't ask).`,
+  `The first few years of my career were also spent fumbling around but landing in places where I could learn and grow. I did enterprise desktop development with C++ and worked on an "ERP" system using... X++ (yeah, don't ask).`,
   `My curiosity drove me to evolve though. After taking some random advice from a co-worker, I taught myself Android development and in 2015 landed a job doing it professionally. In addition to working with a new tech stack, I also adapted from working at a product company to consulting. During that time, I was also exposed to books like "Clean Code", evolving my technical skills to "Senior Developer" status.`,
   `Fast-forward to 2019, and a chance encounter with React led me to learning it in my free time, and I later made the switch to full-time web developer. As time has gone on, I've continued to inherit new skills and tools, some of which you can see on display on this website as well as in my projects (and some of which I can't share... NDAs, sorry 😔).`,
 ];
@@ -12,7 +12,7 @@ const evolutionSteps = [
 <Layout>
   <main
     id="App"
-    class="bg-gradient-radial from-green-400 to-green-500 h-[100dvh] font-sans fixed inset-0 p-8 space-y-4 overflow-y-auto overflow-x-visible"
+    class="bg-gradient-radial from-green-400 to-green-500 h-[100dvh] font-sans fixed inset-0 p-8 space-y-4 overflow-y-auto overflow-x-visible text-xl"
   >
     <header class="rounded-2xl p-6 sm:p-8 bg-white/90 backdrop-blur">
       <h1 class="font-handwritten text-4xl">About Bryan</h1>
@@ -30,7 +30,7 @@ const evolutionSteps = [
           I'm a software engineer<span class="text-stone-500">*</span> focused on
           front-end web development. I've picked up a wide set of skills over my
           career, both technical and non-technical, and continue to adapt effectively
-          to new environments and technologies.
+          to new environments and technologies. My favorite animal is the platypus.
         </p>
         <span class="text-xs text-stone-500">
           *(Or developer. Or programmer. Whatever you want to call it)
@@ -42,9 +42,8 @@ const evolutionSteps = [
       <p class="min-w-80 max-w-[50%]">
         <span class="text-2xl">The platypus is a unique creature.</span> It's a mammal,
         but it lays eggs. It's got a bill and webbed feet like a duck, but it's got
-        fur like a mammal. It's got a tail like a beaver, but it's got a venomous
-        spur like a reptile. The playtpus took a unique evolutionary path to get
-        to where it is today.
+        fur instead of feathers. It's got a tail like a beaver. The playtpus took
+        a unique evolutionary path to get to where it is today.
       </p>
       <div class="bg-amber-800 min-h-16 flex-1 aspect-square">
         Platypus Placeholder
@@ -64,14 +63,14 @@ const evolutionSteps = [
     </section>
     <p class="text-center">...</p>
     <div class="grid grid-cols-1 sm:grid-cols-2 items-center gap-4">
-      <ul>
-        <h4>Platypus adaptability:</h4>
-        <li>A great swimmer... also walks on land</li>
+      <ul class="font-[BryanSans] list-inside list-decimal">
+        <h4 class="text-2xl">Platypus adaptability:</h4>
+        <li>A great swimmer - also walks on land</li>
         <li>
-          Can see, smell, hear, etc... also senses electric fields to find food
+          Can see, smell, hear, etc - also senses electric fields to find food
         </li>
         <li>
-          Freakin' adorable... could also straight up kill you with its
+          Freakin' adorable - could also straight up kill you with its
           murder-spur if it needed to.
         </li>
       </ul>
@@ -84,28 +83,28 @@ const evolutionSteps = [
       <p class="rounded-2xl p-6 sm:p-8 bg-white 90 backdrop-blur text-2xl">
         So too have my experiences helped me become adaptable.
       </p>
-      <ul>
-        <h4>Bryan adaptability:</h4>
+      <ul class="font-[BryanSans] list-inside list-decimal">
+        <h4 class="text-2xl">Bryan adaptability:</h4>
         <li>
-          Front-end web developer... also comfortable learning new tools and
-          tech stacks
+          Front-end web developer - also comfortable learning new tools and tech
+          stacks
         </li>
         <li>
-          Highly-technical developer... also experienced consultant and
+          Highly-technical developer - also experienced consultant and
           non-technical communicator
         </li>
-        <li>Problem-solver... also enjoys creativity</li>
+        <li>Problem-solver - also enjoys bringing creativy to projects</li>
       </ul>
     </div>
     <section>
-      Am I forcing a metaphor about the platypus into my journey as a developer
-      because it's my favorite animal? Perhaps. But, I genuinely think the
-      platypus is a beautiful, intriguing, and sometimes underappreciated
-      creature because of the unique features it developed over its evolution; I
-      like to think that my own diverse background and ability to adapt to a
-      variety of environments makes me a similarly interesting and well-rounded
-      (if perhaps a little odd) <span class="line-through">creature</span> developer
-      and consultant.
+      Am I forcing a metaphor because "platypus" is my favorite animal? Perhaps.
+      But, I genuinely think the platypus is a beautiful, intriguing, and
+      sometimes underappreciated creature because of the unique features it
+      developed over its evolution; I like to think that my own diverse
+      background and ability to adapt to a variety of environments makes me a
+      similarly interesting and well-rounded (if perhaps a little odd) <span
+        class="line-through">creature</span
+      > developer and consultant.
     </section>
     <p class="text-center">...</p>
     <section>
