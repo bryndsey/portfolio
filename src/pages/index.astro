@@ -1,8 +1,8 @@
 ---
-import App from "@/App";
 import Layout from "./_layout.astro";
+import { Home } from "./home/Home";
 ---
 
 <Layout>
-  <App client:only="react" />
+  <Home client:only="react" />
 </Layout>
