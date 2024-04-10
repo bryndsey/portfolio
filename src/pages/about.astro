@@ -2,34 +2,17 @@
 import Layout from "./_layout.astro";
 
 const evolutionSteps = [
-  `Growing up, I didn't have a computer at home. Perhaps unsurprisingly,
-          I had never written any computer code until my time at Centre College.
-          I was originally a Math major there, but after accidentally stumbling
-          into a few encounters with coding, I fell in love with it and somehow
-          managed to graduate in 2012 with a degree in Computer Science.`,
-  ` The first few years of my career were also spent fumbling around and
-          landing in places where I could learn and grow. I did enterprise
-          desktop development with C++ and worked on an "ERP" system using...
-          X++ (yeah, don't ask).`,
-  ` My curiosity drove me to evolve though. After taking some random
-          advice from a co-worker, I taught myself Android development and in
-          2015 landed a job doing it professionally. In addition to working with
-          a new tech stack, I also adapted from working at a product company to
-          consulting. During that time, I was also exposed to books like "Clean
-          Code", evolving my technical skills to "Senior Developer" status.`,
-  ` Fast-forward to 2019, and a chance encounter with Reactled me to
-          learning it in my free time, and I later made the switch to full-time
-          web developer. As time has gone on, I've continued to inherit new
-          skills and tools, some of which you can see on display on this website
-          as well as in my projects (and some of which I can't share... NDAs,
-          sorry 😔).`,
+  `Growing up, I didn't have a computer at home. Perhaps unsurprisingly, I had never written any computer code until my time at Centre College. I was originally a Math major there, but after accidentally stumbling into a few encounters with coding, I fell in love with it and somehow managed to graduate in 2012 with a degree in Computer Science.`,
+  `The first few years of my career were also spent fumbling around and landing in places where I could learn and grow. I did enterprise desktop development with C++ and worked on an "ERP" system using... X++ (yeah, don't ask).`,
+  `My curiosity drove me to evolve though. After taking some random advice from a co-worker, I taught myself Android development and in 2015 landed a job doing it professionally. In addition to working with a new tech stack, I also adapted from working at a product company to consulting. During that time, I was also exposed to books like "Clean Code", evolving my technical skills to "Senior Developer" status.`,
+  `Fast-forward to 2019, and a chance encounter with React led me to learning it in my free time, and I later made the switch to full-time web developer. As time has gone on, I've continued to inherit new skills and tools, some of which you can see on display on this website as well as in my projects (and some of which I can't share... NDAs, sorry 😔).`,
 ];
 ---
 
 <Layout>
   <main
     id="App"
-    class="bg-gradient-radial from-green-400 to-green-500 h-[100dvh] font-sans fixed inset-0 p-8 space-y-4 overflow-y-auto overflow-x-clip"
+    class="bg-gradient-radial from-green-400 to-green-500 h-[100dvh] font-sans fixed inset-0 p-8 space-y-4 overflow-y-auto overflow-x-visible"
   >
     <header class="rounded-2xl p-6 sm:p-8 bg-white/90 backdrop-blur">
       <h1 class="font-handwritten text-4xl">About Bryan</h1>
@@ -55,28 +38,25 @@ const evolutionSteps = [
       </div>
     </div>
     <h2 class="text-xl font-bold">The Longer Version...</h2>
-    <section>
-      <div class="flex flex-col sm:flex-row gap-4 items-center">
-        <p class="min-w-80 max-w-[50%]">
-          <span class="text-2xl">The platypus is a unique creature.</span> It's a
-          mammal, but it lays eggs. It's got a bill and webbed feet like a duck,
-          but it's got fur like a mammal. It's got a tail like a beaver, but it's
-          got a venomous spur like a reptile. The playtpus took a unique evolutionary
-          path to get to where it is today.
-        </p>
-        <div class="bg-amber-800 min-h-16 flex-1 aspect-square">
-          Platypus Placeholder
-        </div>
+    <div class="fw-full flex flex-col sm:flex-row gap-6">
+      <p class="min-w-80 max-w-[50%]">
+        <span class="text-2xl">The platypus is a unique creature.</span> It's a mammal,
+        but it lays eggs. It's got a bill and webbed feet like a duck, but it's got
+        fur like a mammal. It's got a tail like a beaver, but it's got a venomous
+        spur like a reptile. The playtpus took a unique evolutionary path to get
+        to where it is today.
+      </p>
+      <div class="bg-amber-800 min-h-16 flex-1 aspect-square">
+        Platypus Placeholder
       </div>
-    </section>
-    <section class="w-full overflow-x-clip">
+    </div>
+    <section class="w-full overflow-x-visible">
       <h3 class="text-center">My Evolution</h3>
       <div class="flex flex-row overflow-x-auto gap-16 py-4">
         {
           evolutionSteps.map((step) => (
-            <div>
-              <div>Foo</div>
-              <p class="w-[40ch] max-w-[75%] flex-shrink-0">{step}</p>
+            <div class="rounded-2xl p-6 sm:p-8 bg-white/90 backdrop-blur w-[40ch] max-w-[75%] flex-shrink-0">
+              {step}
             </div>
           ))
         }
