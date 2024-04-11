@@ -36,6 +36,8 @@ interface AppContentProps {
   canvasChildren?: React.ReactNode;
 }
 
+const squigglyScaledClassName = "squiggly scale-[1.005]";
+
 function AppContent({ htmlChildren, canvasChildren }: AppContentProps) {
   // const { showStats } = useControls({
   //   showStats: true,
@@ -50,12 +52,9 @@ function AppContent({ htmlChildren, canvasChildren }: AppContentProps) {
     gpuSettings.tier >= 2;
 
   return (
-    <>
-      {htmlChildren}
-      <div
-        id="App"
-        className="bg-gradient-radial from-green-400 to-green-500 h-[100dvh] font-sans fixed inset-0"
-      >
+    <div className="font-sans">
+      <div className="fixed inset-0 bg-gradient-radial from-green-400 to-green-500 -z-50" />
+      <div className="fixed inset-0">
         <MouseTracker>
           <Canvas
             gl={{
@@ -63,7 +62,7 @@ function AppContent({ htmlChildren, canvasChildren }: AppContentProps) {
               stencil: false,
             }}
             shadows={false}
-            className={shouldBeSquiggly ? "squiggly scale-[1.005]" : undefined}
+            className={shouldBeSquiggly ? squigglyScaledClassName : undefined}
           >
             <PerformanceControl />
             {/* {import.meta.env.DEV && showStats && <Stats />} */}
@@ -75,8 +74,11 @@ function AppContent({ htmlChildren, canvasChildren }: AppContentProps) {
           </Canvas>
         </MouseTracker>
       </div>
+      <div className={shouldBeSquiggly ? squigglyScaledClassName : undefined}>
+        {htmlChildren}
+      </div>
       <CustomCursor />
-    </>
+    </div>
   );
 }
 
