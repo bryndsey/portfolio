@@ -45,7 +45,12 @@ function ThreejsContent() {
       <Environment files={HDRI} />
       <Preload all />
       {/* <ambientLight intensity={1} /> */}
-      <CameraControls ref={cameraRef} distance={2.75} dollySpeed={0} />
+      <CameraControls
+        ref={cameraRef}
+        distance={2.75}
+        dollySpeed={0}
+        maxPolarAngle={1.75}
+      />
       <group scale={15}>
         <BryanHeadModel />
       </group>
