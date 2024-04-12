@@ -22,23 +22,22 @@ function App({ htmlChildren, canvasChildren }: AppProps) {
         root
         options={{ syncTouch: true, touchInertiaMultiplier: 10 }}
       >
-        <AppContent
-          htmlChildren={htmlChildren}
-          canvasChildren={canvasChildren}
-        />
+        <div className="fixed inset-0 bg-gradient-radial from-green-400 to-green-500 -z-50" />
+        <AppContent canvasChildren={canvasChildren} />
+        {htmlChildren}
+        <CustomCursor />
       </ReactLenis>
     </GpuProvider>
   );
 }
 
 interface AppContentProps {
-  htmlChildren?: React.ReactNode;
   canvasChildren?: React.ReactNode;
 }
 
 const squigglyScaledClassName = "squiggly scale-[1.005]";
 
-function AppContent({ htmlChildren, canvasChildren }: AppContentProps) {
+function AppContent({ canvasChildren }: AppContentProps) {
   // const { showStats } = useControls({
   //   showStats: true,
   // });
@@ -52,32 +51,25 @@ function AppContent({ htmlChildren, canvasChildren }: AppContentProps) {
     gpuSettings.tier >= 2;
 
   return (
-    <div className="font-sans">
-      <div className="fixed inset-0 bg-gradient-radial from-green-400 to-green-500 -z-50" />
-      <div className="fixed inset-0">
-        <MouseTracker>
-          <Canvas
-            gl={{
-              powerPreference: "high-performance",
-              stencil: false,
-            }}
-            shadows={false}
-            className={shouldBeSquiggly ? squigglyScaledClassName : undefined}
-          >
-            <PerformanceControl />
-            {/* {import.meta.env.DEV && showStats && <Stats />} */}
-            {import.meta.env.DEV && showStats && (
-              <Perf position="bottom-left" />
-            )}
+    <div className="fixed inset-0">
+      <MouseTracker>
+        <Canvas
+          gl={{
+            powerPreference: "high-performance",
+            // stencil: false,
+          }}
+          shadows={false}
+          className={`${
+            shouldBeSquiggly ? squigglyScaledClassName : undefined
+          }`}
+        >
+          <PerformanceControl />
+          {/* {import.meta.env.DEV && showStats && <Stats />} */}
+          {import.meta.env.DEV && showStats && <Perf position="bottom-left" />}
 
-            <Scene>{canvasChildren}</Scene>
-          </Canvas>
-        </MouseTracker>
-      </div>
-      <div className={shouldBeSquiggly ? squigglyScaledClassName : undefined}>
-        {htmlChildren}
-      </div>
-      <CustomCursor />
+          <Scene>{canvasChildren}</Scene>
+        </Canvas>
+      </MouseTracker>
     </div>
   );
 }
