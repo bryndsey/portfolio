@@ -10,6 +10,7 @@ import { isFirefox, isSafari } from "react-device-detect";
 import { CustomCursor } from "./CustomCursor";
 import { GpuProvider, useGpuSettings } from "./gpuDetection";
 import { MouseTracker } from "./mousePosition";
+import { View } from "@react-three/drei";
 
 interface AppProps {
   htmlChildren?: React.ReactNode;
@@ -89,7 +90,10 @@ function AppContent({ canvasChildren, htmlChildren }: AppContentProps) {
               <Perf position="bottom-left" />
             )}
 
-            <Scene>{canvasChildren}</Scene>
+            <Scene>
+              {canvasChildren}
+              <View.Port />
+            </Scene>
           </Canvas>
           <div
             id="htmlPortal"

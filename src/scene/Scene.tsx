@@ -18,7 +18,7 @@ export function Scene({ children }: SceneProps) {
   return (
     <>
       {loadingState !== "loaded" && <LoadingIndicator />}
-      <CameraRig />
+      {/* <CameraRig /> */}
       <Suspense fallback={null}>
         <Environment files={HDRI} />
         <Preload all />

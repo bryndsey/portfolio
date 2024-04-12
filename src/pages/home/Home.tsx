@@ -1,6 +1,7 @@
 import { BackgroundBlobs } from "@/blobs/BackgroundBlobs";
 import { pages } from "@/sections/Pages";
 import App from "@/App";
+import { CameraRig } from "@/scene/CameraRig";
 
 export function Home() {
   return (
@@ -14,6 +15,7 @@ export function Home() {
 function HomeContent() {
   return (
     <>
+      <CameraRig />
       <BackgroundBlobs />
       {pages.pagesWithStartIndex.map((page) => {
         return (

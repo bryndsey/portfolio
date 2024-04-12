@@ -1,6 +1,7 @@
 ---
 import Layout from "./_layout.astro";
 import App from "../App";
+import { BryanHead } from "./about/BryanHead";
 
 const evolutionSteps = [
   `Growing up, I didn't have a computer at home. Perhaps unsurprisingly, I had never written any computer code until my time at Centre College, where I originally went as a Math major.`,
@@ -24,9 +25,12 @@ const evolutionSteps = [
         <h1 class="font-handwritten text-4xl">About Bryan</h1>
         <p>(That's me!)</p>
       </header>
-      <div class="w-full flex flex-col sm:flex-row gap-6">
-        <div class="bg-stone-500 min-h-16 flex-1 aspect-square">
-          Spinning Head Placeholder
+      <div class="w-full flex flex-col sm:flex-row">
+        <div class="min-h-16 flex-1 aspect-square">
+          <BryanHead
+            className="w-full h-full scale-125 md:scale-150"
+            client:only="react"
+          />
         </div>
         <div
           class="rounded-2xl p-6 sm:p-8 bg-white/90 backdrop-blur flex-1 min-w-80 max-w-[50%] flex flex-col justify-center gap-4"
