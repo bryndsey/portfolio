@@ -10,16 +10,21 @@ export type NormalizedMousePosition = {
 // will get overwritten by other usages.
 export let normalizedMousePosition: NormalizedMousePosition | null = null;
 
-export function MouseTracker({ children }: PropsWithChildren) {
+export interface MouseTrackerProps {
+  children?: React.ReactNode;
+  className?: string;
+}
+
+export function MouseTracker({ children, className }: MouseTrackerProps) {
   return (
     <div
-      className="w-full h-full"
+      className={className}
       onPointerMove={(e) => {
         if (e.pointerType === "mouse") {
           const normalizedX = MathUtils.mapLinear(
             e.clientX,
             0,
-            e.currentTarget.clientWidth,
+            window.innerWidth,
             -1,
             1
           );
@@ -28,7 +33,7 @@ export function MouseTracker({ children }: PropsWithChildren) {
           const normalizedY = MathUtils.mapLinear(
             e.clientY,
             0,
-            e.currentTarget.clientHeight,
+            window.innerHeight,
             1,
             -1
           );
