@@ -29,7 +29,7 @@ interface AppContentProps {
   htmlChildren?: React.ReactNode;
 }
 
-const squigglyScaledClassName = "squiggly";
+const squigglyScaledClassName = "squiggly scale-[1.005]";
 
 function AppContent({ canvasChildren, htmlChildren }: AppContentProps) {
   // const { showStats } = useControls({
@@ -55,14 +55,15 @@ function AppContent({ canvasChildren, htmlChildren }: AppContentProps) {
       }}
     >
       <MouseTracker>
-        <div
-          ref={containerRef}
-          // className={`relative ${
-          //   shouldBeSquiggly ? squigglyScaledClassName : undefined
-          // }`}
-        >
+        <div ref={containerRef}>
           <div className="fixed inset-0 bg-gradient-radial from-green-400 to-green-500 -z-50" />
-          {htmlChildren}
+          <div
+            className={`${
+              shouldBeSquiggly ? squigglyScaledClassName : undefined
+            }`}
+          >
+            {htmlChildren}
+          </div>
 
           <Canvas
             gl={{
@@ -72,7 +73,9 @@ function AppContent({ canvasChildren, htmlChildren }: AppContentProps) {
             shadows={false}
             eventSource={containerRef}
             eventPrefix="client"
-            className="pointer-events-none"
+            className={`pointer-events-none ${
+              shouldBeSquiggly ? squigglyScaledClassName : undefined
+            }`}
             style={{
               position: "fixed",
               top: 0,
@@ -88,7 +91,12 @@ function AppContent({ canvasChildren, htmlChildren }: AppContentProps) {
 
             <Scene>{canvasChildren}</Scene>
           </Canvas>
-          <div id="htmlPortal" className="fixed top-0 left-0 w-0 h-0"></div>
+          <div
+            id="htmlPortal"
+            className={`${
+              shouldBeSquiggly ? squigglyScaledClassName : undefined
+            } fixed top-0 left-0 w-0 h-0`}
+          ></div>
           <CustomCursor />
         </div>
       </MouseTracker>
