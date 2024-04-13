@@ -1,15 +1,14 @@
-import { Suspense, useRef } from "react";
+import HDRI from "@assets/empty_warehouse_01_1k.hdr?url";
 import {
   CameraControls,
   Environment,
-  OrbitControls,
   Preload,
   View,
   useGLTF,
 } from "@react-three/drei";
-import Head from "./bryan-head.glb?url";
-import HDRI from "@assets/empty_warehouse_01_1k.hdr?url";
 import { useFrame } from "@react-three/fiber";
+import { Suspense, useRef } from "react";
+import Head from "./bryan-head.glb?url";
 
 function BryanHeadModel() {
   const gltf = useGLTF(Head);

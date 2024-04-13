@@ -1,11 +1,10 @@
+import { BackgroundBlobs } from "@/blobs/BackgroundBlobs";
+import { pages } from "@/sections/Pages";
+import HDRI from "@assets/empty_warehouse_01_1k.hdr?url";
+import { useLoadingState } from "@hooks/useLoadingState";
 import { Environment, Preload } from "@react-three/drei";
 import { Suspense } from "react";
-import HDRI from "@assets/empty_warehouse_01_1k.hdr?url";
-import { pages } from "@/sections/Pages";
-import { useLoadingState } from "@hooks/useLoadingState";
-import { CameraRig } from "./CameraRig";
 import { LoadingIndicator } from "./LoadingIndicator";
-import { BackgroundBlobs } from "@/blobs/BackgroundBlobs";
 import { Postprocessing } from "./Postprocessing";
 
 export interface SceneProps {
@@ -18,7 +17,6 @@ export function Scene({ children }: SceneProps) {
   return (
     <>
       {loadingState !== "loaded" && <LoadingIndicator />}
-      {/* <CameraRig /> */}
       <Suspense fallback={null}>
         <Environment files={HDRI} />
         <Preload all />
