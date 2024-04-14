@@ -82,7 +82,7 @@ function AppContent({ canvasChildren, htmlChildren }: AppContentProps) {
               top: 0,
               left: 0,
               right: 0,
-              height: "100vh",
+              height: "100dvh",
             }}
           >
             <PerformanceControl />

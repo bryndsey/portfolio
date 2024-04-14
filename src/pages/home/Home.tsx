@@ -6,7 +6,7 @@ import { CameraRig } from "@/scene/CameraRig";
 export function Home() {
   return (
     <App
-      htmlChildren={<div style={{ height: `${pages.totalPages * 100}vh` }} />}
+      htmlChildren={<div style={{ height: `${pages.totalPages * 100}dvh` }} />}
       canvasChildren={<HomeContent />}
     />
   );
