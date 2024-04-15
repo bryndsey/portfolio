@@ -36,7 +36,7 @@ export function BryanHead({ className }: BryanHeadProps) {
 function ThreejsContent() {
   const cameraRef = useRef<CameraControls>(null);
   useFrame((_, delta) => {
-    cameraRef.current?.rotate(delta / 2, 0);
+    cameraRef.current?.rotate(delta / 4, 0);
   });
 
   return (
