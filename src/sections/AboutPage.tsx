@@ -1,5 +1,5 @@
 import { useHtmlPortal } from "@hooks/useHtmlPortal";
-import { Html } from "@react-three/drei";
+import { Html, ScreenSpace } from "@react-three/drei";
 import { Suspense, useEffect, useRef } from "react";
 import { Group } from "three";
 import { PageComponentProps } from "./Pages";
@@ -30,7 +30,9 @@ export const AboutPage = (props: PageComponentProps) => {
     props.exitPageIndex,
     ({ enterAmount, exitAmount, isPageVisible, state }) => {
       if (contentRef.current !== null) {
-        contentRef.current.hidden = !isPageVisible;
+        contentRef.current.style.visibility = isPageVisible
+          ? "visible"
+          : "hidden";
       }
 
       if (groupRef.current === null) return;
@@ -47,15 +49,17 @@ export const AboutPage = (props: PageComponentProps) => {
   return (
     <Suspense fallback={null}>
       <group ref={groupRef}>
-        <Html
-          ref={contentRef}
-          fullscreen
-          portal={{ current: htmlPortal }}
-          zIndexRange={[0, 0]}
-          className="p-4 sm:p-8 overflow-clip grid items-center"
-        >
-          <AboutMe />
-        </Html>
+        <ScreenSpace depth={2}>
+          <Html
+            ref={contentRef}
+            fullscreen
+            portal={{ current: htmlPortal }}
+            zIndexRange={[0, 0]}
+            className="grid items-center"
+          >
+            <AboutMe />
+          </Html>
+        </ScreenSpace>
       </group>
     </Suspense>
   );
@@ -71,11 +75,11 @@ const techStackTags: Tag[] = [
 
 function AboutMe() {
   return (
-    <section className="min-h-[66%] w-full text-[calc(1.5vw+1.5vh)] flex flex-col flex-wrap gap-[1.5em] p-[2.5em] bg-white rounded-3xl overflow-x-auto text-pretty">
+    <section className="h-[100dvh] w-full text-[calc(1.5vw+1.5vh)] flex flex-col justify-evenly gap-[1.5em] p-[2.5em] bg-white overflow-x-auto text-pretty">
       <h2 className="font-handwritten squiggly leading-none text-[calc(4vw+4vh)]">
         {"I like to make things"}
       </h2>
-      <div className="flex flex-col flex-grow landscape:flex-row justify-between gap-x-[5%] gap-y-8">
+      <div className="flex flex-col landscape:flex-row justify-between gap-x-[5%] gap-y-8">
         <div className="flex flex-col gap-[1.5em] max-w-[38ch]">
           <p>Web apps. 3D models. Games. Music. Bad jokes.</p>
           <div>
