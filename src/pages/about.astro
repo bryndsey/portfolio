@@ -34,7 +34,7 @@ const evolutionSteps = [
       </header>
       <main class="p-8 space-y-48 text-xl mt-4">
         <div
-          class="w-full flex flex-col sm:flex-row rounded-2xl bg-white/90 backdrop-blur overflow-clip"
+          class="w-full flex flex-col md:flex-row landscape:flex-row rounded-2xl bg-white/90 backdrop-blur overflow-clip"
         >
           <div class="min-h-16 flex-1 aspect-square bg-green-600">
             <BryanHead
@@ -43,22 +43,30 @@ const evolutionSteps = [
             />
           </div>
           <div
-            class="flex-1 min-w-80 sm:max-w-[50%] flex flex-col justify-center gap-4 p-6 sm:p-8"
+            class="text-[calc(1.5vh+1.5vw)] leading-tight flex-1 md:max-w-[50%] landscape:max-w-[50%] flex flex-col justify-center gap-4 p-6 sm:p-8"
           >
             <h2 class="text-4xl font-bold">TL;DR:</h2>
             <p>
               I'm a software engineer<span class="text-stone-500">*</span> focused
-              on front-end web development. I've picked up a wide set of skills over
-              my career, both technical and non-technical, as well as the ability
-              to adapt to new technologies and contexts. My favorite animal is the
-              platypus.
+              on front-end web development.
             </p>
-            <span class="text-xs text-stone-500">
+            <span class="text-[0.5em] text-stone-500">
               *(Or developer. Or programmer. Whatever you want to call it)
             </span>
+            <p>
+              I've picked up a <span class="line-through">particular</span> wide
+              set of skills, both technical and non-technical, and an ability to
+              adapt to different technologies and contexts over my 11+ year career.
+            </p>
+            <p class="text-[0.66em] text-stone-500">
+              Also, my favorite animal is the platypus.
+            </p>
           </div>
         </div>
-        <h2 class="text-xl font-bold">The Longer Version...</h2>
+
+        <h2 class="text-[calc(6vh+6vw)] leading-none font-bold">
+          The Long Version:
+        </h2>
         <div class="fw-full flex flex-col sm:flex-row gap-6">
           <p class="min-w-80 max-w-[50%]">
             <span class="text-2xl">The platypus is a unique creature.</span> It's
