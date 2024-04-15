@@ -29,23 +29,25 @@ const evolutionSteps = [
         <p>(That's me!)</p>
       </header>
       <main class="p-8 space-y-48 text-xl mt-32">
-        <div class="w-full flex flex-col sm:flex-row">
-          <div class="min-h-16 flex-1 aspect-square">
+        <div
+          class="w-full flex flex-col sm:flex-row rounded-2xl bg-white/90 backdrop-blur overflow-clip"
+        >
+          <div class="min-h-16 flex-1 aspect-square bg-green-600">
             <BryanHead
               className="w-full h-full scale-125 md:scale-150"
               client:only="react"
             />
           </div>
           <div
-            class="rounded-2xl p-6 sm:p-8 bg-white/90 backdrop-blur flex-1 min-w-80 sm:max-w-[50%] flex flex-col justify-center gap-4"
+            class="flex-1 min-w-80 sm:max-w-[50%] flex flex-col justify-center gap-4 p-6 sm:p-8"
           >
             <h2 class="text-xl font-bold">TL;DR:</h2>
             <p>
               I'm a software engineer<span class="text-stone-500">*</span> focused
               on front-end web development. I've picked up a wide set of skills over
-              my career, both technical and non-technical, and continue to adapt
-              effectively to new environments and technologies. My favorite animal
-              is the platypus.
+              my career, both technical and non-technical, as well as the ability
+              to adapt to new technologies and contexts. My favorite animal is the
+              platypus.
             </p>
             <span class="text-xs text-stone-500">
               *(Or developer. Or programmer. Whatever you want to call it)
