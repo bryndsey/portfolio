@@ -68,14 +68,24 @@ const evolutionSteps = [
         <h2 class="text-[calc(3vh+3vw)] leading-none font-bold">
           The Long Version:
         </h2>
-        <div class="fw-full flex flex-col sm:flex-row gap-6">
-          <p class="min-w-80 max-w-[50%]">
-            <span class="text-2xl">The platypus is a unique creature.</span> It's
-            a mammal, but it lays eggs. It's got a bill and webbed feet like a duck,
-            but it's got fur instead of feathers. It's got a tail like a beaver.
-            The playtpus took a unique evolutionary path to get to where it is today.
-          </p>
-          <div class="bg-amber-800 min-h-16 flex-1 aspect-square">
+        <div
+          class="fw-full flex flex-col sm:flex-row gap-6 rounded-2xl bg-white/90 backdrop-blur overflow-clip"
+        >
+          <div
+            class="md:max-w-[50%] landscape:max-w-[50%] p-6 sm:p-8 text-[calc(1.5vh+1.5vw)] leading-tight flex flex-col justify-center gap-4"
+          >
+            <p class="text-[1.5em]">The platypus is an evoutionary marvel.</p>
+            <p class="text-stone-500 text-[0.75em]">
+              It's a mammal, but it lays eggs. It's got a bill and webbed feet
+              like a duck, but with has fur instead of feathers. It's got a tail
+              like a beaver and venom like a reptile.
+            </p>
+            <p>
+              It is a unique creature that has adapted in a way that makes it
+              versatile and fascinating.
+            </p>
+          </div>
+          <div class="bg-green-600 min-h-16 flex-1 aspect-square">
             <Platypus
               className="w-full h-full scale-125 md:scale-150"
               client:only="react"
