@@ -2,6 +2,7 @@ import HDRI from "@assets/empty_warehouse_01_1k.hdr?url";
 import {
   CameraControls,
   Environment,
+  Float,
   PerspectiveCamera,
   Preload,
   View,
@@ -48,9 +49,9 @@ function ThreejsContent() {
         dollySpeed={0}
         maxPolarAngle={1.75}
       />
-      <group scale={4}>
+      <Float speed={2} floatIntensity={0.25} scale={4}>
         <PlatypusModel />
-      </group>
+      </Float>
     </Suspense>
   );
 }
