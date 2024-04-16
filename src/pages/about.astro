@@ -70,7 +70,7 @@ const evolutionSteps = [
           The Long Version:
         </h2>
         <div
-          class="fw-full flex flex-col sm:flex-row gap-6 rounded-2xl bg-white/90 backdrop-blur overflow-clip"
+          class="fw-full flex flex-col md:flex-row landscape:flex-row gap-6 rounded-2xl bg-white/90 backdrop-blur overflow-clip"
         >
           <div
             class="md:max-w-[50%] landscape:max-w-[50%] p-6 sm:p-8 text-[calc(1.5vh+1.5vw)] leading-tight flex flex-col justify-center gap-4"
@@ -86,9 +86,11 @@ const evolutionSteps = [
               versatile and fascinating.
             </p>
           </div>
-          <div class="bg-green-600 min-h-16 flex-1 aspect-square">
+          <div
+            class="bg-green-600 min-h-16 flex-1 aspect-square grid place-items-center"
+          >
             <Platypus
-              className="w-full h-full scale-125 md:scale-150"
+              className="w-full scale-125 md:scale-150 aspect-square"
               client:only="react"
             />
           </div>
