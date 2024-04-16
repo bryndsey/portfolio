@@ -10,7 +10,7 @@ const evolutionSteps = [
   `After stumbling into a few encounters with code, I fell in love with development and graduated in 2012 with a degree in Computer Science.`,
   `The first few years of my career were spent fumbling around but landing in places where I could learn and grow. I did enterprise desktop development with C++ and worked on an "ERP" system using... X++ (yeah, don't ask).`,
   `After some random advice from a co-worker, I taught myself Android development and in 2015 landed a job doing Android. In addition to the new tech stack, I also adapted from working at product companies to consulting.`,
-  `I was also exposed to books like "Clean Code" and "Refactoring", which evolved my technical skills to "Senior Developer" status.`,
+  `Exposure to books like "Clean Code" and "Refactoring" evolved my technical skills to "Senior Developer" status.`,
   `A chance encounter led me to learning React in my free time starting in 2019, and I later made the switch to full-time web developer. `,
   `I continue to inherit new skills and tools, some of which you can see on display on this website as well as in my projects (and some of which I can't share... NDAs, sorry 😔).`,
 ];
@@ -21,7 +21,7 @@ const evolutionSteps = [
     <div
       slot="htmlChildren"
       id="App"
-      class="font-sans overflow-y-auto overflow-x-clip"
+      class="font-sans overflow-y-auto overflow-x-clip text-[calc(1.5vh+1.5vw)] leading-tight"
     >
       <header class="flex flex-row items-center">
         <h1 class="font-bold text-[calc(1vh+7vw)] leading-none p-8">
@@ -33,7 +33,7 @@ const evolutionSteps = [
           <p class="text-[calc(0.75vh+0.75vw)] p-2">(Hey, that's me!)</p>
         </div>
       </header>
-      <main class="p-8 space-y-48 text-xl mt-4">
+      <main class="p-8 mt-4">
         <div
           class="w-full flex flex-col md:flex-row landscape:flex-row rounded-2xl bg-white/90 backdrop-blur overflow-clip"
         >
@@ -44,7 +44,7 @@ const evolutionSteps = [
             />
           </div>
           <div
-            class="text-[calc(1.5vh+1.5vw)] leading-tight flex-1 md:max-w-[50%] landscape:max-w-[50%] flex flex-col justify-center gap-4 p-6 sm:p-8"
+            class="flex-1 md:max-w-[50%] landscape:max-w-[50%] flex flex-col justify-center gap-4 p-6 sm:p-8"
           >
             <h2 class="text-4xl font-bold">TL;DR:</h2>
             <p>
@@ -66,14 +66,16 @@ const evolutionSteps = [
           </div>
         </div>
 
-        <h2 class="text-[calc(3vh+3vw)] leading-none font-bold">
+        <h2
+          class="text-[calc(3vh+3vw)] leading-none font-bold h-[100dvh] bg-white -mx-8 mt-48 px-8 py-[2em] flex items-end"
+        >
           The Long Version:
         </h2>
         <div
-          class="fw-full flex flex-col md:flex-row landscape:flex-row gap-6 rounded-2xl bg-white/90 backdrop-blur overflow-clip"
+          class="fw-full flex flex-col md:flex-row landscape:flex-row gap-6 rounded-2xl bg-white/90 backdrop-blur overflow-clip mt-48"
         >
           <div
-            class="md:max-w-[50%] landscape:max-w-[50%] p-6 sm:p-8 text-[calc(1.5vh+1.5vw)] leading-tight flex flex-col justify-center gap-4"
+            class="md:max-w-[50%] landscape:max-w-[50%] p-6 sm:p-8 flex flex-col justify-center gap-4"
           >
             <p class="text-[1.5em]">The platypus is an evoutionary marvel.</p>
             <p class="text-stone-500 text-[0.75em]">
@@ -82,7 +84,7 @@ const evolutionSteps = [
               like a beaver and venom like a reptile.
             </p>
             <p>
-              It is a unique creature that has adapted in a way that makes it
+              It's a unique creature that has adapted in a way that makes it
               versatile and fascinating.
             </p>
           </div>
@@ -95,7 +97,7 @@ const evolutionSteps = [
             />
           </div>
         </div>
-        <section class="w-full overflow-x-visible">
+        <section class="w-full overflow-x-visible mt-48">
           <h3 class="text-center">My Evolution</h3>
           <div class="flex flex-row overflow-x-auto gap-16 p-8 -mx-8">
             {
@@ -107,55 +109,63 @@ const evolutionSteps = [
             }
           </div>
         </section>
-        <p class="text-center">...</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 items-center gap-4">
-          <ul class="font-[BryanSans] list-inside list-decimal">
-            <h4 class="text-2xl">Platypus adaptability:</h4>
-            <li>A great swimmer - also walks on land</li>
-            <li>
-              Can see, smell, hear, etc - also senses electric fields to find
-              food
-            </li>
-            <li>
-              Freakin' adorable - could also straight up kill you with its
-              murder-spur if it needed to.
-            </li>
-          </ul>
-          <p class="rounded-2xl p-6 sm:p-8 bg-white 90 backdrop-blur text-2xl">
-            The platypus has many adaptations that give it a broad set of
-            capabilities.
-          </p>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 items-center gap-4">
-          <p class="rounded-2xl p-6 sm:p-8 bg-white 90 backdrop-blur text-2xl">
-            So too have my experiences helped me become adaptable.
-          </p>
-          <ul class="font-[BryanSans] list-inside list-decimal">
-            <h4 class="text-2xl">Bryan adaptability:</h4>
-            <li>
-              Front-end web developer - also comfortable learning new tools and
-              tech stacks
-            </li>
-            <li>
-              Highly-technical developer - also a product-focused consultant
-              with squishy people skills
-            </li>
-            <li>Problem-solver - also enjoys bringing creativy to projects</li>
-          </ul>
-        </div>
-        <section class="space-y-6">
+        <section class="mt-48">
+          <div class="grid grid-cols-1 sm:grid-cols-2 items-center gap-4">
+            <ul class="font-[BryanSans] list-inside list-decimal">
+              <h4 class="text-2xl">Platypus adaptability:</h4>
+              <li>A great swimmer - also walks on land</li>
+              <li>
+                Can see, smell, hear, etc - also senses electric fields to find
+                food
+              </li>
+              <li>
+                Freakin' adorable - could also straight up kill you with its
+                murder-spur if it needed to.
+              </li>
+            </ul>
+            <p
+              class="rounded-2xl p-6 sm:p-8 bg-white 90 backdrop-blur text-2xl"
+            >
+              The platypus has many adaptations that give it a broad set of
+              capabilities.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 items-center gap-4 mt-48">
+            <p
+              class="rounded-2xl p-6 sm:p-8 bg-white 90 backdrop-blur text-2xl"
+            >
+              So too have I adapted and broadened my own capabilities.
+            </p>
+            <ul class="font-[BryanSans] list-inside list-decimal">
+              <h4 class="text-2xl">Bryan adaptability:</h4>
+              <li>
+                Front-end web developer - also comfortable learning new tools
+                and tech stacks
+              </li>
+              <li>
+                Highly-technical developer - also a product-focused consultant
+                with squishy people skills
+              </li>
+              <li>
+                Problem-solver - also enjoys bringing creativy to projects
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section
+          class="gap-6 mt-24 min-h-[100dvh] flex flex-col justify-around leading-tight text-[calc(1.5vh+1.5vw)]"
+        >
           <p>
             Am I forcing a metaphor because "platypus" is my favorite animal?
           </p>
-          <p>Perhaps.</p>
+          <p class="font-bold">Perhaps.</p>
           <p>
-            But, I genuinely think the platypus is a beautiful, intriguing, and
-            sometimes underappreciated creature because of the unique features
-            it developed over its evolution; I like to think that my own diverse
-            background and ability to adapt makes me a similarly interesting and
-            well-rounded (if perhaps a little odd) <span class="line-through"
-              >creature</span
-            > developer and consultant.
+            But I genuinely find the platypus an intriguing and sometimes
+            underappreciated creature because of its unique evolutionary
+            features; I like to think that my own diverse background and
+            adaptability make me a similarly interesting and well-rounded (if
+            maybe a little unusual) <span class="line-through">creature</span>
+            developer and consultant.
           </p>
         </section>
       </main>
