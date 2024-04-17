@@ -48,7 +48,7 @@ function ThreejsContent() {
         dollySpeed={0}
         maxPolarAngle={1.75}
       />
-      <Float speed={2} floatIntensity={0.25} scale={4}>
+      <Float floatIntensity={0.25} scale={4}>
         <PlatypusModel />
       </Float>
     </Suspense>
