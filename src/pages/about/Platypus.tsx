@@ -8,7 +8,6 @@ import {
   View,
   useGLTF,
 } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import PlatypusGlb from "./platypus.glb?url";
 
