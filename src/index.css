@@ -70,3 +70,25 @@ html.lenis {
     filter: url("#squiggly-4");
   }
 }
+
+.elastic-in {
+  animation-name: elastic-in;
+  animation-duration: 0.7s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes elastic-in {
+  0% {
+    scale: 0%;
+  }
+  33.33% {
+    scale: 106.67%;
+  }
+  66.67% {
+    scale: 96.67%;
+  }
+  100.00% {
+    scale: 100%;
+  }
+}
