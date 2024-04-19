@@ -39,9 +39,9 @@ function AboutPageContent() {
         <h1 className="font-bold text-[calc(1vh+7vw)] leading-none p-8">
           About Bryan
         </h1>
-        <div className="ml-auto mr-[2vw] mt-[2vh] scale-150 text-center rounded-full bg-white backdrop-blur w-[calc(6vw+6vh)] aspect-square flex flex-col justify-center items-center">
+        {/* <div className="ml-auto mr-[2vw] mt-[2vh] scale-150 text-center rounded-full bg-white backdrop-blur w-[calc(6vw+6vh)] aspect-square flex flex-col justify-center items-center">
           <p className="text-[calc(0.75vh+0.75vw)] p-2">{`(Hey, that's me!)`}</p>
-        </div>
+        </div> */}
       </animated.header>
       <main className="p-8 mt-4">
         <animated.div
