@@ -120,7 +120,7 @@ function AboutPageContent() {
           </div>
         </animated.section>
         <animated.section style={{ scale: springValue }} className="mt-48">
-          <div className="grid grid-cols-1 sm:grid-cols-2 rounded-2xl bg-white overflow-clip">
+          <div className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] rounded-2xl bg-white overflow-clip">
             <ul className="list-inside list-decimal space-y-[0.75em] text-[0.75em] p-6 sm:p-8 bg-gradient-radial from-green-500 to-green-600">
               <h4 className="text-[1.5em]">Platypus:</h4>
               <li>A great swimmer; also walks on land</li>
@@ -138,21 +138,21 @@ function AboutPageContent() {
               capabilities.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 mt-16 rounded-2xl bg-white overflow-clip">
+          <div className="grid grid-cols-1 sm:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] mt-48 rounded-2xl bg-white overflow-clip">
             <p className="p-6 sm:p-8 text-[1.5em] font-bold self-center">
               So too have I adapted and broadened my own capabilities.
             </p>
             <ul className="list-inside list-decimal space-y-[0.75em] text-[0.75em] p-6 sm:p-8 bg-gradient-radial from-green-500 to-green-600">
               <h4 className="text-[1.5em]">Bryan:</h4>
               <li>
-                Front-end web developer; also comfortable learning new tools and
-                tech stacks
+                Front-end web developer; can also learn new tools and tech
+                stacks
               </li>
               <li>
                 {`Experienced in technical architecture; also a product-focused
-                  consultant with all those "squishy" people skills`}
+                  consultant with "squishy" people skills`}
               </li>
-              <li>Problem-solver; also enjoys bringing creativy to projects</li>
+              <li>Problem-solver; also enjoys creative projects</li>
             </ul>
           </div>
         </animated.section>
