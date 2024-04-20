@@ -78,7 +78,7 @@ function AboutPageContent() {
           style={{ scaleY: springValue }}
           className="text-[calc(3vh+3vw)] min-h-[75dvh] leading-none font-bold bg-yellow-300 -mx-8 mt-48 px-8 flex flex-col justify-evenly"
         >
-          <span className="text-[0.5em]">{`And now...`}</span>
+          <span className="text-[0.5em]">{`And now,`}</span>
           <span>{`The Long Version:`}</span>
         </animated.h2>
         <animated.div
@@ -158,7 +158,7 @@ function AboutPageContent() {
         </animated.section>
         <animated.section
           style={{ scale: springValue }}
-          className="gap-6 mt-48 min-h-[200dvh] flex flex-col justify-between leading-tight text-[calc(1.5vh+1.5vw)]"
+          className="gap-6 mt-[50dvh] min-h-[200dvh] flex flex-col justify-between leading-tight text-[calc(1.5vh+1.5vw)]"
         >
           <p>
             {`Am I forcing a metaphor because "platypus" is my favorite animal?`}
