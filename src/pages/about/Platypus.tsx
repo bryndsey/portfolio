@@ -8,6 +8,7 @@ import {
   View,
   useGLTF,
 } from "@react-three/drei";
+import CameraController from "camera-controls";
 import { Suspense, useRef } from "react";
 import PlatypusGlb from "./platypus.glb?url";
 
@@ -47,6 +48,11 @@ function ThreejsContent() {
         distance={2.5}
         dollySpeed={0}
         maxPolarAngle={1.75}
+        touches={{
+          one: CameraController.ACTION.NONE,
+          two: CameraController.ACTION.NONE,
+          three: CameraController.ACTION.NONE,
+        }}
       />
       <Float floatIntensity={0.25} scale={4}>
         <PlatypusModel />

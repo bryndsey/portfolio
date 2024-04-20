@@ -9,6 +9,7 @@ import {
 import { useFrame } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import Head from "./bryan-head.glb?url";
+import CameraController from 'camera-controls';
 
 function BryanHeadModel() {
   const gltf = useGLTF(Head);
@@ -49,6 +50,11 @@ function ThreejsContent() {
         distance={2.75}
         dollySpeed={0}
         maxPolarAngle={1.75}
+        touches={{
+          one: CameraController.ACTION.NONE,
+          two: CameraController.ACTION.NONE,
+          three: CameraController.ACTION.NONE,
+        }}
       />
       <group scale={15}>
         <BryanHeadModel />
