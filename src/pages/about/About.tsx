@@ -75,10 +75,11 @@ function AboutPageContent() {
         </animated.div>
 
         <animated.h2
-          style={{ scale: springValue }}
-          className="text-[calc(3vh+3vw)] leading-none font-bold h-[100dvh] bg-white -mx-8 mt-48 px-8 py-[2em] flex items-end"
+          style={{ scaleY: springValue }}
+          className="text-[calc(3vh+3vw)] min-h-[75dvh] leading-none font-bold bg-yellow-300 -mx-8 mt-48 px-8 flex flex-col justify-evenly"
         >
-          The Long Version:
+          <span className="text-[0.5em]">{`And now...`}</span>
+          <span>{`The Long Version:`}</span>
         </animated.h2>
         <animated.div
           style={{ scale: springValue }}
