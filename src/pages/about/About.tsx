@@ -172,8 +172,8 @@ function AboutPageContent() {
           <p className="text-[1.25em] max-w-[40ch]">
             I like to think my own diverse background and adaptability make me a
             similarly interesting and well-rounded (if maybe a little unusual){" "}
-            <span className="line-through">creature</span>
-            developer and consultant.
+            <span className="line-through">creature</span> developer and
+            consultant.
           </p>
         </animated.section>
       </main>
