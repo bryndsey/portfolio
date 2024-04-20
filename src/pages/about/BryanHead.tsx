@@ -49,6 +49,7 @@ function ThreejsContent() {
         ref={cameraRef}
         distance={2.75}
         dollySpeed={0}
+        truckSpeed={0}
         maxPolarAngle={1.75}
         touches={{
           one: CameraController.ACTION.NONE,
