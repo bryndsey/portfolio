@@ -28,7 +28,6 @@ function AboutPageContent() {
 
   return (
     <div
-      slot="htmlChildren"
       id="App"
       className="font-sans overflow-y-auto overflow-x-clip text-[calc(1.5vh+1.5vw)] leading-tight text-pretty"
     >
