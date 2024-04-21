@@ -73,13 +73,17 @@ function AboutPageContent() {
           </div>
         </animated.div>
 
-        <animated.h2
-          style={{ scaleY: springValue }}
-          className="text-[calc(3vh+3vw)] min-h-[75dvh] leading-none font-bold bg-yellow-300 -mx-8 mt-48 px-8 flex flex-col justify-evenly"
-        >
-          <span className="text-[0.5em]">{`And now,`}</span>
-          <span>{`The Long Version:`}</span>
-        </animated.h2>
+        <div className="relative h-[75dvh] mt-8">
+          <Parallax speed={2} className="absolute w-full z-50">
+            <animated.h2
+              style={{ scaleY: springValue }}
+              className="text-[calc(3vh+3vw)] min-h-[100dvh] leading-none font-bold bg-yellow-300 -mx-8 px-8 flex flex-col justify-evenly z-50"
+            >
+              <span className="text-[0.5em]">{`And now,`}</span>
+              <span>{`The Long Version:`}</span>
+            </animated.h2>
+          </Parallax>
+        </div>
         <animated.div
           style={{ scale: springValue }}
           className="fw-full flex flex-col md:flex-row landscape:flex-row gap-6 rounded-2xl bg-white/90 backdrop-blur overflow-clip mt-48"
