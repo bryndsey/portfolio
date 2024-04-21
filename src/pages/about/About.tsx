@@ -198,10 +198,13 @@ function Parallax({
     <animated.div
       ref={divRef}
       style={{
-        translateY: scrollY.to(
-          (y) =>
-            (speed * (divRef.current?.getBoundingClientRect()?.top - y)) / 10
-        ),
+        translateY: scrollY.to((y) => {
+          if (!divRef.current) return 0;
+          const rect = divRef.current.getBoundingClientRect();
+          const viewMidpoint = rect.top + rect.height / 2;
+          const viewportMidpoint = window.innerHeight / 2;
+          return (speed * (viewMidpoint - (y + viewportMidpoint))) / 10;
+        }),
       }}
       className={className}
     >
