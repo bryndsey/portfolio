@@ -4,8 +4,8 @@ import { BryanHead } from "./BryanHead";
 import { Platypus } from "./Platypus";
 import { useLoadingState } from "@/hooks/useLoadingState";
 import { useSpringScaleVisibility } from "@/hooks/useSpringScaleVisibility";
-import { useEffect } from "react";
-import { animated } from "@react-spring/web";
+import { useEffect, useRef } from "react";
+import { animated, useScroll } from "@react-spring/web";
 
 const evolutionSteps = [
   `I had never done any programming until college, where I originally went as a Math major. After stumbling into a few encounters with code though, I fell in love and graduated in 2012 with a degree in Computer Science, starting my first dev gig shortly after.`,
@@ -179,5 +179,33 @@ function AboutPageContent() {
 
       <CtaFooter />
     </div>
+  );
+}
+
+function Parallax({
+  children,
+  className,
+  speed = 1,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  speed?: number;
+}) {
+  const divRef = useRef<HTMLDivElement>(null!);
+  const { scrollY, scrollYProgress } = useScroll();
+
+  return (
+    <animated.div
+      ref={divRef}
+      style={{
+        translateY: scrollY.to(
+          (y) =>
+            (speed * (divRef.current?.getBoundingClientRect()?.top - y)) / 10
+        ),
+      }}
+      className={className}
+    >
+      {children}
+    </animated.div>
   );
 }
