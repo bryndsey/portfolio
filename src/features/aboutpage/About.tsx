@@ -158,8 +158,8 @@ function AboutPageContent() {
             </p>
           </Parallax>
           <Parallax
-            speed={1.5}
-            className="grid grid-cols-1 sm:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] mt-24 rounded-2xl bg-white overflow-clip"
+            speed={1.75}
+            className="grid grid-cols-1 sm:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] mt-[25dvh] rounded-2xl bg-white overflow-clip shadow-xl"
           >
             <p className="p-6 sm:p-8 text-[1.5em] font-bold self-center">
               Likewise, I have adapted and developed my own unique skills and
@@ -189,7 +189,7 @@ function AboutPageContent() {
           <p>
             {`Am I forcing a metaphor because the platypus is my favorite animal?`}
           </p>
-          <Parallax speed={2}>
+          <Parallax speed={1.8}>
             <p className="font-bold text-[1.25em]">Perhaps.</p>
           </Parallax>
           <Parallax speed={-1} className="text-end max-w-[40ch] self-end">
