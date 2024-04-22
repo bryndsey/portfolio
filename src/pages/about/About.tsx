@@ -82,8 +82,7 @@ function AboutPageContent() {
               style={{ scaleY: springValue }}
               className="text-[calc(3vh+3vw)] min-h-[100dvh] leading-none font-bold bg-yellow-300 -mx-8 px-8 flex flex-col justify-evenly z-50"
             >
-              <span className="text-[0.5em]">{`And now,`}</span>
-              <span>{`The Long Version:`}</span>
+              <Parallax speed={-4}>{`The Long Version:`}</Parallax>
             </animated.h2>
           </Parallax>
         </div>
@@ -115,7 +114,9 @@ function AboutPageContent() {
           style={{ scale: springValue }}
           className="w-full overflow-x-visible mt-48"
         >
-          <h3 className="text-end font-bold text-[1.5em]">My Evolution</h3>
+          <Parallax speed={0.5}>
+            <h3 className="text-end font-bold text-[1.5em]">My Evolution</h3>
+          </Parallax>
           <div className="flex flex-row overflow-x-auto gap-16 p-8 -mx-8">
             {evolutionSteps.map((step) => (
               <div
@@ -128,7 +129,10 @@ function AboutPageContent() {
           </div>
         </animated.section>
         <animated.section style={{ scale: springValue }} className="mt-48">
-          <div className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] rounded-2xl bg-white overflow-clip">
+          <Parallax
+            speed={-0.5}
+            className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] rounded-2xl bg-white overflow-clip"
+          >
             <ul className="list-inside list-decimal space-y-[0.75em] text-[0.75em] p-6 sm:p-8 bg-gradient-radial from-green-500 to-green-600">
               <h4 className="text-[1.5em]">Platypus:</h4>
               <li>A great swimmer; also walks on land</li>
@@ -145,8 +149,11 @@ function AboutPageContent() {
               The platypus has many adaptations that give it a broad set of
               capabilities.
             </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] mt-48 rounded-2xl bg-white overflow-clip">
+          </Parallax>
+          <Parallax
+            speed={1}
+            className="grid grid-cols-1 sm:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] mt-24 rounded-2xl bg-white overflow-clip"
+          >
             <p className="p-6 sm:p-8 text-[1.5em] font-bold self-center">
               So too have I adapted and broadened my own capabilities.
             </p>
@@ -162,11 +169,11 @@ function AboutPageContent() {
               </li>
               <li>Problem-solver; also enjoys creative projects</li>
             </ul>
-          </div>
+          </Parallax>
         </animated.section>
         <animated.section
           style={{ scale: springValue }}
-          className="gap-6 mt-[50dvh] min-h-[200dvh] flex flex-col justify-between leading-tight text-[calc(1.5vh+1.5vw)]"
+          className="gap-6 mt-[25dvh] min-h-[200dvh] flex flex-col justify-between leading-tight text-[calc(1.5vh+1.5vw)]"
         >
           <p>
             {`Am I forcing a metaphor because "platypus" is my favorite animal?`}
@@ -186,7 +193,9 @@ function AboutPageContent() {
         </animated.section>
       </main>
 
-      <CtaFooter />
+      <Parallax speed={3}>
+        <CtaFooter />
+      </Parallax>
     </div>
   );
 }
