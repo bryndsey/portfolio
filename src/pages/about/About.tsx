@@ -48,7 +48,9 @@ function AboutPageContent() {
           className="w-full flex flex-col md:flex-row landscape:flex-row rounded-2xl bg-white/90 backdrop-blur overflow-clip"
         >
           <div className="min-h-16 flex-1 aspect-square bg-green-600">
-            <BryanHead className="w-full h-full scale-125 md:scale-150" />
+            <Parallax speed={1} className="w-full h-full">
+              <BryanHead className="w-full h-full scale-125 md:scale-150" />
+            </Parallax>
           </div>
           <div className="flex-1 md:max-w-[50%] landscape:max-w-[50%] flex flex-col justify-center gap-4 p-6 sm:p-8">
             <h2 className="text-4xl font-bold">TL;DR:</h2>
@@ -103,7 +105,9 @@ function AboutPageContent() {
             </p>
           </div>
           <div className="bg-green-600 min-h-16 flex-1 aspect-square grid place-items-center">
-            <Platypus className="w-full scale-125 md:scale-150 aspect-square" />
+            <Parallax speed={1} className="w-full h-full">
+              <Platypus className="w-full scale-125 md:scale-150 aspect-square" />
+            </Parallax>
           </div>
         </animated.div>
         <animated.section
