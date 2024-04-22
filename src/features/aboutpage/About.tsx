@@ -117,11 +117,11 @@ function AboutPageContent() {
           <Parallax speed={0.5}>
             <h3 className="text-end font-bold text-[1.5em]">My Evolution</h3>
           </Parallax>
-          <div className="flex flex-row overflow-x-auto gap-16 p-8 -mx-8">
+          <div className="flex flex-row overflow-x-auto gap-[3em] p-8 -mx-8 bg-gradient-radial from-green-500 to-green-600 mt-2">
             {evolutionSteps.map((step) => (
               <div
                 key={step}
-                className="rounded-2xl p-6 sm:p-8 bg-white/90 backdrop-blur w-[40ch] max-w-[75%] flex-shrink-0"
+                className="rounded-2xl p-[1.5em] bg-white/90 backdrop-blur w-[40ch] max-w-[75%] flex-shrink-0"
               >
                 {step}
               </div>
