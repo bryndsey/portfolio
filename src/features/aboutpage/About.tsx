@@ -184,7 +184,7 @@ function AboutPageContent() {
         </animated.section>
         <animated.section
           style={{ scale: springValue }}
-          className="gap-6 mt-[25dvh] min-h-[150dvh] flex flex-col justify-between leading-tight text-[calc(1.5vh+1.5vw)]"
+          className="gap-6 mt-[25dvh] min-h-[175dvh] flex flex-col justify-between leading-tight text-[calc(1.5vh+1.5vw)]"
         >
           <p>
             {`Am I forcing a metaphor because the platypus is my favorite animal?`}
@@ -199,8 +199,8 @@ function AboutPageContent() {
               features;
             </p>
           </Parallax>
-          <Parallax speed={1}>
-            <p className="text-[1.33em] max-w-[40ch]">
+          <Parallax speed={0.75} className="bg-white -mx-8 px-8 py-[3em]">
+            <p className="text-[1.33em] max-w-[40ch] ">
               I like to think my own diverse background and adaptability make me
               a similarly interesting and well-rounded (if maybe a little
               unusual) <span className="line-through opacity-50">creature</span>{" "}
