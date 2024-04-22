@@ -99,10 +99,6 @@ function AboutPageContent() {
                 like a duck, but has fur. It's got a tail like a beaver and
                 venom like a reptile.`}
             </p>
-            <p>
-              {`It's a unique creature that has adapted in a way that makes it
-                versatile and fascinating.`}
-            </p>
           </div>
           <div className="bg-green-600 min-h-16 flex-1 aspect-square grid place-items-center">
             <Parallax speed={1} className="w-full h-full">
@@ -110,14 +106,24 @@ function AboutPageContent() {
             </Parallax>
           </div>
         </animated.div>
+        <Parallax speed={2}>
+          <animated.div
+            style={{ scale: springValue }}
+            className="p-[2.5em] text-center text-[1.5em]"
+          >
+            {`It's a unique creature that has adapted in a way that makes it
+                versatile and fascinating.`}
+          </animated.div>
+        </Parallax>
         <animated.section
           style={{ scale: springValue }}
           className="w-full overflow-x-visible mt-[25dvh]"
         >
-          <Parallax speed={0.5}>
+          <Parallax speed={2} className="">
             <h3 className="text-end font-bold text-[2em]">My Evolution</h3>
           </Parallax>
-          <div className="flex flex-row overflow-x-auto gap-[3em] p-8 -mx-8 bg-gradient-radial from-green-500 to-green-600 mt-2">
+          {/* <Parallax speed={0.1}> */}
+          <div className="flex flex-row overflow-x-auto gap-[3em] p-8 -mx-8 bg-gradient-radial from-green-500 to-green-600 -translate-y-6">
             {evolutionSteps.map((step) => (
               <div
                 key={step}
@@ -127,8 +133,9 @@ function AboutPageContent() {
               </div>
             ))}
           </div>
+          {/* </Parallax> */}
         </animated.section>
-        <animated.section style={{ scale: springValue }} className="mt-48">
+        <animated.section style={{ scale: springValue }} className="mt-[33dvh]">
           <Parallax
             speed={-0.75}
             className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] rounded-2xl bg-white overflow-clip mx-4 text-[0.9em]"
