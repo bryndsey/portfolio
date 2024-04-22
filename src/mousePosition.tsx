@@ -1,4 +1,3 @@
-import { PropsWithChildren } from "react";
 import { MathUtils } from "three";
 
 export type NormalizedMousePosition = {
