@@ -130,8 +130,8 @@ function AboutPageContent() {
         </animated.section>
         <animated.section style={{ scale: springValue }} className="mt-48">
           <Parallax
-            speed={-0.5}
-            className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] rounded-2xl bg-white overflow-clip"
+            speed={-0.75}
+            className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] rounded-2xl bg-white overflow-clip mx-4 text-[0.9em]"
           >
             <ul className="list-inside list-decimal space-y-[0.75em] text-[0.75em] p-6 sm:p-8 bg-gradient-radial from-green-500 to-green-600">
               <h4 className="text-[1.5em]">Platypus:</h4>
@@ -151,7 +151,7 @@ function AboutPageContent() {
             </p>
           </Parallax>
           <Parallax
-            speed={1}
+            speed={1.5}
             className="grid grid-cols-1 sm:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] mt-24 rounded-2xl bg-white overflow-clip"
           >
             <p className="p-6 sm:p-8 text-[1.5em] font-bold self-center">
