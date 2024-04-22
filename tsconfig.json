@@ -24,7 +24,7 @@
       "@hooks/*": ["src/hooks/*"],
       "@components/*": ["src/components/*"],
       "@sections/*": ["src/homepage/sections/*"],
-      "@scene/*": ["src/scene/*"],
+      "@scene/*": ["src/components/scene/*"],
       "@analytics/*": ["src/analytics/*"]
     }
   },

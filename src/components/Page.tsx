@@ -2,12 +2,12 @@
 import { Canvas } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
 // import { useControls } from "theatric";
-import { PerformanceControl } from "@scene/PerformanceControl";
-import { Scene } from "@scene/Scene";
+import { PerformanceControl } from "@/components/scene/PerformanceControl";
+import { Scene } from "@/components/scene/Scene";
 import { ReactLenis } from "@studio-freight/react-lenis";
 import { useRef } from "react";
 import { isFirefox, isSafari } from "react-device-detect";
-import { CustomCursor } from "../CustomCursor";
+import { CustomCursor } from "./CustomCursor";
 import { GpuProvider, useGpuSettings } from "../gpuDetection";
 import { MouseTracker } from "../mousePosition";
 import { View } from "@react-three/drei";

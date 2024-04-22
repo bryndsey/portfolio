@@ -1,4 +1,4 @@
-import { AO } from "@/ao";
+import { AO } from "@/components/scene/AO";
 import { useGpuSettings } from "@/gpuDetection";
 import { EffectComposer } from "@react-three/postprocessing";
 

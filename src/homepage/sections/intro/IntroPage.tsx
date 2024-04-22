@@ -3,7 +3,7 @@ import { Html } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import { Group, MathUtils } from "three";
-import { Blob } from "@/blobs/Blob";
+import { Blob } from "@/components/scene/blobs/Blob";
 import { useLoadingState } from "@hooks/useLoadingState";
 import { PageComponentProps } from "@/homepage/sections/Pages";
 import { useScrollPages } from "@/homepage/sections/useScrollPages";
