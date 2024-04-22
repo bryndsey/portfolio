@@ -100,14 +100,12 @@ function AboutMe() {
           </ul>
         </div>
       </div>
-      {import.meta.env.DEV && (
-        <a
-          href="/about"
-          className="w-fit text-green-600 hover:scale-110 duration-200"
-        >
-          {"Learn more →"}
-        </a>
-      )}
+      <a
+        href="/about"
+        className="w-fit text-green-600 hover:scale-110 duration-200"
+      >
+        {"Learn more →"}
+      </a>
     </section>
   );
 }

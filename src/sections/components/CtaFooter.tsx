@@ -105,7 +105,7 @@ function CallToActionContent() {
           "Interested in learning more about me or any of the things I've made? Let's chat!"
         }
       </p>
-      <div className="flex flex-row items-baseline gap-2 mt-4">
+      <div className="flex flex-row items-baseline gap-4 mt-4">
         <LinkButton text="Hit me up" linkUrl="mailto:me@bryanlindsey.dev" />
         <LinkButton
           text="Connect"
