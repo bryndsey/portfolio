@@ -1,11 +1,12 @@
+import { useLoadingState } from "@/hooks/useLoadingState";
+import { useSpringScaleVisibility } from "@/hooks/useSpringScaleVisibility";
 import { CtaFooter } from "@/sections/components/CtaFooter";
+import { useFrame } from "@darkroom.engineering/hamo";
+import { animated, useSpringValue } from "@react-spring/web";
+import { useEffect, useRef } from "react";
 import App from "../../App";
 import { BryanHead } from "./BryanHead";
 import { Platypus } from "./Platypus";
-import { useLoadingState } from "@/hooks/useLoadingState";
-import { useSpringScaleVisibility } from "@/hooks/useSpringScaleVisibility";
-import { useEffect, useRef } from "react";
-import { animated, useScroll } from "@react-spring/web";
 
 const evolutionSteps = [
   `I had never done any programming until college, where I originally went as a Math major. After stumbling into a few encounters with code though, I fell in love and graduated in 2012 with a degree in Computer Science, starting my first dev gig shortly after.`,
@@ -199,23 +200,20 @@ function Parallax({
   className?: string;
   speed?: number;
 }) {
-  const divRef = useRef<HTMLDivElement>(null!);
-  const { scrollY, scrollYProgress } = useScroll();
+  const divRef = useRef<HTMLDivElement>(null);
+
+  const translateY = useSpringValue(0, { config: { duration: 100 } });
+
+  useFrame(() => {
+    if (!divRef.current) return 0;
+    const rect = divRef.current.getBoundingClientRect();
+    const viewMidpoint = rect.top + rect.height / 2;
+    const viewportMidpoint = window.innerHeight / 2;
+    translateY.start((speed * (viewMidpoint - viewportMidpoint)) / 10);
+  });
 
   return (
-    <animated.div
-      ref={divRef}
-      style={{
-        translateY: scrollY.to((y) => {
-          if (!divRef.current) return 0;
-          const rect = divRef.current.getBoundingClientRect();
-          const viewMidpoint = rect.top + rect.height / 2;
-          const viewportMidpoint = window.innerHeight / 2;
-          return (speed * (viewMidpoint - (y + viewportMidpoint))) / 10;
-        }),
-      }}
-      className={className}
-    >
+    <animated.div ref={divRef} style={{ translateY }} className={className}>
       {children}
     </animated.div>
   );
