@@ -46,7 +46,7 @@ function AboutPageContent() {
       <main className="p-8 mt-4">
         <animated.div
           style={{ scale: springValue }}
-          className="w-full flex flex-col md:flex-row landscape:flex-row rounded-2xl bg-white/90 backdrop-blur overflow-clip"
+          className="w-full flex flex-col md:flex-row landscape:flex-row rounded-2xl bg-white overflow-clip"
         >
           <div className="min-h-16 flex-1 aspect-square bg-green-600">
             <Parallax speed={1} className="w-full h-full">
@@ -89,7 +89,7 @@ function AboutPageContent() {
         </div>
         <animated.div
           style={{ scale: springValue }}
-          className="fw-full flex flex-col md:flex-row landscape:flex-row gap-6 rounded-2xl bg-white/90 backdrop-blur overflow-clip mt-48"
+          className="fw-full flex flex-col md:flex-row landscape:flex-row gap-6 rounded-2xl bg-white overflow-clip"
         >
           <div className="md:max-w-[50%] landscape:max-w-[50%] p-6 sm:p-8 flex flex-col justify-center gap-4">
             <p className="text-[1.5em]">
