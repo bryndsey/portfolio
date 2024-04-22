@@ -19,10 +19,8 @@ Check `package.json` for a full list of dependencies
 
 ## To-dos
 
-- [ ] Expand "About" section
-- [ ] Improve "Links" section design
-- [ ] Expand section contents
-  - Perhaps utilizing routing
+- [ ] Add Work experience section
+- [ ] Add more detailed/in-depth tech stack section
 - [ ] Continue cleaning up code
   - [ ] Clean up section architecture
   - [ ] Remove old/unused code and comments
