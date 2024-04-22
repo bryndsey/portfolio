@@ -1,11 +1,12 @@
+import { useLoadingState } from "@/hooks/useLoadingState";
+import { useSpringScaleVisibility } from "@/hooks/useSpringScaleVisibility";
 import { CtaFooter } from "@/sections/components/CtaFooter";
+import { useFrame } from "@darkroom.engineering/hamo";
+import { animated, useSpringValue } from "@react-spring/web";
+import { useEffect, useRef } from "react";
 import App from "../../App";
 import { BryanHead } from "./BryanHead";
 import { Platypus } from "./Platypus";
-import { useLoadingState } from "@/hooks/useLoadingState";
-import { useSpringScaleVisibility } from "@/hooks/useSpringScaleVisibility";
-import { useEffect } from "react";
-import { animated } from "@react-spring/web";
 
 const evolutionSteps = [
   `I had never done any programming until college, where I originally went as a Math major. After stumbling into a few encounters with code though, I fell in love and graduated in 2012 with a degree in Computer Science, starting my first dev gig shortly after.`,
@@ -45,10 +46,12 @@ function AboutPageContent() {
       <main className="p-8 mt-4">
         <animated.div
           style={{ scale: springValue }}
-          className="w-full flex flex-col md:flex-row landscape:flex-row rounded-2xl bg-white/90 backdrop-blur overflow-clip"
+          className="w-full flex flex-col md:flex-row landscape:flex-row rounded-2xl bg-white overflow-clip"
         >
           <div className="min-h-16 flex-1 aspect-square bg-green-600">
-            <BryanHead className="w-full h-full scale-125 md:scale-150" />
+            <Parallax speed={1} className="w-full h-full">
+              <BryanHead className="w-full h-full scale-125 md:scale-150" />
+            </Parallax>
           </div>
           <div className="flex-1 md:max-w-[50%] landscape:max-w-[50%] flex flex-col justify-center gap-4 p-6 sm:p-8">
             <h2 className="text-4xl font-bold">TL;DR:</h2>
@@ -73,16 +76,19 @@ function AboutPageContent() {
           </div>
         </animated.div>
 
-        <animated.h2
-          style={{ scaleY: springValue }}
-          className="text-[calc(3vh+3vw)] min-h-[75dvh] leading-none font-bold bg-yellow-300 -mx-8 mt-48 px-8 flex flex-col justify-evenly"
-        >
-          <span className="text-[0.5em]">{`And now,`}</span>
-          <span>{`The Long Version:`}</span>
-        </animated.h2>
+        <div className="relative h-[80dvh]">
+          <Parallax speed={4} className="absolute w-full z-50">
+            <animated.h2
+              style={{ scaleY: springValue }}
+              className="text-[calc(3vh+3vw)] min-h-[100dvh] leading-none font-bold bg-yellow-300 -mx-8 px-8 flex flex-col justify-evenly z-50"
+            >
+              <Parallax speed={-4}>{`The Long Version:`}</Parallax>
+            </animated.h2>
+          </Parallax>
+        </div>
         <animated.div
           style={{ scale: springValue }}
-          className="fw-full flex flex-col md:flex-row landscape:flex-row gap-6 rounded-2xl bg-white/90 backdrop-blur overflow-clip mt-48"
+          className="fw-full flex flex-col md:flex-row landscape:flex-row gap-6 rounded-2xl bg-white overflow-clip"
         >
           <div className="md:max-w-[50%] landscape:max-w-[50%] p-6 sm:p-8 flex flex-col justify-center gap-4">
             <p className="text-[1.5em]">
@@ -99,14 +105,18 @@ function AboutPageContent() {
             </p>
           </div>
           <div className="bg-green-600 min-h-16 flex-1 aspect-square grid place-items-center">
-            <Platypus className="w-full scale-125 md:scale-150 aspect-square" />
+            <Parallax speed={1} className="w-full h-full">
+              <Platypus className="w-full scale-125 md:scale-150 aspect-square" />
+            </Parallax>
           </div>
         </animated.div>
         <animated.section
           style={{ scale: springValue }}
           className="w-full overflow-x-visible mt-48"
         >
-          <h3 className="text-end font-bold text-[1.5em]">My Evolution</h3>
+          <Parallax speed={0.5}>
+            <h3 className="text-end font-bold text-[1.5em]">My Evolution</h3>
+          </Parallax>
           <div className="flex flex-row overflow-x-auto gap-16 p-8 -mx-8">
             {evolutionSteps.map((step) => (
               <div
@@ -119,7 +129,10 @@ function AboutPageContent() {
           </div>
         </animated.section>
         <animated.section style={{ scale: springValue }} className="mt-48">
-          <div className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] rounded-2xl bg-white overflow-clip">
+          <Parallax
+            speed={-0.75}
+            className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] rounded-2xl bg-white overflow-clip mx-4 text-[0.9em]"
+          >
             <ul className="list-inside list-decimal space-y-[0.75em] text-[0.75em] p-6 sm:p-8 bg-gradient-radial from-green-500 to-green-600">
               <h4 className="text-[1.5em]">Platypus:</h4>
               <li>A great swimmer; also walks on land</li>
@@ -136,8 +149,11 @@ function AboutPageContent() {
               The platypus has many adaptations that give it a broad set of
               capabilities.
             </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] mt-48 rounded-2xl bg-white overflow-clip">
+          </Parallax>
+          <Parallax
+            speed={1.5}
+            className="grid grid-cols-1 sm:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] mt-24 rounded-2xl bg-white overflow-clip"
+          >
             <p className="p-6 sm:p-8 text-[1.5em] font-bold self-center">
               So too have I adapted and broadened my own capabilities.
             </p>
@@ -153,31 +169,67 @@ function AboutPageContent() {
               </li>
               <li>Problem-solver; also enjoys creative projects</li>
             </ul>
-          </div>
+          </Parallax>
         </animated.section>
         <animated.section
           style={{ scale: springValue }}
-          className="gap-6 mt-[50dvh] min-h-[200dvh] flex flex-col justify-between leading-tight text-[calc(1.5vh+1.5vw)]"
+          className="gap-6 mt-[25dvh] min-h-[150dvh] flex flex-col justify-between leading-tight text-[calc(1.5vh+1.5vw)]"
         >
           <p>
-            {`Am I forcing a metaphor because "platypus" is my favorite animal?`}
+            {`Am I forcing a metaphor because the platypus is my favorite animal?`}
           </p>
-          <p className="font-bold">Perhaps.</p>
-          <p className="text-end max-w-[40ch] self-end">
-            But I genuinely find the platypus an intriguing and often
-            underappreciated creature because of its unique evolutionary
-            features;
-          </p>
-          <p className="text-[1.25em] max-w-[40ch]">
-            I like to think my own diverse background and adaptability make me a
-            similarly interesting and well-rounded (if maybe a little unusual){" "}
-            <span className="line-through">creature</span> developer and
-            consultant.
-          </p>
+          <Parallax speed={2}>
+            <p className="font-bold text-[1.25em]">Perhaps.</p>
+          </Parallax>
+          <Parallax speed={-1} className="text-end max-w-[40ch] self-end">
+            <p>
+              But I genuinely find the platypus an intriguing and often
+              underappreciated creature because of its unique evolutionary
+              features;
+            </p>
+          </Parallax>
+          <Parallax speed={1}>
+            <p className="text-[1.33em] max-w-[40ch]">
+              I like to think my own diverse background and adaptability make me
+              a similarly interesting and well-rounded (if maybe a little
+              unusual) <span className="line-through opacity-50">creature</span>{" "}
+              developer and consultant.
+            </p>
+          </Parallax>
         </animated.section>
       </main>
 
-      <CtaFooter />
+      <Parallax speed={3}>
+        <CtaFooter />
+      </Parallax>
     </div>
+  );
+}
+
+function Parallax({
+  children,
+  className,
+  speed = 1,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  speed?: number;
+}) {
+  const divRef = useRef<HTMLDivElement>(null);
+
+  const translateY = useSpringValue(0, { config: { duration: 100 } });
+
+  useFrame(() => {
+    if (!divRef.current) return 0;
+    const rect = divRef.current.getBoundingClientRect();
+    const viewMidpoint = rect.top + rect.height / 2;
+    const viewportMidpoint = window.innerHeight / 2;
+    translateY.start((speed * (viewMidpoint - viewportMidpoint)) / 10);
+  });
+
+  return (
+    <animated.div ref={divRef} style={{ translateY }} className={className}>
+      {children}
+    </animated.div>
   );
 }
