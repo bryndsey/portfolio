@@ -4,7 +4,7 @@ import { Suspense, useRef } from "react";
 import { Group, Vector3 } from "three";
 import { GLTF } from "three-stdlib";
 import * as THREE from "three";
-import { normalizedMousePosition } from "@/mousePosition";
+import { normalizedMousePosition } from "@/components/MousePosition";
 import Avatar from "./avatar.glb?url";
 
 type GLTFResult = GLTF & {

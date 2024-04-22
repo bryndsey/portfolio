@@ -1,7 +1,7 @@
 import { useThree } from "@react-three/fiber";
 import { N8AOPostPass } from "n8ao";
 import { forwardRef, useMemo } from "react";
-import { useGpuSettings } from "../../gpuDetection";
+import { useGpuSettings } from "../GpuDetection";
 
 export const AO = forwardRef((_, ref) => {
   const gpuSettings = useGpuSettings();

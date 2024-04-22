@@ -5,7 +5,7 @@ import { useHtmlPortal } from "@hooks/useHtmlPortal";
 import { useScreenState } from "@hooks/useScreenState";
 import { PageComponentProps } from "@/features/homepage/sections/Pages";
 import { useScrollPages } from "@/features/homepage/sections/useScrollPages";
-import { useCameraFrustumWidthAtDepth } from "@/utils";
+import { useCameraFrustumWidthAtDepth } from "@/components/scene/utils";
 import { Device } from "./Device";
 
 const deviceRotation = new Euler();

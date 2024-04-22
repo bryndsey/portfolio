@@ -6,7 +6,7 @@ import {
   PerspectiveCamera as ThreePerspectiveCamera,
   Vector3,
 } from "three";
-import { normalizedMousePosition } from "@/mousePosition";
+import { normalizedMousePosition } from "@/components/MousePosition";
 
 const cameraPosition = { x: 0, y: 0, z: 3 };
 

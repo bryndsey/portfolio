@@ -1,5 +1,5 @@
 import { AO } from "@/components/scene/AO";
-import { useGpuSettings } from "@/gpuDetection";
+import { useGpuSettings } from "@/components/GpuDetection";
 import { EffectComposer } from "@react-three/postprocessing";
 
 export function Postprocessing() {
