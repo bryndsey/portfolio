@@ -1,5 +1,3 @@
-import { BackgroundBlobs } from "@/blobs/BackgroundBlobs";
-import { pages } from "@/sections/Pages";
 import HDRI from "@assets/empty_warehouse_01_1k.hdr?url";
 import { useLoadingState } from "@hooks/useLoadingState";
 import { Environment, Preload } from "@react-three/drei";
@@ -27,23 +25,5 @@ export function Scene({ children }: SceneProps) {
         {children}
       </Suspense>
     </>
-  );
-}
-
-export function HomeScene() {
-  return (
-    <Scene>
-      <BackgroundBlobs />
-
-      {pages.pagesWithStartIndex.map((page) => {
-        return (
-          <page.page.component
-            key={page.page.id}
-            startPageIndex={page.startIndex}
-            exitPageIndex={page.startIndex + page.page.contentLength}
-          />
-        );
-      })}
-    </Scene>
   );
 }
