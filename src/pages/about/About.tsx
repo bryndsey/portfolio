@@ -173,23 +173,29 @@ function AboutPageContent() {
         </animated.section>
         <animated.section
           style={{ scale: springValue }}
-          className="gap-6 mt-[25dvh] min-h-[200dvh] flex flex-col justify-between leading-tight text-[calc(1.5vh+1.5vw)]"
+          className="gap-6 mt-[25dvh] min-h-[150dvh] flex flex-col justify-between leading-tight text-[calc(1.5vh+1.5vw)]"
         >
           <p>
-            {`Am I forcing a metaphor because "platypus" is my favorite animal?`}
+            {`Am I forcing a metaphor because the platypus is my favorite animal?`}
           </p>
-          <p className="font-bold">Perhaps.</p>
-          <p className="text-end max-w-[40ch] self-end">
-            But I genuinely find the platypus an intriguing and often
-            underappreciated creature because of its unique evolutionary
-            features;
-          </p>
-          <p className="text-[1.25em] max-w-[40ch]">
-            I like to think my own diverse background and adaptability make me a
-            similarly interesting and well-rounded (if maybe a little unusual){" "}
-            <span className="line-through">creature</span> developer and
-            consultant.
-          </p>
+          <Parallax speed={2}>
+            <p className="font-bold text-[1.25em]">Perhaps.</p>
+          </Parallax>
+          <Parallax speed={-1} className="text-end max-w-[40ch] self-end">
+            <p>
+              But I genuinely find the platypus an intriguing and often
+              underappreciated creature because of its unique evolutionary
+              features;
+            </p>
+          </Parallax>
+          <Parallax speed={1}>
+            <p className="text-[1.33em] max-w-[40ch]">
+              I like to think my own diverse background and adaptability make me
+              a similarly interesting and well-rounded (if maybe a little
+              unusual) <span className="line-through opacity-50">creature</span>{" "}
+              developer and consultant.
+            </p>
+          </Parallax>
         </animated.section>
       </main>
 
