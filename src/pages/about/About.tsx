@@ -76,8 +76,8 @@ function AboutPageContent() {
           </div>
         </animated.div>
 
-        <div className="relative h-[75dvh] mt-8">
-          <Parallax speed={2} className="absolute w-full z-50">
+        <div className="relative h-[80dvh]">
+          <Parallax speed={4} className="absolute w-full z-50">
             <animated.h2
               style={{ scaleY: springValue }}
               className="text-[calc(3vh+3vw)] min-h-[100dvh] leading-none font-bold bg-yellow-300 -mx-8 px-8 flex flex-col justify-evenly z-50"
