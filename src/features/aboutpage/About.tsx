@@ -109,9 +109,9 @@ function AboutPageContent() {
         <Parallax speed={2}>
           <animated.div
             style={{ scale: springValue }}
-            className="p-[2.5em] text-center text-[1.5em]"
+            className="py-[2.5em] m-auto max-w-[32ch] text-center text-[1.5em]"
           >
-            {`It's a unique creature that has adapted in a way that makes it
+            {`It's a unique creature that has evolved and adapted in ways that makes it
                 versatile and fascinating.`}
           </animated.div>
         </Parallax>
@@ -135,7 +135,7 @@ function AboutPageContent() {
           </div>
           {/* </Parallax> */}
         </animated.section>
-        <animated.section style={{ scale: springValue }} className="mt-[33dvh]">
+        <animated.section style={{ scale: springValue }} className="mt-[40dvh]">
           <Parallax
             speed={-0.75}
             className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] rounded-2xl bg-white overflow-clip mx-4 text-[0.9em]"
@@ -162,19 +162,23 @@ function AboutPageContent() {
             className="grid grid-cols-1 sm:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] mt-24 rounded-2xl bg-white overflow-clip"
           >
             <p className="p-6 sm:p-8 text-[1.5em] font-bold self-center">
-              So too have I adapted and broadened my own capabilities.
+              Likewise, I have adapted and developed my own unique skills and
+              features.
             </p>
             <ul className="list-inside list-decimal space-y-[0.75em] text-[0.75em] p-6 sm:p-8 bg-gradient-radial from-green-500 to-green-600">
               <h4 className="text-[1.5em]">Bryan:</h4>
               <li>
-                Front-end web developer; can also learn new tools and tech
-                stacks
+                Front-end web developer; also continuously learns new tools and
+                technologies
               </li>
               <li>
-                {`Experienced in technical architecture; also a product-focused
-                  consultant with "squishy" people skills`}
+                {`Experienced technical architect; also a product-focused
+                  consultant with plenty of "squishy" people skills`}
               </li>
-              <li>Problem-solver; also enjoys creative projects</li>
+              <li>
+                Problem-solver and analytical thinker; also enjoys creative
+                projects
+              </li>
             </ul>
           </Parallax>
         </animated.section>
