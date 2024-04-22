@@ -112,10 +112,10 @@ function AboutPageContent() {
         </animated.div>
         <animated.section
           style={{ scale: springValue }}
-          className="w-full overflow-x-visible mt-48"
+          className="w-full overflow-x-visible mt-[25dvh]"
         >
           <Parallax speed={0.5}>
-            <h3 className="text-end font-bold text-[1.5em]">My Evolution</h3>
+            <h3 className="text-end font-bold text-[2em]">My Evolution</h3>
           </Parallax>
           <div className="flex flex-row overflow-x-auto gap-[3em] p-8 -mx-8 bg-gradient-radial from-green-500 to-green-600 mt-2">
             {evolutionSteps.map((step) => (
