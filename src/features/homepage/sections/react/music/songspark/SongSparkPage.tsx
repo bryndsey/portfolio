@@ -4,7 +4,7 @@ import { Group, MathUtils, Vector3 } from "three";
 import { useHtmlPortal } from "@hooks/useHtmlPortal";
 import { useScreenState } from "@hooks/useScreenState";
 import { useSpringScaleVisibility } from "@hooks/useSpringScaleVisibility";
-import { PageComponentProps } from "@/homepage/sections/Pages";
+import { PageComponentProps } from "@/features/homepage/sections/Pages";
 import {
   ProjectDescription,
   ReactTag,
@@ -12,7 +12,7 @@ import {
   TypescriptTag,
   WebAudioTag,
 } from "@/components/ProjectDescription";
-import { useScrollPages } from "@/homepage/sections/useScrollPages";
+import { useScrollPages } from "@/features/homepage/sections/useScrollPages";
 import { AcousticGuitar } from "./AcousticGuitar";
 import { KeyboardModel } from "./KeyboardModel";
 import { ViolinModel } from "./ViolinModel";

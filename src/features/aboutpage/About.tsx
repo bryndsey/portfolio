@@ -4,7 +4,7 @@ import { useLoadingState } from "@/hooks/useLoadingState";
 import { useSpringScaleVisibility } from "@/hooks/useSpringScaleVisibility";
 import { animated } from "@react-spring/web";
 import { useEffect } from "react";
-import { Parallax } from "../components/Parallax";
+import { Parallax } from "../../components/Parallax";
 import { BryanHead } from "./BryanHead";
 import { Platypus } from "./Platypus";
 

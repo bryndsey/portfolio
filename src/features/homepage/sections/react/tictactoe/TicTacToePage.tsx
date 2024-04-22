@@ -17,8 +17,8 @@ import {
 import { useHtmlPortal } from "@hooks/useHtmlPortal";
 import { useScreenState } from "@hooks/useScreenState";
 import { useSpringScaleVisibility } from "@hooks/useSpringScaleVisibility";
-import { PageComponentProps } from "@/homepage/sections/Pages";
-import { useScrollPages } from "@/homepage/sections/useScrollPages";
+import { PageComponentProps } from "@/features/homepage/sections/Pages";
+import { useScrollPages } from "@/features/homepage/sections/useScrollPages";
 import Font from "./Comfortaa_Bold.json";
 
 const XPiece = { color: "red", shape: "x" } as const;

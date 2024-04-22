@@ -5,8 +5,8 @@ import { Suspense, useRef } from "react";
 import { Group, MathUtils } from "three";
 import { Blob } from "@/components/scene/blobs/Blob";
 import { useLoadingState } from "@hooks/useLoadingState";
-import { PageComponentProps } from "@/homepage/sections/Pages";
-import { useScrollPages } from "@/homepage/sections/useScrollPages";
+import { PageComponentProps } from "@/features/homepage/sections/Pages";
+import { useScrollPages } from "@/features/homepage/sections/useScrollPages";
 import { AvatarModel } from "./AvatarModel";
 
 export const IntroPageContent = () => {

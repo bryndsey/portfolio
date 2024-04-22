@@ -3,8 +3,8 @@ import { Suspense, useRef, useState } from "react";
 import { Euler, Group, MathUtils } from "three";
 import { useHtmlPortal } from "@hooks/useHtmlPortal";
 import { useScreenState } from "@hooks/useScreenState";
-import { PageComponentProps } from "@/homepage/sections/Pages";
-import { useScrollPages } from "@/homepage/sections/useScrollPages";
+import { PageComponentProps } from "@/features/homepage/sections/Pages";
+import { useScrollPages } from "@/features/homepage/sections/useScrollPages";
 import { useCameraFrustumWidthAtDepth } from "@/utils";
 import { Device } from "./Device";
 

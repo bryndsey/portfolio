@@ -4,8 +4,8 @@ import { useRef } from "react";
 import { Group, MathUtils } from "three";
 import { ProjectDescription, ReactTag } from "@/components/ProjectDescription";
 import { useHtmlPortal } from "@hooks/useHtmlPortal";
-import { PageComponentProps } from "@/homepage/sections/Pages";
-import { useScrollPages } from "@/homepage/sections/useScrollPages";
+import { PageComponentProps } from "@/features/homepage/sections/Pages";
+import { useScrollPages } from "@/features/homepage/sections/useScrollPages";
 import { GarbageCanModel } from "./GarbageCanModel";
 
 export const ChoresPage = (props: PageComponentProps) => {
