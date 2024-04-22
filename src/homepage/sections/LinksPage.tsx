@@ -3,7 +3,7 @@ import { Html, ScreenSpace } from "@react-three/drei";
 import { useRef } from "react";
 import { Group } from "three";
 import { PageComponentProps } from "./Pages";
-import { CtaFooter } from "./components/CtaFooter";
+import { CtaFooter } from "../../components/CtaFooter";
 import { useScrollPages } from "./useScrollPages";
 
 export const LinksPage = (props: PageComponentProps) => {

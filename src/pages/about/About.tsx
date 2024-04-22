@@ -1,6 +1,6 @@
 import { useLoadingState } from "@/hooks/useLoadingState";
 import { useSpringScaleVisibility } from "@/hooks/useSpringScaleVisibility";
-import { CtaFooter } from "@/sections/components/CtaFooter";
+import { CtaFooter } from "@/components/CtaFooter";
 import { useFrame } from "@darkroom.engineering/hamo";
 import { animated, useSpringValue } from "@react-spring/web";
 import { useEffect, useRef } from "react";

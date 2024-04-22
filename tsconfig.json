@@ -23,7 +23,7 @@
       "@assets/*": ["src/assets/*"],
       "@hooks/*": ["src/hooks/*"],
       "@components/*": ["src/components/*"],
-      "@sections/*": ["src/sections/*"],
+      "@sections/*": ["src/homepage/sections/*"],
       "@scene/*": ["src/scene/*"],
       "@analytics/*": ["src/analytics/*"]
     }

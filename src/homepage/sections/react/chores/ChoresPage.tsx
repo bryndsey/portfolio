@@ -2,13 +2,10 @@ import { Html, Sphere } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import { Group, MathUtils } from "three";
-import {
-  ProjectDescription,
-  ReactTag,
-} from "@/sections/components/ProjectDescription";
+import { ProjectDescription, ReactTag } from "@/components/ProjectDescription";
 import { useHtmlPortal } from "@hooks/useHtmlPortal";
-import { PageComponentProps } from "@/sections/Pages";
-import { useScrollPages } from "@/sections/useScrollPages";
+import { PageComponentProps } from "@/homepage/sections/Pages";
+import { useScrollPages } from "@/homepage/sections/useScrollPages";
 import { GarbageCanModel } from "./GarbageCanModel";
 
 export const ChoresPage = (props: PageComponentProps) => {

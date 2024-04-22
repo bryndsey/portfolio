@@ -1,7 +1,7 @@
 import { PropsWithChildren, useEffect, useState } from "react";
 import { useSelectedAndroidApp } from "./useSelectedAndroidApp";
 import { AndroidApp, androidApps } from "./AndroidApp";
-import { ProjectDescription } from "@/sections/components/ProjectDescription";
+import { ProjectDescription } from "@/components/ProjectDescription";
 import {
   MdSignalWifiStatusbar3Bar,
   MdSignalCellular3Bar,

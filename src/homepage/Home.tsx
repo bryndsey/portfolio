@@ -1,5 +1,5 @@
 import { BackgroundBlobs } from "@/blobs/BackgroundBlobs";
-import { pages } from "@/sections/Pages";
+import { pages } from "@/homepage/sections/Pages";
 import App from "@/App";
 import { CameraRig } from "@/scene/CameraRig";
 

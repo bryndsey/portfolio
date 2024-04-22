@@ -3,9 +3,9 @@ import { Suspense, useRef, useState } from "react";
 import { Euler, Group, MathUtils } from "three";
 import { useHtmlPortal } from "@hooks/useHtmlPortal";
 import { useScreenState } from "@hooks/useScreenState";
-import { PageComponentProps } from "@/sections/Pages";
-import { useScrollPages } from "@/sections/useScrollPages";
-import { useCameraFrustumWidthAtDepth } from "@/sections/utils";
+import { PageComponentProps } from "@/homepage/sections/Pages";
+import { useScrollPages } from "@/homepage/sections/useScrollPages";
+import { useCameraFrustumWidthAtDepth } from "@/utils";
 import { Device } from "./Device";
 
 const deviceRotation = new Euler();

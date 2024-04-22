@@ -12,7 +12,7 @@ import {
   TailwindTag,
   ThreeJsTag,
   TypescriptTag,
-} from "./components/ProjectDescription";
+} from "../../components/ProjectDescription";
 
 export const AboutPage = (props: PageComponentProps) => {
   const htmlPortal = useHtmlPortal();
