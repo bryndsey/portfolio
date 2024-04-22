@@ -1,4 +1,4 @@
-import { useGpuSettings } from "@/gpuDetection";
+import { useGpuSettings } from "@/components/GpuDetection";
 import { useSpringValue } from "@react-spring/web";
 import { useProgress } from "@react-three/drei";
 import { useEffect, useState } from "react";
