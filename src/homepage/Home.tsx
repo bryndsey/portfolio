@@ -1,11 +1,11 @@
 import { BackgroundBlobs } from "@/blobs/BackgroundBlobs";
 import { pages } from "@/homepage/sections/Pages";
-import App from "@/App";
+import { Page } from "@/components/Page";
 import { CameraRig } from "@/scene/CameraRig";
 
 export function Home() {
   return (
-    <App
+    <Page
       htmlChildren={<div style={{ height: `${pages.totalPages * 100}dvh` }} />}
       canvasChildren={<HomeContent />}
     />

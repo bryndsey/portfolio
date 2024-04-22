@@ -4,7 +4,7 @@ import { CtaFooter } from "@/components/CtaFooter";
 import { useFrame } from "@darkroom.engineering/hamo";
 import { animated, useSpringValue } from "@react-spring/web";
 import { useEffect, useRef } from "react";
-import App from "../../App";
+import { Page } from "@/components/Page";
 import { BryanHead } from "./BryanHead";
 import { Platypus } from "./Platypus";
 
@@ -17,7 +17,7 @@ const evolutionSteps = [
 ];
 
 export function AboutPage() {
-  return <App htmlChildren={<AboutPageContent />}></App>;
+  return <Page htmlChildren={<AboutPageContent />}></Page>;
 }
 
 function AboutPageContent() {

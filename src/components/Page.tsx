@@ -7,32 +7,35 @@ import { Scene } from "@scene/Scene";
 import { ReactLenis } from "@studio-freight/react-lenis";
 import { useRef } from "react";
 import { isFirefox, isSafari } from "react-device-detect";
-import { CustomCursor } from "./CustomCursor";
-import { GpuProvider, useGpuSettings } from "./gpuDetection";
-import { MouseTracker } from "./mousePosition";
+import { CustomCursor } from "../CustomCursor";
+import { GpuProvider, useGpuSettings } from "../gpuDetection";
+import { MouseTracker } from "../mousePosition";
 import { View } from "@react-three/drei";
 
-interface AppProps {
+interface PageProps {
   htmlChildren?: React.ReactNode;
   canvasChildren?: React.ReactNode;
 }
 
-function App({ htmlChildren, canvasChildren }: AppProps) {
+export function Page({ htmlChildren, canvasChildren }: PageProps) {
   return (
     <GpuProvider>
-      <AppContent canvasChildren={canvasChildren} htmlChildren={htmlChildren} />
+      <PageContent
+        canvasChildren={canvasChildren}
+        htmlChildren={htmlChildren}
+      />
     </GpuProvider>
   );
 }
 
-interface AppContentProps {
+interface PageContentProps {
   canvasChildren?: React.ReactNode;
   htmlChildren?: React.ReactNode;
 }
 
 const squigglyScaledClassName = "squiggly scale-[1.005]";
 
-function AppContent({ canvasChildren, htmlChildren }: AppContentProps) {
+function PageContent({ canvasChildren, htmlChildren }: PageContentProps) {
   // const { showStats } = useControls({
   //   showStats: true,
   // });
@@ -107,5 +110,3 @@ function AppContent({ canvasChildren, htmlChildren }: AppContentProps) {
     </ReactLenis>
   );
 }
-
-export default App;
