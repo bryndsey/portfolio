@@ -60,7 +60,6 @@ function PageContent({ canvasChildren, htmlChildren }: PageContentProps) {
     >
       <MouseTracker>
         <div ref={containerRef}>
-          <div className="fixed inset-0 bg-gradient-radial from-green-400 to-green-500 -z-50" />
           <div
             className={`${
               shouldBeSquiggly ? squigglyScaledClassName : undefined
