@@ -33,10 +33,10 @@ function AboutPageContent() {
       className="font-sans overflow-y-auto overflow-x-clip text-[calc(1.5vh+1.5vw)] leading-tight text-pretty"
     >
       <animated.header
-        className="flex flex-row items-center"
+        className="flex flex-row items-center justify-end"
         style={{ scale: springValue }}
       >
-        <h1 className="font-bold text-[calc(1vh+7vw)] leading-none p-8">
+        <h1 className="font-bold text-[calc(1vh+7vw)] leading-none p-8 text-right">
           About Bryan
         </h1>
         {/* <div className="ml-auto mr-[2vw] mt-[2vh] scale-150 text-center rounded-full bg-white backdrop-blur w-[calc(6vw+6vh)] aspect-square flex flex-col justify-center items-center">
