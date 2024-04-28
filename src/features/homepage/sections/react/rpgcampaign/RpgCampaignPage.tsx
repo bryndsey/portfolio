@@ -2,7 +2,6 @@ import {
   ProjectDescription,
   ReactTag,
   TailwindTag,
-  ThreeJsTag,
   TypescriptTag,
 } from "@/components/ProjectDescription";
 import { PageComponentProps } from "@/features/homepage/sections/Pages";
@@ -10,8 +9,8 @@ import { useScrollPages } from "@/features/homepage/sections/useScrollPages";
 import { useHtmlPortal } from "@hooks/useHtmlPortal";
 import { useScreenState } from "@hooks/useScreenState";
 import { useSpringScaleVisibility } from "@hooks/useSpringScaleVisibility";
-import { Html } from "@react-three/drei";
-import { Suspense, useRef } from "react";
+import { Html, QuadraticBezierLine } from "@react-three/drei";
+import { useRef } from "react";
 import { Group } from "three";
 import { D20Model } from "./D20Model";
 
@@ -19,7 +18,7 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
   const htmlPortal = useHtmlPortal();
   const pageGroupRef = useRef<Group>(null);
   const descriptionGroupRef = useRef<Group>(null!);
-  const piecesGroupRef = useRef<Group>(null!);
+  const d20GroupRef = useRef<Group>(null!);
 
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -77,11 +76,10 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
       contentRef.current.style.scale = `${springValue.get()}`;
       contentRef.current.style.opacity = showDescription ? "1" : "0";
 
-      const piecesScrollAmount =
-        2 * (enterAmount + contentProgressAmount * 0.5 + exitAmount);
+      const d20ScrollAmount = enterAmount + exitAmount;
 
       const viewportHeight = state.viewport.height;
-      piecesGroupRef.current.position.setY(piecesScrollAmount * viewportHeight);
+      d20GroupRef.current.position.setY(d20ScrollAmount * viewportHeight);
     }
   );
 
@@ -102,8 +100,25 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
           />
         </Html>
       </group>
-      <group ref={piecesGroupRef} scale={3}>
-        <D20Model />
+      <group ref={d20GroupRef}>
+        <QuadraticBezierLine
+          start={[1, 1, -1]}
+          end={[-0.25, 0, 0]}
+          mid={[0.5, 1.25, -0.5]}
+        />
+        <QuadraticBezierLine
+          end={[-0.75, 0, 0.25]}
+          start={[-0.25, 0, 0]}
+          mid={[-0.5, 0.75, 0.125]}
+        />
+        <QuadraticBezierLine
+          start={[-0.75, 0, 0.25]}
+          end={[-0.25, 0, 0.75]}
+          mid={[-0.5, 0.25, 0.5]}
+        />
+        <group scale={3} position={[1, 0, 0]}>
+          <D20Model />
+        </group>
       </group>
     </group>
   );
