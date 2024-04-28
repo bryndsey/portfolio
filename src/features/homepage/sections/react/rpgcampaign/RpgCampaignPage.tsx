@@ -10,7 +10,7 @@ import { useHtmlPortal } from "@hooks/useHtmlPortal";
 import { useScreenState } from "@hooks/useScreenState";
 import { useSpringScaleVisibility } from "@hooks/useSpringScaleVisibility";
 import { Html, Plane, QuadraticBezierLine } from "@react-three/drei";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Group } from "three";
 import { D20Model } from "./D20Model";
 import {
@@ -91,6 +91,20 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
   );
 
   const d20RigidBodyRef = useRef<RapierRigidBody>(null!);
+  const d20RigidBodyRef2 = useRef<RapierRigidBody>(null!);
+
+  function rollDice() {
+    [d20RigidBodyRef, d20RigidBodyRef2].forEach((rb) =>
+      rb.current.applyImpulse(
+        {
+          x: (Math.random() - 0.5) * 0.02,
+          y: 0.005,
+          z: (Math.random() - 0.5) * 0.02,
+        },
+        true
+      )
+    );
+  }
 
   return (
     <group ref={pageGroupRef}>
@@ -109,7 +123,8 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
           />
         </Html>
       </group>
-      <group ref={d20GroupRef}>
+
+      <group ref={d20GroupRef} position={[-0.1, 0, 2]}>
         {/* <QuadraticBezierLine
           start={[1, 1, -1]}
           end={[-0.25, 0, 0]}
@@ -126,55 +141,60 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
           mid={[-0.5, 0.25, 0.5]}
         /> */}
 
-        {/* <group scale={3} position={[1, 0, 0]}>
-          <D20Model />
-        </group> */}
-
-        <Physics debug>
-          <RigidBody
-            position={[0, 0.5, 0]}
-            colliders="hull"
-            ref={d20RigidBodyRef}
-          >
-            <group
-              onClick={() => {
-                d20RigidBodyRef.current.applyImpulse(
-                  { x: 0, y: 0, z: -0.01 },
-                  true
-                );
-              }}
+        <Physics>
+          <group onClick={rollDice}>
+            <RigidBody
+              position={[0, 0.5, 0]}
+              colliders="hull"
+              ref={d20RigidBodyRef}
             >
               <D20Model />
-            </group>
-          </RigidBody>
+            </RigidBody>
+          </group>
 
-          <RigidBody type="fixed" position={[0, -0.25, 0]}>
-            {/* <MeshCollider type="hull">
-              <Plane args={[100, 100]} rotation={[-Math.PI / 2, 0, 0]}></Plane>
-            </MeshCollider> */}
+          <group onClick={rollDice}>
+            <RigidBody
+              position={[0, 0.75, 0]}
+              colliders="hull"
+              ref={d20RigidBodyRef2}
+            >
+              <D20Model />
+            </RigidBody>
+          </group>
+
+          <RigidBody type="fixed" position={[0, -0.125, 0]}>
             <CuboidCollider args={[100, 0.05, 100]}>
               <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane>
             </CuboidCollider>
+
             <CuboidCollider
               args={[100, 0.05, 100]}
-              position={[0, 0, -0.5]}
-              rotation={[Math.PI / 2.75, 0, 0]}
+              position={[0, 0, -0.25]}
+              rotation={[Math.PI / 2.25, 0, 0]}
             >
               <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane>
             </CuboidCollider>
 
             <CuboidCollider
               args={[100, 0.05, 100]}
-              position={[0.1, 0, 0.5]}
-              rotation={[-Math.PI / 2.5, 0.75, 1]}
+              position={[0, 0, 0.25]}
+              rotation={[-Math.PI / 2.25, 0, 0]}
             >
               <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane>
             </CuboidCollider>
 
             <CuboidCollider
               args={[100, 0.05, 100]}
-              position={[-0.1, 0, 0.5]}
-              rotation={[-Math.PI / 2.5, -0.75, -1]}
+              position={[0.25, 0, 0]}
+              rotation={[Math.PI / 2, 0, Math.PI / 2]}
+            >
+              <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane>
+            </CuboidCollider>
+
+            <CuboidCollider
+              args={[100, 0.05, 100]}
+              position={[-0.25, 0, 0]}
+              rotation={[Math.PI / 2, 0, -Math.PI / 2]}
             >
               <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane>
             </CuboidCollider>
