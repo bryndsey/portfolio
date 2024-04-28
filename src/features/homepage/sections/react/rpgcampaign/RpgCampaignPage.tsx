@@ -9,7 +9,12 @@ import { useScrollPages } from "@/features/homepage/sections/useScrollPages";
 import { useHtmlPortal } from "@hooks/useHtmlPortal";
 import { useScreenState } from "@hooks/useScreenState";
 import { useSpringScaleVisibility } from "@hooks/useSpringScaleVisibility";
-import { Html, Plane, QuadraticBezierLine } from "@react-three/drei";
+import {
+  Html,
+  MeshDiscardMaterial,
+  Plane,
+  QuadraticBezierLine,
+} from "@react-three/drei";
 import { useEffect, useRef, useState } from "react";
 import { Group } from "three";
 import { D20Model } from "./D20Model";
@@ -89,10 +94,12 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
       contentRef.current.style.scale = `${springValue.get()}`;
       contentRef.current.style.opacity = showDescription ? "1" : "0";
 
-      const d20ScrollAmount = enterAmount + exitAmount;
+      const d20ScrollAmount =
+        enterAmount + exitAmount + contentProgressAmount * 0.1;
 
       const viewportHeight = state.viewport.height;
       d20GroupRef.current.position.setY(d20ScrollAmount * viewportHeight);
+      d20GroupRef.current.position.setX(-0.125 * state.viewport.width);
     }
   );
 
@@ -172,43 +179,42 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
             </RigidBody>
           </group>
 
-          <RigidBody type="fixed" position={[0, -0.15, 0]}>
-            <CuboidCollider args={[100, 0.05, 100]}>
+          <RigidBody type="fixed" position={[0, -0.75, 0]}>
+            <CuboidCollider args={[100, 0.5, 100]}>
               <Plane
                 args={[1, 1]}
                 rotation={[-Math.PI / 2, 0, 0]}
-                position={[0, 0.05, 0]}
-                // material={}
+                position={[0, 0.66, 0]}
               ></Plane>
             </CuboidCollider>
 
             <CuboidCollider
-              args={[100, 0.05, 100]}
-              position={[0, 0, -0.25]}
+              args={[100, 0.5, 100]}
+              position={[0, 0, -0.75]}
               rotation={[Math.PI / 2.25, 0, 0]}
             >
-              {/* <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane> */}
+              <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane>
             </CuboidCollider>
 
             <CuboidCollider
-              args={[100, 0.05, 100]}
-              position={[0, 0, 0.25]}
+              args={[100, 0.5, 100]}
+              position={[0, 0, 0.75]}
               rotation={[-Math.PI / 2.25, 0, 0]}
             >
               {/* <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane> */}
             </CuboidCollider>
 
             <CuboidCollider
-              args={[100, 0.05, 100]}
-              position={[0.25, 0, 0]}
+              args={[100, 0.5, 100]}
+              position={[0.75, 0, 0]}
               rotation={[Math.PI / 2, 0, Math.PI / 2]}
             >
               {/* <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane> */}
             </CuboidCollider>
 
             <CuboidCollider
-              args={[100, 0.05, 100]}
-              position={[-0.25, 0, 0]}
+              args={[100, 0.5, 100]}
+              position={[-0.75, 0, 0]}
               rotation={[Math.PI / 2, 0, -Math.PI / 2]}
             >
               {/* <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane> */}
