@@ -9,10 +9,17 @@ import { useScrollPages } from "@/features/homepage/sections/useScrollPages";
 import { useHtmlPortal } from "@hooks/useHtmlPortal";
 import { useScreenState } from "@hooks/useScreenState";
 import { useSpringScaleVisibility } from "@hooks/useSpringScaleVisibility";
-import { Html, QuadraticBezierLine } from "@react-three/drei";
+import { Html, Plane, QuadraticBezierLine } from "@react-three/drei";
 import { useRef } from "react";
 import { Group } from "three";
 import { D20Model } from "./D20Model";
+import {
+  Physics,
+  RigidBody,
+  CuboidCollider,
+  MeshCollider,
+  RapierRigidBody,
+} from "@react-three/rapier";
 
 export const RpgCampaignPage = (props: PageComponentProps) => {
   const htmlPortal = useHtmlPortal();
@@ -83,6 +90,8 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
     }
   );
 
+  const d20RigidBodyRef = useRef<RapierRigidBody>(null!);
+
   return (
     <group ref={pageGroupRef}>
       <group ref={descriptionGroupRef}>
@@ -101,7 +110,7 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
         </Html>
       </group>
       <group ref={d20GroupRef}>
-        <QuadraticBezierLine
+        {/* <QuadraticBezierLine
           start={[1, 1, -1]}
           end={[-0.25, 0, 0]}
           mid={[0.5, 1.25, -0.5]}
@@ -115,10 +124,62 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
           start={[-0.75, 0, 0.25]}
           end={[-0.25, 0, 0.75]}
           mid={[-0.5, 0.25, 0.5]}
-        />
-        <group scale={3} position={[1, 0, 0]}>
+        /> */}
+
+        {/* <group scale={3} position={[1, 0, 0]}>
           <D20Model />
-        </group>
+        </group> */}
+
+        <Physics debug>
+          <RigidBody
+            position={[0, 0.5, 0]}
+            colliders="hull"
+            ref={d20RigidBodyRef}
+          >
+            <group
+              onClick={() => {
+                d20RigidBodyRef.current.applyImpulse(
+                  { x: 0, y: 0, z: -0.01 },
+                  true
+                );
+              }}
+            >
+              <D20Model />
+            </group>
+          </RigidBody>
+
+          <RigidBody type="fixed" position={[0, -0.25, 0]}>
+            {/* <MeshCollider type="hull">
+              <Plane args={[100, 100]} rotation={[-Math.PI / 2, 0, 0]}></Plane>
+            </MeshCollider> */}
+            <CuboidCollider args={[100, 0.05, 100]}>
+              <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane>
+            </CuboidCollider>
+            <CuboidCollider
+              args={[100, 0.05, 100]}
+              position={[0, 0, -0.5]}
+              rotation={[Math.PI / 2.75, 0, 0]}
+            >
+              <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane>
+            </CuboidCollider>
+
+            <CuboidCollider
+              args={[100, 0.05, 100]}
+              position={[0.1, 0, 0.5]}
+              rotation={[-Math.PI / 2.5, 0.75, 1]}
+            >
+              <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane>
+            </CuboidCollider>
+
+            <CuboidCollider
+              args={[100, 0.05, 100]}
+              position={[-0.1, 0, 0.5]}
+              rotation={[-Math.PI / 2.5, -0.75, -1]}
+            >
+              <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane>
+            </CuboidCollider>
+          </RigidBody>
+        </Physics>
       </group>
     </group>
   );
