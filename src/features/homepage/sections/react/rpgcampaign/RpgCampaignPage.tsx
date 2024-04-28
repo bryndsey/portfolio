@@ -10,7 +10,7 @@ import { useHtmlPortal } from "@hooks/useHtmlPortal";
 import { useScreenState } from "@hooks/useScreenState";
 import { useSpringScaleVisibility } from "@hooks/useSpringScaleVisibility";
 import { Html, Plane, QuadraticBezierLine } from "@react-three/drei";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Group } from "three";
 import { D20Model } from "./D20Model";
 import {
@@ -38,6 +38,8 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
 
   const { springValue, setVisibility } = useSpringScaleVisibility();
 
+  const [physicsPaused, setPhysicsPaused] = useState(true);
+
   useScrollPages(
     props.startPageIndex,
     props.exitPageIndex,
@@ -48,6 +50,10 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
       isPageVisible,
       state,
     }) => {
+      if (physicsPaused === isPageVisible) {
+        setPhysicsPaused(!isPageVisible);
+      }
+
       if (pageGroupRef.current === null) return;
 
       pageGroupRef.current.visible = isPageVisible;
@@ -97,9 +103,9 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
     [d20RigidBodyRef, d20RigidBodyRef2].forEach((rb) =>
       rb.current.applyImpulse(
         {
-          x: (Math.random() - 0.5) * 0.02,
-          y: 0.005,
-          z: (Math.random() - 0.5) * 0.02,
+          x: (Math.random() - 0.5) * 2,
+          y: 0.25,
+          z: (Math.random() - 0.5) * 2,
         },
         true
       )
@@ -124,7 +130,7 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
         </Html>
       </group>
 
-      <group ref={d20GroupRef} position={[-0.1, 0, 2]}>
+      <group ref={d20GroupRef} scale={3} position={[-0.5, 0, 0.5]}>
         {/* <QuadraticBezierLine
           start={[1, 1, -1]}
           end={[-0.25, 0, 0]}
@@ -141,11 +147,13 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
           mid={[-0.5, 0.25, 0.5]}
         /> */}
 
-        <Physics>
+        <Physics paused={physicsPaused}>
           <group onClick={rollDice}>
             <RigidBody
               position={[0, 0.5, 0]}
               colliders="hull"
+              gravityScale={3}
+              restitution={0.5}
               ref={d20RigidBodyRef}
             >
               <D20Model />
@@ -156,15 +164,22 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
             <RigidBody
               position={[0, 0.75, 0]}
               colliders="hull"
+              gravityScale={3}
+              restitution={0.5}
               ref={d20RigidBodyRef2}
             >
               <D20Model />
             </RigidBody>
           </group>
 
-          <RigidBody type="fixed" position={[0, -0.125, 0]}>
+          <RigidBody type="fixed" position={[0, -0.15, 0]}>
             <CuboidCollider args={[100, 0.05, 100]}>
-              <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane>
+              <Plane
+                args={[1, 1]}
+                rotation={[-Math.PI / 2, 0, 0]}
+                position={[0, 0.05, 0]}
+                // material={}
+              ></Plane>
             </CuboidCollider>
 
             <CuboidCollider
@@ -172,7 +187,7 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
               position={[0, 0, -0.25]}
               rotation={[Math.PI / 2.25, 0, 0]}
             >
-              <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane>
+              {/* <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane> */}
             </CuboidCollider>
 
             <CuboidCollider
@@ -180,7 +195,7 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
               position={[0, 0, 0.25]}
               rotation={[-Math.PI / 2.25, 0, 0]}
             >
-              <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane>
+              {/* <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane> */}
             </CuboidCollider>
 
             <CuboidCollider
@@ -188,7 +203,7 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
               position={[0.25, 0, 0]}
               rotation={[Math.PI / 2, 0, Math.PI / 2]}
             >
-              <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane>
+              {/* <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane> */}
             </CuboidCollider>
 
             <CuboidCollider
@@ -196,7 +211,7 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
               position={[-0.25, 0, 0]}
               rotation={[Math.PI / 2, 0, -Math.PI / 2]}
             >
-              <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane>
+              {/* <Plane args={[1, 1]} rotation={[-Math.PI / 2, 0, 0]}></Plane> */}
             </CuboidCollider>
           </RigidBody>
         </Physics>
