@@ -9,7 +9,7 @@ import { useScrollPages } from "@/features/homepage/sections/useScrollPages";
 import { useHtmlPortal } from "@hooks/useHtmlPortal";
 import { useScreenState } from "@hooks/useScreenState";
 import { useSpringScaleVisibility } from "@hooks/useSpringScaleVisibility";
-import { Html } from "@react-three/drei";
+import { Html, Text } from "@react-three/drei";
 import {
   CuboidCollider,
   Physics,
@@ -17,7 +17,7 @@ import {
   RigidBody,
 } from "@react-three/rapier";
 import { useRef, useState } from "react";
-import { Group } from "three";
+import { Group, Material, Mesh } from "three";
 import { D20Model } from "./D20Model";
 
 export const RpgCampaignPage = (props: PageComponentProps) => {
@@ -25,6 +25,9 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
   const pageGroupRef = useRef<Group>(null);
   const descriptionGroupRef = useRef<Group>(null!);
   const d20GroupRef = useRef<Group>(null!);
+
+  const tonePromptText = useRef<Mesh>(null!);
+  const settingPromptText = useRef<Mesh>(null!);
 
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -88,8 +91,7 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
       contentRef.current.style.scale = `${springValue.get()}`;
       contentRef.current.style.opacity = showDescription ? "1" : "0";
 
-      const d20ScrollAmount =
-        enterAmount + exitAmount + contentProgressAmount * 0.25;
+      const d20ScrollAmount = enterAmount + exitAmount;
 
       const [diceXOffset, diceYOffset, diceZOffset] =
         screenState.orientation === "portrait" &&
@@ -103,6 +105,23 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
       );
       d20GroupRef.current.position.setX(diceXOffset);
       d20GroupRef.current.position.setZ(diceZOffset);
+
+      const promptScrollAmount =
+        enterAmount + exitAmount + contentProgressAmount * 0.5;
+
+      tonePromptText.current.position.setX(
+        (promptScrollAmount * state.viewport.width) / 2 - 0.1
+      );
+      settingPromptText.current.position.setX(-promptScrollAmount - 0.3);
+
+      [tonePromptText.current, settingPromptText.current].forEach((text) => {
+        const material = text.material as Material;
+        material.opacity =
+          Math.max(
+            1 - Math.pow(promptScrollAmount + text.position.y / 4, 2),
+            0
+          ) / 2;
+      });
     }
   );
 
@@ -124,6 +143,24 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
 
   return (
     <group ref={pageGroupRef}>
+      <Text
+        position={[-0.1, 1, -1.5]}
+        fontSize={0.2}
+        fontWeight={800}
+        color={"black"}
+        ref={tonePromptText}
+      >
+        Tone: Adventurous
+      </Text>
+      <Text
+        position={[0.1, 0.5, -3]}
+        fontSize={0.25}
+        fontWeight={800}
+        color={"black"}
+        ref={settingPromptText}
+      >
+        Setting: Fantasy
+      </Text>
       <group ref={descriptionGroupRef}>
         <Html
           ref={contentRef}
