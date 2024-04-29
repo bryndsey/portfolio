@@ -169,7 +169,7 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
           distanceFactor={descriptionScaleFactor}
         >
           <ProjectDescription
-            projectName="RPG Campaign Generator"
+            projectName="RPG Story Studio"
             descriptionText="AI-powered RPG campaigns at the push of a button"
             tags={[ReactTag, TypescriptTag, TailwindTag]}
             url="https://rpg-campaign-generator.vercel.app/"
