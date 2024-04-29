@@ -135,7 +135,7 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
             projectName="RPG Campaign Generator"
             descriptionText="AI-powered RPG campaigns at the push of a button"
             tags={[ReactTag, TypescriptTag, TailwindTag]}
-            url="https://tictactoeplus.bryanlindsey.dev/"
+            url="https://rpg-campaign-generator.vercel.app/"
           />
         </Html>
       </group>
