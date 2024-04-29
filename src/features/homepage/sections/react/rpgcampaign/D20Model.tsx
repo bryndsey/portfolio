@@ -9,6 +9,10 @@ import { GLTF } from "three-stdlib";
 import D20Glb from "./d20.glb?url";
 import D20Texture from "./d20Numbers.png?url";
 
+type D20ModelProps = {
+  color?: THREE.ColorRepresentation;
+} & JSX.IntrinsicElements["group"];
+
 type GLTFResult = GLTF & {
   nodes: {
     D20: THREE.Mesh;
@@ -16,13 +20,13 @@ type GLTFResult = GLTF & {
   materials: Record<string, never>;
 };
 
-export function D20Model(props: JSX.IntrinsicElements["group"]) {
+export function D20Model({ color, ...rest }: D20ModelProps) {
   const texture = useTexture(D20Texture);
   const { nodes } = useGLTF(D20Glb) as GLTFResult;
   return (
-    <group {...props} dispose={null}>
+    <group {...rest} dispose={null}>
       <mesh geometry={nodes.D20.geometry} rotation={[0, -Math.PI / 2, 0]}>
-        <LayerMaterial color="#00cc00" lighting="physical">
+        <LayerMaterial color={color} lighting="physical">
           {/* <Noise mode="multiply" scale={100} /> */}
           <Texture map={texture} alpha={1} />
         </LayerMaterial>

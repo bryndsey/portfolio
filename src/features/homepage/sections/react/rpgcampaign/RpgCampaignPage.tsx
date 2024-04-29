@@ -187,7 +187,7 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
               restitution={0.5}
               ref={d20RigidBodyRef}
             >
-              <D20Model />
+              <D20Model color={"red"} />
             </RigidBody>
           </group>
 
@@ -199,7 +199,7 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
               restitution={0.5}
               ref={d20RigidBodyRef2}
             >
-              <D20Model />
+              <D20Model color="blue" />
             </RigidBody>
           </group>
 
