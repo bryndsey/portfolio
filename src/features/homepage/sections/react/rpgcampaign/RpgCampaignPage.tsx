@@ -97,7 +97,7 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
         screenState.orientation === "portrait" &&
         screenState.deviceClass === "small"
           ? [0, viewport.height * 0.33, -1 / state.viewport.width]
-          : [-0.125 * state.viewport.width, 0, 0];
+          : [-0.166 * state.viewport.width, 0, 0];
 
       const viewportHeight = state.viewport.height;
       d20GroupRef.current.position.setY(
