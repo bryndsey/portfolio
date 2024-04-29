@@ -75,7 +75,7 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
       const [descriptionX, descriptionY] =
         screenState.orientation === "portrait" &&
         screenState.deviceClass === "small"
-          ? [-viewport.width * 0.4, 0]
+          ? [-viewport.width * 0.4, viewport.height * 0.125]
           : [0, viewport.height * 0.33];
 
       const descriptionScrollAmount = enterAmount + exitAmount;
@@ -89,11 +89,20 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
       contentRef.current.style.opacity = showDescription ? "1" : "0";
 
       const d20ScrollAmount =
-        enterAmount + exitAmount + contentProgressAmount * 0.1;
+        enterAmount + exitAmount + contentProgressAmount * 0.25;
+
+      const [diceXOffset, diceYOffset, diceZOffset] =
+        screenState.orientation === "portrait" &&
+        screenState.deviceClass === "small"
+          ? [0, viewport.height * 0.33, -1 / state.viewport.width]
+          : [-0.125 * state.viewport.width, 0, 0];
 
       const viewportHeight = state.viewport.height;
-      d20GroupRef.current.position.setY(d20ScrollAmount * viewportHeight);
-      d20GroupRef.current.position.setX(-0.125 * state.viewport.width);
+      d20GroupRef.current.position.setY(
+        d20ScrollAmount * viewportHeight + diceYOffset
+      );
+      d20GroupRef.current.position.setX(diceXOffset);
+      d20GroupRef.current.position.setZ(diceZOffset);
     }
   );
 
