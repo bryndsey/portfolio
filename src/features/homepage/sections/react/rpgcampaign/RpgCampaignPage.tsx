@@ -112,14 +112,18 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
       const promptScrollAmount =
         enterAmount + exitAmount + contentProgressAmount * 0.5;
 
-      tonePromptText.current.position.setX(
-        (promptScrollAmount * state.viewport.width) / 2 - 0.1
-      );
       const tonePromptTextZ =
         screenState.orientation === "portrait" &&
         screenState.deviceClass === "small"
           ? -3.5
           : -1.5;
+
+      tonePromptText.current.position.setX(
+        (promptScrollAmount * state.viewport.width) / 2 - 0.1
+      );
+      tonePromptText.current.position.setY(
+        viewportHeight * 0.5 - tonePromptTextZ / 10
+      );
       tonePromptText.current.position.setZ(tonePromptTextZ);
 
       const settingPromptTextZ =
@@ -128,6 +132,7 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
           ? -5
           : -3;
       settingPromptText.current.position.setX(-promptScrollAmount - 0.3);
+      settingPromptText.current.position.setY(viewportHeight * 0.33);
       settingPromptText.current.position.setZ(settingPromptTextZ);
 
       [tonePromptText.current, settingPromptText.current].forEach((text) => {
