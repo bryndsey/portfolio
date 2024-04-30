@@ -115,7 +115,20 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
       tonePromptText.current.position.setX(
         (promptScrollAmount * state.viewport.width) / 2 - 0.1
       );
+      const tonePromptTextZ =
+        screenState.orientation === "portrait" &&
+        screenState.deviceClass === "small"
+          ? -3.5
+          : -1.5;
+      tonePromptText.current.position.setZ(tonePromptTextZ);
+
+      const settingPromptTextZ =
+        screenState.orientation === "portrait" &&
+        screenState.deviceClass === "small"
+          ? -5
+          : -3;
       settingPromptText.current.position.setX(-promptScrollAmount - 0.3);
+      settingPromptText.current.position.setZ(settingPromptTextZ);
 
       [tonePromptText.current, settingPromptText.current].forEach((text) => {
         const material = text.material as Material;
