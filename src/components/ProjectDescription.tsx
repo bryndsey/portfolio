@@ -8,6 +8,7 @@ import {
   SiThreedotjs,
   SiTypescript,
 } from "react-icons/si";
+import { twMerge } from "tailwind-merge";
 import { LinkButton } from "./LinkButton";
 
 interface ProjectDescriptionProps {
@@ -49,11 +50,11 @@ const Tags = (props: TagsProps) => {
 
 export const ProjectDescription = (props: ProjectDescriptionProps) => {
   return (
-    // TODO: Re-add ability to combine with props style (or remove props style?)
     <div
-      className={
-        "flex flex-col gap-[1em] text-[calc(1.5vw+1.5vh)] leading-tight overflow-x-clip"
-      }
+      className={twMerge(
+        "flex flex-col gap-[1em] text-[calc(1.5vw+1.5vh)] leading-tight overflow-x-clip",
+        props.className
+      )}
     >
       <h2 className="text-[2.5em] font-bold leading-none overflow-ellipsis overflow-x-clip">
         {props.projectName}
