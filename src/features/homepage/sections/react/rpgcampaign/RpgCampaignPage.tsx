@@ -78,7 +78,10 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
       const [descriptionX, descriptionY] =
         screenState.orientation === "portrait" &&
         screenState.deviceClass === "small"
-          ? [-viewport.width * 0.4, viewport.height * 0.125]
+          ? [
+              -viewport.width * 0.4,
+              -viewport.height * 0.33 + 0.66 / viewport.width,
+            ]
           : [0, viewport.height * 0.33];
 
       const descriptionScrollAmount = enterAmount + exitAmount;
