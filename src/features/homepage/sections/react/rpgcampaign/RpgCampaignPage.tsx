@@ -1,6 +1,7 @@
 import {
+  AstroTag,
   ProjectDescription,
-  ReactTag,
+  SvelteTag,
   TailwindTag,
   TypescriptTag,
 } from "@/components/ProjectDescription";
@@ -192,7 +193,7 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
           <ProjectDescription
             projectName="RPG Story Studio"
             descriptionText="AI-powered RPG campaigns at the push of a button"
-            tags={[ReactTag, TypescriptTag, TailwindTag]}
+            tags={[AstroTag, SvelteTag, TypescriptTag, TailwindTag]}
             url="https://rpg-campaign-generator.vercel.app/"
           />
         </Html>

@@ -4,6 +4,7 @@ import { GiSoundWaves } from "react-icons/gi";
 import {
   SiAstro,
   SiKonva,
+  SiSvelte,
   SiTailwindcss,
   SiThreedotjs,
   SiTypescript,
@@ -101,6 +102,13 @@ export const ReactTag: Tag = {
   name: "React",
   color: "rgb(20, 158, 202)",
   icon: FaReact,
+  iconColor: "white",
+};
+
+export const SvelteTag: Tag = {
+  name: "Svelte",
+  color: "red",
+  icon: SiSvelte,
   iconColor: "white",
 };
 
