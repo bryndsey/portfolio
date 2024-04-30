@@ -52,10 +52,10 @@ export const ProjectDescription = (props: ProjectDescriptionProps) => {
     // TODO: Re-add ability to combine with props style (or remove props style?)
     <div
       className={
-        "flex flex-col gap-[1em] text-[calc(1.5vw+1.5vh)] leading-tight"
+        "flex flex-col gap-[1em] text-[calc(1.5vw+1.5vh)] leading-tight overflow-x-clip"
       }
     >
-      <h2 className="text-[2.5em] font-bold leading-none">
+      <h2 className="text-[2.5em] font-bold leading-none overflow-ellipsis overflow-x-clip">
         {props.projectName}
       </h2>
       <p>{props.descriptionText}</p>
