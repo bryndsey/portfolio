@@ -7,6 +7,7 @@ import { PedalsPage } from "./react/music/pedals/PedalsPage";
 // import { ChoresPage } from "./react/chores/ChoresPage";
 import { TicTacToePage } from "./react/tictactoe/TicTacToePage";
 import { isIOS, isSafari } from "react-device-detect";
+import { RpgCampaignPage } from "./react/rpgcampaign/RpgCampaignPage";
 
 export interface PageComponentProps {
   startPageIndex: number;
@@ -22,6 +23,7 @@ interface Page {
 const pagesShapes: Page[] = [
   { id: "intro", component: IntroPage, contentLength: 0 },
   { id: "about", component: AboutPage, contentLength: 0 },
+  { id: "rpgcampaign", component: RpgCampaignPage, contentLength: 0.5 },
   { id: "songspark", component: SongSparkPage, contentLength: 0.5 },
   { id: "pedals", component: PedalsPage, contentLength: 0.5 },
   // { id: "chores", component: ChoresPage, contentLength: 0.25 },
