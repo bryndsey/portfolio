@@ -209,7 +209,7 @@ export const RpgCampaignPage = (props: PageComponentProps) => {
               restitution={0.5}
               ref={d20RigidBodyRef}
             >
-              <D20Model color={"gold"} />
+              <D20Model color={"goldenrod"} />
             </RigidBody>
           </group>
 
